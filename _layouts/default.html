@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include head.html %}
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <a href="/" class="logo">Enes<br>Başpınar</a>
+                <ul class="menu">
+                    {% for item in site.data.navigation %}
+                        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {{ content }}
+        </main>
+        <footer>
+            <div class="info">Burası, blog örneklerinden esinlenerek tarafımca tasarlanan bir blogumsudur. Hiçbir hakkı saklı değildir.<br><br>İletişime geçmek isterseniz lütfen çekinmeyin:</div>
+            <ul class="social-links">
+                <li><a href="mailto:{{ site.email }}"><i class="fa fa-envelope-square fa-2x"></i></a></li>
+                <li><a href="https://github.com/{{ site.github_username }}"><i class="fa fa-github-square fa-2x"></i></a></li>
+                <li><a href="https://twitter.com/{{ site.twitter_username }}"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/{{ site.linkedin_username }}"><i class="fab fa-linkedin fa-2x"></i></a></li>
+            </ul>
+        </footer>
+    </div>
+</body>
+</html>

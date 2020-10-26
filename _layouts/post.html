@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<h1 class="page-title">
+    <div class="page-title__text">
+        {{ page.title }}
+    </div>
+    <div class="page-title__subtitle">
+        {% assign m = page.date | date: "%-m" %}
+        {{ page.date | date: "%-d" }}
+        {% case m %}
+        {% when '1' %}Oca
+        {% when '2' %}Şub
+        {% when '3' %}Mar
+        {% when '4' %}Nis
+        {% when '5' %}May
+        {% when '6' %}Haz
+        {% when '7' %}Tem
+        {% when '8' %}Ağu
+        {% when '9' %}Eyl
+        {% when '10' %}Eki
+        {% when '11' %}Kas
+        {% when '12' %}Ara
+        {% endcase %}
+        {{ page.date | date: "%Y" }}
+        - 
+        {% assign words = page.content | number_of_words %}
+        {{ words | divided_by:170 }} dk
+        
+    </div>
+</h1>
+
+{{ content }}

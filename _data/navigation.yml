@@ -1,0 +1,6 @@
+- name: Anasayfa
+  link: /
+- name: Blog
+  link: /blog
+- name: Özgeçmiş
+  link: /ozgecmis

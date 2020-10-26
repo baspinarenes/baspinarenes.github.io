@@ -1,0 +1,232 @@
+---
+---
+
+$logo-rengi:blue;
+$link-rengi: #737373;
+$normal-metin-rengi: #0c0c0d;
+$alt-metin-rengi: #737373;
+$baslik-rengi: #202020;
+
+@import url(https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700);
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    color:$link-rengi;
+
+    &:hover {
+        color: black;
+    }
+}
+
+h2 {
+    margin: 60px 0 20px 0;
+}
+
+p {
+    line-height: 30px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+blockquote {
+    display: block;
+    border-width: 2px 0;
+    border-style: solid;
+    border-color: $alt-metin-rengi;
+    padding: 1.2em 0 1em;
+    margin: 1.5em 0;
+    position: relative;
+
+    p {
+        text-align: center;
+        margin-bottom: 0;
+    }
+
+    &:before {
+        content: '\201C';
+        position: absolute;
+        top: -0.1em;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        width: 3rem;
+        height: 2rem;
+        font: 6em/1.08em 'PT Sans', sans-serif;
+        color: #666;
+        text-align: center;
+    }
+}
+
+.wrapper {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+
+    display: flex;
+    flex-direction: column;
+        
+    max-width: 900px;
+    width: 80%;
+    height: 100px;
+    margin: 60px auto;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    height: 160px;
+    align-content: center;
+    justify-content: center;
+
+    nav {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .logo {
+            font-family: "Pecita";
+            font-size: 400%;
+            font-weight: 700;
+            margin: 0 auto 30px auto;
+            color: black;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(8,8,11,0.15);
+            border-bottom: 1px solid rgba(8,8,11,0.15);
+            padding: 10px 0px;
+            li {
+                list-style: none;
+                margin-right: 50px;
+
+                &:last-of-type {
+                    margin-right: 0;
+                }
+
+                a {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+main {
+    margin-bottom: 30px;
+    padding: 50px 20px;
+    border-bottom: 1px solid rgba(8,8,11,0.15);
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: $baslik-rengi;
+        .page-title__text {
+            font-weight: 700;
+            font-size: 120%;
+        }
+        .page-title__subtitle {
+            font-weight: 400;
+            font-size: 60%;
+            color: $alt-metin-rengi;
+        }
+    }
+
+    .post-img {
+        display: block;
+        margin: 0 auto 40px auto;
+        height: 350px;
+    }
+
+    .tags {
+        .tag {
+            height: 60px;
+            margin: 40px 0 20px 0;
+            border-bottom: 1px solid black;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 150%;
+            color: $alt-metin-rengi;
+            
+            p {
+                height: 30px;
+                margin-bottom: 10px;
+            }
+
+            .tag-icon {
+                color: gray;
+                font-size: 1.5em;
+                margin-bottom: 2px;
+                align-self: flex-end;
+            }
+        }
+
+        .posts {
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            
+            .post {
+                display: flex;
+                justify-content: space-between;
+
+                .post-name {
+                    margin-right: 2px;
+                }
+
+                .post-date {
+                    color: $link-rengi;
+                    flex-shrink: 0;
+                }
+            }
+        }
+    }
+
+    .summary {
+        margin-top: 60px;
+    }
+}
+
+footer {
+    font-size: 0.8em;
+    .info {
+        text-align: center;
+    }
+
+    .social-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-end;
+        padding-bottom: 22px;
+
+        li {
+            list-style: none;
+            margin: 20px 20px 0px 0px;
+
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+
+        i {
+            color: $normal-metin-rengi;
+        }
+    }
+}

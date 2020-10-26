@@ -1,0 +1,5 @@
+- name: python
+  icon-class: fab fa-python
+
+- name: git
+  icon-class: fab fa-git

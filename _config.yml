@@ -1,0 +1,26 @@
+
+title: Enes Başpınar
+email: enesbaspinar07@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Bu blog, iyidir hoşdur ancak hiç bir şekilde profesyonellik içermemektedir.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: https://baspinarenes.github.io # the base hostname & protocol for your site, e.g. http://example.com
+
+icon: assets/img/icon.jpg
+
+twitter_username: enesbaspinar0
+github_username:  baspinarenes
+linkedin_username: enesbaspinar
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+permalink: /:categories/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-autoprefixer
+
+sass:
+  sass_dir: _sass
+  style: compressed
