@@ -1,6 +1,6 @@
 ---
 layout: post
-image: /assets/img/post-img/003-divanu-lugatit-git-0.png
+image: assets/img/card-img/git.png
 title: "Divanu Lügatit Git - 0 : Seriye Giriş"
 description: >
   Çoğu yerde Git ile ilgili seriler mevcut ama kuru kuru anlatılıyor diye düşünmüşümdür hep. Kendi kendime "Madem öyle düşünüyorsun daha iyisini becerebiliyorsan yap." dedim ve böyle bir seriye giriştim. Serinin adı tam olarak espri düzeyimi gösteriyor :) Bu yazıda, konu anlatmak yerine seriyle ilgili bilgileri; serinin içeriğini, seri genelindeki terimleri toplu görebileceğiniz tabloyu, kullandığım kaynakları paylaşacağım. Bu yazı, seri bitene kadar yaşayan (güncellenen) bir yazı olacak.
