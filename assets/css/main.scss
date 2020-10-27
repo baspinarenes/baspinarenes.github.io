@@ -260,7 +260,7 @@ code.language-plaintext {
 
                 p {
                     height: 30px;
-                    margin-bottom: 5px;
+                    margin-bottom: 10px;
                 }
 
                 .tag-icon {
@@ -279,7 +279,7 @@ code.language-plaintext {
                 .post {
                     display: flex;
                     justify-content: space-between;
-
+                    margin-bottom: 5px;
                     .post-name {
                         margin-right: 2px;
                         width: fit-content;
@@ -294,6 +294,7 @@ code.language-plaintext {
                     }
 
                     .post-date {
+                        margin-left: 6px;
                         color: $link-rengi;
                         flex-shrink: 0;
                     }
