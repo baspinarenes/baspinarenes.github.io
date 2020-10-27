@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     {% include head.html %}
 </head>
@@ -10,16 +10,25 @@
                 <a href="/" class="logo">Enes<br>Başpınar</a>
                 <ul class="menu">
                     {% for item in site.data.navigation %}
+                        {% if item.name == "Özgeçmiş" %}
+                        <li><a href="{{ item.link }}" target="_blank">{{ item.name }}</a></li>
+                        {% elsif item.name == "(Blog güncelleniyor...)"%}
+                        <li style="color: red;">(Blog güncelleniyor...)</li>
+                        {% else %}
                         <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </nav>
         </header>
         <main>
+            <article>
             {{ content }}
+            </article>
         </main>
         <footer>
-            <div class="info">Burası, blog örneklerinden esinlenerek tarafımca tasarlanan bir blogumsudur. Hiçbir hakkı saklı değildir.<br><br>İletişime geçmek isterseniz lütfen çekinmeyin:</div>
+            <p>Burası, blog örneklerinden esinlenerek tarafımca tasarlanan bir blogumsudur. Hiçbir hakkı saklı değildir. Github hesabımdan klonlayıp kendiniz için kullanabilirsiniz.</p>
+            <p>İletişime geçmek isterseniz yazmaktan çekinmeyin:</p>
             <ul class="social-links">
                 <li><a href="mailto:{{ site.email }}"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 <li><a href="https://github.com/{{ site.github_username }}"><i class="fa fa-github-square fa-2x"></i></a></li>

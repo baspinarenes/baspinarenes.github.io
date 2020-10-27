@@ -1,13 +1,13 @@
----
----
+--- 
+--- 
+
+@import url(https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700);
 
 $logo-rengi:blue;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
 $alt-metin-rengi: #737373;
 $baslik-rengi: #202020;
-
-@import url(https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700);
 
 * {
     margin: 0;
@@ -16,36 +16,90 @@ $baslik-rengi: #202020;
 }
 
 html {
-    overflow: -moz-scrollbars-vertical; 
+    overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
+    width: 100%;
+    font-size: 16px;
+    line-height: 32px;
+}
+
+img {
+    display: block;
+    margin: 30px auto 40px;
 }
 
 a {
     text-decoration: none;
-    color:$link-rengi;
+    color: $link-rengi;
 
     &:hover {
         color: black;
     }
 }
 
-h2 {
-    margin: 60px 0 20px 0;
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: $baslik-rengi;
+    font-weight: 700;
 }
 
-p {
-    line-height: 30px;
+h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-top: 80px;
     margin-bottom: 20px;
-    text-align: justify;
+    font-size: 1.5rem;
+}
+
+h3 {
+    margin-top: 50px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+h4 {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+h5 {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: 1.12em;
+}
+
+h6 {
+    margin: 0 auto 30px auto;
+    font-weight: 400;
+    font-size: 1rem;
+    color: $alt-metin-rengi;
+    text-align: center;
+    border-radius: 15px;
+    width: fit-content;
+}
+
+li {
+    margin-left: 20px;
+}
+
+ul {
+    margin-bottom: 20px;
 }
 
 blockquote {
-    display: block;
-    border-width: 2px 0;
-    border-style: solid;
-    border-color: $alt-metin-rengi;
+    border-top: 1px solid $alt-metin-rengi;
+    border-bottom: 1px solid $alt-metin-rengi;
     padding: 1.2em 0 1em;
-    margin: 1.5em 0;
+    margin: 40px 0;
     position: relative;
 
     p {
@@ -68,165 +122,305 @@ blockquote {
     }
 }
 
+hr {
+    border: 0px;
+    border-top: 12px dotted $alt-metin-rengi;
+    width: 100px;
+    height: 1px;
+    margin: 40px auto 40px;
+}
+
+pre {
+    padding: 10px 10px 0;
+    margin: 0 0 30px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.025);
+    font-size: 0.92rem;
+    height: fit-content;
+    line-height: 1.2rem;
+
+    & * {
+        background-color: rgba(0, 0, 0, 0);
+    }
+
+    .lineno {
+        border-radius: 0;
+        border-right: 1px solid black;
+    }
+
+    overflow-x: scroll;
+}
+
+/* ` ` */
+code.language-plaintext {
+    font-size: 1rem;
+    padding: 2px 4px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+}
+
+
+.copyright-alert {
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.781);
+    text-align: center;
+    margin-bottom: 30px;
+    a {
+        color: black;
+        text-decoration: underline;
+    }
+}
+
 .wrapper {
     font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
-    font-weight: 400;
+    height: fit-content;
+    padding: 50px 5% 5% 5%;
+    margin: 0px auto;
+    font-size: 1rem;
 
-    display: flex;
-    flex-direction: column;
-        
-    max-width: 900px;
-    width: 80%;
-    height: 100px;
-    margin: 60px auto;
-    height: 100%;
-}
-
-header {
-    display: flex;
-    height: 160px;
-    align-content: center;
-    justify-content: center;
-
-    nav {
-        flex: 1;
+    header {
         display: flex;
-        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        margin-top: 50px;
+        margin-bottom: 80px;
 
-        .logo {
-            font-family: "Pecita";
-            font-size: 400%;
-            font-weight: 700;
-            margin: 0 auto 30px auto;
-            color: black;
+        nav {
             text-align: center;
-            line-height: 40px;
-        }
-
-        .menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-top: 1px solid rgba(8,8,11,0.15);
-            border-bottom: 1px solid rgba(8,8,11,0.15);
-            padding: 10px 0px;
-            li {
-                list-style: none;
-                margin-right: 50px;
-
-                &:last-of-type {
-                    margin-right: 0;
-                }
-
-                a {
-                    font-size: 20px;
-                }
-            }
-        }
-    }
-}
-
-main {
-    margin-bottom: 30px;
-    padding: 50px 20px;
-    border-bottom: 1px solid rgba(8,8,11,0.15);
-
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-        color: $baslik-rengi;
-        .page-title__text {
-            font-weight: 700;
-            font-size: 120%;
-        }
-        .page-title__subtitle {
-            font-weight: 400;
-            font-size: 60%;
-            color: $alt-metin-rengi;
-        }
-    }
-
-    .post-img {
-        display: block;
-        margin: 0 auto 40px auto;
-        height: 350px;
-    }
-
-    .tags {
-        .tag {
-            height: 60px;
-            margin: 40px 0 20px 0;
-            border-bottom: 1px solid black;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            font-size: 150%;
-            color: $alt-metin-rengi;
-            
-            p {
-                height: 30px;
-                margin-bottom: 10px;
-            }
-
-            .tag-icon {
-                color: gray;
-                font-size: 1.5em;
-                margin-bottom: 2px;
-                align-self: flex-end;
-            }
-        }
-
-        .posts {
-            margin-bottom: 50px;
+            width: 80%;
             display: flex;
             flex-direction: column;
-            
-            .post {
+            justify-content: center;
+            align-items: center;
+
+            .logo {
+                font-family: "Pecita";
+                font-size: 4rem;
+                font-weight: 700;
+            }
+
+            .menu {
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
+                flex-wrap: wrap;
+                border-top: 1px solid rgba(8, 8, 11, 0.15);
+                border-bottom: 1px solid rgba(8, 8, 11, 0.15);
+                font-size: 1.2rem;
+                padding: 10px 0px;
+                margin-top: 30px;
+                width: 100%;
 
-                .post-name {
-                    margin-right: 2px;
-                }
-
-                .post-date {
-                    color: $link-rengi;
-                    flex-shrink: 0;
+                li {
+                    list-style: none;
+                    margin: 0 25px;
                 }
             }
         }
     }
 
-    .summary {
-        margin-top: 60px;
-    }
-}
+    main > article {
+        margin: 40px 0 30px;
+        padding-bottom: 65px;
+        border-bottom: 1px solid $link-rengi;
 
-footer {
-    font-size: 0.8em;
-    .info {
+
+        & > p {
+            line-height: 32px;
+            margin-bottom: 20px;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        
+        .post-img {
+            display: block;
+            margin: 0 auto 40px auto;
+            height: 350px;
+        }
+
+        .tags {
+            .tag {
+                margin-bottom: 20px;
+                border-bottom: 1px solid black;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                font-size: 150%;
+                color: $alt-metin-rengi;
+
+                p {
+                    height: 30px;
+                    margin-bottom: 5px;
+                }
+
+                .tag-icon {
+                    color: gray;
+                    font-size: 1.5em;
+                    margin-bottom: 5px;
+                    align-self: flex-end;
+                }
+            }
+
+            .posts {
+                margin-bottom: 30px;
+                display: flex;
+                flex-direction: column;
+
+                .post {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .post-name {
+                        margin-right: 2px;
+                        width: fit-content;
+                    }
+
+                    .name-date-line {
+                        overflow: hidden;
+                        height: 30px;
+                        color: #737373;
+                        margin: 0 5px;
+                        flex: 1;
+                    }
+
+                    .post-date {
+                        color: $link-rengi;
+                        flex-shrink: 0;
+                    }
+                }
+            }
+        }
+
+        .author {
+            margin: 0 auto;
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            img {
+                margin: 0 auto 20px;
+                border-radius: 50%; 
+                shape-outside: circle();
+                width: 150px;
+            }
+    
+            p {
+                padding-top: 4px;
+            }
+        }
+    }
+
+    footer {
         text-align: center;
-    }
-
-    .social-links {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        align-self: flex-end;
-        padding-bottom: 22px;
+        font-style: italic;
+        color: $normal-metin-rengi;
+        font-size: 0.91rem;
+        margin-bottom: 50px;
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
 
         li {
             list-style: none;
-            margin: 20px 20px 0px 0px;
+            margin: 0px 10px;
+        }
 
-            &:last-of-type {
-                margin-right: 0;
+        p {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width: 465px) {
+    .wrapper {
+        header {
+            nav {
+                .menu {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    .name-date-line {
+        display: none;
+    }
+}
+
+/* Telefon & Tablet */
+@media only screen and (min-width: 466px) and (max-width: 960px) {
+    .wrapper {
+        header {
+            nav {
+                .menu {
+                    li {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* Bilgisayar */
+@media only screen and (min-width: 961px) {
+    html {
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+        font-size: 18px;
+    }
+
+    body {
+        padding: 0 2.5%;
+
+    }
+
+    .wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 50px 0;
+        font-size: 1rem;
+
+        header {
+            nav {
+                width: 80%;
+                .logo {
+                    font-size: 4.5em;
+                }
+                .menu {
+                    margin-top: 40px;
+                }
             }
         }
 
-        i {
-            color: $normal-metin-rengi;
+        main > article {
+            .author {
+                margin: 0 auto;
+                width: 85%;
+
+                display: block;
+                img {
+                    float: left;
+                    margin: 28px 70px 0 0;
+                }
+        
+                p {
+                    padding-top: 4px;
+                }
+            }
         }
     }
+
+    
 }

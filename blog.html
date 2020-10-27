@@ -20,7 +20,7 @@ title: Yazılar
             {% for post in posts %}
             <div class="post">                
                 <a class="post-name" href="{{ post.url }}">{{ post.title }}</a>
-                <div style="overflow: hidden; height: 30px; color: #737373; margin: 0 5px;">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+                <div class="name-date-line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
                 <div class="post-date">
                     {% assign m = post.date | date: "%-m" %}
                     {{ post.date | date: "%-d" }}
