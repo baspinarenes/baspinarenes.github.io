@@ -2,11 +2,10 @@
 layout: post
 image: assets/img/card-img/python.png
 title: Değişken Deyince Ne Anlamalı?
+date: 2020-10-08
 description: >
   Python'a yeni başlarken her şey yolunda ilerliyordur. Ancak bir noktada karşınıza "mutable" ve "immutable" kavramları çıkıp kafanızı karıştırabilir. Bu yazı, Ned Batchelder'in PyCon 2015'da yaptığı sunumdan hazırladığı yazının çevirisidir. Kendisi nazikçe çeviri isteğime onay verdi. Tabi kendimce bazı küçük dokunuşlar da yaptım. Gidelim ve değişkenler hakkındaki kafa karışıklığınızı giderelim!
-excerpt_separator: <!--more-->
 ---
-<!--more-->
 
 <div class="copyright-alert">
 Bu içerik, kendisine çeviri talebinde bulunduğum ve mailimi oldukça nazik bir şekilde yanıtlayan <a href="https://twitter.com/nedbat"><b>Ned Batchelder</b></a>'in sitesinde paylaştığı yazıdan çevrilmiş ve tarafımca bazı eklemeler yapılmıştır. Yazının orjinal haline <a href="https://nedbatchelder.com/text/names.html"><b>buradan</b></a> ulaşabilirsiniz.
@@ -42,7 +41,7 @@ print(x+2) # 25 yazdırır
 C dili konusunda deneyimliyseniz, referans kavramını işaretçi (***pointer***) olarak düşünmek isteyebilirsiniz, ancak bu sizin için bir şey ifade etmiyorsa endişe etmeyin. Neler olduğunu anlamanıza yardımcı olması için diyagramlar kullanacağız. Gri etiket, ok ile işaret edilen değerin referansı olan ismi temsil eder. Örnekte **x** ismi 23 sayısına referans gösterir:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/001.png" alt="001.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/001.png" alt="001.png" style="zoom: 100%;"/>
 </p>
 
 Bu yazıda kodlarımızı diyagramlar ile görselleştireceğiz. Siz de kendi kodlarınızı diyagram şeması ile takip edebilmek için [pythontutor.com](http://pythontutor.com/) sitesini kullanabilirsiniz.
@@ -59,7 +58,7 @@ y = x
 Artık **x** ve **y** aynı değere işaret ederler:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/002.png" alt="002.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/002.png" alt="002.png" style="zoom: 100%;"/>
 </p>
 
 Belirtmekte fayda var. Ne **x** ne de **y** isimlerinden birisi gerçek diğeri ise ikinci isim değildir. İkiside değer için aynı öneme sahiptir. Zaten referans gösterme şekilleri de tamamen aynıdır.
@@ -74,7 +73,7 @@ y = x
 x = 12
 ```
 
-![](/assets/img/python-posts/degisken-deyince-ne-anlamali/003.png)
+![](/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/003.png)
 
 `y = x` dediğimizde, sonsuza dek eşit olacakları anlamına gelmez. **x**'in yeniden atanması, değerin referansı olarak **y**'yi yalnız bırakır. Her zaman eşit olsalardı yaşanacak kaosu hayal edebilirsiniz.
 
@@ -192,7 +191,7 @@ nums = [1, 2, 3]
 ```
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/004.png" alt="004.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/004.png" alt="004.png" style="zoom: 100%;"/>
 </p>
 
 **nums**'ı tanımladıktan sonra başka bir isme atarsak, aynı listeye referans gösteren iki tane isme sahibiz demektir:
@@ -203,7 +202,7 @@ tri = nums
 ```
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/005.png" alt="005.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/005.png" alt="005.png" style="zoom: 100%;"/>
 </p>
 
 Unutmayın: atama kesinlikle yeni değerler oluşturmaz veya veriyi kopyalamaz. Son örnekteki atama ifadesi, listeyi çiftlemez.
@@ -231,13 +230,13 @@ nums.append(4)
 Öncelikle listemize bir isim atayalım:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/006.png" alt="006.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/006.png" alt="006.png" style="zoom: 100%;"/>
 </p>
 
 Ardından bu listeye başka bir değer ekleyelim:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/007.png" alt="007.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/007.png" alt="007.png" style="zoom: 100%;"/>
 </p>
 
 **nums**'ın referans gösterdiği değeri değiştirmedik. Başlangıçta, **nums** ismi üç elemanlı bir listeyi ifade eder. Sonrasında listeye erişmek için aynı ismi kullanmaya devam ederiz, çünkü başka atama yapmadığımızdan dolayı aynı listeye referans göstermeye devam eder. `.append` metodu, 4 değerini ekleyerek listeyi değiştirir, ancak liste hala aynı listedir ve **nums** hala onun referansıdır.
@@ -257,13 +256,13 @@ print(tri)      # [1, 2, 3, 4]
 **tri**'nin değeri neden değişti? Cevap, şimdiye kadar öğrendiklerimizde gizlidir. Atama yapmak, değeri kopyalamaz. Bu nedenle **tri** ismine atama yaptıktan sonra, aynı listeye referans olan iki ismimiz olur:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/008.png" alt="008.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/008.png" alt="008.png" style="zoom: 100%;"/>
 </p>
 
 Sonrasında listeyi yerinde değiştiren `nums.append(4)` metodunu çağırırız. **tri** bu listeyi temsil ettiğinden, baktığımızda değişikliği görürüz. Bu nedenle ismimiz artık dört elemanlı olan listeyi gösterir:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/009.png" alt="009.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/009.png" alt="009.png" style="zoom: 100%;"/>
 </p>
 
 Değiştirilebilirlik, insanların Python isimleri ve değerleriyle ilgili kafasını karıştıran asıl şeydir. Bir değer birden fazla isim tarafından paylaşılır ve birinde değiştirilir ise tüm isimler değişikliği görür. Bunun gerçekleşmesi için ihtiyacımız olanlar ise:
@@ -338,13 +337,13 @@ Daha önce Python'un altında yatan basitlikten bahsetmiştik. Mekanizmaları ol
 Liste diyagramlarımızda, eleman olarak sayıları göstermiştik ancak gerçekte her öğe bir sayıya referanstır. Bu nedenle şu şekilde çizilmelidir:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/010.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/010.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Ancak diyagram karmaşıklaşacağı için görsel bir kısaltma kullandık:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/011.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/011.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 *mutable* değerleri işaret eden liste öğeleriniz varsa, liste elemanlarının yalnızca değerlere referanslar olduğunu unutmamak önemlidir.
@@ -422,7 +421,7 @@ print(nums)  # [1, 2, 3, 4, 4]
 Bu kod parçası şaşırtıcı sonuçlar doğurabilir. Adım adım ilerleyerek süreci takip edelim. **augment_twice** fonksiyonunu çağırdığımızda isimler ve değerler şöyle görünür:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/012.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/012.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Fonksiyondaki yerel isimleri bir çerçeve içine aldık. Fonksiyonu çağırdığımızda, diğer herhangi bir atama ifadesinde olduğu gibi değerler parametre isimlerine atanır. Atamanın hiçbir zaman yeni değerler oluşturmadığını veya herhangi bir veriyi kopyalamadığını unutmayın. Bundan dolayı yerel isim **a_list**, gönderilen değere yani **nums**'a referansta bulunur.
@@ -430,13 +429,13 @@ Fonksiyondaki yerel isimleri bir çerçeve içine aldık. Fonksiyonu çağırdı
 Sonra `a_list.append` metodunu iki kez çağırarak listeyi değiştiririz:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/013.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/013.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Fonksiyon sona erdiğinde yerel isimler yok edilir. Referansı kalmayan değerler **reclaimed** duruma gelir, diğerleriyse bellekte kalır:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/014.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/014.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Değiştirmek üzere listeyi fonksiyonumuza gönderdik. Hiçbir değer kopyalanmadı. Bu davranış şaşırtıcı olsa da oldukça önemlidir. Bu sayede nesneleri değiştiren yöntemler yazabiliriz.
@@ -454,19 +453,19 @@ print(nums)  # [1, 2, 3, 4, 4]
 **augment_twice_bad** fonksiyonunu çağırdığımız anda, daha önce **augment_twice** fonksiyonunu çağırdığımızdakiyle aynı görüntüyü elde ederiz:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/015.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/015.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Bir sonraki ifade ise atama işlemidir. Sağ taraftaki ifade yeni bir liste oluşturur ve bu liste daha sonra **a_list** ismine atanır:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/016.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/016.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Fonksiyon sona erdiğinde, yerel isimler yok edilir ve referansı kalmayan değerler çöpe gönderilir ve başladığımız yere döneriz:
 
 <p align="center">
-<img src="/assets/img/python-posts/degisken-deyince-ne-anlamali/017.png" alt="010.png" style="zoom: 100%;"/>
+<img src="/assets/img/posts/python-posts/degisken-deyince-ne-anlamali/017.png" alt="010.png" style="zoom: 100%;"/>
 </p>
 
 Bir değeri yerinde değiştirmek ile bir ismi yeniden tanımlamak arasındaki farkı anlayabilmek gerçekten önemlidir. **augment_twice** fonksiyonu gönderilen değeri değiştirdi ve böylece fonksiyon değer döndürdükten sonra da değişim görüldü. **augment_twice_bad** fonksiyonu ise gönderilen değeri yerel bir ismi yeniden tanımlamak için atama kullandı, bu nedenle değişiklikler fonksiyonun dışında görülmedi.

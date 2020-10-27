@@ -51,7 +51,7 @@ h1 {
     font-weight: 700;
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 h2 {
@@ -79,7 +79,7 @@ h5 {
 }
 
 h6 {
-    margin: 0 auto 30px auto;
+    margin: 0 auto 50px auto;
     font-weight: 400;
     font-size: 1rem;
     color: $alt-metin-rengi;
@@ -316,9 +316,38 @@ code.language-plaintext {
             }
     
             p {
-                text-align: center;
                 padding-top: 4px;
             }
+        }
+
+        .dict-table {
+            width: 200%;
+            margin-left: -50%;
+        }
+
+        .table-input {
+            width: 50%;
+            margin: 70px auto 30px;
+            border: 0;
+
+            input {
+                outline: none;
+            }
+        }
+
+        .results tr[visible='false'],
+        .no-result{
+            display:none;
+            color: red;
+        }
+
+        .results tr[visible='true']{
+            display:table-row;
+        }
+
+        .counter{
+            padding:8px; 
+            color:#ccc;
         }
     }
 
@@ -399,7 +428,7 @@ code.language-plaintext {
 
         header {
             nav {
-                width: 80%;
+                width: 100%;
                 .logo {
                     font-size: 4.5em;
                 }
@@ -417,7 +446,7 @@ code.language-plaintext {
                 display: block;
                 img {
                     float: left;
-                    margin: 13px 70px 0 0;
+                    margin: 5px 70px 0 0;
                 }
         
                 p {

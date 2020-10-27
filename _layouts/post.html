@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<img src="{{ site.url }}/{{ site.data.logos.python }}" width="200" style="margin: 0 auto 20px; display: block;">
+<img src="{{ site.url }}/assets/img/logos/logo-{{ page.categories[1] }}.png" width="200" style="margin: 0 auto 20px; display: block;">
 <h1>{{ page.title }}</h1>
 <h6>
     <!--
@@ -10,7 +10,6 @@ layout: default
     {% assign words = page.categories[1] | split: ' ' %}
     {% capture titlecase %}{% for word in words %}{{ word | capitalize }} {% endfor %}{% endcapture %}
     {{ titlecase }}
-    ,
     -->
     {% assign m = page.date | date: "%-m" %}
     {{ page.date | date: "%-d" }}

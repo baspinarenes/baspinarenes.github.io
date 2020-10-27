@@ -11,7 +11,7 @@ title: Yazılar
 
 <div class="tags">
     {% for tag in site.data.tags %}
-        {% assign posts = site.categories[tag.name] %}
+        {% assign posts = site.categories[tag.name] | reverse %}
         <div class="tag">
             <p>#{{ tag.name }}</p>
             <i class="tag-icon {{ tag.icon-class }}"></i>

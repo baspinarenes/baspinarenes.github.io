@@ -12,13 +12,12 @@
                     {% for item in site.data.navigation %}
                         {% if item.name == "Özgeçmiş" %}
                         <li><a href="{{ item.link }}" target="_blank">{{ item.name }}</a></li>
-                        {% elsif item.name == "(Blog güncelleniyor...)"%}
-                        <li style="color: red;">(Blog güncelleniyor...)</li>
                         {% else %}
                         <li><a href="{{ item.link }}">{{ item.name }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>
+                <p style="color: red; font-size: 20px;">(Blog güncelleniyor...)</p>
             </nav>
         </header>
         <main>
@@ -37,5 +36,8 @@
             </ul>
         </footer>
     </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="{{ site.url }}/assets/js/table.js"></script>
+
 </body>
 </html>
