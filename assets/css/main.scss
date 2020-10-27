@@ -26,6 +26,7 @@ html {
 img {
     display: block;
     margin: 30px auto 40px;
+    max-width: 100%;
 }
 
 a {
@@ -50,7 +51,7 @@ h1 {
     font-weight: 700;
     font-size: 2rem;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 h2 {
@@ -131,12 +132,11 @@ hr {
 }
 
 pre {
-    padding: 10px 10px 0;
+    padding: 10px;
     margin: 0 0 30px;
     border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.025);
     font-size: 0.92rem;
-    height: fit-content;
     line-height: 1.2rem;
 
     & * {
@@ -146,9 +146,10 @@ pre {
     .lineno {
         border-radius: 0;
         border-right: 1px solid black;
+        margin: 0;
     }
 
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 /* ` ` */
@@ -171,6 +172,7 @@ code.language-plaintext {
     background-color: rgba(255, 0, 0, 0.781);
     text-align: center;
     margin-bottom: 30px;
+
     a {
         color: black;
         text-decoration: underline;
@@ -189,7 +191,7 @@ code.language-plaintext {
         align-content: center;
         justify-content: center;
         margin-top: 50px;
-        margin-bottom: 80px;
+        margin-bottom: 20px;
 
         nav {
             text-align: center;
@@ -200,6 +202,7 @@ code.language-plaintext {
             align-items: center;
 
             .logo {
+                line-height: 0.60em;
                 font-family: "Pecita";
                 font-size: 4rem;
                 font-weight: 700;
@@ -225,7 +228,7 @@ code.language-plaintext {
     }
 
     main > article {
-        margin: 40px 0 30px;
+        margin: 20px 0 30px;
         padding-bottom: 65px;
         border-bottom: 1px solid $link-rengi;
 
@@ -304,14 +307,16 @@ code.language-plaintext {
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
             img {
                 margin: 0 auto 20px;
                 border-radius: 50%; 
                 shape-outside: circle();
-                width: 150px;
+                width: 170px;
             }
     
             p {
+                text-align: center;
                 padding-top: 4px;
             }
         }
@@ -319,10 +324,10 @@ code.language-plaintext {
 
     footer {
         text-align: center;
-        font-style: italic;
         color: $normal-metin-rengi;
         font-size: 0.91rem;
         margin-bottom: 50px;
+        line-height: 18px;
         
         .social-links {
             display: flex;
@@ -412,7 +417,7 @@ code.language-plaintext {
                 display: block;
                 img {
                     float: left;
-                    margin: 28px 70px 0 0;
+                    margin: 13px 70px 0 0;
                 }
         
                 p {

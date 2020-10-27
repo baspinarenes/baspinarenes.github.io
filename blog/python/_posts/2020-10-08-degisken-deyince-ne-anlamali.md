@@ -116,7 +116,7 @@ print(id(a))    # 140056999120528
 print(id(b))    # 140056999120528
 print(id(c))    # 140056999120528
 ```
-Bunu şu şekilde düşünelim **a** 3000 değerine referans gösterir (a->3000). **b** ve **c** isimleri **a**'ya, **a** ismi de 3000 değerini işaret ettiğinden **b** ve **c** isimleri de aslında 3000 değerine referans gösterir (b->a->3000, c->a->3000). 
+Bunu şu şekilde düşünelim **a** 3000 değerine referans gösterir (a->3000). **b** ve **c** isimleri **a** ismine, **a** ismi de 3000 değerini işaret ettiğinden **b** ve **c** isimleri de aslında 3000 değerine referans gösterir (b->a->3000, c->a->3000). 
 
 Python'da *mutable* değere sahip bir isim oluşturulduğunda, bellekte o değer için her atamada farklı nesne oluşturulur. *immutable* değerlerde ise hep aynı nesneyi kullanır.
 
@@ -517,15 +517,6 @@ Bu, **nums**'ın değerini silmez, **nums** ismini siler. İsim uzayından çık
 Bazı insanlar "Python'da değişken yoktur, isimler vardır" demeyi severler. Ancak bu slogan yanıltıcıdır. Gerçek şu ki, Python'da değişkenler vardır fakat C'deki değişkenlerden farklı çalışırlar. 
 
 İsimler, Python değişkenleridir: değerlere referans olurlar ve bu değerler programınız süresince değişebilir. Sırf başka bir dilin (önemli olsa da) farklı davranması, Python'u değişken içermeyen dil olarak tanımlamak için iyi bir neden değildir.
-
----
-
-<div class="author">
-  <img src="/assets/img/icon.jpg" alt="010.png">
-  <p>
-  Bilginin zekatı paylaşmaktır diyerek yazımızı burada sonlandıralım. Maillerinize her zaman açığım. Olumlu yorumlar motive eder, olumsuzlar ise geliştirir. Bu yüzden hakaret içermezlerse olumsuz yorumları duymak da son derece önemlidir. Selametle.
-  </p>
-</div>
 
 
 
