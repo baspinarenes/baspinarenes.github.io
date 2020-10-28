@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/python.png
 title: Değişken Deyince Ne Anlamalı?
-date: 2020-10-08
+excerpt: İkinci çeviri yazım ile karşınızdayım. Yazının orjinali, Ned Batchelder tarafından PyCon 2015 için hazırlanmış bir slaytın yine kendisi tarafından yazıya aktarılmış halidir. Dile yeni başlayan insanların kafasını karıştıran bir nokta olduğunu düşündüğümden dolayı yazıyı herkesin okuyabilmesini istedim.
 ---
 
 <div class="copyright-alert">
