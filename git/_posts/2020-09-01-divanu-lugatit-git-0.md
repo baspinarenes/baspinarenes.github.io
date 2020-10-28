@@ -2,11 +2,7 @@
 layout: post
 image: assets/img/card-img/git.png
 title: "Divanu Lügatit Git - 0 : Seriye Giriş"
-description: >
-  Çoğu yerde Git ile ilgili seriler mevcut ama kuru kuru anlatılıyor diye düşünmüşümdür hep. Kendi kendime "Madem öyle düşünüyorsun daha iyisini becerebiliyorsan yap." dedim ve böyle bir seriye giriştim. Serinin adı tam olarak espri düzeyimi gösteriyor :) Bu yazıda, konu anlatmak yerine seriyle ilgili bilgileri; serinin içeriğini, seri genelindeki terimleri toplu görebileceğiniz tabloyu, kullandığım kaynakları paylaşacağım. Bu yazı, seri bitene kadar yaşayan (güncellenen) bir yazı olacak.
-excerpt_separator: <!--more-->
 ---
-<!--more-->
 
 Git konusunu araştırmaya başladığımda kafam allak bullak olmuştu. Bunun sebebi ise Türkçe yazıların içeriğinin genelde safi bilgi olması ve anlatanın duygularını aktaramaması. Amacım emek harcanmış bu tarz yazıları yargılamak değil, zaten bunun için yeterli kapasitede değilim. Ancak bir okuyucuyum ve bu yazıyı hissetmemi engelliyor ve öğrenmemi zorlaştırıyor. Benim gibi bu zorlukları çekenler içinde kendi Git serime garip bir isimle birlikte başlıyorum. Sıkıcı olmayan ve sizlerle birlikte güzel vakit geçireceğimiz bir seri olmasını ümit ediyorum. Belki de berbat bir şey çıkar ortaya kim bilir ? :)
 

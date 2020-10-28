@@ -3,8 +3,6 @@ layout: post
 image: assets/img/card-img/python.png
 title: Değişken Deyince Ne Anlamalı?
 date: 2020-10-08
-description: >
-  Python'a yeni başlarken her şey yolunda ilerliyordur. Ancak bir noktada karşınıza "mutable" ve "immutable" kavramları çıkıp kafanızı karıştırabilir. Bu yazı, Ned Batchelder'in PyCon 2015'da yaptığı sunumdan hazırladığı yazının çevirisidir. Kendisi nazikçe çeviri isteğime onay verdi. Tabi kendimce bazı küçük dokunuşlar da yaptım. Gidelim ve değişkenler hakkındaki kafa karışıklığınızı giderelim!
 ---
 
 <div class="copyright-alert">
