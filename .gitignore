@@ -3,13 +3,3 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
-
-assets/img/posts/git-posts/divanu-lugatit-git-1/
-assets/img/posts/git-posts/divanu-lugatit-git-2/
-assets/img/posts/git-posts/divanu-lugatit-git-3/
-assets/img/posts/git-posts/divanu-lugatit-git-4/
-
-git/_posts/2020-09-02-divanu-lugatit-git-1.md
-git/_posts/2020-09-04-divanu-lugatit-git-2.md
-git/_posts/2020-09-05-divanu-lugatit-git-3.md
-git/_posts/2020-09-09-divanu-lugatit-git-4.md
