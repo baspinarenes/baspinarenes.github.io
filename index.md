@@ -5,7 +5,7 @@ image: assets/img/icon.jpg
 
 # Girizgah
 
-Merhabalar, ben Enes. Kocaeli Üniversitesi Bilgisayar Mühendisliği dördüncü sınıfım. Kendimden kısaca bahsetmem gerekirse; tek başına vakit geçirmeyi, polisiye romanlara dalmayı ve öğrendiklerini paylaşmayı seven birisiyim. Aslında bende kendimi yeni yeni tanıyorum. Örneğin üniversitenin ilk üç senesi elle tutulur hiçbir şey yapmamış olduğumu yeni farkettim. Bunu farkettikten sonra güzel bir planlama yaptım. Allah tamamlamayı nasip ederse de planlamamın sonucunda hedeflerimi gerçekleştirmek istiyorum. Aynı zamanda savunma sanayiye ilgi duyuyorum. Özellikle inansız hava araçlarına. İlgilendiğim iki alanın kesişimi ise ileride çalışmak istediğim işi özetliyor.
+Merhabalar, ben Enes. Kocaeli Üniversitesi Bilgisayar Mühendisliği dördüncü sınıfım. Kısaca bahsetmem gerekirse; tek başına vakit geçirmeyi, polisiye romanlara dalmayı ve öğrendiklerini paylaşmayı seven birisiyim. Aslında bende kendimi yeni yeni tanıyorum. Örneğin üniversitenin ilk üç senesi elle tutulur hiçbir şey yapmamış olduğumu yeni farkettim. Bunu farkettikten sonra güzel bir planlama yaptım. Allah tamamlamayı nasip ederse de planlamamın sonucunda hedeflerimi gerçekleştirmek istiyorum. Aynı zamanda savunma sanayiye ilgi duyuyorum. Özellikle inansız hava araçlarına. İlgilendiğim iki alanın kesişimi ise ileride çalışmak istediğim işi özetliyor.
 
 Öğrendiklerimi paylaşmayı seviyorum demişken sevdiğim bir sözden bahsetmek istiyorum;
 
@@ -15,13 +15,13 @@ Merhabalar, ben Enes. Kocaeli Üniversitesi Bilgisayar Mühendisliği dördünc�
 
 ## Blog Açacak Kadar Bilgili Miyim?
 
-Yukarıda iddialı bir söz paylaştım ama çok bilgili olduğumdan değil. Dediğim gibi kendisini ve öğrenme biçimini çok geç tanıyan birisiyim. Ve kendim de dahil olmak üzere çok fazla kişide bir şeyleri öğrenmek için neler yapılır, hangi yollar izlenir sorularının cevabının olmadığını gördüm. Öğrenme isteksizliği problemi yaşayan insanlar için yine bu insanların içinden birisi olarak bu blogu ele alıyorum. Öğrendiğim konuları, sonradan ilgilenecek olanların kolayca anlayabilmesi derdindeyim.
+Yukarıda iddialı bir söz paylaştım ama çok bilgili olduğumdan değil. Dediğim gibi kendisini ve öğrenme biçimini çok geç tanıyan birisiyim. Ve kendim de dahil olmak üzere çok fazla kişide bir şeyleri öğrenmek için neler yapılır, hangi yollar izlenir sorularının cevabının olmadığını gördüm. Öğrenme isteksizliği problemi yaşayan insanlar için yine bu insanların içinden birisi olarak bu blogu kaleme alıyorum. Öğrendiğim konuları, sonradan ilgilenecek olanların kolayca anlayabilmesi derdindeyim.
 
 Kısacası; mükemmel bir yazılımcıyım diye açmıyorum bu blogu. Hedeflediğim şey, öğrenme sürecimde edindiğim bilgileri blogumda paylaşarak hedefleri benimkilerle aynı olan insanları buluşturmak. Blog yazılarının çoğunun karmaşık yazıldığını ve anlaşılma gayesi gütmediklerini düşünüyorum. Bu yüzden siz bir konu öğrenmeye başladığınızda neler düşünüyorsanız ben de bu süreçten geçerken bu soruların cevaplarını aradığımdan dolayı sizlere aktarıyor olacağım.
 
 ## Peki İçerik Ne Olacak?
 
-İçeriğin başrolünde Python olacak elbette. Bunun haricinde temel beceriler (Git, OOP vs), makine öğrenimi algoritmaları, kuantum programlama ve işin matematiğiyle ilgili yazılar da yer alacak. Bunları yaparken araştırdığım yazıları ve Coursera gibi siteler üzerinden aldığım derslerdeki notlarımı, sorduğum sorulara aldığım yanıtları ve kendi örneklerimle harmanlayarak anlamayı kolay hale getirmeyi planlıyorum. İngilizce öğrenimi sürecimi de eş zamanlı olarak blogumda paylaşma planım var. Ve elbette farklı farklı konular da yer alacak.
+İçeriğin başrolünde Python olacak elbette. Bunun haricinde temel beceriler (Git, OOP vs), makine öğrenimi algoritmaları, kuantum programlama ve işin matematiği ile ilgili yazılar da yer alacak. Bunları yaparken araştırdığım yazıları ve Coursera gibi siteler üzerinden aldığım derslerdeki notlarımı, sorduğum sorulara aldığım yanıtları ve kendi örneklerimle harmanlayarak kolayca anlaşılabilir hale getirmeyi planlıyorum. İngilizce öğrenimi sürecimi de eş zamanlı olarak blogumda paylaşma düşüncem var. Ve elbette farklı farklı konular da yer alacak.
 
 ---
 
