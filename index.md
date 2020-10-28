@@ -9,7 +9,9 @@ Merhabalar, ben Enes. Kocaeli Üniversitesi Bilgisayar Mühendisliği dördünc�
 
 Öğrendiklerimi paylaşmayı seviyorum demişken sevdiğim bir sözden bahsetmek istiyorum;
 
-> Bilginin yükünü tek başımıza sırtlamaya kalkarsak, bir gün o yükün altında kalırız. 
+<blockquote style="text-align: center;">
+Bilginin yükünü tek başımıza sırtlamaya kalkarsak, bir gün o yükün altında kalırız.
+</blockquote>
 
 İşte tam olarak bu yüzden blog işine girmek istedim. Türkçe kaynak eksikliği çekiyoruz ve teknolojinin ilerlemesiyle her geçen gün daha da geride kalıyoruz. Eğer bunu başkaları yapmıyorsa, biz elimizi taşın altına koyalım ve geleceğimizi şekillendirelim. Yazıyı okuyan herkesin harekete geçmesi için nacizane çağrımdır.
 
