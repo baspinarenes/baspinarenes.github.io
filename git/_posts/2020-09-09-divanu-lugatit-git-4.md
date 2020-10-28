@@ -2,8 +2,6 @@
 layout: post
 image: assets/img/card-img/git.png
 title: "Divanu Lügatit Git - 4 : Lokalin Derinlikleri"
-description: >
-  Lokale kabaca baktık ama bu kadarcık yeterli değil. Bu yazıda, lokalde anlattıklarımızın derinliklerine ineceğiz. Yaptığımız işlemleri görselleştirerek kafanızda netleştireceğiz, *commit* mesajının iskeletine bakacağız ve komutların bayraklarıyla birlikte ayrıntılarına değineceğiz.
 ---
 
 ## Seri İçeriği

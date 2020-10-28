@@ -2,8 +2,6 @@
 layout: post
 image: assets/img/card-img/git.png
 title: "Divanu Lügatit Git - 2 : Git ve GitHub Nedir?"
-description: >
-  Yavaş yavaş öğreneceklerimizin arkaplanını oluşturmaya devam ediyoruz. Bu yazıda, "Git nedir, yapısı ve işleyişi nasıldır?" sorularına değindikten sonra kısacık Github'ın Git ile bağlantısından bahsedeceğiz. Git komutlarını anlayabilmek için önemli bir yazı. Pür dikkat okumalısınız.
 ---
 
 ## Seri İçeriği
