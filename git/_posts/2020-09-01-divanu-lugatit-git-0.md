@@ -15,10 +15,10 @@ Artık Git öğrenme vaktinizin geldiğini hissediyorsanız buyrun hep birlikte 
 ## Seri İçeriği
 
 - <span style="font-weight: bold;">Divanu Lügatit Git - 0 : Seriye Giriş</span>
-- [Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?](/blog/git/divanu-lugatit-git-2/)
-- [Divanu Lügatit Git - 2 : Git ve GitHub Nedir?](/blog/git/divanu-lugatit-git-2/)
-- [Divanu Lügatit Git - 3 : Git ile Lokalde Takılmak](/blog/git/divanu-lugatit-git-3/)
-- [Divanu Lügatit Git - 4 : Lokalin Derinlikleri](/blog/git/divanu-lugatit-git-4/)
+- [Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?](/git/divanu-lugatit-git-1/)
+- [Divanu Lügatit Git - 2 : Git ve GitHub Nedir?](/git/divanu-lugatit-git-2/)
+- [Divanu Lügatit Git - 3 : Git ile Lokalde Takılmak](/git/divanu-lugatit-git-3/)
+- [Divanu Lügatit Git - 4 : Lokalin Derinlikleri](/git/divanu-lugatit-git-4/)
 
 
 <div class="seri-sozlugu">
