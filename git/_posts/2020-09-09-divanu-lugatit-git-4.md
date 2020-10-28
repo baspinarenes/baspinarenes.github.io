@@ -185,10 +185,9 @@ resim.jpg
 ```
 ignore_folder
 ```
-Bu bilgileri kullanarak kendi .gitignore dosyalarımızı oluşturabiliriz. Ancak kullandığımız yazılım diline ve platforma göre hazırlanmış .gitignore dosyaları elde edebileceğimiz güzel bir siteden bahsedeceğim. Sitemiz: [https://www.toptal.com/developers/gitignore](https://www.toptal.com/developers/gitignore)
+Bu bilgileri kullanarak kendi .gitignore dosyalarımızı oluşturabiliriz. Ancak kullandığımız yazılım diline ve platforma göre hazırlanmış .gitignore dosyaları elde edebileceğimiz güzel bir siteden bahsedeceğim. Sitemiz: <a href="https://www.toptal.com/developers/gitignore" style="text-decoration: underline;">toptal.com/developers/gitignore</a>
 
-Örnek olarak Visual Studio üzerinden Python yazdığımızı düşünelim. Arama çubuğuna ikisini de giriyorum:
-
+Örnek olarak Visual Studio üzerinden Python yazdığımızı düşünelim. Arama kısmına ikisini de giriyorum:
 
 <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-4/002.png" alt="lokalde-takiliyoruz.gif" style="display: block; margin-left: auto; margin-right: auto;"/>
 
