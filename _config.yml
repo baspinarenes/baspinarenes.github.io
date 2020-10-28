@@ -34,6 +34,7 @@ permalink: /:categories/:title/
 plugins:
   - jekyll-feed
   - jekyll-autoprefixer
+  - jekyll-toc
 
 sass:
   sass_dir: _sass

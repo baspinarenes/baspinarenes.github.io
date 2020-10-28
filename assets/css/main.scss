@@ -374,6 +374,7 @@ code.language-plaintext {
             padding:8px; 
             color:#ccc;
         }
+
     }
 
     footer {
@@ -451,6 +452,9 @@ code.language-plaintext {
         padding: 50px 0;
         font-size: 1rem;
 
+
+        position: relative;
+
         header {
             nav {
                 width: 100%;
@@ -482,6 +486,35 @@ code.language-plaintext {
             
             .seri-sozlugu {
                 display: initial;
+            }
+
+            .toc {
+
+                position: absolute;
+                padding-top: 30px;
+                top: 530px;
+                right: -400px;
+                width: 300px;
+                height: calc(100% - 1800px);
+
+                .sticky {
+                    
+                    position: sticky;
+                    top: 0;
+                    width: 300px;
+                    height: fit-content;
+                    padding: 50px 0 0 30px;
+                    font-size: 0.9rem;
+
+                    #table-of-contents {
+                        width: 100%;
+                        border-left: 1px solid rgb(214, 211, 211);
+
+                        li {
+                            list-style: none;
+                        }
+                    }
+                }
             }
         }
     }

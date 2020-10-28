@@ -3,6 +3,7 @@ layout: post
 image: assets/img/card-img/git.png
 title: "Divanu Lügatit Git - 3 : Git ile Lokalde Takılmak"
 excerpt: "Artık elle tutulur uygulamalar yapabileceğimiz kısma geldik. Bu yazıda, Git'in lokal işlemlerine bakacağız. Dosyalarda değişiklik yapacağız, değişiklikleri staging area'ya ekleyeceğiz ve sonrasında **commit** ederek repoya kaydedeceğiz. Lokal bizim kendi bilgisayarımızdaki repo, remote ise ortak repodur. Bunun farkını ileride anlayacaksınız."
+toc: true
 ---
 
 ## Seri İçeriği

@@ -3,6 +3,7 @@ layout: post
 image: assets/img/card-img/linux.png
 title: Terminale Biraz Renk Katalım
 excerpt: "Ubuntu'nun varsayılan terminali bakınca sizinde içiniz kararmıyor mu? Bu yazıda, terminalimize biraz renk katacağız."
+toc: true
 ---
 
 <div class="copyright-alert">

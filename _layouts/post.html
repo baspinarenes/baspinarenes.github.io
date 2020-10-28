@@ -34,7 +34,16 @@ layout: default
     {{ words | divided_by:170 }} dk
 </h6>
 
-{{ content }}
+<div class="toc-wrapper">
+  <div class="sticky">
+    <div id="table-of-contents">
+      {% toc %}
+    </div>
+  </div>
+</div>
+
+
+{{ content  }}
 
 <hr>
 
