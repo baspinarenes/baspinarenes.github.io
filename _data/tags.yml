@@ -3,3 +3,6 @@
 
 - name: git
   icon-class: fab fa-git
+  
+- name: linux
+  icon-class: fab fa-ubuntu
