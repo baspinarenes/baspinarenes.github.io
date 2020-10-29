@@ -72,7 +72,7 @@ Evet ayarlarımızı yaptığımıza göre şov başlasın. İlk Git repomuzu ol
 
 ## Git Reposu Oluşturma {#git-reposu-olusturma}
 
-Git reposu oluşturmak için iki seçeneğe sahibiz. Biri sıfırdan bir repo oluşturmak diğeri ise başka bir yerde var olan bir repo kopyalamak. İkinci seçeneğe ileride bakmak üzere şu anlık veda ederek devam edelim.
+Git reposu oluşturmak için iki seçeneğe sahibiz. Biri sıfırdan bir repo oluşturmak diğeri ise başka bir yerde var olan bir repo kopyalamak. İkinci seçeneğe ileride bakmak üzere elveda diyerek devam edelim.
 
 Repo oluştururken bulunduğumuz dizin önem arz eder. O yüzden dizine dikkat edin. Linux'ta `pwd` komutu ile nerede olduğunuza bakabilirsiniz. Şimdi bir dizin oluşturalım ve o dizini Git projesi haline getirelim: 
 
