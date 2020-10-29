@@ -6,7 +6,7 @@ excerpt: "Yavaş yavaş öğreneceklerimizin arkaplanını oluşturmaya devam ed
 toc: true
 ---
 
-## Seri İçeriği
+## Seri İçeriği {#seri-icerigi}
 
 - [Divanu Lügatit Git - 0 : Seriye Giriş](/git/divanu-lugatit-git-0/) 
 - [Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?](/git/divanu-lugatit-git-1/)
@@ -17,7 +17,7 @@ toc: true
 <br>
 Yavaş yavaş öğreneceklerimizin arkaplanını oluşturmaya devam ediyoruz. Bu yazıda, "Git nedir, yapısı ve işleyişi nasıldır?" sorularına değindikten sonra kısacık Github'ın Git ile bağlantısından bahsedeceğiz. Git komutlarını anlayabilmek için önemli bir yazı olduğundan pür dikkat okumalısınız.
 
-## Git Kurulumu
+## Git Kurulumu {#git-kurulumu}
 
 Önce şu linkleri verelim, herkes indirsin ki hemen aradan çıksın:
 
@@ -29,15 +29,15 @@ Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download
 
 ![git-version]({{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/001.png) 
 
-## Site Linkindeki SCM İfadesi Neyi İfade Eder?
+## Git Linkinde Bulunan SCM İfadesi {#git-linkinde-bulunan-scm-ifadesi}
 
 Git'i indirirken site adresine baktığınızda arkedeceksiniz üzere "SCM" ifadesi geçer. Buna aslında VCS'in diğer bir adı diyebiliriz. "Source Code Management"ın yani kaynak kodu yönetiminin kısaltmasıdır. Ancak bu sistem kaynak kodu dışındaki şeylerde de kullanabileceğimizden dolayı VCS kullanmak daha yaygındır.
 
-## Peki Nasıl Oluştu?
+## Nasıl Ortaya Çıktı? {#peki-nasil-ortaya-cikti}
 
 Linux kerneli geliştirilirken dünyanın her yerinden bir çok sayıda geliştirici görev aldığı için Bitkeeper isimli DVCS kullanılıyordur. Yaşanan bazı şeylerden sonra BitKeeper ücretsiz kullanımı kaldırır. Buna sinirlenen Linus Torvalds ise BitKeeper kullanırken edindiği bilgiler sayesinde, dağıtık ve veri kaybının zor olduğu bir VCS yazmaya başlar. Böylece insanlığa bu muazzam sistemi kazandırır.
 
-## Git Nedir?
+## Git Tam Olarak Nedir? {#git-tam-olarak-nedir}
 
 Git, bir tür versiyon kontrol aracıdır. Bu bölüm önemli çünkü sistemin nasıl çalıştığını anlamaya çalışacağız. Önce Git'in diğerlerinden farkına sonra da yapısına bir göz atalım. 
 
@@ -59,7 +59,7 @@ Dolayısıyla bu versiyonlar yerel repository'de (şimdilik değişikliklerin sa
 
 > Kısaca; Git, <b>commit</b>'lerde (değişikliklerin repository'e kaydedilme işlemine verdiğimiz özel isim) her dosyanın tüm içeriğini kaydeder. Bu da Git'e sonradan göreceğimiz branching (dallanma) gibi faydalar sağlar. Yazının sonraki kısmında Git'in yapısından bahsedeceğiz. Okurken dikkatinizi verin ve odaklanın. Bu kısım kodların işlevlerini anlarken önem teşkil ediyor.
 
-### Git'in Yapısı
+### Git'in Yapısı {#gitin-yapisi}
 
 <figure>
     <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/004.svg" alt="" style="width: 20%; margin-bottom: 10px;" />
@@ -75,7 +75,7 @@ Dolayısıyla bu versiyonlar yerel repository'de (şimdilik değişikliklerin sa
 - **Local (Yerel) Repository:** Çalışma alanınızdaki **.git** klasörüdür. Bu repoda yalnızca siz çalışabilirsiniz. Yaptığınız değişiklikler diskinize kaydedilir.
 - **Remote (Uzak) Repository:** Uzak sunucuda bulunan **.git** dosyasıdır. Aynı proje üzerinde çalışan geliştiriciler bu repository üzerinden değişiklikleri paylaşır.
 
-### Git İş Akışı (Workflow)
+### Git İş Akışı (Workflow) {#git-is-akisi}
 
 <figure>
     <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/005.png" alt="" style="width: 60%; margin-bottom: 10px;" />
@@ -106,7 +106,7 @@ Bu saçma hikayede; <br>
   - yaptığı yiyecekleri mutfak masasına koyması <b>stage</b> işlemini,<br>
   - mutfak masasından yemek masasına koyması <b>commit</b> işlemini temsil eder.
 
-## Peki Github Bu İşin Neresinde?
+## Peki Github Bu İşin Neresinde? {#peki-github-bu-isin-neresinde}
 
 <figure>
     <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/006.png" alt="" style="width: 60%; margin-bottom: 10px;" />

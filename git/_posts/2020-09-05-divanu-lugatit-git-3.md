@@ -6,7 +6,7 @@ excerpt: "Artık elle tutulur uygulamalar yapabileceğimiz kısma geldik. Bu yaz
 toc: true
 ---
 
-## Seri İçeriği
+## Seri İçeriği  {#seri-icerigi}
 
 - [Divanu Lügatit Git - 0 : Seriye Giriş](/git/divanu-lugatit-git-0/) 
 - [Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?](/git/divanu-lugatit-git-1/)
@@ -26,7 +26,7 @@ Kötü bir şakayla başlarsam yazıyı bırakıp gitmezsiniz herhalde değil mi
 <b>Staged:</b> Üzerinde değişiklik yapılmış ve sıradaki **commit** için stage area'ya eklenmiş dosyalardır.<br>
 <b>Commited:</b> Üzerinde değişiklik yapılmış ve repoya **commit** ile kaydedilmiş dosyalardır.
 
-## Git'e Kendimizi Tanıtalım
+## Git'e Kendimizi Tanıtalım  {#gite-kendimizi-tanitalim}
 
 Evet kalan birkaç kişiyle devam edebiliriz. An itibariyle Git nedir ne değildir biliyoruz. Fakat Git bizim kim olduğumuzu bilmiyor. Elbet bir gün çok fazla yazılımcı bulunan projelere dahil olacağız. Bir değişiklik yaptığımızda ekiptekiler bu değişikliği kimin yaptığını nereden bilecekler? İşte burada Git devreye giriyor ve bunu şu yapmıştı diyor. Şimdi konfigürasyon ile biraz oynayarak Git'e kendimizi tanıtalım:
 
@@ -70,7 +70,7 @@ Konfigürasyon dosyamıza da göz atmadık demeyelim:
 
 Evet ayarlarımızı yaptığımıza göre şov başlasın. İlk Git repomuzu oluşturalım.
 
-## Git Reposu Oluşturma
+## Git Reposu Oluşturma {#git-reposu-olusturma}
 
 Git reposu oluşturmak için iki seçeneğe sahibiz. Biri sıfırdan bir repo oluşturmak diğeri ise başka bir yerde var olan bir repo kopyalamak. İkinci seçeneğe ileride bakmak üzere şu anlık veda ederek devam edelim.
 
@@ -100,7 +100,7 @@ $(~/deneme-git-projesi) ls -la
 
 Bu aşamada kısa bir özet geçsek fena olmaz. Git dizini (**.git** ) dosyalarımızın versiyonlarını, proje geçmişini ve konfigürasyon dosyalarını barındıran repository'dir. Örneğimizdeki **deneme-git-projesi** dizini ise working directory'dir. Yani dosyalarımızı burada oluşturacağız ve burada değiştireceğiz.
 
-## Çalışma Dizinine Dosya Ekleme
+## Çalışma Dizinine Dosya Ekleme {#calisma-dizinine-dosya-ekleme}
 
 Git projesi oluşturduk. Artık dosya eklemeye başlayabiliriz. İlk dosyamızı oluşturalım ve kaydedelim:
 
@@ -116,7 +116,7 @@ Ve işte en çok kullanacağımız komut ile tanışmış olduk. `git status` ko
 
 > Seri boyunca komutların yazdırdığı her şeyden bahsetmeye çalışacağız. Ancak yerinde ve zamanında. O yüzden gönül rahatlığıyla ilerleyebilirsiniz.
 
-## Dosyaların Git Tarafından İzlenmesi
+## Dosyaların Git Tarafından İzlenmesi {#dosyalarin-git-tarafindan-izlenmesi}
 
 Çalışma dizinimize ilk dosyamızı ekledik ancak henüz Git dosyayı izlemiyor yani bir değişiklik yaparsak farketmez. Bunu hemen dosyamızı değiştirerek görebiliriz:
 
@@ -136,7 +136,7 @@ Ve işte en çok kullanacağımız komut ile tanışmış olduk. `git status` ko
 
 > Burada hemen detaylandıralım. Dosyalarda kullandığımız ilk `git add` komutunun özel bir anlamı vardır, artık bu dosyayı izle ve değişiklik yapılırsa bana bildir demiş oluruz. Git dosyayı izlemeye başlamadan önce değişiklik yapmayı denersek, önceki örnekteki gibi, dosyanın hala "untracked" olduğunu yani değişikliği farketmediğini görebiliriz.
 
-## Değişiklikleri Repoya Kaydetme
+## Değişiklikleri Repoya Kaydetme {#degisiklikleri-repoya-kaydetme}
 
 Artık yaptığımız değişiklikleri repoya kaydedebiliriz. Şimdi farkı görmek için bir tane daha dosya oluşturalım:
 

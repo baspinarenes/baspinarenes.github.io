@@ -6,7 +6,7 @@ excerpt: "Lokale kabaca baktık ama bu kadarcık yeterli değil. Bu yazıda, lok
 toc: true
 ---
 
-## Seri İçeriği
+## Seri İçeriği {#seri-icerigi}
 
 - [Divanu Lügatit Git - 0 : Seriye Giriş](/git/divanu-lugatit-git-0/) 
 - [Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?](/git/divanu-lugatit-git-1/)
@@ -17,16 +17,17 @@ toc: true
 <br>
 Lokale kabaca baktık ama bu kadarcık yeterli değil. Bu yazıda, lokalde anlattığımız konuların bazılarını ayrı ayrı ele alacağız. Yaptığımız işlemleri görselleştirerek kafanızda netleştireceğiz, *commit* mesajının iskeletine bakacağız ve komutların bayraklarıyla birlikte ayrıntılarına değineceğiz.
 
-## Lokaldeki Çalışmayı Görselleştirelim
+## Lokaldeki Çalışmayı Görselleştirelim {#lokaldeki-calismayi-gorsellestirelim}
+
 Lokal kısımdaki dosyalarda değişiklik yapma, `git add` ile stage area'ya ekleme ve `git commit` ile repoya kaydetme işlemlerinin görsel olarak göstererek herkesin kafasına yerleşmesini sağlayalım.
 
 Not: Udacity'deki [Version Control with Git](https://www.udacity.com/course/version-control-with-git--ud123) kursundan aldığım bu videoya elimden geldiğince Türkçe dublaj yapmaya çalıştım. Hafif peltekliğim için mazur görün :)
 
 <iframe width="560" height="450" src="https://www.youtube.com/embed/9KpOf663_xg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="display: block; margin: 0 auto; width: 100%;" allowfullscreen></iframe><br>
 
-## Komutların Farklı Kullanımları
+## Komutların Farklı Kullanımları {#komutların-farkli-kullanimlari}
 
-### git init:
+### git init {#git-init}
 
 Bulunduğumuz klasör dışında bir klasöre git reposu tanımlayabiliriz. Eğer klasör yoksa öncesinde oluşturulur:
 
@@ -42,7 +43,7 @@ $(~) git init --template= <template_directory>
 #template_directory: şablon dosyaların alınacağı dizin
 ```
 
-### git clone:
+### git clone {#git-clone}
 
 Bir repoyu kopyalarken farklı bir isim ile kaydedebiliriz:
 
@@ -52,7 +53,7 @@ $(~) git clone <repo> <directory>
 #directory: kopyalayacağımız isim
 ```
 
-### git add:
+### git add {#git-add}
 
 Çalışma dizininde yapılan değişiklikleri **stage area**'ya dosya dosya eklemek istersek dosyaların isimlerini tek tek verebiliriz:
 
@@ -70,7 +71,7 @@ $(~) git add <directory>
 
 Önceden gördüğümüz "." ile tüm dosyaların eklenmesi yönteminde aslında o anda bulunduğumuz klasörü vermiş oluruz.
 
-### git commit:
+### git commit {#git-commit}
 
 Bu komutu sade kullanırsak *staged* edilmiş dosyaları *commit*'e eklerken -a parametresi ile kullanırsak izlenen ve üzerinde değişiklikleri ekler:
 
@@ -86,26 +87,26 @@ $(~) git commit -am "commit message"
 #directory: içindeki tüm dosyalar **stage** edilecek klasör
 ```
 
-## Gelişmiş Commit Mesajları
+## Gelişmiş Commit Mesajları {#gelismis-commit-mesajlari}
 
 *commit* mesajlarınıdan bahsetmiştik. Birkaç püf noktası var tabi bu mesajları seçerken kullanacağımız. Önce ona bakalım sonrasında 
 şuan için fazla detaya kaçan, ancak fikir sahibi olmanın işimize yarayacağı mesaj yapısı hakkında bilgi edineceğiz. Proje büyük çaplı değilse genelde sadece başlığı yazarız.
 
-### Mesaj Yazmanın Püf Noktaları
+### Püf Noktaları {#puf-noktalari}
 
 Öncelikle güzel *commit* mesajı diyince ne anlamalıyız? Önerilen bazı maddeler ile bunları açıklayalım:
 - 60 karakterden az karakter kullan
 - *commit*'in ne yaptığını açıkla (nasıl ve neden olduğunu değil)
 - *commit*'lerin içeriğini mesajda "ve" kullanmak zorunda kalmayacak şekilde tutmalıyız
 
-### Mesaj Yapısı
+### Yapısı {#yapisi}
 
  Bir *commit* mesajı, boş bir satırla ayrılmış üç farklı bölümden oluşur: başlık, isteğe bağlı gövde ve isteğe bağlı altbilgi. Düzen şuna benzer: 
  - başlık: *commit* mesajının iyi bir özetidir.
  - gövde: *commit*'in her detayını içeren mesajdır.
  - altbilgi: *commit*'i tanımlayan benzersiz numaraları yazarız.
 
-## Varolan Bir Repoyu Klonlayalım
+## Varolan Bir Repoyu Klonlayalım {#varolan-bir-repoyu-klonlayalim}
 
 Örnek olarak "Terminale Biraz Renk Katalım" yazımda kullandığım repoyu Github sunucusundan bilgisayarıma kopyalayacağım. Repoyu kopyalamak için `git clone` komutunu kullanacağım:
 
@@ -123,7 +124,7 @@ $(~) git clone bash-tema-dosyalari/ yeni-proje/
 
 `git clone` kullanarak uzak repodan indirdiğimiz projeyi bu seferde bilgisayırımızda başka bir proje olarak klonladık.
 
-## Commit'e Etiket Atama
+## Commit'e Etiket Atama  {#commite-etiket-atama}
 
 `git tag` komutu, bazı *commit*'lere isim vermemizi sağlar. Örneğin projemizde belirli bir aşama kaydettik ve ilk versiyonunu çıkarmaya hazırız. Bu yüzden bu *commit*'in bizim için önemli bir anlamı var. O yüzden kolay erişebilmek için etiket atayalım:
 
@@ -164,7 +165,7 @@ $(~) git tag v1.0 a87984
 $(~) git tag
 ```
 
-## Git'e İzlemesini İstemediğimiz Dosyaları Söyleme
+## Git'e İzlemesini İstemediğimiz Dosyaları Söyleme  {#gite-izlemesini-istemediğimiz-dosyalari-soyleme}
 
 `git add` komutuyla ".", "*" gibi karakterler kullandığımızda bildiğimiz gibi tüm dosyaları ekleyecektir. Bazı durumlarda proje boyunca *git*'in izlemesini istemediğimiz dosyalar olabilir. `git add` komutunu kullandığımızda bunları göz ardı etmesi gerektiğini *git*'e bildirmek için `.gitignore` isimli özel bir dosya kullanırız (bu dosya *.git* ile aynı klasörde bulunmalıdır, içerisinde DEĞİL!). Yazdıklarımız görmezden gelinecektir.
 
@@ -267,7 +268,7 @@ dmypy.json
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python
 ```
 
-## Yapılan Değişiklileri İnceleme
+## Yapılan Değişiklileri İnceleme  {#yapilan-degisiklikleri-inceleme}
 
 <figure style="margin-bottom: 80px;">
     <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-4/003.png" alt="Yerel versiyon kontrol şeması" style="margin-bottom: 10px;" />

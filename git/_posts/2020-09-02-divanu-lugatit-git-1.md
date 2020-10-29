@@ -6,7 +6,7 @@ excerpt: "Seriye başlamaya hazırsak buyrun ilk yazımız. Bu yazıda, Git'in a
 toc: true
 ---
 
-## Seri İçeriği
+## Seri İçeriği {#seri-icerigi}
 
 - [Divanu Lügatit Git - 0 : Seriye Giriş](/git/divanu-lugatit-git-0/)
 - <span style="font-weight: bold;">Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?</span>
@@ -17,7 +17,7 @@ toc: true
 <br>
 Seriye başlamaya hazırsak buyrun ilk yazımız. Bu yazıda, Git'in arkasındaki güce yani versiyon kontrol sistemlerine kısa bir göz atacağız.
 
-## Versiyon Kontrol Sistemi (VCS) Nedir?
+## Versiyon Kontrol Sistemi (VCS) Nedir? {#versiyon-kontrol-sistemi-nedir}
 
 "Şimdi bir dakika tane tane gidelim, versiyon da ne?" derseniz önce kısaca tanımlayalım. Bir projedeki dosyaların zaman içerisindeki herhangi bir durumuna **versiyon** denir. Küçük bir örnek:
 
@@ -44,7 +44,7 @@ Biliyorum çok uzattım ama kurs boyunca bana biraz sabretmeniz lazımki birlikt
 
 Şimdi azıcık ucundan çeşitlerine bakalım. Bunlardan bizi ilgilendiren aslında sondaki ama o aşamaya gelene kadar insanlar neler çekmiş ve ne için yeni sistemlere gereksinim duymuşlar baksak güzel olur. Buyrun başlayalım.
 
-### Yerel Versiyon Kontrol Sistemi (Local Version Control System)
+### Yerel Versiyon Kontrol Sistemi (Local Version Control System) {#yerel-versiyon-kontrol-sistemi}
 
 Kullanıcıların dosyalarda yaptığı değişiklikler, yine kendi bilgisayarlarındaki özel bir veritabanında parçalar halinde tutuldu.
 
@@ -63,7 +63,7 @@ Nasıl bir şeydi acaba diye benim gibi merak ettiyseniz sevindim. Merak duymak,
 
 > Tekrar hatırlatmakta fayda var. Teorik bilgi kimsenin aklında kolayca yer etmez. Bunun yerine Git kısmında bunları bizzat yakından göreceğiz. Deneyimden daha iyi bir öğrenme yöntemi olabilir mi?
 
-### Merkezi Versiyon Kontrol Sistemi (Centralized Version Control System)
+### Merkezi Versiyon Kontrol Sistemi (Centralized Version Control System) {#merkezi-versiyon-kontrol-sistemi}
 
 Bütün dosyalar ve versiyonları, tek bir sunucudaki veritabanında tutulup denetlenmeye başlandı. Her geliştirici değişikliklerini merkezi veri tabanına kaydetti (şimdilik böyle bilin).
 
@@ -74,7 +74,7 @@ Bütün dosyalar ve versiyonları, tek bir sunucudaki veritabanında tutulup den
 
 İnsanlar merkezi VCS'yi kullanarak projelerini yürüttü ancak tek bir yere kaydedildiği için ortaya bir çok karmaşa çıktı. Aynı anda değişikliklerin gönderilmesi durumunda sorunlar yaşandı, küçük bir değişiklik için uzun süreler beklenmeye başlandı. İnternet bağlantısı olmama durumunda sunucuya erişilemediğinden başkalarının değişiklikleri takip edilemedi ve yapılan değişiklikler gönderilemedi. Veriler kaybedildiğinde emekler suya düştü. Bunların sonucunda dağıtık sistem geliştirildi.
 
-### Dağıtık Versiyon Kontrol Sistemi (Distributed Version Control System)
+### Dağıtık Versiyon Kontrol Sistemi (Distributed Version Control System) {#dağıtık-versiyon-kontrol-sistemi}
 
 Dağıtık sistemlerde proje yönetimi, sunucu tarafında değil geliştirici tarafında yapılmaya başlandı. Yani, her geliştiricinin bilgisayarında veritabanı oldu ve geliştirici değişiklikleri kendi veritabanına uyguladı. Sonrasında sunucudaki veritabanını kendi veritabanı ile güncelledi. 
 
