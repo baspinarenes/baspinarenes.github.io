@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/linux.png
 title: Terminale Biraz Renk Katalım
-excerpt: "Ubuntu'nun varsayılan terminali bakınca sizinde içiniz kararmıyor mu? Bu yazıda, terminalimize biraz renk katacağız."
+excerpt: "Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararmıyor mu? Bu yazıda, terminalimize biraz renk katacağız."
 toc: true
 ---
 
@@ -10,7 +10,7 @@ toc: true
 Bu yazıda izlenilecek yöntem, <a href="https://twitter.com/rajaraodv"><b>Raja Rao DV</b></a>'nin Medium hesabında paylaştığı bir yazıdan alıntılanmıştır. Yazının orjinal haline <a href="https://medium.com/free-code-camp/jazz-up-your-bash-terminal-a-step-by-step-guide-with-pictures-80267554cb22" style="text-decoration: underline;"><b>buradan</b></a> ulaşabilirsiniz.
 </div>
 
-Ubuntu'nun varsayılan terminali bakınca sizinde içiniz kararmıyor mu? Bunu özellikle Git kullanırken farkettim. Baktığım video ve yazılardaki insanların, baktıkça Git kullanma hissi uyandıran terminalleri vardı. Sadece git için değil tabi normal kullanımda da içinizi açıyor. Neyse hadi terminalimize biraz renk katalım ve yazı sonunda bu terminali elde edelim:
+Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararmıyor mu? Bunu özellikle Git kullanırken farkettim. Baktığım video ve yazılardaki insanların, baktıkça Git kullanma hissi uyandıran terminalleri vardı. Sadece git için değil tabi normal kullanımda da içinizi açıyor. Neyse hadi terminalimize biraz renk katalım ve yazı sonunda bu terminali elde edelim:
 
 <img src="{{ site.baseurl }}/assets/img/posts/linux-posts/terminale-renk-katalim/001.png" alt="" style="display: block; margin: 0 auto;"/>
 
