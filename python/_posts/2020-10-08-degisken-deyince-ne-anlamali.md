@@ -19,7 +19,7 @@ Python'daki isimlerin ve değerlerin davranışı, özellikle başka diller ile 
 
 ---
 
-## İsimler ve Değerler
+## İsimler ve Değerler {#isimler-ve-degerler}
 
 Basitçe başlayalım:<br>
 
@@ -85,7 +85,7 @@ Staja veya işe girerken de böyle değil midir? Öhöm, öhöm. Goygoyu bırak�
 
 Python, her bir değerin kaç tane referansa sahip olduğunu takip eder ve referansı olmayanları otomatik olarak temizler. Buna **garbage collection** denir ve artık ihtiyaç kalmadığında değerlerin kendiliğinden yok olduğu anlamına gelir. Bu temizleme işlemine **reclaiming** de denir.
 
-### Küçük Bir Dokunuş
+### Küçük Bir Dokunuş {#kucuk-bir-dokunus-1}
 
 > Aşağıdaki kodları konsoldaki Python yorumlayıcısında çalıştırmak ve script olarak çalıştırmak farklı sonuçlar üretir. Ancak scriptte verdiği sonuçları göz önüne alacağız. Ne de olsa bizim için önemli olan script, değil mi? :)
 
@@ -119,7 +119,7 @@ print(id(c))    # 140056999120528
 
 Analiz edecek olursak; **a** ismi 3000 değerine referans gösterir (a->3000). **b** ve **c** isimleri **a** ismine, **a** ismi de 3000 değerini işaret ettiğinden **b** ve **c** isimleri de aslında 3000 değerine referans gösterir (b->a->3000, c->a->3000). 
 
-## Atama İşlemi
+## Atama İşlemi {#atama-islemi}
 
 Atama ile ilgili önemli bir noktanın üzerinde duralım:
 
@@ -224,7 +224,7 @@ Bu durum yalnızca *mutable* değerlerde gerçekleştiğinden, bazı insanlar at
 
 Tüm atamalar aynı şekilde çalışır: bir isim bir değere referans atanır. Ancak *immutable* bir değer, referans gösteren kaç isim olursa olsun, yerinde değiştirilemez. Böylece diğer isimler bu değişiklikten asla etkilenmez.
 
-### Küçük Bir Dokunuş
+### Küçük Bir Dokunuş {#kucuk-bir-dokunus-2}
 
 Python'da *mutable* değere sahip bir isim oluşturulduğunda, bellekte o değer için her atamada farklı nesne oluşturulur. *immutable* değerlerde ise hep aynı nesneyi kullanır.
 
@@ -322,7 +322,7 @@ print(id(tri))    # 139622030879296
 
 > Basit bir örnekle bunu hayal edelim: Bir kovam var ve içi yarıya kadar su dolu. Geri kalan yarısını doldurursak kova hala aynı konumda olacaktır. Ancak içindeki su miktarı değişmiştir.
 
-## Python Dilinin Çeşitliliği
+## Python Dilinin Çeşitliliği {#python-dilinin-cesitliligi}
 
 Daha önce Python'un altında yatan basitlikten bahsetmiştik. Mekanizmaları oldukça basittir ancak çeşitli şekillerde ortaya çıkarlar.
 
@@ -474,7 +474,7 @@ Son fonksiyon, beklenmeyen sonuç elde etme olasılığını en aza indirdiği i
 
 Yeniden tanımlama ve değişiklik yapmak arasındaki seçimin mutlak doğru bir cevabı yoktur: hangisini kullanacağınız, ihtiyacınız olan etkiye bağlıdır. Önemli olan, her birinin nasıl davrandığını anlamak, elinizde hangi araçlara sahip olduğunuzu bilmek ve daha sonra o an için en iyi olanı seçmektir.
 
-## Dinamik Tip Belirleme
+## Dinamik Tip Belirleme {dinamik-tip-belirleme}
 
 Python'daki isimler ve değerler hakkında bazı ayrıntılardan bahsedelim:
 
