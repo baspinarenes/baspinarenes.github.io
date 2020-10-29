@@ -18,6 +18,7 @@ $baslik-rengi: #202020;
 html {
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
+    scroll-behavior: smooth;
     width: 100%;
     font-size: 16px;
     font-weight: 700;
@@ -488,7 +489,7 @@ code.language-plaintext {
                 display: initial;
             }
 
-            .toc {
+            .toc-wrapper {
 
                 position: absolute;
                 padding-top: 30px;
@@ -505,13 +506,19 @@ code.language-plaintext {
                     height: fit-content;
                     padding: 50px 0 0 30px;
                     font-size: 0.9rem;
+                    color: $link-rengi;
 
                     #table-of-contents {
+                        margin-top: 10px;
                         width: 100%;
                         border-left: 1px solid rgb(214, 211, 211);
-
-                        li {
+                        ul li {
                             list-style: none;
+                        
+                            a.active {
+                                font-weight: bold;
+                                color: rgb(255, 0, 0);
+                            }
                         }
                     }
                 }
