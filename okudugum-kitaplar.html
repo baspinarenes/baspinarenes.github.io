@@ -8,16 +8,15 @@ layout: default
     olmuş olur hem de ilgilenenler bu listeden tavsiye alabilir.
 </blockquote>
 
-<div class="kitap-listesi-div" style="width: 100%; height: fit-content; display: flex; flex-wrap: wrap; justify-content: space-around;">
-    
+<div class="book-movie-list-div">
     {% for book in site.data.books %}
-        <div class="kitap-div" style="width: 210px; margin-bottom: 30px;">
-            <img src="{{ book.cover-img }}" alt="" style="margin: 0; width: 100%; height: 300px; border-radius: 10px 10px 0 0">
-            <div clas="kitap-bilgi-div" style="font-size: 14px; line-height: 18px; text-align: center; background-color: #f9f9f9; display: flex; flex-direction: column; padding: 10px 0;  border-radius: 0 0 10px 10px;">
-                <b style="font-size: 15px">{{ book.name }}</b><br>
-                {{ book.author }}<br>
-                <span style="background-color: yellow; padding: 5px; width: fit-content;">{{ book.type }}</span><br>
-                Bitiş Tarihi: {{ book.reading-date }}
+        <div class="book-movie-div">
+            <img src="{{ book.cover-img }}" alt="">
+            <div class="item-info-div">
+                <b style="font-size: 15px; margin-bottom: 2px;">{{ book.name }}</b>
+                <p>{{ book.author }}</p>
+                <span class="item-type">{{ book.type }}</span>
+                <p>Bitiş Tarihi: {{ book.reading-date }}</p>
             </div>
         </div>
     {% endfor %}
