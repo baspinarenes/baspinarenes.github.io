@@ -474,7 +474,7 @@ Son fonksiyon, beklenmeyen sonuç elde etme olasılığını en aza indirdiği i
 
 Yeniden tanımlama ve değişiklik yapmak arasındaki seçimin mutlak doğru bir cevabı yoktur: hangisini kullanacağınız, ihtiyacınız olan etkiye bağlıdır. Önemli olan, her birinin nasıl davrandığını anlamak, elinizde hangi araçlara sahip olduğunuzu bilmek ve daha sonra o an için en iyi olanı seçmektir.
 
-## Dinamik Tip Belirleme {dinamik-tip-belirleme}
+## Dinamik Tip Belirleme {#dinamik-tip-belirleme}
 
 Python'daki isimler ve değerler hakkında bazı ayrıntılardan bahsedelim:
 
