@@ -1,0 +1,36 @@
+- name:             "Sherlock Holmes - 1 :<br> Kızıl Dosya"
+  type:             Polisiye
+  author:           Sir Arthur Conan Doyle
+  reading-date:     20.05.2020
+  cover-img:        /assets/img/book-img/sh-kizil-dosya.jpg
+
+- name:             "<b>Sherlock Holmes - 2 :<br> Dörtlerin İmzası</b>"
+  type:             Polisiye
+  author:           Sir Arthur Conan Doyle
+  reading-date:     24.05.2020
+  cover-img:        /assets/img/book-img/sh-dortlerin-imzasi.jpg
+
+- name:             "<b>Sherlock Holmes - 3 :<br> Akıl Oyunlarının Gölgesinde</b>"
+  type:             Polisiye
+  author:           Sir Arthur Conan Doyle
+  reading-date:     1.06.2020
+  cover-img:        /assets/img/book-img/sh-akil-oyunlarinin-golgesinde.jpg
+
+- name:             "<b>Sherlock Holmes - 4 :<br> Suç Detayda Saklıdır</b>"
+  type:             Polisiye
+  author:           Sir Arthur Conan Doyle
+  reading-date:     17.06.2020
+  cover-img:        /assets/img/book-img/sh-suc-detayda-saklidir.jpg
+
+- name:             "<b>Sherlock Holmes - 5 :<br> Baskerville'lerin Köpeği</b>"
+  type:             Polisiye
+  author:           Sir Arthur Conan Doyle
+  reading-date:     26.06.2020
+  cover-img:        /assets/img/book-img/sh-baskervillelerin-kopegi.jpg
+
+- name:             "<b>Abdülhamid<br>Son Hükümdar</b>"
+  type:             Tarih
+  author:           Okay Tiryakioğlu
+  reading-date:     28.08.2020
+  cover-img:        /assets/img/book-img/abdulhamid-son-hukumdar.jpg
+

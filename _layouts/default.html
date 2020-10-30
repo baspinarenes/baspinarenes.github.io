@@ -12,6 +12,7 @@
                     {% for item in site.data.navigation %}
                         {% if item.name == "Özgeçmiş" %}
                         <li><a href="{{ item.link }}" target="_blank">{{ item.name }}</a></li>
+                        <div class="line-break"></div>
                         {% else %}
                         <li><a href="{{ item.link }}">{{ item.name }}</a></li>
                         {% endif %}
@@ -39,5 +40,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="{{ site.url }}/assets/js/table.js"></script>
     <script type="text/javascript" src="{{ site.url }}/assets/js/toc-active-feature.js"></script>
+    <script type="text/javascript" src="{{ site.url }}/assets/js/imdb-info.js"></script>
 </body>
 </html>

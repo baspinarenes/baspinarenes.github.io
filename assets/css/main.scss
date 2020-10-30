@@ -421,6 +421,8 @@ code.language-plaintext {
 /* Telefon & Tablet */
 @media only screen and (min-width: 466px) and (max-width: 960px) {
     .wrapper {
+        max-width: 700px;
+
         header {
             nav {
                 .menu {
@@ -464,6 +466,10 @@ code.language-plaintext {
                 }
                 .menu {
                     margin-top: 40px;
+                    
+                    .line-break {
+                        width: 100%;
+                    }
                 }
             }
         }
