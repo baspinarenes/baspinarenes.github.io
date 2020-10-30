@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<blockquote style="text-align: justify;">
+    <b>BİLGİLENDİRME:</b> Blogumun kendime has köşelerinden birisine geldiniz. Eskiden okuduğum kitapları bir kenara bırakarak
+    kütüphanemde bulunan tüm kitapları en baştan okumaya başladım. Bloga da bu başlığı eklemek istedim. Hem bir yerde kayıtlı
+    olmuş olur hem de ilgilenenler bu listeden tavsiye alabilir.
+</blockquote>
+
+<div class="kitap-listesi-div" style="width: 100%; height: fit-content; display: flex; flex-wrap: wrap; justify-content: space-around;">
+    
+    {% for movie in site.data.movies %}
+        <div class="kitap-div" style="width: 210px; margin-bottom: 30px;">
+            <img src="{{ movie.cover-img }}" alt="" style="margin: 0; width: 100%; height: 300px; border-radius: 10px 10px 0 0">
+            <div clas="kitap-bilgi-div" style="font-size: 14px; line-height: 18px; text-align: center; background-color: #f9f9f9; display: flex; flex-direction: column; padding: 10px 0;  border-radius: 0 0 10px 10px;">
+                <b style="font-size: 15px">{{ movie.name }}</b><br>
+                {{ movie.imdb }}<br>
+                <span style="background-color: yellow; padding: 5px; width: fit-content;">{{ movie.type }}</span><br>
+                Bitiş Tarihi: {{ movie.watching-date }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

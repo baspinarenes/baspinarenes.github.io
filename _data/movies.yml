@@ -1,0 +1,95 @@
+- name:            "<b>The Sixth Sense<br>(1999)</b>"
+  type:            Gerilim
+  imdb:            8,1/10
+  watching-date:   20.05.2020
+  cover-img:       /assets/img/movie-img/the-sixth-sense.jpg
+
+- name:            "<b>The Departed<br>(2006)</b>"
+  type:            Suç
+  imdb:            8,5/10
+  watching-date:   22.05.2020
+  cover-img:       /assets/img/movie-img/the-departed.jpg
+
+- name:            "<b>Inception<br>(2010)</b>"
+  type:            Bilim Kurgu
+  imdb:            8,8/10
+  watching-date:   24.06.2020
+  cover-img:       /assets/img/movie-img/inception.jpg
+
+- name:            "<b>The Mummy<br>(1999)</b>"
+  type:            Macera
+  imdb:            7.0/10
+  watching-date:   25.06.2020
+  cover-img:       /assets/img/movie-img/the-mummy.jpg
+
+- name:            "<b>The Mummy Returns<br>(2001)</b>"
+  type:            Macera
+  imdb:            6.3/10
+  watching-date:   28.06.2020
+  cover-img:       /assets/img/movie-img/the-mummy-returns.jpg
+
+- name:            "<b>The Mummy Tomb of The Dragon Emperor<br>(2008)</b>"
+  type:            Macera
+  imdb:            5.2/10
+  watching-date:   28.06.2020
+  cover-img:       /assets/img/movie-img/the-mummy-dragon-emperor.jpg
+
+- name:            "<b>Fermat's Room<br>(2007)</b>"
+  type:            Gizem
+  imdb:            6.7/10
+  watching-date:   29.06.2020
+  cover-img:       /assets/img/movie-img/fermats-room.jpg
+
+- name:            "<b>Dağ<br>(2012)</b>"
+  type:            Aksiyon
+  imdb:            7.8/10
+  watching-date:   30.06.2020
+  cover-img:       /assets/img/movie-img/dag-1.jpg
+
+- name:            "<b>Dağ 2<br>(2016)</b>"
+  type:            Aksiyon
+  imdb:            8.9/10
+  watching-date:   02.07.2020
+  cover-img:       /assets/img/movie-img/dag-2.jpg
+
+- name:            "<b>Maskeli Beşler İntikam Peşinde<br>(2005)</b>"
+  type:            Komedi
+  imdb:            4.2/10
+  watching-date:   03.07.2020
+  cover-img:       /assets/img/movie-img/maskeli-besler-intikam-pesinde.jpg
+
+- name:            "<b>Maskeli Beşler Irak<br>(2007)</b>"
+  type:            Komedi
+  imdb:            3.7/10
+  watching-date:   04.07.2020
+  cover-img:       /assets/img/movie-img/maskeli-besler-irak.jpg
+
+- name:            "<b>Maskeli Beşler Kıbrıs<br>(2008)</b>"
+  type:            Komedi
+  imdb:            3.0/10
+  watching-date:   05.07.2020
+  cover-img:       /assets/img/movie-img/maskeli-besler-kibris.jpg
+
+- name:            "<b>G.O.R.A<br>(2004)</b>"
+  type:            Komedi
+  imdb:            8.0/10
+  watching-date:   06.07.2020
+  cover-img:       /assets/img/movie-img/gora.jpg
+
+- name:            "<b>A.R.O.G<br>(2008)</b>"
+  type:            Komedi
+  imdb:            7.3/10
+  watching-date:   07.07.2020
+  cover-img:       /assets/img/movie-img/arog.jpg
+
+- name:            "<b>Kolpaçino<br>(2009)</b>"
+  type:            Komedi
+  imdb:            6.2/10
+  watching-date:   09.07.2020
+  cover-img:       /assets/img/movie-img/kolpacino.jpg
+
+- name:            "<b>Kolpaçino: Bomba<br>(2011)</b>"
+  type:            Komedi
+  imdb:            5.6/10
+  watching-date:   11.07.2020
+  cover-img:       /assets/img/movie-img/kolpacino-bomba.jpg
