@@ -6,11 +6,32 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/pecita" type="text/css" />
     <style>
+        .container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 900px; height: 500px;
+            margin:auto;
+        }
+        .title {
+            font-weight: 300;
+            font-size: 250px;
+            line-height: 250px;
+            margin: 0; 
+            text-align: center;
+        }
+        .subtitle {
+            width: 100%;
+            text-align: center;
+            font-size: 25px;
+            letter-spacing: 2px;
+        }
         a {
             text-decoration: none;
-            color: #737373;
+            color: red;
         }
-
         a:hover {
             color: black;
             text-decoration: none;
@@ -19,17 +40,9 @@
     <title>Document</title>
 </head>
 <body style="font-family: Quicksand;">
-    <div style="
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 900px; height: 500px;
-        margin:auto;
-    ">
-    <p style="font-weight: 300; font-size: 350px; line-height: 350px; margin: 0; text-align: center;">404</p>
-    <p style="width: 100%; text-align: center; font-size: 25px; letter-spacing: 2px;">Gittiğin yol, yol değil. <a href="javascript:;" onclick="window.history.back();">Geri dön.</a></p>
+    <div class="container">
+        <p class="title">404</p>
+        <p class="subtitle">Gittiğin yol, yol değil. <a href="javascript:;" onclick="window.history.back();">Geri dön!</a></p>
     </div>
 </body>
 </html>
