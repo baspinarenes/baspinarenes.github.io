@@ -491,6 +491,17 @@ code.language-plaintext {
 
             .toc-wrapper {
 
+                display: none;
+            }
+        }
+    }    
+}
+
+@media only screen and (min-width: 1500px) {
+    .wrapper {
+        main > article {
+            .toc-wrapper {
+                display: initial;
                 position: absolute;
                 padding-top: 30px;
                 top: 300px;
@@ -499,7 +510,6 @@ code.language-plaintext {
                 height: calc(100% - 10%);
 
                 .sticky {
-                    
                     position: sticky;
                     top: 0;
                     width: 300px;
@@ -528,6 +538,4 @@ code.language-plaintext {
             }
         }
     }
-
-    
 }

@@ -13,7 +13,6 @@ window.addEventListener("scroll", event => {
                     selectedSection = mainSections[i];
                     selectedSectionNext = mainSections[i+1];
                 } else {
-                    console.log("geldik nulle")
                     selectedSection = mainSections[i];
                     selectedSectionNext = null;
                 }
