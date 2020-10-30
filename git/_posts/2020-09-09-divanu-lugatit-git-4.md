@@ -106,7 +106,7 @@ $(~) git commit -am "commit message"
  - gövde: *commit*'in her detayını içeren mesajdır.
  - altbilgi: *commit*'i tanımlayan benzersiz numaraları yazarız.
 
-## Varolan Bir Repoyu Klonlayalım {#varolan-bir-repoyu-klonlayalim}
+## Varolan Bir Repoyu Klonlama {#varolan-bir-repoyu-klonlama}
 
 Örnek olarak "Terminale Biraz Renk Katalım" yazımda kullandığım repoyu Github sunucusundan bilgisayarıma kopyalayacağım. Repoyu kopyalamak için `git clone` komutunu kullanacağım:
 
