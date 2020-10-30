@@ -484,10 +484,6 @@ code.language-plaintext {
                     padding-top: 4px;
                 }
             }
-            
-            .seri-sozlugu {
-                display: initial;
-            }
 
             .toc-wrapper {
 
@@ -496,6 +492,18 @@ code.language-plaintext {
         }
     }    
 }
+
+@media only screen and (min-width: 1440px) {
+
+    .wrapper {
+        main > article {
+            .seri-sozlugu {
+                display: initial;
+            }
+        }
+    }
+}
+
 
 @media only screen and (min-width: 1500px) {
     .wrapper {

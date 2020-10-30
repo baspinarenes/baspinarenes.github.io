@@ -20,8 +20,8 @@ window.addEventListener("scroll", event => {
         }
 
         if(selectedSectionNext != null){
-            if (selectedSection.offsetTop - 290 <= fromTop && 
-                selectedSectionNext.offsetTop - 290 > fromTop) {
+            if (selectedSection.offsetTop - 190 <= fromTop && 
+                selectedSectionNext.offsetTop - 190 > fromTop) {
                 link.classList.add("active");
 
             } else {
