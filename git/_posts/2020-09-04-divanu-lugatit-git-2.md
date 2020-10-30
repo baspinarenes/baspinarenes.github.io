@@ -29,7 +29,7 @@ Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download
 
 ![git-version]({{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/001.png) 
 
-## Git Linkinde Bulunan SCM İfadesi {#git-linkinde-bulunan-scm-ifadesi}
+## Linkteki SCM İfadesi {#linkdeki-scm-ifadesi}
 
 Git'i indirirken site adresine baktığınızda arkedeceksiniz üzere "SCM" ifadesi geçer. Buna aslında VCS'in diğer bir adı diyebiliriz. "Source Code Management"ın yani kaynak kodu yönetiminin kısaltmasıdır. Ancak bu sistem kaynak kodu dışındaki şeylerde de kullanabileceğimizden dolayı VCS kullanmak daha yaygındır.
 
@@ -37,7 +37,7 @@ Git'i indirirken site adresine baktığınızda arkedeceksiniz üzere "SCM" ifad
 
 Linux kerneli geliştirilirken dünyanın her yerinden bir çok sayıda geliştirici görev aldığı için Bitkeeper isimli DVCS kullanılıyordur. Yaşanan bazı şeylerden sonra BitKeeper ücretsiz kullanımı kaldırır. Buna sinirlenen Linus Torvalds ise BitKeeper kullanırken edindiği bilgiler sayesinde, dağıtık ve veri kaybının zor olduğu bir VCS yazmaya başlar. Böylece insanlığa bu muazzam sistemi kazandırır.
 
-## Git Tam Olarak Nedir? {#git-tam-olarak-nedir}
+## Tam Olarak Nedir? {#tam-olarak-nedir}
 
 Git, bir tür versiyon kontrol aracıdır. Bu bölüm önemli çünkü sistemin nasıl çalıştığını anlamaya çalışacağız. Önce Git'in diğerlerinden farkına sonra da yapısına bir göz atalım. 
 
