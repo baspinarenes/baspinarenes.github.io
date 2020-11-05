@@ -3,7 +3,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700);
 
-$logo-rengi:blue;
+$logo-rengi:black;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
 $alt-metin-rengi: #737373;
@@ -32,9 +32,7 @@ img {
 }
 
 a {
-    text-decoration: none;
     color: $link-rengi;
-
     &:hover {
         color: black;
         text-decoration: none;
@@ -175,8 +173,8 @@ code.language-plaintext {
     margin-bottom: 30px;
 
     a {
-        color: black;
         text-decoration: underline;
+        color: black;
     }
 }
 
@@ -203,6 +201,7 @@ code.language-plaintext {
             align-items: center;
 
             .logo {
+                color: $logo-rengi;
                 line-height: 0.60em;
                 font-family: "Pecita";
                 font-size: 4rem;
@@ -237,11 +236,10 @@ code.language-plaintext {
         & > p {
             line-height: 32px;
             margin-bottom: 20px;
-            text-align: justify;
+            text-align: start;
             hyphens: auto;
         }
-
-        
+ 
         .post-img {
             display: block;
             margin: 0 auto 40px auto;
@@ -407,7 +405,8 @@ code.language-plaintext {
                     }
 
                     .item-type {
-                        background-color: yellow;
+                        background-color: $link-rengi;
+                        color: white;
                         padding: 5px; 
                         width: 100%;
                     }
@@ -416,6 +415,12 @@ code.language-plaintext {
 
         }
 
+        .toc-wrapper {
+            display: none;
+            a {
+                text-decoration: none;
+            }
+        }
     }
 
     footer {
@@ -529,11 +534,6 @@ code.language-plaintext {
                 p {
                     padding-top: 4px;
                 }
-            }
-
-            .toc-wrapper {
-
-                display: none;
             }
         }
     }    
