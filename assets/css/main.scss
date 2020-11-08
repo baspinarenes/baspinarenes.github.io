@@ -25,6 +25,11 @@ html {
     line-height: 32px;
 }
 
+.MathJax {
+    font-size: 1em;
+    //border: 1px solid red;
+}
+
 img {
     display: block;
     margin: 30px auto 40px;
@@ -120,9 +125,13 @@ blockquote {
         color: #666;
         text-align: center;
     }
+
+    ul {
+        margin-bottom: 0;
+    }
 }
 
-hr {
+hr.three-dot {
     border: 0px;
     border-top: 12px dotted $alt-metin-rengi;
     width: 100px;

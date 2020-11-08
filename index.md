@@ -25,6 +25,6 @@ Kısacası; mükemmel bir yazılımcıyım diye açmıyorum bu blogu. Hedefledi�
 
 İçeriğin başrolünde Python olacak elbette. Bunun haricinde temel beceriler (Git, OOP vs), makine öğrenimi algoritmaları, kuantum programlama ve işin matematiği ile ilgili yazılar da yer alacak. Bunları yaparken araştırdığım yazıları ve Coursera gibi siteler üzerinden aldığım derslerdeki notlarımı, sorduğum sorulara aldığım yanıtları ve kendi örneklerimle harmanlayarak kolayca anlaşılabilir hale getirmeyi planlıyorum. İngilizce öğrenimi sürecimi de eş zamanlı olarak blogumda paylaşma düşüncem var. Ve elbette farklı farklı konular da yer alacak.
 
----
+<hr class="three-dot">
 
 Düşündüklerimi döktüğüme göre, içime sinen bir tasarım ile blogumu yavaş yavaş hareketlendirmeye başlayacağım. Takipte kalın.
