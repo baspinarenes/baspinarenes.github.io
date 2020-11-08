@@ -167,7 +167,7 @@ $(~) git tag
 
 ## Git'e İzlemesini İstemediğimiz Dosyaları Söyleme  {#gite-izlemesini-istemediğimiz-dosyalari-soyleme}
 
-`git add` komutuyla ".", "*" gibi karakterler kullandığımızda bildiğimiz gibi tüm dosyaları ekleyecektir. Bazı durumlarda proje boyunca *git*'in izlemesini istemediğimiz dosyalar olabilir. `git add` komutunu kullandığımızda bunları göz ardı etmesi gerektiğini *git*'e bildirmek için `.gitignore` isimli özel bir dosya kullanırız (bu dosya *.git* ile aynı klasörde bulunmalıdır, içerisinde DEĞİL!). Yazdıklarımız görmezden gelinecektir.
+`git add` komutuyla ".", "\*" gibi karakterler kullandığımızda bildiğimiz gibi tüm dosyaları ekleyecektir. Bazı durumlarda proje boyunca *git*'in izlemesini istemediğimiz dosyalar olabilir. `git add` komutunu kullandığımızda bunları göz ardı etmesi gerektiğini *git*'e bildirmek için `.gitignore` isimli özel bir dosya kullanırız (bu dosya *.git* ile aynı klasörde bulunmalıdır, içerisinde DEĞİL!). Yazdıklarımız görmezden gelinecektir.
 
 *.gitignore* dosyasına farklı yollarla dosyaları bildirebiliriz:
 - dosyalarımızın isimlerini satır satır yazabiliriz:
