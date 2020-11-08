@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/python.png
 title: Random Modülünün Önemli Noktaları
-excerpt: "Python'da kullanacağımız programlara rastgelelik katmak isteyebiliriz. Bunu gerçekleyen random modülünün nasıl çalıştığına ve ne gibi yeteneklere sahip olduğuna buyrun birlikte göz atalım."
+excerpt: "Python geliştirirken bazı zamanlar rastgeleliğe farklı şekillerde ihtiyaç duyabiliriz. Örneğin 0-100 arasında herhangi bir sayı üretmek veya listeden rastgele eleman seçmek isteyebiliriz. Böyle zamanlarda Python ile birlikte gelen **random** modülü imdadımıza yetişiyor."
 toc: true
 ---
 
