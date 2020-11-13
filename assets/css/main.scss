@@ -230,7 +230,7 @@ code.language-plaintext {
 
                 li {
                     list-style: none;
-                    margin: 0 25px;
+                    margin: 0 8px;
                 }
             }
         }
@@ -482,6 +482,10 @@ code.language-plaintext {
                 .menu {
                     li {
                         margin-right: 10px;
+                    }
+
+                    .line-break {
+                        width: 100%;
                     }
                 }
             }
