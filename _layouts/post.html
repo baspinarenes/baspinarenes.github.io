@@ -34,19 +34,6 @@ layout: default
     {{ words | divided_by:170 }} dk
 </h6>
 
-{% if page.toc == true %}
-<div class="toc-wrapper">
-  <div class="sticky">
-    İÇERİK
-    <!-- <a onclick='window.scrollTo({top: 0, behavior: "smooth"});' href="javascript:;">Başa Dön</a> -->
-    <div id="table-of-contents">      
-      {% include toc.html html=content %}
-    </div>
-    <!--<a onclick='window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});' href="javascript:;">Sona Git</a> -->
-  </div>
-</div>
-{% endif %}
-
 {{ content  }}
 
 <hr class="three-dot">

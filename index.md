@@ -17,7 +17,7 @@ Bilginin yükünü tek başımıza sırtlamaya kalkarsak, bir gün o yükün alt
 
 ## Blog Açacak Kadar Bilgili Miyim?
 
-Yukarıda iddialı bir söz paylaştım ama çok bilgili olduğumdan değil. Dediğim gibi kendisini ve öğrenme biçimini çok geç tanıyan birisiyim. Ve kendim de dahil olmak üzere çok fazla kişide bir şeyleri öğrenmek için neler yapılır, hangi yollar izlenir sorularının cevabının olmadığını gördüm. Öğrenme isteksizliği problemi yaşayan insanlar için yine bu insanların içinden birisi olarak bu blogu kaleme alıyorum. Öğrendiğim konuları, sonradan ilgilenecek olanların kolayca anlayabilmesi derdindeyim.
+Yukarıda iddialı bir söz paylaştım ama çok bilgili olduğumdan değil. Yolun başındayım ve de hayatım boyunca da yolun başında kalmak, her şeyi ilk günkü heyecanımla öğreniyor olmak istiyorum. Dediğim gibi kendisini ve öğrenme biçimini çok geç tanıyan birisiyim. Ve kendim de dahil olmak üzere çok fazla kişide bir şeyleri öğrenmek için neler yapılır, hangi yollar izlenir sorularının cevabının olmadığını gördüm. Öğrenme isteksizliği problemi yaşayan insanlar için yine bu insanların içinden birisi olarak bu blogu kaleme alıyorum. Öğrendiğim konuları, sonradan ilgilenecek olanların kolayca anlayabilmesi derdindeyim.
 
 Kısacası; mükemmel bir yazılımcıyım diye açmıyorum bu blogu. Hedeflediğim şey, öğrenme sürecimde edindiğim bilgileri blogumda paylaşarak hedefleri benimkilerle aynı olan insanları buluşturmak. Blog yazılarının çoğunun karmaşık yazıldığını ve anlaşılma gayesi gütmediklerini düşünüyorum. Bu yüzden siz bir konu öğrenmeye başladığınızda neler düşünüyorsanız ben de bu süreçten geçerken bu soruların cevaplarını aradığımdan dolayı sizlere aktarıyor olacağım.
 
