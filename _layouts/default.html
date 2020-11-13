@@ -2,6 +2,10 @@
 <html lang="tr">
 <head>
     {% include head.html %}
+    
+    {% if jekyll.environment == 'production' %}
+        {% include analytics.html %}
+    {% endif %}
 </head>
 <body>
     <div class="wrapper">
@@ -41,6 +45,7 @@
     <script type="text/javascript" src="{{ site.url }}/assets/js/table.js"></script>
     <script type="text/javascript" src="{{ site.url }}/assets/js/toc-active-feature.js"></script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    
 </script>
 </body>
 </html>
