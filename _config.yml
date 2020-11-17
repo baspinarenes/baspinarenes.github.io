@@ -4,7 +4,7 @@ email: enesbaspinar07@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Bu blog, iyidir hoşdur ancak hiç bir şekilde profesyonellik içermemektedir.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: https://baspinarenes.github.io # the base hostname & protocol for your site, e.g. http://example.com
+url: http://baspinarenes.github.io/ # the base hostname & protocol for your site, e.g. http://example.com
 
 icon: assets/img/icon.jpg
 
@@ -27,7 +27,8 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
-    
+
+permalink: pretty
 permalink: /:categories/:title/
 
 plugins:

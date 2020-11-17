@@ -1,5 +1,11 @@
 --- 
 --- 
+@font-face {
+    font-family: 'Pecita';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Pecita'), url('https://fonts.cdnfonts.com/s/341/Pecita.woff') format('woff');
+}
 
 $logo-rengi:black;
 $link-rengi: #737373;
