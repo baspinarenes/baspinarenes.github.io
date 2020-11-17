@@ -13,14 +13,14 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Crunchy';
-    src:url('../fonts/Crunchy/Crunchy.ttf') format('ttf'),
-        url('../fonts/Crunchy/Crunchy.woff2') format('woff2'),
-        url('../fonts/Crunchy/Crunchy.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+@font-face {font-family: "Crunchy W05 Regular";
+    src: url("../fonts/Crunchy/Crunchy.eot"); /* IE9*/
+    src: url("../fonts/Crunchy/Crunchy.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/Crunchy/Crunchy.woff2") format("woff2"), /* chrome、firefox */
+    url("../fonts/Crunchy/Crunchy.woff") format("woff"), /* chrome、firefox */
+    url("../fonts/Crunchy/Crunchy.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url("../fonts/Crunchy/Crunchy.svg#Crunchy W05 Regular") format("svg"); /* iOS 4.1- */
+  }
 
 
 $logo-rengi:black;
@@ -238,10 +238,9 @@ code.language-plaintext {
 
             .logo {
                 color: $logo-rengi;
-                line-height: 0.60em;
-                font-family: 'Crunchy', 'Pecita';
+                line-height: 0.70em;
+                font-family: 'Crunchy W05 Regular', 'Pecita';
                 font-size: 4rem;
-                font-weight: 700;
             }
 
             .menu {
