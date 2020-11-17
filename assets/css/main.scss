@@ -13,6 +13,16 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Crunchy-PERSONAL-USE-ONLY';
+    src:url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.woff') format('woff'),
+        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.svg#Crunchy-PERSONAL-USE-ONLY') format('svg'),
+        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.eot'),
+        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 $logo-rengi:black;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
@@ -229,7 +239,7 @@ code.language-plaintext {
             .logo {
                 color: $logo-rengi;
                 line-height: 0.70em;
-                font-family: 'CrunchyW05-Regular';
+                font-family: 'Crunchy-PERSONAL-USE-ONLY';
                 font-size: 4rem;
             }
 
