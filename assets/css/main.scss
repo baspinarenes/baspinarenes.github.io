@@ -50,6 +50,10 @@ b {
     color: #00C787;
 }
 
+strong {
+    color: #00C787;
+}
+
 a {
     color: $link-rengi;
     &:hover {
@@ -195,8 +199,7 @@ code.language-plaintext {
     text-align: center;
     margin-bottom: 30px;
 
-    a {
-        text-decoration: underline;
+    b {
         color: black;
     }
 }

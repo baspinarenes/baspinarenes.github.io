@@ -60,7 +60,7 @@ $(~) git config --list
 $(~) git config --global core.editor "code --wait"
 ```
 
-Komuttaki `--wait` bayrağı, konsola geri dönmek için editördeki dosyanın kapanmasının beklenmesini sağlar.
+Komuttaki **--wait** bayrağı, konsola geri dönmek için editördeki dosyanın kapanmasının beklenmesini sağlar.
 
 > Seri genelinde komutların her şeyine değineceğiz. Bu benim bir şeyler okurken yaşadığım sorunlardan biri. Yapıyorum ama neden yapıyorum, bu eklediğimiz şey ne işe yarıyor diye soruyorsanız o yazıda bir şeyler eksiktir. İşte bu yüzden bu yazıda elimden geldiğince eksik bir şey bırakmamaya çalışacağım.
 
@@ -134,7 +134,7 @@ Ve işte en çok kullanacağımız komut ile tanışmış olduk. `git status` ko
 
 "**Changes to be commited**", **Staging Area**'da bulunan ve sıradaki **commit** için hazır dosyaları gösterir.
 
-> Burada hemen detaylandıralım. Dosyalarda kullandığımız ilk `git add` komutunun özel bir anlamı vardır, artık bu dosyayı izle ve değişiklik yapılırsa bana bildir demiş oluruz. Git dosyayı izlemeye başlamadan önce değişiklik yapmayı denersek, önceki örnekteki gibi, dosyanın hala "untracked" olduğunu yani değişikliği farketmediğini görebiliriz.
+> Burada hemen detaylandıralım. Dosyalarda kullandığımız ilk `git add` komutunun özel bir anlamı vardır, artık bu dosyayı izle ve değişiklik yapılırsa bana bildir demiş oluruz. Git dosyayı izlemeye başlamadan önce değişiklik yapmayı denersek, önceki örnekteki gibi, dosyanın hala **"untracked"** olduğunu yani değişikliği farketmediğini görebiliriz.
 
 ## Değişiklikleri Repoya Kaydetme {#degisiklikleri-repoya-kaydetme}
 

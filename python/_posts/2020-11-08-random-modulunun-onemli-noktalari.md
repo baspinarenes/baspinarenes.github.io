@@ -12,7 +12,7 @@ Python geliştirirken bazı zamanlar rastgeleliğe farklı şekillerde ihtiyaç 
 
 Modüldeki fonksiyonlara bakacağız. Ancak öncesinde bu rastgeleliğin nasıl sağlandığına bakmak faydalı olabilir.
 
-Rastgele sayı günümüzde iki temel yöntem ile sağlanıyor: fiziksel veriler veya matematiksel işlemler yardımıyla. Bizi ilgilendiren ikinci yöntem. Bunu yöntemi kullananlara **Pseudorandom Number Generators** yani **Sözde Rassal Sayı Üreteçleri** diyoruz. Bunlar sayı dizileri oluşturan algoritmalardır. Başlangıç olarak olarak bir **seed** yani **tohum** değeri alır üzerinde matematiksel işlemler uygularlar ve sonrasında çıkan her sonuca tekrar aynı matematiksel işlemler uygulayarak devam ederler. Ancak sayıları tekrarlı olacak şekilde üretirler. Tohum değeri girdiğimizde algoritma her çalıştırdığımızda rastgele sayıları aynı sırada basarlar. Varsayılan değer ise o anda bilgisayarın zamanıdır. Bu sayede tohum her seferinde otomatik olarak değişecektir ve her başlangıçta farklı sayılar üretir.
+Rastgele sayı günümüzde iki temel yöntem ile sağlanıyor: fiziksel veriler veya matematiksel işlemler yardımıyla. Bizi ilgilendiren ikinci yöntem. Bunu yöntemi kullananlara **Pseudorandom Number Generators** yani **Sözde Rassal Sayı Üreteçleri** diyoruz. Bunlar sayı dizileri oluşturan algoritmalardır. Başlangıç olarak olarak bir **seed** yani **tohum** değeri alırlar ve üzerinde matematiksel işlemler uygularlar. Elde edilen her sonuca tekrar aynı matematiksel işlemler uygulayarak devam ederler. Ancak sayıları tekrarlı olacak şekilde üretirler. Tohum değeri girdiğimizde algoritma her çalıştırdığımızda rastgele sayıları aynı sırada basarlar. Varsayılan değer ise o anda bilgisayarın zamanıdır. Bu sayede tohum her seferinde otomatik olarak değişecektir ve her başlangıçta farklı sayılar üretir.
 
 Sözde rassal sayı üreten algoritmaların belirli bir sayıdan sonra tekrara düşeceklerini söylemiştik. Kaba bir tabirle, bu sayı ne kadar büyük ise algoritma o kadar iyi rastgeledir diyebiliriz. Modülümüzün kullandığı **Mersenne Twister** üretecinde, bu tekrar $$2^{19937} - 1$$ sayıda bir gerçekleşir. Kullanılan en yaygın algoritmalardandır ve tekrar sayısı yeterince yüksektir.
 
@@ -29,32 +29,22 @@ Unutmadan söyleyeyim, bu fonksiyonları ve parametrelerini sıralarken 3.9 sür
 
 ### seed()
 
-Kullanım şekli `random.seed(a=None)` olan bu fonksiyon, üreteç için tohum belirler.
-
-**a parametresi**: Değer belirtilmişse verilen değeri, aksi halde varsayılan değeri olan None ile birlikte sistem saatini tohum olarak kullanılır.
+Kullanım şekli `random.seed(a=None)` olan bu fonksiyon, üreteç için tohum belirler. Parametre verilmişse o değeri, verilmemişse varsayılan None değeriyle birlikte sistem saatini tohum olarak kullanılır.
 
 <blockquote style="text-align: center;">Tohumun, algoritmaya verilen ve üzerinden rastgele sayı<br> üretilen ilk değer olduğunu unutmayın.</blockquote> 
 
 ### getstate()
 
-Kullanım şekli `random.getstate()` olan bu fonksiyon, üretecin mevcut durumunu depolayan bir nesne döndürür. Başka bir zaman kaldığın yerden devam etmek için *setstate()* fonksiyonuna gönderilebilir.
+Kullanım şekli `random.getstate()` olan bu fonksiyon, üretecin mevcut durumunu depolayan bir nesne döndürür. Başka bir zaman kaldığın yerden devam etmek için **setstate()** fonksiyonuna gönderilebilir.
 
 ### setstate()
-Kullanım şekli `random.setstate(state)` olan bu fonksiyon, rastgele sayı üretme işlemini öncesinde *getstate()* ile elde edilmiş bir durumdan devam ettirir. 
-
-**state parametresi**: Devam edilecek durum.
+Kullanım şekli `random.setstate(state)` olan bu fonksiyon, rastgele sayı üretme işlemini öncesinde **getstate()** ile elde edilmiş bir durumdan devam ettirir. 
 
 ### randbytes()
-Kullanım şekli `random.randbytes(n)` olan bu fonksiyon, rastgele bayt üretir. 
-
-**n parametresi**: Üretilecek bayt sayısı.
+Kullanım şekli `random.randbytes(n)` olan bu fonksiyon, verilen sayı kadar rastgele bayt üretir. 
 
 ### randrange()
-Kullanım şekli `random.randrange(start, stop[, step])` olan bu fonksiyon, verilen aralık dahilinde rastgele bir sayı verir. 
-
-**start parametresi**: Aralığın alt limitidir.  
-**stop parametresi**: Aralığın üst limitidir ancak dahil değildir.  
-**[step] parametresi** Aralıkta başlangıçtan itibaren hangi sıralardaki sayıların dikkate alınacağını belirtir. İsteğe bağlıdır. [1,2,3,4,5] sayılarını örnek olarak ele alırsak **step** 2 varsayarsak [1,3,5] sayıları arasında seçim yapılır.
+Kullanım şekli `random.randrange(start, stop[, step])` olan bu fonksiyon, verilen aralık dahilinde rastgele bir sayı verir. step parametresi ilk sayıdan sonra kaçar atlayarak sayıların alınacağını belirtir.
 
 <blockquote style="text-align: center;">İçeriğinin <b>range()</b> kullanırken içine yazdığımız biçimde olduğuna dikkat edin.</blockquote> 
 
@@ -64,32 +54,19 @@ Kullanım şekli `random.randrange(start, stop[, step])` olan bu fonksiyon, veri
 
 Kullanım şekli `random.randint(a, b)` olan bu fonksiyon, *a <= N <= b* aralığında bulunan rastgele bir sayı verir.
 
-**a parametresi**: Aralığın alt limitidir.  
-**b parametresi**: Aralığın üst limitidir ve dahildir.
-
 <blockquote style="text-align: center;"><b>randrange(a, b+1)</b> işleminin takma ismi gibi düşünebiliriz.</blockquote> 
 
 ### getrandbits()
 
 Kullanım şekli `random.getrandbits(k)` olan bu fonksiyon, *k* bit ile ifade edilebilinecek sayılardan rastgele birini seçer. Örneğin k=2 olduğunda ele alınacak sayılar binary olarak 2 bit ile ifade edilebilen 0, 1, 2, 3 (00, 01, 10, 11) sayılarıdır.
 
-**k parametresi**: Üretilecek sayının içereceği bit sayısı.
-
 ### choice()
 
-Kullanım şekli `random.choice(seq)` olan bu fonksiyon, diziden rastgele bir öğe seçer.
-
-**seq parametresi**: Öğenin seçileceği dizi. Dizi derken bunlar string, list ve tuple değişkenleri içerir.
+Kullanım şekli `random.choice(seq)` olan bu fonksiyon, verilen diziden (string, list ve tuple vs) rastgele bir öğe seçer.
 
 ### choices()
 
-Kullanım şekli `random.choices(seq, k=1 weights=None, cum_weights=None)` olan bu fonksiyon, diziden rastgele öğeler seçer.
-
-**seq parametresi**: Seçilecek öğelerin bulunduğu dizi.  
-**k parametresi**: Seçilecek öğe sayısı. Varsayılan değeri 1.  
-**weights parametresi**: Öğelerin ağırlıkları. Belirtilmişse, seçimler göreli ağırlıklara göre yapılır. Varsayılan değeri None'dur.  
-**cum-weights parametresi**: Öğelerin ağırlıkları. Belirtilmişse, seçimler kümülatif ağırlıklara göre yapılır. Varsayılan değeri None'dur.
-
+Kullanım şekli `random.choices(seq, k=1 weights=None, cum_weights=None)` olan bu fonksiyon, diziden k adet rastgele öğe seçer. weights parametresi öğelerin ağırlıklarını belirtir. Seçimler bu ağırlıklara göre yapılır. cum-weights ise kümülatif ağırlıkları kullanmak istersek tercihimiz olabilir.
 
 <blockquote style="text-align: center;">Arkaplanda seçim yapılmadan önce göreli ağırlıklar, kümülatif ağırlıklara dönüştürülür. Bu nedenle kümülatif ağırlıkların sağlanması işten tasarruf sağlar.</blockquote>
 
@@ -98,18 +75,13 @@ Kullanım şekli `random.choices(seq, k=1 weights=None, cum_weights=None)` olan 
 
 ### shuffle()
 
-Kullanım şekli `random.shuffle(x)` olan bu fonksiyon, x dizisinin öğelerini yerinde (in-place) karıştırır.
-
-**x parametresi**: Öğeleri karıştırılacak dizi.
+Kullanım şekli `random.shuffle(x)` olan bu fonksiyon, verilen dizinin öğelerini yerinde (in-place) karıştırır.
 
 <blockquote style="text-align: center;"><b>immutable</b> bir diziyi karıştırmak ve karıştırılmış yeni diziyi<br> döndürmek için bunun yerine <b>sample(x, k=len(x))</b> kullanın.</blockquote> 
 
 ### sample()
 
-Kullanım şekli `random.sample(seq, k)` olan bu fonksiyon, diziden seçilen öğelerin listesini verir. k=1 olsa dahi 1 elemanlık liste olarak verecektir.
-
-**seq parametresi**: Öğelerin seçileceği dizi.  
-**k parametresi**: Seçilecek öğe sayısı.
+Kullanım şekli `random.sample(seq, k)` olan bu fonksiyon, diziden seçilen k adet öğeyi liste olarak verir.
 
 <blockquote style="text-align: center;">Bir sayı aralığından rastgele sayılar seçmek için kullanılabilir: <b>sample(range(10000000), k=60)</b></blockquote> 
 
@@ -123,9 +95,7 @@ Kullanım şekli `random.random()` olan bu fonksiyon, 0 ve 1 aralığında rastg
 
 ### uniform()
 
-Kullanım şekli `random.uniform(a, b)` olan bu fonksiyon, verilen aralıkta rastgele ondalıklı sayı seçer.
-
-**a ve b parametreleri**: Hangisi daha büyükse üst limit, diğeri ise alt limit olacaktır.
+Kullanım şekli `random.uniform(a, b)` olan bu fonksiyon, verilen aralıkta rastgele ondalıklı sayı seçer. Parametrelerden hangisi daha büyükse üst limit olur, diğeri de alt limit olur.
 
 ---
 

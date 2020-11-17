@@ -31,11 +31,11 @@ Windows: <a href="https://git-scm.com/download/win">https://git-scm.com/download
 
 ## Linkteki SCM İfadesi {#linkdeki-scm-ifadesi}
 
-Git'i indirirken site adresine baktığınızda arkedeceksiniz üzere "SCM" ifadesi geçer. Buna aslında VCS'in diğer bir adı diyebiliriz. "Source Code Management"ın yani kaynak kodu yönetiminin kısaltmasıdır. Ancak bu sistem kaynak kodu dışındaki şeylerde de kullanabileceğimizden dolayı VCS kullanmak daha yaygındır.
+Git'i indirirken site adresine baktığınızda arkedeceksiniz üzere **"SCM"** ifadesi geçer. Buna aslında VCS'in diğer bir adı diyebiliriz. **"Source Code Management"** teriminin yani kaynak kodu yönetiminin kısaltmasıdır. Ancak bu sistem kaynak kodu dışındaki şeylerde de kullanabileceğimizden dolayı VCS kullanmak daha yaygındır.
 
 ## Nasıl Ortaya Çıktı? {#peki-nasil-ortaya-cikti}
 
-Linux kerneli geliştirilirken dünyanın her yerinden bir çok sayıda geliştirici görev aldığı için Bitkeeper isimli DVCS kullanılıyordur. Yaşanan bazı şeylerden sonra BitKeeper ücretsiz kullanımı kaldırır. Buna sinirlenen Linus Torvalds ise BitKeeper kullanırken edindiği bilgiler sayesinde, dağıtık ve veri kaybının zor olduğu bir VCS yazmaya başlar. Böylece insanlığa bu muazzam sistemi kazandırır.
+Linux kerneli geliştirilirken dünyanın her yerinden bir çok sayıda geliştirici görev aldığı için Bitkeeper isimli DVCS kullanılıyordur. Yaşanan bazı şeylerden sonra BitKeeper ücretsiz kullanımı kaldırır. Buna sinirlenen **Linus Torvalds** ise BitKeeper kullanırken edindiği bilgiler sayesinde, dağıtık ve veri kaybının zor olduğu bir VCS yazmaya başlar. Böylece insanlığa bu muazzam sistemi kazandırır.
 
 ## Tam Olarak Nedir? {#tam-olarak-nedir}
 
@@ -48,16 +48,16 @@ Birçok versiyon kontrol sistemi verileri, dosyalar ve dosyalarda zaman içerisi
     <figcaption style="text-align: center;"><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" style="font-size: 16px; text-decoration: underline;">kaynak</a></figcaption>
 </figure> 
 
-Git ise, verileri dosya sisteminin bir dizi snapshot'u (anlık görüntüsü) olarak düşünür. Her versiyonda dosya sisteminin anlık resmini çeker ve buna bir referans atar. Dosyalar değişmediyse Git dosyayı yeniden depolamaz, önceden depolamış olduğu dosyaya referans verir. 
+Git ise, verileri dosya sisteminin bir dizi **snapshot**'u (anlık görüntüsü) olarak düşünür. Her versiyonda dosya sisteminin anlık resmini çeker ve buna bir referans atar. Dosyalar değişmediyse Git dosyayı yeniden depolamaz, önceden depolamış olduğu dosyaya referans verir. 
 
 <figure>
     <img src="{{ site.baseurl }}/assets/img/posts/git-posts/divanu-lugatit-git-2/003.png" alt="" style="width: 60%; margin-bottom: 10px;" />
     <figcaption style="text-align: center;"><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" style="font-size: 16px; text-decoration: underline;">kaynak</a></figcaption>
 </figure> 
 
-Dolayısıyla bu versiyonlar yerel repository'de (şimdilik değişikliklerin saklandığı veri tabanı olarak düşünün) tutulduğu için kolaylıkla erişilebilir ve versiyonlar arasında geçişler yapılabilir.
+Dolayısıyla bu versiyonlar yerel **repository**'de (şimdilik değişikliklerin saklandığı veri tabanı olarak düşünün) tutulduğu için kolaylıkla erişilebilir ve versiyonlar arasında geçişler yapılabilir.
 
-> Kısaca; Git, <b>commit</b>'lerde (değişikliklerin repository'e kaydedilme işlemine verdiğimiz özel isim) her dosyanın tüm içeriğini kaydeder. Bu da Git'e sonradan göreceğimiz branching (dallanma) gibi faydalar sağlar. Yazının sonraki kısmında Git'in yapısından bahsedeceğiz. Okurken dikkatinizi verin ve odaklanın. Bu kısım kodların işlevlerini anlarken önem teşkil ediyor.
+> Kısaca; Git, **commit**'lerde (değişikliklerin **repository**'e kaydedilme işlemine verdiğimiz özel isim) her dosyanın tüm içeriğini kaydeder. Bu da Git'e sonradan göreceğimiz **branching** (dallanma) gibi faydalar sağlar. Yazının sonraki kısmında Git'in yapısından bahsedeceğiz. Okurken dikkatinizi verin ve odaklanın. Bu kısım kodların işlevlerini anlarken önem teşkil ediyor.
 
 ### Git'in Yapısı {#gitin-yapisi}
 
@@ -113,6 +113,6 @@ Bu saçma hikayede; <br>
     <figcaption style="text-align: center;"><a href="https://helpdeskgeek.com/how-to/how-to-view-the-source-code-of-an-open-source-piece-of-software/" style="font-size: 16px; text-decoration: underline;">kaynak</a></figcaption>
 </figure>
 
-2008 yılında kurulan ve Microsoft tarafından 2018 yılında satın alınan bir şirket. GitHub için sürüm Git kullanan projeler için depolama servisidir diyebiliriz. Başka insanlarla çalışabilmek için repolarımızı herkesin erişebileceği bir sunucuda saklamamız gerekir. İşte repolarımızı saklayacağımız servis budur. Her kullanıcı kendi yerel reposunda değişikliklerini yapar ve bu değişiklikler ile ana repoyu günceller.
+2008 yılında kurulan ve Microsoft tarafından 2018 yılında satın alınan bir şirket. **GitHub** için sürüm Git kullanan projeler için depolama servisidir diyebiliriz. Başka insanlarla çalışabilmek için repolarımızı herkesin erişebileceği bir sunucuda saklamamız gerekir. İşte repolarımızı saklayacağımız servis budur. Her kullanıcı kendi yerel reposunda değişikliklerini yapar ve bu değişiklikler ile ana repoyu günceller.
 
-Github, aynı zamanda site üzerinden Git işlemlerini yapabilmemiz için bize arayüzde sağlar hatta masaüstü uygulaması da var. İlerleyen zamanlarda detaylı bakacağız. Ama öncesinde konsolu bir halledelim. Konsolu bilen her türlü aracı kullanabilir.
+**Github**, aynı zamanda site üzerinden Git işlemlerini yapabilmemiz için bize arayüzde sağlar hatta masaüstü uygulaması da var. İlerleyen zamanlarda detaylı bakacağız. Ama öncesinde konsolu bir halledelim. Konsolu bilen her türlü aracı kullanabilir.

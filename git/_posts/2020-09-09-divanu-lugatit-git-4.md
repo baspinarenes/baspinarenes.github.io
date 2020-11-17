@@ -15,11 +15,11 @@ toc: true
 - <span style="font-weight: bold;">Divanu Lügatit Git - 4 : Lokalin Derinlikleri</span>
 
 <br>
-Lokale kabaca baktık ama bu kadarcık yeterli değil. Bu yazıda, lokalde anlattığımız konuların bazılarını ayrı ayrı ele alacağız. Yaptığımız işlemleri görselleştirerek kafanızda netleştireceğiz, *commit* mesajının iskeletine bakacağız ve komutların bayraklarıyla birlikte ayrıntılarına değineceğiz.
+Lokale kabaca baktık ama bu kadarcık yeterli değil. Bu yazıda, lokalde anlattığımız konuların bazılarını ayrı ayrı ele alacağız. Yaptığımız işlemleri görselleştirerek kafanızda netleştireceğiz, **commit** mesajının iskeletine bakacağız ve komutların bayraklarıyla birlikte ayrıntılarına değineceğiz.
 
 ## Lokaldeki Çalışmayı Görselleştirelim {#lokaldeki-calismayi-gorsellestirelim}
 
-Lokal kısımdaki dosyalarda değişiklik yapma, `git add` ile stage area'ya ekleme ve `git commit` ile repoya kaydetme işlemlerinin görsel olarak göstererek herkesin kafasına yerleşmesini sağlayalım.
+Lokal kısımdaki dosyalarda değişiklik yapma, `git add` ile Stage Area'ya ekleme ve `git commit` ile repoya kaydetme işlemlerinin görsel olarak göstererek herkesin kafasına yerleşmesini sağlayalım.
 
 Not: Udacity'deki [Version Control with Git](https://www.udacity.com/course/version-control-with-git--ud123) kursundan aldığım bu videoya elimden geldiğince Türkçe dublaj yapmaya çalıştım. Hafif peltekliğim için mazur görün :)
 
@@ -55,7 +55,7 @@ $(~) git clone <repo> <directory>
 
 ### git add {#git-add}
 
-Çalışma dizininde yapılan değişiklikleri **stage area**'ya dosya dosya eklemek istersek dosyaların isimlerini tek tek verebiliriz:
+Çalışma dizininde yapılan değişiklikleri **Stage Area**'ya dosya dosya eklemek istersek dosyaların isimlerini tek tek verebiliriz:
 
 ```bash
 $(~) git add <file1> <file2> ...
@@ -73,14 +73,14 @@ $(~) git add <directory>
 
 ### git commit {#git-commit}
 
-Bu komutu sade kullanırsak *staged* edilmiş dosyaları *commit*'e eklerken -a parametresi ile kullanırsak izlenen ve üzerinde değişiklikleri ekler:
+Bu komutu sade kullanırsak *staged* edilmiş dosyaları **commit**'e eklerken -a parametresi ile kullanırsak izlenen ve üzerinde değişiklikleri ekler:
 
 ```bash
 $(~) git commit -a 
 #directory: içindeki tüm dosyalar **stage** edilecek klasör
 ```
 
-Bildiğimiz gibi *commit* mesajını -m parametresi yardımıyla ekleyebiliyorduk. Bunu -a parametresiyle birlikte kullanabiliriz:
+Bildiğimiz gibi **commit** mesajını -m parametresi yardımıyla ekleyebiliyorduk. Bunu -a parametresiyle birlikte kullanabiliriz:
 
 ```bash
 $(~) git commit -am "commit message" 
@@ -89,22 +89,22 @@ $(~) git commit -am "commit message"
 
 ## Gelişmiş Commit Mesajları {#gelismis-commit-mesajlari}
 
-*commit* mesajlarınıdan bahsetmiştik. Birkaç püf noktası var tabi bu mesajları seçerken kullanacağımız. Önce ona bakalım sonrasında 
+**commit** mesajlarınıdan bahsetmiştik. Birkaç püf noktası var tabi bu mesajları seçerken kullanacağımız. Önce ona bakalım sonrasında 
 şuan için fazla detaya kaçan, ancak fikir sahibi olmanın işimize yarayacağı mesaj yapısı hakkında bilgi edineceğiz. Proje büyük çaplı değilse genelde sadece başlığı yazarız.
 
 ### Püf Noktaları {#puf-noktalari}
 
-Öncelikle güzel *commit* mesajı diyince ne anlamalıyız? Önerilen bazı maddeler ile bunları açıklayalım:
+Öncelikle güzel **commit** mesajı diyince ne anlamalıyız? Önerilen bazı maddeler ile bunları açıklayalım:
 - 60 karakterden az karakter kullan
-- *commit*'in ne yaptığını açıkla (nasıl ve neden olduğunu değil)
-- *commit*'lerin içeriğini mesajda "ve" kullanmak zorunda kalmayacak şekilde tutmalıyız
+- **commit**'in ne yaptığını açıkla (nasıl ve neden olduğunu değil)
+- **commit**'lerin içeriğini mesajda "ve" kullanmak zorunda kalmayacak şekilde tutmalıyız
 
 ### Yapısı {#yapisi}
 
- Bir *commit* mesajı, boş bir satırla ayrılmış üç farklı bölümden oluşur: başlık, isteğe bağlı gövde ve isteğe bağlı altbilgi. Düzen şuna benzer: 
- - başlık: *commit* mesajının iyi bir özetidir.
- - gövde: *commit*'in her detayını içeren mesajdır.
- - altbilgi: *commit*'i tanımlayan benzersiz numaraları yazarız.
+ Bir **commit** mesajı, boş bir satırla ayrılmış üç farklı bölümden oluşur: başlık, isteğe bağlı gövde ve isteğe bağlı altbilgi. Düzen şuna benzer: 
+ - başlık: **commit** mesajının iyi bir özetidir.
+ - gövde: **commit**'in her detayını içeren mesajdır.
+ - altbilgi: **commit**'i tanımlayan benzersiz numaraları yazarız.
 
 ## Varolan Bir Repoyu Klonlama {#varolan-bir-repoyu-klonlama}
 
@@ -126,7 +126,7 @@ $(~) git clone bash-tema-dosyalari/ yeni-proje/
 
 ## Commit'e Etiket Atama  {#commite-etiket-atama}
 
-`git tag` komutu, bazı *commit*'lere isim vermemizi sağlar. Örneğin projemizde belirli bir aşama kaydettik ve ilk versiyonunu çıkarmaya hazırız. Bu yüzden bu *commit*'in bizim için önemli bir anlamı var. O yüzden kolay erişebilmek için etiket atayalım:
+`git tag` komutu, bazı **commit**'lere isim vermemizi sağlar. Örneğin projemizde belirli bir aşama kaydettik ve ilk versiyonunu çıkarmaya hazırız. Bu yüzden bu **commit**'in bizim için önemli bir anlamı var. O yüzden kolay erişebilmek için etiket atayalım:
 
 ```bash
 $(~) git tag -a v1.0
@@ -152,7 +152,7 @@ $(~) git tag -d v1.0
 #-d: etiketi kaldırır
 ```
 
-Önceki bir *commit*'e etiket atamak istiyorsak ilgili *commit*'in SHA'ını parametre olarak verebiliriz:
+Önceki bir **commit**'e etiket atamak istiyorsak ilgili **commit**'in SHA'ını parametre olarak verebiliriz:
 
 
 ```bash
@@ -167,9 +167,9 @@ $(~) git tag
 
 ## Git'e İzlemesini İstemediğimiz Dosyaları Söyleme  {#gite-izlemesini-istemediğimiz-dosyalari-soyleme}
 
-`git add` komutuyla ".", "\*" gibi karakterler kullandığımızda bildiğimiz gibi tüm dosyaları ekleyecektir. Bazı durumlarda proje boyunca *git*'in izlemesini istemediğimiz dosyalar olabilir. `git add` komutunu kullandığımızda bunları göz ardı etmesi gerektiğini *git*'e bildirmek için `.gitignore` isimli özel bir dosya kullanırız (bu dosya *.git* ile aynı klasörde bulunmalıdır, içerisinde DEĞİL!). Yazdıklarımız görmezden gelinecektir.
+`git add` komutuyla ".", "\*" gibi karakterler kullandığımızda bildiğimiz gibi tüm dosyaları ekleyecektir. Bazı durumlarda proje boyunca *git*'in izlemesini istemediğimiz dosyalar olabilir. `git add` komutunu kullandığımızda bunları göz ardı etmesi gerektiğini Git'e bildirmek için `.gitignore` isimli özel bir dosya kullanırız (bu dosya ***.git** ile aynı klasörde bulunmalıdır, içerisinde DEĞİL!). Yazdıklarımız görmezden gelinecektir.
 
-*.gitignore* dosyasına farklı yollarla dosyaları bildirebiliriz:
+**.gitignore** dosyasına farklı yollarla dosyaları bildirebiliriz:
 - dosyalarımızın isimlerini satır satır yazabiliriz:
 
 ```
@@ -187,7 +187,7 @@ resim.jpg
 ```
 ignore_folder
 ```
-Bu bilgileri kullanarak kendi .gitignore dosyalarımızı oluşturabiliriz. Ancak kullandığımız yazılım diline ve platforma göre hazırlanmış .gitignore dosyaları elde edebileceğimiz güzel bir siteden bahsedeceğim. Sitemiz: <a href="https://www.toptal.com/developers/gitignore" style="text-decoration: underline;">toptal.com/developers/gitignore</a>
+Bu bilgileri kullanarak kendi **.gitignore** dosyalarımızı oluşturabiliriz. Ancak kullandığımız yazılım diline ve platforma uygun hazırlanmış dosyaları elde edebileceğimiz güzel bir siteden bahsedeceğim. Sitemiz: <a href="https://www.toptal.com/developers/gitignore" style="text-decoration: underline;">toptal.com/developers/gitignore</a>
 
 Örnek olarak Visual Studio üzerinden Python yazdığımızı düşünelim. Arama kısmına ikisini de giriyorum:
 
@@ -301,7 +301,7 @@ index 6b0c6cf..b37e70a 100644
 # 34. satırdan başlayarak 6 satır çıkarılmıştır ve yine 34. satırdan başlayarak 8 satır eklenmiştir.
 ```
 
-Aynı zamanda son *commit*'ten sonra *stage area*'ya eklenen değişiklikleri görmek için de *--staged* veya *--cached* bayrağını kullanabiliriz:
+Aynı zamanda son **commit**'ten sonra **Stage Area**'ya eklenen değişiklikleri görmek için de *--staged* veya *--cached* bayrağını kullanabiliriz:
 
 ```bash
 $(~) git diff --staged 
