@@ -3,6 +3,16 @@
 
 @import url('https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700');
 
+@font-face {
+    font-family: 'Pecita';
+    src:url('../fonts/Pecita/Pecita.ttf.woff') format('woff'),
+        url('../fonts/Pecita/Pecita.ttf.svg#Pecita') format('svg'),
+        url('../fonts/Pecita/Pecita.ttf.eot'),
+        url('../fonts/Pecita/Pecita.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 $logo-rengi:black;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
@@ -34,6 +44,10 @@ img {
     display: block;
     margin: 30px auto 40px;
     max-width: 100%;
+}
+
+b {
+    color: #00C787;
 }
 
 a {
