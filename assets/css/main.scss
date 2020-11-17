@@ -1,28 +1,6 @@
 --- 
 --- 
 
-@import url('https://fonts.googleapis.com/css?family=PT+Sans|Ubuntu:300,400,700');
-
-@font-face {
-    font-family: 'Pecita';
-    src:url('../fonts/Pecita/Pecita.ttf.woff') format('woff'),
-        url('../fonts/Pecita/Pecita.ttf.svg#Pecita') format('svg'),
-        url('../fonts/Pecita/Pecita.ttf.eot'),
-        url('../fonts/Pecita/Pecita.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Crunchy-PERSONAL-USE-ONLY';
-    src:url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.woff') format('woff'),
-        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.svg#Crunchy-PERSONAL-USE-ONLY') format('svg'),
-        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.eot'),
-        url('../fonts/Crunchy/Crunchy-PERSONAL-USE-ONLY.ttf.eot?#iefix') format('embedded-opentype'); 
-    font-weight: normal;
-    font-style: normal;
-}
-
 $logo-rengi:black;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
@@ -238,9 +216,10 @@ code.language-plaintext {
 
             .logo {
                 color: $logo-rengi;
-                line-height: 0.70em;
-                font-family: 'Crunchy-PERSONAL-USE-ONLY';
+                line-height: 0.60em;
+                font-family: 'Pecita', sans-serif;
                 font-size: 4rem;
+                font-weight: 700;
             }
 
             .menu {
