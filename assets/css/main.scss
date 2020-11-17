@@ -15,7 +15,9 @@
 
 @font-face {
     font-family: 'Crunchy';
-    src:url('../fonts/Crunchy/Crunchy.ttf') format('ttf');
+    src:url('../fonts/Crunchy/Crunchy.ttf') format('ttf'),
+        url('../fonts/Crunchy/Crunchy.woff2') format('woff2'),
+        url('../fonts/Crunchy/Crunchy.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -237,7 +239,7 @@ code.language-plaintext {
             .logo {
                 color: $logo-rengi;
                 line-height: 0.60em;
-                font-family: 'Crunchy';
+                font-family: 'Crunchy', 'Pecita' Arial, sans-serif;
                 font-size: 4rem;
                 font-weight: 700;
             }
