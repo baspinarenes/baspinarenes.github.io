@@ -13,6 +13,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Crunchy';
+    src:url('../fonts/Crunchy/Crunchy.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 $logo-rengi:black;
 $link-rengi: #737373;
 $normal-metin-rengi: #0c0c0d;
@@ -229,7 +237,7 @@ code.language-plaintext {
             .logo {
                 color: $logo-rengi;
                 line-height: 0.60em;
-                font-family: 'Pecita';
+                font-family: 'Crunchy';
                 font-size: 4rem;
                 font-weight: 700;
             }
