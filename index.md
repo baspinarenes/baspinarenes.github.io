@@ -29,4 +29,4 @@ Kısacası; mükemmel bir yazılımcıyım diye açmıyorum bu blogu. Hedefledi�
 
 <hr class="three-dot">
 
-Düşündüklerimi döktüğüme göre, içime sinen bir tasarım ile blogumu yavaş yavaş hareketlendirmeye başlayacağım. Takipte kalın.
+Düşündüklerimi döktüğüme göre, içime sinen bir tasarım ile blogumu yavaş yavaş hareketlendirmeye başlayacağım. Garip içeriklerime hazır olan varsa başlayalım.
