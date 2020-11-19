@@ -1,6 +1,8 @@
 ---
 layout: default
 image: assets/img/icon.jpg
+main: true
+excerpt: Bir garip, gayriresmi ve nereden çıktığı belli olmayan blogumsu.
 ---
 
 # Girizgah
