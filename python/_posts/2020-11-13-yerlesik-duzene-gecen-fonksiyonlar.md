@@ -6,7 +6,7 @@ scrool-top: true
 excerpt: "Python'da son derece fazla kullanılan yerleşik fonksiyonlar için başucu kaynağı."
 ---
 
-Python'da fazlaca kullanılan yerleşik fonksiyonlar için bir başucu yazımın olmasını istedim. Böylece hem ben hem de siz arada bir gelip burdan yardım alabiliriz. Yazıyı güzel örneklere denk geldikçe zenginleştirmeyi düşünüyorum. Eğer güzel örnekleriniz ve ekleyeceğiniz bilgileriniz varsa bana mesaj ile iletirseniz ekleyebilirim.<br><br>
+Python'da fazlaca kullanılan yerleşik fonksiyonlar için bir başucu yazımın olmasını istedim. Böylece hem ben hem de siz arada bir gelip burdan yardım alabiliriz. Yazıyı güzel örnekler buldukça zenginleştirmek istiyorum. Sizin de eklense güzel olur dediğiniz örnekler veya bilgiler varsa bana iletirseniz yazıyı birlikte zenginleştirmiş oluruz.<br><br>
 
 <!-- https://www.tablesgenerator.com/ sitesinden üretildi.-->
 <div class="table-responsive"> 
@@ -2084,6 +2084,6 @@ print(madalya)
 ## Kullanılan Kaynaklar
 
 ---
-[0] [https://docs.python.org/3/library/functions.html](https://docs.python.org/3/library/functions.html)
+[0] [https://docs.python.org/3/library/functions.html](https://docs.python.org/3/library/functions.html)  
 [1] [https://www.programiz.com/python-programming/methods/built-in/](https://www.programiz.com/python-programming/methods/built-in/)  
 [2] [https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html](https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html)
