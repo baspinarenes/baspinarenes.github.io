@@ -22,7 +22,6 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <p style="color: red; font-size: 20px;">(Blog güncelleniyor...)</p>
             </nav>
         </header>
         <main>
@@ -30,16 +29,23 @@
             {{ content }}
             {% if page.toc == true %}
                 <div class="toc-wrapper">
-                <div class="sticky">
-                    İÇERİK
-                    <!-- <a onclick='window.scrollTo({top: 0, behavior: "smooth"});' href="javascript:;">Başa Dön</a> -->
-                    <div id="table-of-contents">      
-                    {% include toc.html html=content %}
+                    <div class="sticky">
+                        İÇERİK
+                        <div id="table-of-contents">      
+                        {% include toc.html html=content %}
+                        </div>
                     </div>
-                    <!--<a onclick='window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});' href="javascript:;">Sona Git</a> -->
                 </div>
+            {% endif %}
+
+            {% if page.scrool-top == true %}
+                <div class="toc-wrapper" style="height: 100%; ">
+                    <div class="sticky">
+                        <a onclick='window.scrollTo({top: 0, behavior: "smooth"});' href="javascript:;">Başa Dön</a>
+                        <!--<a onclick='window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});' href="javascript:;">Sona Git</a> -->
+                    </div>
                 </div>
-                {% endif %}
+            {% endif %}
             </article>
         </main>
         <footer>
