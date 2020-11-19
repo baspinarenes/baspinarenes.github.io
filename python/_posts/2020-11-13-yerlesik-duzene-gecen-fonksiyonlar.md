@@ -2084,7 +2084,6 @@ print(madalya)
 ## Kullanılan Kaynaklar
 
 ---
-
-[0] [https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html](https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html)  
+[0] [https://docs.python.org/3/library/functions.html](https://docs.python.org/3/library/functions.html)
 [1] [https://www.programiz.com/python-programming/methods/built-in/](https://www.programiz.com/python-programming/methods/built-in/)  
-[2] [https://docs.python.org/3/library/functions.html](https://docs.python.org/3/library/functions.html)  
+[2] [https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html](https://www.gurayyildirim.com.tr/python-dict-hash-ve-dogum-gunu-problemi-1233.html)
