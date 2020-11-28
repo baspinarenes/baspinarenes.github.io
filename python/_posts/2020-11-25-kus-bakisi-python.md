@@ -7,7 +7,7 @@ toc: true
 ---
 
 <div class="copyright-alert">
-Bu içerik, <a href="https://twitter.com/leandrotk_"><b>Leandro TK</b></a> tarafından yazılmış ve çeşitli platformlarda on binlerce kişiye ulaşmış, bir yazıdan çevrilmiştir ve tarafımca bazı düzenlemeler yapılmıştır. Yazının orjinal haline <a href="https://leandrotk.github.io/2017/09/learning-python-from-zero-to-hero/index.html"><b>buradan</b></a> ulaşabilirsiniz.
+Bu içerik, <a href="https://twitter.com/leandrotk_"><b>Leandro TK</b></a> tarafından yazılmış ve çeşitli platformlarda on binlerce kişiye ulaşmış bir yazıdan çevrilmiştir ve tarafımca bazı düzenlemeler yapılmıştır. Yazının orjinal haline <a href="https://leandrotk.github.io/2017/09/learning-python-from-zero-to-hero/index.html"><b>buradan</b></a> ulaşabilirsiniz.
 </div>
 
 Tek oturuşluk bir okuma ile Python hakkında güzel ve sağlam bir görüşe sahip olmak istemez miydiniz? Böyle bir içeriğin deneyimi olanların tekrar edebilmesi, dile yeni başlayacakların ise ön bilgiye sahip olması açısından güzel olacağını tahmin ediyorum. Bu sebepten, güzel bir yazıya denk gelmişken çevirip sizinle paylaşmak istedim.
