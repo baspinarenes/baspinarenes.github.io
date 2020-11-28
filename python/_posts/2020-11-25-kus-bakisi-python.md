@@ -10,9 +10,11 @@ toc: true
 Bu içerik, <a href="https://twitter.com/leandrotk_"><b>Leandro TK</b></a> tarafından yazılmış ve çeşitli platformlarda on binlerce kişiye ulaşmış, bir yazıdan çevrilmiştir ve tarafımca bazı düzenlemeler yapılmıştır. Yazının orjinal haline <a href="https://leandrotk.github.io/2017/09/learning-python-from-zero-to-hero/index.html"><b>buradan</b></a> ulaşabilirsiniz.
 </div>
 
-Tek oturuşluk bir okuma ile Python hakkında güzel ve sağlam bir görüşe sahip olmak istemez miydiniz? Böyle bir içerik, deneyimi olanların tekrar etmesi, dile yeni başlayacakların ise ön bilgiye sahip olması açısından oldukça faydalı olacaktır. Bu sebepten, güzel bir yazıya denk gelmişken sizinle paylaşmak istedim.
+Tek oturuşluk bir okuma ile Python hakkında güzel ve sağlam bir görüşe sahip olmak istemez miydiniz? Böyle bir içeriğin deneyimi olanların tekrar edebilmesi, dile yeni başlayacakların ise ön bilgiye sahip olması açısından güzel olacağını tahmin ediyorum. Bu sebepten, güzel bir yazıya denk gelmişken çevirip sizinle paylaşmak istedim.
 
-<blockquote style="text-align: center;">Tek yazı ile dil öğrenilemeyeceğini unutmayın.</blockquote>
+Yazacağım çeviri yazılarıyla ilgili bir şeyden bahsetmek istiyorum. Birebir aynısını yazmaktansa içeriği özümseyip iyileştirmeler yaparak paylaşırsam daha faydalı olacağına inanıyorum. Bu sebeple içerik bir miktar farklılık arz ediyor.
+
+<blockquote style="text-align: center;">Tek yazı ile dil öğrenilemeyeceğini, programlama dillerinin de konuştuğumuz<br>dillerde olduğu gibi deneme yanılma süreci gerektirdiğini unutmayın.</blockquote>
 
 Başlamadan önce, yaratıcısı tarafından Python için yapılan tanımı duyalım:
 
@@ -24,7 +26,7 @@ Biraz sadeleştirmiş olabilirim :) Hazırsanız başlayalım!
 
 Değişken (**variable**), bir değere taktığımız lakaptır. Basit bir mantığa sahiptir. Değerin bellekteki yerini tutar diyince kafanız karışabilir.  Daha fazla bilgi edinmek için ["Değişken Deyince Ne Anlamalı?"](/python/degisken-deyince-ne-anlamali/) isimli yazıma bakabilirsiniz.
 
-<blockquote style="text-align: center;">En yakınızdaki marketi düşünün. Market binasını değer, marketin ismini değişken olarak düşünün. İsmini duyduğunuzda kafanızda o marketin binası ve konumu canlanacaktır. Değişken mantığı da buna benzer.</blockquote>
+<blockquote style="text-align: center;">En yakınızdaki marketin ismini düşünün. Kapısı, içerisi hatta bakkalcının duruş şekli bile kafanızda canlandı değil mi? Market binasını değer, marketin ismine değişken diyebiliriz. İsmini duyduğunuzda kafanızda o marketin binası ve konumu canlanacaktır. Değişken mantığı da buna benzerdir.</blockquote>
 
 Python'da değişken tanımlamak ve değer atamak oldukça kolaydır. Örneğin 1 sayısını `bir` isimli değişkene atayabiliriz (neden böyle bir şey isteyeceğimiz meçhul):
 
@@ -100,9 +102,7 @@ False
 """
 ```
 
-Sonrasında True ise bloktaki kod çalıştırılır.
-
-Eğer `if` ifadesindeki sonuç False olduğunda başka bir kod çalıştırmak istersek `else` ifadesini kullanabiliriz:
+Sonuç True ise bloktaki kod çalıştırılır. Bunun yanında `if` ifadesindeki sonuç False olduğunda başka bir şey yaptırmak istersek `else` ifadesini kullanabiliriz:
 
 ```python
 if 1 > 2:
@@ -115,7 +115,7 @@ else:
 """
 ```
 
-Yukarıdaki örnekte aslında bir şeyi sorgularız: "1>2 doğru mu?". Ancak `if` ve `else` arasına `elif` ifadesiyle istediğimiz kadar ekstra sorgulama ekleyebiliriz:
+Yukarıdaki örnekte aslında bir şeyi sorgularız: "1>2 doğru mu?". Ancak `if` ve `else` arasına `elif` ifadesiyle istediğimiz kadar ekstra koşul sorgusu ekleyebiliriz:
 
 ```python
 if 1 > 2:
@@ -215,11 +215,11 @@ Sayılarımızı `sayi_listem` değişkenine depoladık. Peki bu listedeki değe
 
 <blockquote style="text-align: center;">Birçok dilde olduğu gibi Python'da da saymaya sıfırdan başlanır. Ekstra olarak Python'da negatif indeksler vardır. Baştan olduğu gibi, sondan da -1, -2, .. şeklinde numaralandırılır.</blockquote>
 
-Kafamızda bu resmi daha netleştirmek için şu resme göz atabilirsiniz:
+Kuru kuru geçmektense görselleştirelim ve deneyelim:
 
 <img src="{{ site.baseurl }}/assets/img/posts/python-posts/kus-bakisi-python/indexing.png" alt="" style="display: block; margin-left: auto; margin-right: auto;"/>
 
-Harflere erişmek istersek kutuların başını gösteren değerleri girebiliriz. Resimdekini örneği koda dökelim ve indekslere bakalım:
+Harflere erişmek istersek kutuların başını gösteren değerleri girebiliriz:
 
 ```python
 harfler = ["İ", "N", "D", "E", "K", "S"]
@@ -233,7 +233,7 @@ print(harfler[-6])  # İ
 
 <img src="{{ site.baseurl }}/assets/img/posts/python-posts/kus-bakisi-python/slicing.png" alt="" style="display: block; margin-left: auto; margin-right: auto;"/>
 
-İndekslemeden bahsetmişken dilimlemeden bahsetmemek olmaz. Dilimleme için de benzer notasyon kullanırız. Bunun için dilimin başını ve sonunu gösteren sayıları alırız:
+İndekslemeden bahsetmişken dilimlemeden bahsetmemek olmaz. Dilimleme için alacağımız kısmın başını ve sonunu gösteren sayıları alırız ve benzer bir notasyon kullanırız:
 
 ```python
 harfler = ["İ", "N", "D", "E", "K", "S"]
@@ -277,10 +277,10 @@ Evet polisiye romanlara bayılırım :) Liste veri tipi bu kadar yeterli. Başka
 
 Listelerin tamsayılar ile indekslendiğini gördük. Peki ya indeks olarak sayılar yerine başka şeyler kullanmak istersek?
 
-O halde `dictionary` veri yapısı hakkında bilgi edinelim. **key**-**value**  yani anahtar-değer çiftlerinden oluşan koleksiyon çeşididir. Kalıbı şu şekilde olacaktır:
+O halde `dictionary` veri yapısı hakkında bilgi edinelim. **key**-**value**  yani anahtar-değer çiftlerinden oluşan koleksiyon çeşididir. Sözdizimi şu şekilde olacaktır:
 
 ```python
-sozluk_kalibi = {
+sozluk_sozdizimi = {
     "anahtar1": "deger1",
     "anahtar2": "deger2",
     "anahtar3": "deger3"
@@ -294,15 +294,15 @@ Yazının sahibine ait bilgileri tutan bir sözlük oluşturalım:
 ```python
 yazar_bilgileri = {
     "isim": "Leandro TK",
-    "milliyet": "Brezilyalı"
+    "memleket": "Brezilya"
 }
 
 print("Yazarın ismi: ", yazar_bilgileri["isim"])
-print("Yazarın milliyeti: ", yazar_bilgileri["milliyet"])
+print("Yazarın memleketi: ", yazar_bilgileri["memleket"])
 
 """ ÇIKTI:
 Yazarın ismi:  Leandro TK
-Yazarın milliyeti:  Brezilyalı
+Yazarın memleketi:  Brezilya
 """
 ```
 
@@ -329,7 +329,7 @@ Ekleme yapmanın yanı sıra var olan değerleri değiştirirken de aynı sözdi
 
 ## Yineleme: Öğeler Üzerinde Döngü Kurma {#yineleme}
 
-Önceki konularda öğrendiğimiz üzere, listeleri yinelemek oldukça basittir. Python geliştiricilerinin genel tercihi `for` döngüsü kullanmaktır:
+Listeleri yinelemek oldukça basittir. Liste konusunda gördüğümüz örnekten hatırlayabilirsiniz. Yineleme yapmak için Python geliştiricilerinin genel tercihi `for` döngüsü kullanmaktır:
 
 ```python
 kitap_rafi = [
@@ -352,7 +352,7 @@ Yedi Güzel Adam
 
 Bu şekilde tüm değerleri yazdırabiliriz. Python'un nimetleri.
 
-Sözlüklerde `for` döngüsü kullanmaya kalkarsak anahtarlarını elde ederiz. Elbette anahtarları kullanarak da değerlere erişebiliriz:
+Listelerde direk elemanlara ulaştık, peki sözlüklerde nasıl yineleme yapıyoruz? Sözlüklerde her yinelemede anahtarları elde ederiz. Elbette anahtarları kullanarak da değerlere erişebiliriz:
 
 ```python
 sozluk = {
@@ -371,7 +371,7 @@ anahtar3 --> deger3
 """
 ```
 
-Basit bir örnekti. Bunu yapmanın başka bir yolu da `items()` metodunu kullanmaktır:
+Eğer ikisini birden elde etmek istersek `items()` sözlük metodunu kullanabiliriz:
 
 ```python
 for anahtar, deger in sozluk.items():
@@ -389,22 +389,22 @@ Sözlüğün içeriğini geçici olarak tuttuğumuz parametreleri anahtar ve de�
 
 ## Sınıflar ve Nesneler
 
-Nesneler (**object**), arabalar, köpekler veya bisikletler gibi dünyamızda var olan nesnelerin temsilidir. İki kavramdan oluşurlar: özellik ve davranış.
+Nesneler (**object**), arabalar, köpekler veya bisikletler gibi dünyamızda var olan nesnelerin temsilidir. İki olgudan meydana gelirler: özellik ve davranış.
 
-Arabaların tekerlek sayısı, kapı sayısı ve oturma kapasitesi gibi özellikleri vardır. Ayrıca bazı eylemler gerçekleştirirler; hızlanabilir, durabilir, kalan yakıtı gösterebilir vs.
+Arabaların tekerlek sayısı, kapı sayısı ve oturma kapasitesi gibi özellikleri vardır. Ayrıca hızlanma, durma, kalan yakıtı gösterme  gibi bazı eylemler gerçekleştirirler.
 
-Nesneye yönelimli programlamada; özellikler için öznitelik (**attribute**), davranışlar için metod (**method**) kavramlarını kullanırız.
+Nesneye yönelimli programlamada bunların özel isimleri vardır. Özellikler için öznitelik (**attribute**), davranışlar için metod (**method**) kavramlarını kullanırız.
 
-Sınıf (**class**) ise nesnelerin üretildiği kalıptır. Gerçek dünyada, genellikle aynı türden birçok nesne görürüz. Mesela arabalar. Aynı model arabalar için oluşturulmuş bir kalıp vardır ve üretim için fabrikada bu kalıp kullanılır. Bazılarına paket yükseltmeleri de gerçekleştirebiliriz yani nesnelere ayrı ayrı eklemeler de yapabiliriz.
+Sınıf (**class**) ise nesnelerin üretildiği kalıptır. Gerçek dünyada, genellikle aynı türden birçok nesne görürüz. Mesela arabalar. Aynı model arabalar için oluşturulmuş bir kalıp vardır ve üretim için fabrikada bu kalıp kullanılır. Eğer istersek paket yükseltmeleri de gerçekleştirebiliriz. Kısacası nesneleri özelleştirebiliriz.
 
-Artık örneklerimize başlayalım. Önce bir araba sınıfı oluşturalım:
+Örneklerimize başlayalım. Önce bir araba sınıfı oluşturalım:
 
 ```python
-class Araba: # Arac yerine Arac()'da kullanılabilir.
+class Araba: # "Araba" yerine "Araba()"da yazılabilir.
     pass
 ```
 
-Sınıfları `class` ifadesiyle tanımlarız. Hepsi bu kadar.
+Sınıfları `class` ifadesiyle tanımlarız.
 
 Nesneler ise sınıflardan üretilmiş örneklerdir (**instance**). Bir örnek oluşturalım:
 
@@ -417,30 +417,31 @@ print(arabam)
 """
 ```
 
-**Araba** sınıfını kullanarak **arabam** nesnesi oluşturduk. **Araba** sınıfımızı 4 özelliğe küçültelim: tekerlek sayısı, yakıt tipi, oturma kapasitesi ve maksimum hız. Sınıfı oluştururken tüm bu öznitelikleri belirlememiz gerekir. Boş olan sınıfımızı artık dolduralım:
+**Araba** sınıfını kullanarak **arabam** nesnesi oluşturduk ancak halihazırda bomboş bir sınıf. **Araba** sınıfımızın basitçe 4 özellik ile ifade edelim: tekerlek sayısı, yakıt tipi, oturma kapasitesi ve maksimum hız. Sınıfı oluştururken tüm bu öznitelikleri belirlememiz gerekir. Boş olan sınıfımızı bu özelliklerle dolduralım:
 
 ```python
 class Araba:
     # Argümanlar görülebilsin diye alt alta yazacağım.
     def __init__(self, tekerlek_sayisi, yakit_tipi,
                  oturma_kapasitesi, maksimum_hiz):
+
         self.tekerlek_sayisi = tekerlek_sayisi
         self.yakit_tipi = yakit_tipi
         self.oturma_kapasitesi = oturma_kapasitesi
         self.maksimum_hiz = maksimum_hiz
 ```
 
-Bunun için `__init__` metodunu kullanırız. Buna, yapıcı metod (**constructor**) denir. Yani nesne oluştururken bu öznitelikleri belirleyebiliriz. Örneğin bir Tesla Model S nesnesi oluşturduğumuzu hayal edelim:
+Sınıfa öznitelik tanımlamak için `__init__()` metodunu kullanırız. Buna, yapıcı metod (**constructor**) denir. Yani verdiğimiz öznitelik değerlerine göre nesneyi oluşturur. Oluştururken de `self` anahtar sözcüğünü kullanır. Bu, sınıftan oluşturulan nesneyi tutar ve o nesne ile işlem yapabilmemizi sağlar. Örneğin bir `tesla_model_s` nesnesi oluşturalım:
 
 ```python
 tesla_model_s = Araba(4, 'elektrikli', 5, 250)
 # 4 tekerlek, elektrikli, 5 kişilik, 250 km/saat maksimum hız
 ```
 
-Tüm öznitelikleri belirledik. Peki ya bu değerlere nasıl erişebiliriz? Bu değerleri almak için nesneye istek göndeririz. Bunları gerçekleştiren fonksiyonlara ise metod (**method**) deriz. Örnek olarak `tekerlek_sayisi` özniteliği için ayarlama ve değeri alma metodları yazalım:
+Tüm öznitelikleri belirledik. Peki ya bu değerlere nasıl erişebiliriz? Bu değerleri bizimle paylaşması için nesneden ricada bulunuruz. Bunu gerçekleştiren fonksiyonlara ise metod (**method**) deriz. Örnek olarak `tekerlek_sayisi` özniteliği için ayarlama ve değeri alma metodları yazalım:
 
 ```python
-class Arac:
+class Araba:
     # Argümanlar görülebilsin diye alt alta yazacağım.
     def __init__(self, tekerlek_sayisi, yakit_tipi,
                  oturma_kapasitesi, maksimum_hiz):
@@ -458,10 +459,10 @@ class Arac:
 
 **get** ve **set** ile başlayan bu metodlara **getter** ve **setter** denir. Çünkü ilki öznitelik değerini alır, ikincisi ise öznitelik için yeni değer belirler.
 
-Python'da **getter** ve **setter** tanımlamak için `@property` dekoratörünü (**decorator**) kullanabiliriz. Örneğe göz atalım:
+Python'da **getter** ve **setter** tanımlamak için ikinci ve daha güzel bir yöntem, `@property` dekoratörünü (**decorator**) kullanmaktırız. Örneğe göz atalım:
 
 ```python
-class Arac:
+class Araba:
     # Argümanlar görülebilsin diye alt alta yazacağım.
     def __init__(self, tekerlek_sayisi, yakit_tipi,
                  oturma_kapasitesi, maksimum_hiz):
@@ -492,11 +493,11 @@ tesla_model_s.number_of_wheels = 2    # değeri 2 yapalım
 print(tesla_model_s.tekerlek_sayisi)  # 2 (getter)
 ```
 
-Bu metodlardan biraz farklıdır. Öznitelik ile ilgileniyormuşuz gibi görünse de yaptığımız tanımlamalar arkaplanda otomatik olarak ilgili metodu çalıştırır.
+Bu ilk yöntemden biraz farklılık gösterir. Öznitelik ile çalışıyormuşuz gibi görünse de yaptığımız işlemler arkaplanda ilgili metodu çalıştırır.
 
 <blockquote style="text-align: center;">Burada neden bir metod çalıştırıyoruz ki diye düşünebilirsiniz. <b>getter</b> kullandığımızda değeri çağırırken başka işlemler de gerçekleştirebiliriz, <b>setter</b> kullandığımızda ise atamadan önce kontrol gerçekleştirebiliriz.</blockquote>
 
-Bununla birlikte arabanın çalıştırılması tarzında eylemler için de metodları kullanabiliriz:
+Bununla birlikte arabanın çalıştırılması tarzında eylemler için metodları kullanabiliriz:
 
 ```python
 class Araba:
@@ -523,9 +524,9 @@ VRUUUUUUUM
 """
 ```
 
-## Encapsulation: Bilgiyi Gizleme {#kapsulleme}
+## Encapsulation: Bilgi Gizleme {#kapsulleme}
 
-Türkçeye **kapsülleme** olarak geçen **encapsulation**, nesnelerin özniteliklerine ve metodlarına doğrudan erişimi kısıtlayan ve verilerin yanlışlıkla değiştirilmesine mahal vermeyen bir mekanizmadır. Gereksiz ayrıntıları kullanıcıdan saklar ve yapılacak işlemleri kolaylaştırır.
+Türkçeye **kapsülleme**/**sarmalama** olarak geçen **encapsulation**, nesnelerin özniteliklerine ve metodlarına doğrudan erişimi kısıtlayan ve verilerin yanlışlıkla değiştirilmesine mahal vermeyen bir mekanizmadır. Gereksiz ayrıntıları kullanıcıdan saklayarak işleri kolaylaştırır.
 
 Bu mekanizmanıyı gerçekleştiren, erişimin seviyesini belirleyen yapılara **erişim belirleyicileri** (**access modifier**) denir. Üç çeşit vardır:
 - public
@@ -541,35 +542,40 @@ Bu mekanizmanıyı gerçekleştiren, erişimin seviyesini belirleyen yapılara *
 Yapıcı metodumuzun içinde nesne özelliklerini atamak için değişken tanımlamayı görmüştük. Hatırlamak maksadıyla şu örneğe bakalım:
 
 ```python
-class Kaleci:
-    def __init__(self, isim):
+class Kisi:
+    def __init__(self, isim, kilo):
         self.isim = isim
+        self.kilo = kilo
 
-kaleci = Kaleci('Volkan') 
-kaleci.isim = "Altay" # Kalecimiz artık değişti
-print(kaleci.isim)
+blog_sahibi = Kisi('Enes', 76) 
+blog_sahibi.kilo = 77
+print(blog_sahibi.kilo)  # 77
 ```
 
 Özniteliklerimizin yanında bir de metodlarımız vardı. Bunların da erişim seviyelerini belirleyebiliriz.
 
 ```python
-class Kaleci:
-    def __init__(self, isim):
+class Kisi:
+    def __init__(self, isim, kilo):
         self.isim = isim
+        self.kilo = kilo
     
-    def get_isim(self):
-        return self.isim
-        
+    def get_kilo(self):
+        return self.kilo
+    
+    def set_kilo(self, kilo):
+        self.kilo = kilo
 
-kaleci = Kaleci('Altay') 
-print(kaleci.get_isim()) # "Altay"
+blog_sahibi = Kisi('Enes', 76)
+blog_sahibi.set_kilo(77)
+print(blog_sahibi.get_kilo())  # 77
 ```
 
 Önceki örneklerde gördüğümüz tüm öznitelikler ve metodlar varsayılan olarak **public** olduğundan dolayı ne işe yaradığı anlaşılabilir olmayabilir. Şimdi diğerlerine de bakalım ve aradaki farkı görelim.
 
 ### Protected
 
-**protected** ifadesi, tanımlandığı sınıftan ve o sınıftan türetilen alt sınıflardan erişime açık olduğunu belirtir. Erişimi `protected` yapmak için öznitelik ve metodların isimlerinin başına bir adet alt çizgi (_) eklenir:
+**protected** ifadesi, tanımlandığı sınıftan ve o sınıftan türetilen alt sınıflardan erişime açık olduğunu belirtir. Erişimi `protected` yapmak için özniteliklerin ve metodların başına bir adet alt çizgi (_) eklenir:
 
 ```python
 class Kisi:
@@ -652,9 +658,9 @@ print(tk.yasi_goster())
 
 ## Inheritance: Miras Alma {#kalitim}
 
-Örneğin, annemizden babamızdan bazı özelliklerini miras alırız. Mesela annemizin gözlerini, babamızın ise burnunu almış olabiliriz. 
+Annemizden babamızdan bazı özelliklerini miras alırız. Mesela annemizin gözlerini, babamızın ise burnunu almış olabiliriz. 
 
-Nesne yönelimli programlamada ise bu, Türkçeye **kalıtım** olarak geçen **inheritance** kavramına karşılık gelir. Bazı sınıfların davranışları veyahut karakteristik özellikleri aynı olabilir. Örneğin tüm canlılar ses çıkarabilir, dolayısıyla aynı eylemi gerçekleştirebilirler. Ve bir sınıf ortak özelliklerini başka bir sınıftan miras alabilir. Örneğin canlılar ses çıkardığı için insan sınıfı canlı sınıfından bu özelliği miras alabilir.
+Nesne yönelimli programlamada ise bu, Türkçeye **kalıtım** olarak geçen **inheritance** kavramına karşılık gelir. Bazı sınıfların davranışları veyahut karakteristik özellikleri aynı olabilir. Örneğin tüm canlılar ses çıkarabilir, dolayısıyla aynı eylemi gerçekleştirebilirler. Ve bir sınıf ortak özelliklerini başka bir sınıftan miras alabilir. Örneğin canlılar ses çıkardığı için insan sınıfı canlı sınıfından bu özelliği miras alır.
 
 Arabalara geri dönelim. Tekerlek sayısı, koltuk kapasitesi ve maksimum hız, arabaların ortak özelliğidir. Elektrikli arabaların ise normal arabaların yanında başka özellikleri vardır. Öncelikle klasik bir arabayı temsil etmek için `Araba` sınıfı oluşturalım:
 
@@ -668,7 +674,7 @@ class Araba:
         self.maksimum_hiz = maksimum_hiz
 ```
 
-Araba sınıfından nesnemizi üretelim:
+Araba sınıfından nesne oluşturalım:
 
 ```python
 arabam = Araba(4, 5, 250)
@@ -690,7 +696,7 @@ class ElektrikliAraba(Araba):
         self.sarj_suresi = sarj_suresi
 ```
 
-`super()` fonksiyonu, miras alınan sınıfı temsil eder.  Yani `super().__init__()`, üst sınıfın yapıcı metodunu çağırır. Alt sınıfa ekstra kod eklemeden üst sınıfa ait yapıcı metodu çalıştırır. Yukarıdaki örneğe eş değer olarak bu kod verilebilir:
+`super()` fonksiyonu, miras alınan sınıfı temsil eder.  Yani `super().__init__()`, üst sınıfın yapıcı metodunu çağırır. Alt sınıfa ekstra kod eklemeden üst sınıfa ait yapıcı metod çalıştırılmış olunur. Yukarıdaki örneğe eş değer olarak bu kod verilebilir:
 
 ```python
 # Argümanlar görülebilsin diye alt alta yazacağım.
