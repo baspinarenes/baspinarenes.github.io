@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/python.png
 title: "Kuş Bakışı Python"
-excerpt: "İkinci çeviri yazım ile karşınızdayım. Yazının orjinali, Ned Batchelder tarafından PyCon 2015 için hazırlanmış bir slaytın yine kendisi tarafından yazıya aktarılmış halidir. Dile yeni başlayan insanların kafasını karıştıran bir nokta olduğunu düşündüğümden dolayı yazıyı herkesin okuyabilmesini istedim."
+excerpt: "Bu yazı ile Python üzerinde kuş bakışı tur atabilirsiniz."
 toc: true
 ---
 
