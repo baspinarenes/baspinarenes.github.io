@@ -7,5 +7,5 @@
 - name: linux
   icon-class: fab fa-ubuntu
 
-- name: olasilik-ve-istatistik
-  icon-class: fas fa-chart-bar
+# - name: olasilik-ve-istatistik
+#  icon-class: fas fa-chart-bar
