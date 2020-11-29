@@ -94,6 +94,12 @@ movies:
     imdb:            5.6/10
     watching-date:   11.07.2020
     cover-img:       /assets/img/movie-img/kolpacino-bomba.jpg
+  
+  - name:            "Rise of The Planet<br>of The Apes<br>(2011)"
+    type:            Bilim Kurgu
+    imdb:            7.6/10
+    watching-date:   28.11.2020
+    cover-img:       /assets/img/movie-img/rise-of-the-planet-of-the-apes.jpg
 
 series:
   - name:            "The Queen's Gambit"
