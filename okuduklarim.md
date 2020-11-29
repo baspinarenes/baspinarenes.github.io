@@ -1,5 +1,6 @@
 ---
 layout: default
+title: Okuduklarım
 ---
 
 <blockquote style="text-align: justify;">

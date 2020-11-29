@@ -1,6 +1,7 @@
 ---
 layout: default
 toc: true
+title: İzlediklerim
 ---
 
 <blockquote style="text-align: justify;">
