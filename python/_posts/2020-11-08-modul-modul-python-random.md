@@ -1,7 +1,7 @@
 ---
 layout: post
 image: assets/img/card-img/python.png
-title: Random Modülünün Önemli Noktaları
+title: "Modül Modül Python: Random"
 excerpt: "Python geliştirirken bazı zamanlar rastgeleliğe farklı şekillerde ihtiyaç duyabiliriz. Örneğin 0-100 arasında herhangi bir sayı üretmek veya listeden rastgele eleman seçmek isteyebiliriz. Böyle zamanlarda Python ile birlikte gelen **random** modülü imdadımıza yetişiyor."
 toc: true
 ---
