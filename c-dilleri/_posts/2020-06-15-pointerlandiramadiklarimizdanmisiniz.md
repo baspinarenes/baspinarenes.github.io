@@ -1,6 +1,6 @@
 ---
 layout: post
-image: assets/img/card-img/c-c++.png
+image: assets/img/card-img/c-dilleri.png
 title: "Pointer'landıramadıklarımızdan Mısınız?"
 excerpt: "Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararmıyor mu? Bu yazıda, terminalimize biraz renk katacağız."
 toc: true
