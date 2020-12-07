@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/c-dilleri.png
 title: "Pointer'landıramadıklarımızdan Mısınız?"
-excerpt: "C, C++ gibi dillerde bu kavramdan kaçışınız yoktur. O yüzden pointer'ları herkesin anlayabileceği bir seviyeye çekelim."
+excerpt: "C, C++ gibi dillerde bu kavramdan kaçışınız yoktur. O yüzden 'Pointer' kavramını herkesin anlayabileceği bir seviyeye çekelim."
 toc: true
 ---
 
