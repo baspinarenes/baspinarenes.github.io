@@ -31,15 +31,15 @@ int dogum_tarihi = 1999
 
 Günlük yaşantımızda sayıları 10 tabanında (decimal) kullanıyoruz. Ancak bilgisayarlar bunları anlayabilmek için 2 tabanına (binary) çevirmek zorunda. Bellek temsillerinde ise nedenini bulamadım ancak 16 tabanını (hexadecimal) kullanılıyor. Aşağıda 1999 değerinin bu tabanlardaki halini görebilirsiniz:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/001.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/001.png)
 
 Değişkenin bellekteki şekline bakalım. 16 tabanındaki karşılığını sırayla kutulara ikişerli olarak yerleştiririz:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/002.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/002.png)
 
 İkişerli yerleştirme sebebimiz, 2'lik tabandaki her 8 bite karşılık 16'lık tabanda 2 karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek `dogum_tarihi` dedik:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/003.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/003.png)
 
 Artık biz `dogum_tarihi` değişkenini çağırdığımız zaman, CPU belleğe gider ve değişkenin başlangıcı adresi olan **90000008** adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani **00 00 07 CF** değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
 
@@ -80,7 +80,7 @@ Pointer'ları belli etmek için genellikle ismin başına<br>veya sonuna "p", "p
 
 Şöyle genel biçimde tekrar edecek olursak; `dogum_tarihi_ptr` **pointer** değişkeni, `dogum_tarihi` değişkeninin bellek adresini işaret eder:
 
-<img src="{{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/010.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+<img src="{{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/004.png" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
 Şu iki çıktıya bakarsak `&` işaretinin ne işe yaradığı daha net anlaşılabilir:
 
@@ -127,7 +127,7 @@ Değişken ismine bitişik olduğu için değişkene ait olduğundan emin oluruz
 
 Değişkenin adresini elde edebileceğimiz gibi adres yardımıyla değişken değerine de erişebiliriz. Şu görsele göz atalım ve sonrasında birlikte inceleyelim:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/004.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/006.png)
 
 Örneğin elimizdeki doğum tarihi bilgisini kullanıcının yanlış girmiş. Bunu değiştirmek istiyor. Elimizde hem değişken hem de adresini tutan **pointer** var:
 
@@ -215,7 +215,7 @@ int *sayi_dizisi_ptr = sayi_dizisi;
 
 Dizimizin bellekteki durumunu görselleştirelim:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/005.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/006.png)
 
 Dizilerin elemanlarına erişmek için indeksleri kullanıyorduk (bir sonraki kısımda karşılaştıracağız). Ancak arkada neler dönüyor merak ediyoruz. İşte bunu **pointer** yardımıyla anlayabiliriz. 
 
@@ -251,13 +251,13 @@ son eleman: 30
 
 Biraz kafalar karışmış olabilir. Bu tarz şeylere görsellik katmadan anlamak zordur bilirim. İkinci elemana ulaşmak için adrese 1 eklediğimizde olacak şey böyledir:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/006.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/007.png)
 
 Göreceğimiz gibi 1 eklediğimizde esasen `1*sizeof(int)` demek isteriz. **int** olmasının sebebi dizinin elemanlarının tam sayı olmasıdır. Tam sayı boyutunun 4 bayt olduğundan bahsetmiştik. Yani 4 kutu. 1 eklemek istediğimizde 4 kutu sonraya git demiş oluruz. Yani `sayi_dizisi_ptr` **pointer** değişkeni artık 0x7ffcd4fb6110 adresini depolayacak. Bunu yapma sebebimiz ise diğer elemanın adresine erişmek. Tekrardan 1 eklediğimizde de aynı işlemler uygulanır ve adres 0x7ffcd4fb6114 olur.
 
 Direk olarak 3. elemana erişmek isteseydik `2*sizeof(int)`, yani 2 eleman sonraya git diyebilirdik:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/007.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/008.png)
 
 Bu sefer sonraki 8. kutuya giderek 30 değerinin adresine sahip olurdu.
 
@@ -342,7 +342,7 @@ printf("%d", yeni_sayi_dizisi[1])
 
 30 sonucunu alırız. Çünkü dizimiz artık şu hale gelecektir:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/008.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/009.png)
 
 Dolayısıyla ilk eleman artık 30 olacaktır (başlangıçtan 4 kutu sonrası olarak hayal ediyorduk hatırlayın).
 
@@ -507,7 +507,7 @@ printf("%d\n", **yas_ptr_ptr);
 
 Görsel olarak da eklemiş olayım:
 
-![]({{ site.baseurl }}/assets/img/posts/c-c++-posts/anlayamadiklarimiz-pointer/009.png)
+![]({{ site.baseurl }}/assets/img/posts/c-dilleri-posts/anlayamadiklarimiz-pointer/010.png)
 
 
 ## Kaynaklar
