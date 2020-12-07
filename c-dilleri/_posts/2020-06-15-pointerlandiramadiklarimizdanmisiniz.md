@@ -2,7 +2,7 @@
 layout: post
 image: assets/img/card-img/c-dilleri.png
 title: "Pointer'landıramadıklarımızdan Mısınız?"
-excerpt: "Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararmıyor mu? Bu yazıda, terminalimize biraz renk katacağız."
+excerpt: "C, C++ gibi dillerde bu kavramdan kaçışınız yoktur. O yüzden pointer'ları herkesin anlayabileceği bir seviyeye çekelim."
 toc: true
 ---
 
