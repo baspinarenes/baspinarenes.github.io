@@ -4,12 +4,7 @@ layout: default
 
 <img src="{{ site.url }}/assets/img/logos/logo-{{ page.categories }}.png" width="200" style="margin: 0 auto 20px; display: block;">
 
-{% assign a =  page.title | split: ':' %}
-{% if a[1] != null %}
-<h1>{{a[0]}} :<br>{{a[1]}}</h1>
-{% else %}
-<h1>{{a[0]}}</h1>
-{% endif %}
+<h1>{{page.title }}</h1>
 
 <h6>
     {% assign m = page.date | date: "%-m" %}
