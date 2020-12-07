@@ -1,7 +1,7 @@
 ---
 layout: post
 image: assets/img/card-img/git.png
-title: "Divanu Lügatit Git - 0 : Seriye Giriş"
+title: "Divanu Lügatit Git - 0:<br>Seriye Giriş"
 ---
 
 Git konusunu araştırmaya başladığımda kafam allak bullak olmuştu. Bunun sebebi ise Türkçe yazıların içeriğinin genelde safi bilgi olması ve anlatanın duygularını aktaramaması. Amacım emek harcanmış bu tarz yazıları yargılamak değil, zaten bunun için yeterli kapasitede değilim. Ancak bir okuyucuyum ve bu yazıyı hissetmemi engelliyor ve öğrenmemi zorlaştırıyor. Benim gibi bu zorlukları çekenler içinde kendi Git serime garip bir isimle birlikte başlıyorum. Sıkıcı olmayan ve sizlerle birlikte güzel vakit geçireceğimiz bir seri olmasını ümit ediyorum. Belki de berbat bir şey çıkar ortaya kim bilir ? :)

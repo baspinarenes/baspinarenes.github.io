@@ -1,7 +1,7 @@
 ---
 layout: post
 image: assets/img/card-img/git.png
-title: "Divanu Lügatit Git - 1 : Versiyon Kontrol Sistemide Nesi?"
+title: "Divanu Lügatit Git - 1:<br>Versiyon Kontrol Sistemide Nesi?"
 excerpt: "Seriye başlamaya hazırsak buyrun ilk yazımız. Bu yazıda, Git'in arkasındaki güce yani versiyon kontrol sistemlerine kısa bir göz atacağız."
 toc: true
 ---
