@@ -113,6 +113,12 @@ movies:
     watching-date:   30.11.2020
     cover-img:       /assets/img/movie-img/war-for-the-planet-of-the-apes.jpg
 
+  - name:            "Tomris<br>(2019)"
+    type:            Tarih
+    imdb:            6.4/10
+    watching-date:   25.12.2020
+    cover-img:       /assets/img/movie-img/tomris.jpeg
+
 series:
   - name:            "The Queen's Gambit"
     type:            Drama
