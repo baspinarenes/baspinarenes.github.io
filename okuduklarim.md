@@ -5,8 +5,9 @@ title: Okuduklarım
 
 <blockquote style="text-align: justify;">
     <b>BİLGİLENDİRME:</b> Blogumda kendim için oluşturduğum bölümlerden birisine geldiniz. Eskiden okuduğum kitapları bir kenara bırakarak
-    kütüphanemde bulunan tüm kitapları en baştan okumaya başladım. Bloguma da eklemek istedim. Hem bir yerde kayıtlı
-    olmuş olur hem de ilgilenenler bu listeden tavsiye alabilir.
+    kütüphanemde bulunan tüm kitapları en baştan okumaya başladım. Bloguma da bunların kaydını tutmak istedim.
+    <br><br>
+    Bir dipnot düşmüş olayım. Buraya kitap eklemem, o kitapla ilgili her şeyi beğenmem, benimsediği fikri veyahut ana fikrini tasvip etmem anlamına gelmez. Karşıt fikrimde de olsa okumaktan gocunmam. Çünkü bu sayede farklı açıdan çıkarım yapabilirim ve bakış açılarını hakkında fikir sahibi olabilirim.
 </blockquote>
 
 <div class="book-movie-list-div">

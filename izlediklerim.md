@@ -5,9 +5,9 @@ title: İzlediklerim
 ---
 
 <blockquote style="text-align: justify;">
-    <b>BİLGİLENDİRME:</b> Blogumda kendim için oluşturduğum bölümlerden birisine geldiniz. Eskiden izlediğim filmleri bir kenara bırakarak
-    düzenli olarak dizi ve film izlemeye başladım. Bloguma da eklemek istedim. Hem bir yerde kayıtlı
-    olmuş olur hem de ilgilenenler bu listeden tavsiye alabilir.
+    <b>BİLGİLENDİRME:</b> Blogumda kendim için oluşturduğum bölümlerden birisine geldiniz. Eskiden izlediğim filmleri bir kenara bırakarak düzenli olarak dizi ve film izlemeye başladım. Bir yerde kayıtlı olması adına da bloguma eklemek istedim
+    <br><br>
+    Bir dipnot düşmüş olayım. Buraya dizi/film eklemem her şeyini beğendiğim, benimsediği fikri veyahut içerdiği eylemleri tasvip ettiğim anlamına gelmez. Karşıt fikrimde de olsa izlemekten gocunmam. Çünkü bu sayede farklı açıdan çıkarım yapabilirim ve bakış açılarını hakkında fikir sahibi olabilirim.
 </blockquote>
 
 <h2 style="margin-bottom: 30px;" id="diziler">Diziler</h2>
