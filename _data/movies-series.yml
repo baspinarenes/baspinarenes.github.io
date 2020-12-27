@@ -143,3 +143,9 @@ series:
     imdb:            8.1/10
     watching-date:   24.12.2020
     cover-img:       /assets/img/movie-img/bodyguard.jpg
+
+  - name:            "Bir Başkadır (S1)"
+    type:            Dram
+    imdb:            8.7/10
+    watching-date:   27.12.2020
+    cover-img:       /assets/img/movie-img/bir-baskadir.jpg
