@@ -149,3 +149,9 @@ series:
     imdb:            8.7/10
     watching-date:   27.12.2020
     cover-img:       /assets/img/movie-img/bir-baskadir.jpg
+  
+  - name:            "Lie to Me (S1)"
+    type:            Suç
+    imdb:            8.0/10
+    watching-date:   30.12.2020
+    cover-img:       /assets/img/movie-img/lie-to-me.jpg
