@@ -144,13 +144,13 @@ series:
     watching-date:   24.12.2020
     cover-img:       /assets/img/movie-img/bodyguard.jpg
 
-  - name:            "Bir Başkadır (S1)"
+  - name:            "Bir Başkadır"
     type:            Dram
     imdb:            8.7/10
     watching-date:   27.12.2020
     cover-img:       /assets/img/movie-img/bir-baskadir.jpg
   
-  - name:            "Lie to Me (S1)"
+  - name:            "Lie to Me"
     type:            Suç
     imdb:            8.0/10
     watching-date:   30.12.2020
