@@ -149,6 +149,6 @@ Son olarak şu komutu çalıştıralım:
 $ powerline-daemon --replace
 ```
 
-"Oh be nihayet bitti". Terminali yeniden başlattığınızda her şeyin hazır olduğunu görebilirsiniz.
+Terminali yeniden başlattığınızda her şeyin hazır olduğunu görebilirsiniz.
 
 <img src="{{ site.baseurl }}/assets/img/posts/linux-posts/terminale-renk-katalim/013.png" alt="" style="display: block; margin: 0 auto;"/>
