@@ -34,7 +34,7 @@
   reading-date:     28.08.2020
   cover-img:        /assets/img/book-img/abdulhamid-son-hukumdar.jpg
 
-- name:             "Akıl Haritaları"
+- name:             "<br>Akıl Haritaları"
   type:             Kişisel Gelişim
   author:           Tony Buzan
   reading-date:     13.11.2020
@@ -45,3 +45,9 @@
   author:           Mark Manson
   reading-date:     29.11.2020
   cover-img:        /assets/img/book-img/ustalik-gerektiren-kafaya-takmama-sanati.jpg
+
+- name:             "<br>On Küçük Zenci"
+  type:             Polisiye
+  author:           Agatha Christie
+  reading-date:     15.01.2021
+  cover-img:        /assets/img/book-img/on-kucuk-zenci.jpeg
