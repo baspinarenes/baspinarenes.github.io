@@ -17,13 +17,13 @@ movies:
     watching-date:   24.06.2020
     cover-img:       /assets/img/movie-img/inception.jpg
 
-  - name:            "The Mummy<br>(1999)"
+  - name:            "<br>The Mummy<br>(1999)"
     type:            Macera
     imdb:            7.0/10
     watching-date:   25.06.2020
     cover-img:       /assets/img/movie-img/the-mummy.jpg
 
-  - name:            "The Mummy Returns<br>(2001)"
+  - name:            "<br>The Mummy Returns<br>(2001)"
     type:            Macera
     imdb:            6.3/10
     watching-date:   28.06.2020
@@ -53,19 +53,19 @@ movies:
     watching-date:   02.07.2020
     cover-img:       /assets/img/movie-img/dag-2.jpg
 
-  - name:            "Maskeli Beşler İntikam Peşinde<br>(2005)"
+  - name:            "Maskeli Beşler<br>İntikam Peşinde<br>(2005)"
     type:            Komedi
     imdb:            4.2/10
     watching-date:   03.07.2020
     cover-img:       /assets/img/movie-img/maskeli-besler-intikam-pesinde.jpg
 
-  - name:            "Maskeli Beşler Irak<br>(2007)"
+  - name:            "Maskeli Beşler<br>Irak<br>(2007)"
     type:            Komedi
     imdb:            3.7/10
     watching-date:   04.07.2020
     cover-img:       /assets/img/movie-img/maskeli-besler-irak.jpg
 
-  - name:            "Maskeli Beşler Kıbrıs<br>(2008)"
+  - name:            "Maskeli Beşler<br>Kıbrıs<br>(2008)"
     type:            Komedi
     imdb:            3.0/10
     watching-date:   05.07.2020
@@ -89,7 +89,7 @@ movies:
     watching-date:   09.07.2020
     cover-img:       /assets/img/movie-img/kolpacino.jpg
 
-  - name:            "Kolpaçino: Bomba<br>(2011)"
+  - name:            "Kolpaçino:<br>Bomba<br>(2011)"
     type:            Komedi
     imdb:            5.6/10
     watching-date:   11.07.2020
@@ -113,11 +113,17 @@ movies:
     watching-date:   30.11.2020
     cover-img:       /assets/img/movie-img/war-for-the-planet-of-the-apes.jpg
 
-  - name:            "Tomris<br>(2019)"
+  - name:            "<br>Tomris<br>(2019)"
     type:            Tarih
     imdb:            6.4/10
     watching-date:   25.12.2020
     cover-img:       /assets/img/movie-img/tomris.jpeg
+
+  - name:            "The Lord of The Rings<br>The Fellowship of The Ring<br>(2001)"
+    type:            Fantastik
+    imdb:            8.8/10
+    watching-date:   16.01.2021
+    cover-img:       /assets/img/movie-img/lord-of-the-rings-1.jpeg
 
 series:
   - name:            "The Queen's Gambit"
