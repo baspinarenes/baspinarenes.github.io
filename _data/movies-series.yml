@@ -125,27 +125,39 @@ movies:
     watching-date:   16.01.2021
     cover-img:       /assets/img/movie-img/lord-of-the-rings-1.jpeg
 
+  - name:            "The Lord of The Rings<br>The Two Towers<br>(2002)"
+    type:            Fantastik
+    imdb:            8.7/10
+    watching-date:   18.01.2021
+    cover-img:       /assets/img/movie-img/lord-of-the-rings-2.jpeg
+
+  - name:            "The Lord of The Rings<br>The Return of the King<br>(2003)"
+    type:            Fantastik
+    imdb:            8.9/10
+    watching-date:   19.01.2021
+    cover-img:       /assets/img/movie-img/lord-of-the-rings-3.jpeg
+
 series:
   - name:            "The Queen's Gambit"
-    type:            Drama
+    type:            Dram
     imdb:            8.8/10
     watching-date:   11.10.2020
     cover-img:       /assets/img/movie-img/the-queens-gambit.png
   
   - name:            "Sherlock Holmes"
-    type:            Polisiye
+    type:            Suç/Polisiye
     imdb:            9.1/10
     watching-date:   09.12.2020
     cover-img:       /assets/img/movie-img/sherlock-holmes.jpg
 
   - name:            "The Capture"
-    type:            Suç
+    type:            Suç/Polisiye
     imdb:            7.8/10
     watching-date:   23.12.2020
     cover-img:       /assets/img/movie-img/the-capture.jpg
 
   - name:            "Bodyguard"
-    type:            Suç
+    type:            Suç/Polisiye
     imdb:            8.1/10
     watching-date:   24.12.2020
     cover-img:       /assets/img/movie-img/bodyguard.jpg
@@ -157,7 +169,13 @@ series:
     cover-img:       /assets/img/movie-img/bir-baskadir.jpg
   
   - name:            "Lie to Me"
-    type:            Suç
+    type:            Suç/Polisiye
     imdb:            8.0/10
     watching-date:   30.12.2020
     cover-img:       /assets/img/movie-img/lie-to-me.jpg
+
+  - name:            "The Mentalist (İzleniyor)"
+    type:            Suç/Polisiye
+    imdb:            8.1/10
+    watching-date:   22.01.2021
+    cover-img:       /assets/img/movie-img/the-mentalist.jpeg
