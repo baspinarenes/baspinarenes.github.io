@@ -137,7 +137,7 @@ movies:
     watching-date:   19.01.2021
     cover-img:       /assets/img/movie-img/lord-of-the-rings-3.jpeg
     
-   - name:            "1917<br>(2019)"
+  - name:            "1917<br>(2019)"
     type:            Savaş/Dram
     imdb:            8.3/10
     watching-date:   16.03.2021
