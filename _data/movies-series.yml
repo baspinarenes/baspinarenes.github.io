@@ -136,6 +136,13 @@ movies:
     imdb:            8.9/10
     watching-date:   19.01.2021
     cover-img:       /assets/img/movie-img/lord-of-the-rings-3.jpeg
+    
+   - name:            "1917<br>(2019)"
+    type:            Savaş/Dram
+    imdb:            8.3/10
+    watching-date:   16.03.2021
+    cover-img:       /assets/img/movie-img/1917.jpg
+   
 
 series:
   - name:            "The Queen's Gambit"
@@ -177,5 +184,5 @@ series:
   - name:            "The Mentalist"
     type:            Suç/Polisiye
     imdb:            8.1/10
-    watching-date:   22.01.2021
+    watching-date:   02.03.2021
     cover-img:       /assets/img/movie-img/the-mentalist.jpeg
