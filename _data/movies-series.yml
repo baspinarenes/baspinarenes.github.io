@@ -142,7 +142,97 @@ movies:
     imdb:            8.3/10
     watching-date:   16.03.2021
     cover-img:       /assets/img/movie-img/1917.jpg
+
+  - name:            "<br>The Shawshank Redemption<br>(1994)"
+    type:            Dram
+    imdb:            9.2/10
+    watching-date:   18.03.2021
+    cover-img:       /assets/img/movie-img/the-shawshank-redemption.jpg
    
+  - name:            "<br>Platform<br>(2019)"
+    type:            Bilim Kurgu
+    imdb:            7.0/10
+    watching-date:   20.03.2021
+    cover-img:       /assets/img/movie-img/platform.jpg
+
+  - name:            "Mandela:<br>Long Walk to Freedom<br>(2013)"
+    type:            Biyografi
+    imdb:            7.1/10
+    watching-date:   22.03.2021
+    cover-img:       /assets/img/movie-img/mandela.jpg
+  
+  - name:            "The Boy Who<br>Harnessed the Wind<br>(2019)"
+    type:            Biyografi
+    imdb:            7.6/10
+    watching-date:   26.03.2021
+    cover-img:       /assets/img/movie-img/the-boy-who-harnessed-the-wind.jpg
+
+  - name:            "<br>3 Idiots<br>(2009)"
+    type:            Komedi/Drama
+    imdb:            8.4/10
+    watching-date:   01.04.2021
+    cover-img:       /assets/img/movie-img/3-idiots.jpg
+
+  - name:            "<br>Jurassic Park I<br>(1993)"
+    type:            Bilim Kurgu
+    imdb:            8.1/10
+    watching-date:   02.04.2021
+    cover-img:       /assets/img/movie-img/jurassic-park-1.jpg
+
+  - name:            "The Lost World:<br>Jurassic Park II<br>(1997)"
+    type:            Bilim Kurgu
+    imdb:            6.6/10
+    watching-date:   02.04.2021
+    cover-img:       /assets/img/movie-img/jurassic-park-2.jpg
+
+  - name:            "<br>Jurassic Park III<br>(2001)"
+    type:            Bilim Kurgu
+    imdb:            5.9/10
+    watching-date:   02.04.2021
+    cover-img:       /assets/img/movie-img/jurassic-park-3.jpg
+
+  - name:            "<br>Hababam Sınıfı<br>(1975)"
+    type:            Komedi
+    imdb:            9.3/10
+    watching-date:   03.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi.jpg
+  
+  - name:            "Hababam Sınıfı<br>Sınıfta Kaldı<br>(1976)"
+    type:            Komedi
+    imdb:            9.0/10
+    watching-date:   03.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-sinifta-kaldi.jpg
+
+  - name:            "Hababam Sınıfı<br>Uyanıyor<br>(1976)"
+    type:            Komedi
+    imdb:            8.8/10
+    watching-date:   03.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-uyaniyor.jpg
+
+  - name:            "Hababam Sınıfı<br>Tatilde<br>(1978)"
+    type:            Komedi
+    imdb:            8.7/10
+    watching-date:   03.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-tatilde.jpg
+
+  - name:            "Hababam Sınıfı<br>Merhaba<br>(2004)"
+    type:            Komedi
+    imdb:            3.1/10
+    watching-date:   05.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-merhaba.jpg
+
+  - name:            "Hababam Sınıfı<br>Askerde<br>(2005)"
+    type:            Komedi
+    imdb:            3.1/10
+    watching-date:   06.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-askerde.jpg
+
+  - name:            "Hababam Sınıfı<br>Üç Buçuk<br>(2005)"
+    type:            Komedi
+    imdb:            2.9/10
+    watching-date:   07.04.2021
+    cover-img:       /assets/img/movie-img/hababam-sinifi-uc-bucuk.jpg
+
 
 series:
   - name:            "The Queen's Gambit"
