@@ -5,9 +5,18 @@ title: İzlediklerim
 ---
 
 <blockquote style="text-align: justify;">
-    <b>BİLGİLENDİRME:</b> Blogumda kendim için oluşturduğum bölümlerden birisine geldiniz. Eskiden izlediğim filmleri bir kenara bırakarak düzenli olarak dizi ve film izlemeye başladım. Bir yerde kayıtlı olması adına da bloguma eklemek istedim
+    <b>BİLGİLENDİRME:</b> Blogumda kendim için oluşturduğum bölümlerden birisine geldiniz. Eskiden izlediğim filmleri bir kenara bırakarak düzenli olarak dizi ve film izlemeye başladım. Bir yerde kayıtlı olması adına da bloguma eklemek istedim.
     <br><br>
-    Bir dipnot düşmüş olayım. Buraya dizi/film eklemem her şeyini beğendiğim, benimsediği fikri veyahut içerdiği eylemleri tasvip ettiğim anlamına gelmez. Karşıt fikrimde de olsa izlemekten gocunmam. Çünkü bu sayede farklı açıdan çıkarım yapabilirim ve bakış açılarını hakkında fikir sahibi olabilirim.
+    Bir dipnot düşmüş olayım. Buraya dizi/film eklemem her şeyini beğendiğim, benimsediği fikri veyahut içerdiği eylemleri tasvip ettiğim anlamına gelmez. Karşıt fikrimde de olsa izlemekten gocunmam. Çünkü bu sayede farklı açıdan çıkarım yapabilirim ve bakış açılarını hakkında fikir sahibi olabilirim. IMDB denen puan saçmalığını da ciddiye pek almam, herkesin puanı kendine :)
+    <br><br>
+    <span style="text-align: center;">
+        ★ = Kötü<br>
+        ★★ = Orta<br>
+        ★★★ = İyi<br>
+        ★★★★ = Çok İyi<br>
+        ★★★★★ = Fevkalade<br>
+        ★★★★★★ = Fevkaladenin Fevkinde<br>
+    </span>
 </blockquote>
 
 <h2 style="margin-bottom: 30px;" id="diziler">Diziler</h2>
@@ -18,7 +27,7 @@ title: İzlediklerim
             <img src="{{ serie.cover-img }}" alt="">
             <div class="item-info-div">
                 <b style="font-size: 15px; margin-bottom: 2px;">{{ serie.name }}</b>
-                <p>{{ serie.imdb }}</p>
+                <p>{{ serie.score }}</p>
                 <span class="item-type">{{ serie.type }}</span>
                 <p>Bitiş Tarihi: {{ serie.watching-date }}</p>
             </div>
@@ -34,7 +43,7 @@ title: İzlediklerim
             <img src="{{ movie.cover-img }}" alt="">
             <div class="item-info-div">
                 <b style="font-size: 15px; margin-bottom: 2px;">{{ movie.name }}</b>
-                <p>{{ movie.imdb }}</p>
+                <p>{{ movie.score }}</p>
                 <span class="item-type">{{ movie.type }}</span>
                 <p>Bitiş Tarihi: {{ movie.watching-date }}</p>
             </div>
