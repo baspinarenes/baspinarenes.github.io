@@ -9,14 +9,12 @@ title: İzlediklerim
     <br><br>
     Bir dipnot düşmüş olayım. Buraya dizi/film eklemem her şeyini beğendiğim, benimsediği fikri veyahut içerdiği eylemleri tasvip ettiğim anlamına gelmez. Karşıt fikrimde de olsa izlemekten gocunmam. Çünkü bu sayede farklı açıdan çıkarım yapabilirim ve bakış açılarını hakkında fikir sahibi olabilirim. IMDB denen puan saçmalığını da ciddiye pek almam, herkesin puanı kendine :)
     <br><br>
-    <span style="text-align: center;">
-        ★ = Kötü<br>
-        ★★ = Orta<br>
-        ★★★ = İyi<br>
-        ★★★★ = Çok İyi<br>
-        ★★★★★ = Fevkalade<br>
-        ★★★★★★ = Fevkaladenin Fevkinde<br>
-    </span>
+    ★ = Kötü<br>
+    ★★ = Orta<br>
+    ★★★ = İyi<br>
+    ★★★★ = Çok İyi<br>
+    ★★★★★ = Fevkalade<br>
+    ★★★★★★ = Fevkaladenin Fevkinde<br>
 </blockquote>
 
 <h2 style="margin-bottom: 30px;" id="diziler">Diziler</h2>

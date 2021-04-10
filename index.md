@@ -6,6 +6,8 @@ title: Anasayfa
 excerpt: Bir garip, gayriresmi ve nereden çıktığı belli olmayan blogumsu.
 ---
 
+<div style="text-align: center; color: red; margin-bottom: 20px;">SİTE KISA SÜRE İÇERİSİNDE YENİLENECEKTİR.</div>
+
 # Girizgah
 
 Merhabalar, ben Enes. Kocaeli Üniversitesi Bilgisayar Mühendisliği dördüncü sınıfım. Kısaca bahsetmem gerekirse; tek başına vakit geçirmeyi, polisiye romanlara dalmayı ve öğrendiklerini paylaşmayı seven birisiyim. Aslında bende kendimi yeni yeni tanıyorum. Örneğin üniversitenin ilk üç senesi elle tutulur hiçbir şey yapmamış olduğumu yeni farkettim. Bunu farkettikten sonra güzel bir planlama yaptım. Allah tamamlamayı nasip ederse de planlamamın sonucunda hedeflerimi gerçekleştirmek istiyorum. Aynı zamanda savunma sanayiye ilgi duyuyorum. Özellikle inansız hava araçlarına. İlgilendiğim iki alanın kesişimi ise ileride çalışmak istediğim işi özetliyor.
