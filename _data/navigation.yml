@@ -1,10 +1,8 @@
-- name: Anasayfa
+- name: Ana Sayfa
   link: /
 - name: Blog
-  link: /blog
+  link: /blog.html
+- name: Projeler
+  link: /projects.html
 - name: Özgeçmiş
-  link: https://drive.google.com/file/d/1nqB3U8FfCYZHBZIp5vep4bYpyQTpnstM/view?usp=sharing
-- name: Okuduklarım
-  link: /okuduklarim
-- name: İzlediklerim
-  link: /izlediklerim
+  link: /cv.html

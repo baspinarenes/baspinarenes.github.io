@@ -2,53 +2,134 @@
 layout: default
 title: Blog
 ---
-
-<h1 class="page-title">
-    <div class="page-title__text">
-        Yazılar
+<div class="page-cover d-flex flex-column justify-content-center border-bottom p-5">
+    <h1 class="page-title text-center">
+        Blog
+    </h1>
+    <p>Yeni şeyler öğrenmeyi çok seviyorum. Bunun için motivasyon kaynağım, bildiklerimi başka insanlara da
+        içeriğe
+        renk katarak aktarmak. Herkesin öğrenme ve öğretme yöntemi elbette farklılık gösterebilir ancak resmi
+        bir
+        dille yazılan yazıların öğretme gayesinden uzak kaldığını düşünüyorum. Makul miktarda samimi bir dille
+        aktarmak ve görselliğini mümkün mertebe yüksek tutmak öğrenmeyi kolaylaştırıyor. Yazdıklarım,
+        derlediklerim
+        ve çevirdiğim yazıları burada sizlerle paylaşıyor olacağım. Ara sıra kötü espriler de sizleri bekliyor
+    </p>
+    <p>
+        Ben nacizane öğrendiklerimi paylaşacağım dolayısıyla benimle çelişse de çok sevdiğim şu sözü paylaşmak
+        istiyorum, kim bilir belki
+        bazılarınız bu sebepten blog tutmaya karar verir.
+    </p>
+    <blockquote>
+        <p>
+            Bir mum, diğer mumu tutuşturmakla ışığından bir şey kaybetmez.
+            <strong>- Mevlana Celaleddin Rumi</strong>
+        </p>
+    </blockquote>
+    <div class="scroll-arrow">
+        <div class="arrow"></div>
+        <div class="arrow"></div>
+        <div class="arrow"></div>
     </div>
-</h1>
+</div>
 
-<div class="tags">
-    {% for tag in site.data.tags %}
-        {% assign posts = site.categories[tag.name] | reverse %}
-        <div class="tag">
-            <p>#{{ tag.name }}</p>
-            <i class="tag-icon {{ tag.icon-class }}"></i>
-        </div>
-        <div class="posts">
-            {% for post in posts %}
-            <div class="post">                
-                <a class="post-name" href="{{ post.url }}">
-                    {% if post.title contains "<br>" %}
-                        {% assign a =  post.title | split: "<br>" %}
-                        {{ a[0] }} {{ a[1] }}
-                    {% else %}
-                        {{ post.title }}
-                    {% endif %}
-                </a>
-                <div class="name-date-line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
-                <div class="post-date">
-                    {% assign m = post.date | date: "%-m" %}
-                    {{ post.date | date: "%-d" }}
-                    {% case m %}
-                    {% when '1' %}Oca
-                    {% when '2' %}Şub
-                    {% when '3' %}Mar
-                    {% when '4' %}Nis
-                    {% when '5' %}May
-                    {% when '6' %}Haz
-                    {% when '7' %}Tem
-                    {% when '8' %}Ağu
-                    {% when '9' %}Eyl
-                    {% when '10' %}Eki
-                    {% when '11' %}Kas
-                    {% when '12' %}Ara
-                    {% endcase %}
-                    {{ post.date | date: "%Y" }}
-                </div>
+<div class="page-content p-5">
+    <div class="post-categories">
+        <div class="post-category">
+            <div class="post-category-header" href="" style="background-color: #e44d26;">
+                <h2 class="post-category-header-title">
+                    HTML5
+                </h2>
+                <img class="post-category-header-img" src="images/post-category-logos/6.svg" alt="">
             </div>
-            {% endfor %}
+            <ul class="post-list">
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+            </ul>
         </div>
-    {% endfor %}
+        <div class="post-category">
+            <div class="post-category-header" href="" style="background-color: #0086d4;">
+                <h2 class="post-category-header-title">
+                    CSS3
+                </h2>
+                <img class="post-category-header-img" src="images/post-category-logos/7.svg" alt="">
+            </div>
+            <ul class="post-list">
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+            </ul>
+        </div>
+        <div class="post-category">
+            <div class="post-category-header" href="" style="background-color: #f7df1e;">
+                <h2 class="post-category-header-title">
+                    Javascript
+                </h2>
+                <img class="post-category-header-img" src="images/post-category-logos/8.svg" alt="">
+            </div>
+            <ul class="post-list">
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+            </ul>
+        </div>
+        <div class="post-category">
+            <div class="post-category-header" href="" style="background-color: #673ab7;">
+                <h2 class="post-category-header-title">
+                    Bootstrap
+                </h2>
+                <img class="post-category-header-img" src="images/post-category-logos/9.svg" alt="">
+            </div>
+            <ul class="post-list">
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+                <li class="post">
+                    <a href="post.html" class="post-title">
+                        Deneme Post Yazısı
+                    </a>
+                    <hr class="post-divider">
+                    <span class="post-date">22 Nis 2021</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
