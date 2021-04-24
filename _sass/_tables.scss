@@ -1,0 +1,15 @@
+.functions-table {
+    text-align: center;
+    
+    & > thead > tr > th {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+    }
+    & > tbody {
+        border: 1px solid #ccc;
+
+        td {
+            border: 1px solid #ccc;
+        }
+    }
+}
