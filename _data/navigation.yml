@@ -1,8 +1,8 @@
 - name: Ana Sayfa
   link: /
 - name: Blog
-  link: /blog.html
+  link: /blog
 - name: Projeler
-  link: /projects.html
+  link: /projects
 - name: Özgeçmiş
-  link: /cv.html
+  link: /cv
