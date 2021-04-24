@@ -4,6 +4,8 @@
 @import "shortcuts";
 @import "custom-elements";
 @import "scroll-down-arrows";
+@import "syntax-highlight";
+@import "tables";
 
 .nav-link {
   &:hover {
@@ -45,13 +47,19 @@
       border-radius: 10px;
       margin-bottom: 30px;
       color: white;
-
-      a {
-        color: black;
-      }
+      list-style: 1.5rem;
 
       p {
         margin: 0;
+      }
+
+      .warning-link {
+        color: black !important;
+
+        &:hover {
+          border-bottom: 2px solid;
+          text-decoration: none;
+        }
       }
     }
 
@@ -136,6 +144,7 @@
           border-radius: inherit;
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
+          border-right: 1px solid #dadce0;
           margin: 0;
           display: block;
         }
@@ -168,7 +177,6 @@
               color: white;
               margin: 0 5px 6px 0;
             }
-            
           }
 
           .project-title {
@@ -178,7 +186,6 @@
 
             &:hover {
               transition: 300ms all;
-              text-decoration: underline;
             }
           }
 
@@ -312,7 +319,7 @@
   font-size: 0.8rem;
   font-weight: 500;
   display: inline-block;
-  padding: 5px 15px;
+  padding: 8px 15px;
   border-radius: 6px;
   margin: 3px 1px;
 }
@@ -352,7 +359,7 @@
 }
 
 @media screen and (max-width: 1250px) {
-   .site-footer {
+  .site-footer {
     position: static;
     border: 1px solid #dee2e6;
 
@@ -369,9 +376,7 @@
       }
 
       &-item {
-        
-          font-size: 2.1rem !important;
-        
+        font-size: 2.1rem !important;
       }
     }
   }
@@ -382,20 +387,17 @@
     width: 150px !important;
   }
 
-  
   .index-title {
     font-size: 9vw;
   }
 }
 
-
 @media screen and (max-width: 750px) {
-
   .site-footer {
     position: static;
     bottom: 10;
     left: 0;
-    width: 100%;  
+    width: 100%;
   }
 
   .project {
@@ -405,5 +407,11 @@
       border-bottom-left-radius: 0 !important;
       border-top-right-radius: 10px !important;
     }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  html {
+    font-size: 13px !important;
   }
 }

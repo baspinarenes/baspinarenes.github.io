@@ -40,11 +40,11 @@
     color: white !important;
 }
 
-.clr-c, .clr-css {
+.clr-cpp, .clr-css {
     color: #0086d4 !important;
 }
 
-.bg-color-c, .bg-color-css {
+.bg-color-cpp, .bg-color-css {
     background-color: #0086d4 !important;
     color: white !important;
 }
@@ -83,6 +83,11 @@
 .bg-color-sass {
     background-color: #c69 !important;
     color: white !important;
+}
+
+.bg-color-bem {
+    background-color: black;
+    color: white;
 }
 
 /************* 2 - Font Size *************/
