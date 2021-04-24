@@ -1,0 +1,26 @@
+title: Enes Başpınar
+description: Bu blog, iyidir hoşdur ancak hiç bir şekilde profesyonellik içermemektedir.
+
+email: enesbaspinar07@gmail.com
+twitter_username: enesbaspinar0
+github_username:  baspinarenes
+linkedin_username: enesbaspinar
+
+kramdown:
+  input:          GFM
+  syntax_highlighter: rouge
+
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+permalink: pretty
+permalink: /blog/:categories/:title
