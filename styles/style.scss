@@ -17,7 +17,7 @@
   margin-top: 65px;
 
   .page-cover {
-    height: calc(100vh - 65px);
+    min-height: calc(100vh - 65px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,18 +116,23 @@
     }
 
     .projects {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
       .project {
         display: block;
         position: relative;
         margin-bottom: 20px;
         min-height: 200px;
-        width: 100%;
+        width: fit-content;
         border: 1px solid #dadce0;
         border-radius: 10px;
         display: flex;
         justify-content: space-between;
 
         &-img {
+          max-width: 430px;
           border-radius: inherit;
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
@@ -136,10 +141,11 @@
         }
 
         &-content {
-          width: 100%;
+          max-width: 430px;
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
           padding: 20px 30px;
 
           .project-github {
@@ -166,9 +172,8 @@
           }
 
           .project-title {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             padding-bottom: 3px;
-            color: black;
             border: 0;
 
             &:hover {
@@ -222,8 +227,7 @@
       }
 
       .section {
-        width: 95%;
-        margin: 0 auto;
+        width: 100%;
 
         h4 {
           text-align: start;
@@ -373,30 +377,33 @@
   }
 }
 
-@media screen and (max-width: 750px) {
-  html {
-    font-size: 13px !important;
-  }
-
-  .site-footer {
-    position: static;
-    bottom: 10;
-    left: 0;
-    width: 100%;
-
-  
-  }
-
-  .project {
-    flex-direction: column;
-  }
-}
-
 @media screen and (max-width: 780px) {
   .profile-photo {
     width: 150px !important;
   }
 
-  .techs {
+  
+  .index-title {
+    font-size: 9vw;
+  }
+}
+
+
+@media screen and (max-width: 750px) {
+
+  .site-footer {
+    position: static;
+    bottom: 10;
+    left: 0;
+    width: 100%;  
+  }
+
+  .project {
+    flex-direction: column;
+
+    &-img {
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 10px !important;
+    }
   }
 }

@@ -12,7 +12,7 @@ nav {
 h1 {
   font-size: 4rem;
   font-weight: 600;
-  margin: 20px 0 50px;
+  margin: 0 0 20px;
 }
 
 h2 {
@@ -110,7 +110,7 @@ code {
   border-radius: 6px;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 780px) {
   html {
     font-size: 13px !important;
   }
