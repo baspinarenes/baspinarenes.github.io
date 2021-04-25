@@ -103,8 +103,6 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github){
 }
 
 .navbar-brand{
-  background-color: black !important;
-
   &:hover {
     background-color: rgb(58, 134, 255) !important;
   }

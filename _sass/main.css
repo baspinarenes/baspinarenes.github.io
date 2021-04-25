@@ -253,10 +253,6 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github):hove
           transition-duration: 300ms;
 }
 
-.navbar-brand {
-  background-color: black !important;
-}
-
 .navbar-brand:hover {
   background-color: #3a86ff !important;
 }
