@@ -7,6 +7,6 @@ title: Ana Sayfa
     <h1 class="page-title index-title text-center">
         Selam, ben <span class="clr-blue">Enes</span>.
         <br><br>
-        Blogumun yeni hali şu sıralar test aşamasında.
+        Test aşamasında olan bloguma hoşgeldiniz.
     </h1>
 </div>
