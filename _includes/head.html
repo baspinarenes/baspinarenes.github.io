@@ -3,25 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Twitter Cards - Start -->
-    <meta name="twitter:site" content="@{{ site.twitter_username }}">
-    <meta name="twitter:creator" content="@{{ site.twitter_username }}">
-    <meta name="twitter:title" content="{{ page.title }}">
-
-    {% if page.summary %}
-    <meta name="twitter:description" content="{{ page.summary }}">
-    {% else %}
-    <meta name="twitter:description" content="{{ site.description }}">
-    {% endif %}
-
-    {% if page.categories %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://{{ site.url }}/assets/img/twitter-card/{{ page.categories }}.png">
-    {% else %}
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="https://{{ site.url }}/{{ site.title_image }}">
-    {% endif %}
-    <!-- Twitter Cards - End -->
+    {% include twitter-card.html %}
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
