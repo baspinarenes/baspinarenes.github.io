@@ -15,5 +15,9 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="\assets\css\style.css">
 
+    {% if jekyll.environment == 'production' %}
+    {% include analytics.html %}
+    {% endif %}
+
     <title>{{ page.title }} | Enes Başpınar</title>
 </head>
