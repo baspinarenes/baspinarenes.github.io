@@ -254,11 +254,11 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github):hove
 }
 
 .navbar-brand {
-  background-color: black;
+  background-color: black !important;
 }
 
 .navbar-brand:hover {
-  background-color: #3a86ff;
+  background-color: #3a86ff !important;
 }
 
 img {
@@ -486,7 +486,7 @@ pre .lineno {
 }
 
 .nav-link:hover {
-  border-bottom: 2px solid;
+  border-bottom: 3px solid #3a86ff;
   padding: 7px;
 }
 

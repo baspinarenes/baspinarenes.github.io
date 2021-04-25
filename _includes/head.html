@@ -14,12 +14,12 @@
     <meta name="twitter:description" content="{{ site.description }}">
     {% endif %}
 
-    {% if page.image %}
+    {% if page.categories %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
+    <meta name="twitter:image" content="https://{{ site.url }}/assets/img/twitter-card/{{ page.categories }}.png">
     {% else %}
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="{{ site.title_image }}">
+    <meta name="twitter:image" content="https://{{ site.url }}/{{ site.title_image }}">
     {% endif %}
     <!-- Twitter Cards - End -->
 
