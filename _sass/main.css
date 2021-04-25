@@ -933,6 +933,20 @@ pre .lineno {
   }
 }
 
+@media screen and (max-width: 950px) {
+  .project {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .project-img {
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 10px !important;
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+
 @media screen and (max-width: 780px) {
   .profile-photo {
     width: 150px !important;
@@ -948,16 +962,6 @@ pre .lineno {
     bottom: 10;
     left: 0;
     width: 100%;
-  }
-  .project {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
-  .project-img {
-    border-bottom-left-radius: 0 !important;
-    border-top-right-radius: 10px !important;
   }
 }
 

@@ -382,6 +382,18 @@
   }
 }
 
+@media screen and (max-width: 950px) {
+  .project {
+    flex-direction: column;
+
+    &-img {
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 10px !important;
+      border-bottom: 1px solid #dee2e6;
+    }
+  }
+}
+
 @media screen and (max-width: 780px) {
   .profile-photo {
     width: 150px !important;
@@ -398,15 +410,6 @@
     bottom: 10;
     left: 0;
     width: 100%;
-  }
-
-  .project {
-    flex-direction: column;
-
-    &-img {
-      border-bottom-left-radius: 0 !important;
-      border-top-right-radius: 10px !important;
-    }
   }
 }
 
