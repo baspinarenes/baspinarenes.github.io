@@ -1,0 +1,31 @@
+- title: Todo App
+  desc: Javascript'e aşinalık kazanmak ve günlük olarak kullanmak adına basit bir todo app yaptım. Verileri localStorage kullanarak tarayıcıda depoladım.
+  img: /assets/img/projects/todo-app.png
+  date: 27.04.2021
+  link: https://baspinarenes.github.io/todo-app/
+  github-link: https://github.com/baspinarenes/todo-app
+  tags: [HTML, CSS, SASS, Javascript]
+
+- title: LinkedIn Homepage Clone
+  desc: Linkedin ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Geliştirme esnasında BEM metodolojisini uyguladım ve SASS'ı ilk kez deneyimledim. Önceki projeye kıyasla kendimi denemek için Bootstrap kullanmadım.
+  img: /assets/img/projects/linkedin-clone.png
+  date: 21.04.2021
+  link: https://baspinarenes.github.io/linkedin-clone/
+  github-link: https://github.com/baspinarenes/linkedin-clone
+  tags: [HTML, CSS, SASS, BEM]
+
+- title: Instagram Homepage Clone
+  desc: Instagram ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Bootstrap'in grid yapısı gibi nimetlerini kullandım.
+  img: /assets/img/projects/instagram-clone.png
+  date: 16.04.2021
+  link: https://baspinarenes.github.io/instagram-clone/
+  github-link: https://github.com/baspinarenes/instagram-clone
+  tags: [HTML, CSS, BEM, Bootstrap]
+
+- title: Google Homepage Clone
+  desc: Google ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Geliştirme esnasında BEM metodolojisini öğrenerek uyguladım.
+  img: /assets/img/projects/google-clone.png
+  date: 09.04.2021
+  link: https://baspinarenes.github.io/google-clone/
+  github-link: https://github.com/baspinarenes/google-clone
+  tags: [HTML, CSS, BEM]

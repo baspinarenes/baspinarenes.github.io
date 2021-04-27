@@ -18,58 +18,24 @@ title: Projeler
 
 <div class="page-content p-4 p-sm-5">
     <ul class="projects">
+        {% for project in site.data.projects %}
         <li class="project">
-            <img src="/assets/img/projects/linkedin-clone.png" alt="" class="project-img">
+            <img src="{{ project.img }}" alt="" class="project-img">
             <div class="project-content">
-                <a href="https://github.com/baspinarenes/linkedin-clone" class="project-github">
+                <a href="{{ project.github-link }}" class="project-github">
                     <i class="fab fa-github"></i>
                 </a>
-                <a class="project-title" href="https://baspinarenes.github.io/linkedin-clone/">LinkedIn Homepage Clone</a>
+                <a class="project-title" href="{{ project.link }}">{{ project.title }}</a>
                 <p class="project-desc">
-                    Linkedin ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Geliştirme esnasında BEM metodolojisini uyguladım ve SASS'ı ilk kez deneyimledim. Önceki projeye kıyasla kendimi denemek için Bootstrap kullanmadım. (21.04.2021)
+                    {{ project.desc }} ({{ project.date }})
                 </p>
                 <ul class="project-tags">
-                    <li class="tag bg-color-html">HTML</li>
-                    <li class="tag bg-color-css">CSS</li>
-                    <li class="tag bg-color-sass">SASS</li>
-                    <li class="tag bg-color-bem">BEM</li>
+                    {% for tag in project.tags %}
+                    <li class="tag bg-color-{{ tag | downcase }}">{{ tag }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         </li>
-        <li class="project">
-            <img src="/assets/img/projects/instagram-clone.png" alt="" class="project-img">
-            <div class="project-content">
-                <a href="https://github.com/baspinarenes/instagram-clone" class="project-github">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a class="project-title" href="https://baspinarenes.github.io/instagram-clone/">Instagram Homepage Clone</a>
-                <p class="project-desc">
-                    Instagram ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Bootstrap'in grid yapısı gibi nimetlerini kullandım. (16.04.2021)
-                </p>
-                <ul class="project-tags">
-                    <li class="tag bg-color-html">HTML</li>
-                    <li class="tag bg-color-css">CSS</li>
-                    <li class="tag bg-color-bem">BEM</li>
-                    <li class="tag bg-color-bootstrap">Bootstrap</li>
-                </ul>
-            </div>
-        </li>
-        <li class="project">
-            <img src="/assets/img/projects/google-clone.png" alt="" class="project-img">
-            <div class="project-content">
-                <a href="https://github.com/baspinarenes/google-clone" class="project-github">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a class="project-title" href="https://baspinarenes.github.io/google-clone/">Google Homepage Clone</a>
-                <p class="project-desc">
-                    Google ana sayfasını HTML ve CSS ile responsive bir şekilde tasarladım. Geliştirme esnasında BEM metodolojisini öğrenerek uyguladım. (09.04.2021)
-                </p>
-                <ul class="project-tags">
-                    <li class="tag bg-color-html">HTML</li>
-                    <li class="tag bg-color-css">CSS</li>
-                    <li class="tag bg-color-bem">BEM</li>
-                </ul>
-            </div>
-        </li>
+        {% endfor %}
     </ul>
 </div>
