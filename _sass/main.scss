@@ -383,15 +383,13 @@
 }
 
 @media screen and (max-width: 900px) {
-  .projects {
-    .project {
-      flex-direction: column;
+  .project {
+    flex-direction: column;
 
-      &-img {
-        border-bottom-left-radius: 0 !important;
-        border-top-right-radius: 10px !important;
-        border-bottom: 1px solid #dee2e6;
-      }
+    &-img {
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 10px !important;
+      border-bottom: 1px solid #dee2e6;
     }
   }
 }

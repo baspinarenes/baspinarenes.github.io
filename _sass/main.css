@@ -930,13 +930,13 @@ pre .lineno {
 }
 
 @media screen and (max-width: 900px) {
-  .projects .project {
+  .project {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .projects .project-img {
+  .project-img {
     border-bottom-left-radius: 0 !important;
     border-top-right-radius: 10px !important;
     border-bottom: 1px solid #dee2e6;
