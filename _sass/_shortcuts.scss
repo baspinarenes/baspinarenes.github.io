@@ -1,103 +1,116 @@
-
 /************* 1 - Colors *************/
 
 .clr-blue {
-    color: rgb(72, 103, 255);
+  color: rgb(72, 103, 255);
 }
 
 .bg-color-blue {
-    background-color: rgb(72, 103, 255);
+  background-color: rgb(72, 103, 255);
 }
 
 .clr-dgray {
-    color: rgb(38, 39, 40) !important;
+  color: rgb(38, 39, 40) !important;
 }
 
 .clr-ubuntu {
-    color: #f02e00 !important;
+  color: #f02e00 !important;
 }
 
 .bg-color-ubuntu {
-    background-color: #f02e00 !important;
-    color: white !important;
+  background-color: #f02e00 !important;
+  color: white !important;
 }
 
 .clr-python {
-    color: #3872a1 !important;
+  color: #3872a1 !important;
 }
 
 .bg-color-python {
-    background-color: #3872a1 !important;
-    color: white !important;
+  background-color: #3872a1 !important;
+  color: white !important;
 }
 
 .clr-git {
-    color: #fc8363 !important;
+  color: #fc8363 !important;
 }
 
 .bg-color-git {
-    background-color: #fc8363 !important;
-    color: white !important;
+  background-color: #fc8363 !important;
+  color: white !important;
 }
 
-.clr-cpp, .clr-css {
-    color: #0086d4 !important;
+.clr-cpp,
+.clr-css {
+  color: #0086d4 !important;
 }
 
-.bg-color-cpp, .bg-color-css {
-    background-color: #0086d4 !important;
-    color: white !important;
+.bg-color-cpp,
+.bg-color-css {
+  background-color: #0086d4 !important;
+  color: white !important;
 }
 
 .clr-html {
-    color: #e44d26 !important;
+  color: #e44d26 !important;
 }
 
 .bg-color-html {
-    background-color: #e44d26 !important;
-    color: white !important;
+  background-color: #e44d26 !important;
+  color: white !important;
 }
 
 .clr-javascript {
-    color: #f7df1e !important;
+  color: #f7df1e !important;
 }
 
 .bg-color-javascript {
-    background-color: #f7df1e !important;
-    color: white !important;
+  background-color: #f7df1e !important;
+  color: white !important;
 }
 
 .clr-bootstrap {
-    color: #673ab7 !important;
+  color: #673ab7 !important;
 }
 
 .bg-color-bootstrap {
-    background-color: #673ab7 !important;
-    color: white !important;
+  background-color: #673ab7 !important;
+  color: white !important;
 }
 
 .clr-sass {
-    color: #c69 !important;
+  color: #c69 !important;
 }
 
 .bg-color-sass {
-    background-color: #c69 !important;
-    color: white !important;
+  background-color: #c69 !important;
+  color: white !important;
+}
+
+.clr-bem {
+  color: black !important;
 }
 
 .bg-color-bem {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
+}
+
+.clr-react {
+  color: #61dafb !important;
+}
+
+.bg-color-react {
+  background-color: #61dafb;
+  color: white;
 }
 
 /************* 2 - Font Size *************/
 
 .fw-500 {
-    font-weight: 500 !important;
+  font-weight: 500 !important;
 }
 
-
 .px-90px {
-    padding-left: 90px;
-    padding-right: 90px;
+  padding-left: 90px;
+  padding-right: 90px;
 }

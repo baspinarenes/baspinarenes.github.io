@@ -1,3 +1,11 @@
+- title: Todo App v2
+  desc: React konseptlerine aşinalık kazanmaya başlamamla birlikte Todo uygulamamı güncelledim. Mobil ve masaüstü için farklı fonksiyonellikler tanımladım. Verileri state yapısı ile tuttum ve yine localStorage ile depoladım.
+  img: /assets/img/projects/todo.png
+  date: 1.05.2021
+  link: https://baspinarenes.github.io/todo
+  github-link: https://github.com/baspinarenes/todo
+  tags: [SASS, React]
+
 - title: Todo App
   desc: Javascript'e aşinalık kazanmak ve günlük olarak kullanmak adına basit bir todo app yaptım. Verileri localStorage kullanarak tarayıcıda depoladım.
   img: /assets/img/projects/todo-app.png

@@ -94,11 +94,13 @@ table {
   color: white !important;
 }
 
-.clr-cpp, .clr-css {
+.clr-cpp,
+.clr-css {
   color: #0086d4 !important;
 }
 
-.bg-color-cpp, .bg-color-css {
+.bg-color-cpp,
+.bg-color-css {
   background-color: #0086d4 !important;
   color: white !important;
 }
@@ -139,8 +141,21 @@ table {
   color: white !important;
 }
 
+.clr-bem {
+  color: black !important;
+}
+
 .bg-color-bem {
   background-color: black;
+  color: white;
+}
+
+.clr-react {
+  color: #61dafb !important;
+}
+
+.bg-color-react {
+  background-color: #61dafb;
   color: white;
 }
 
@@ -930,11 +945,14 @@ pre .lineno {
 }
 
 @media screen and (max-width: 900px) {
+  body {
+    background-color: red;
+  }
   .project {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
   }
   .project-img {
     border-bottom-left-radius: 0 !important;

@@ -383,8 +383,11 @@
 }
 
 @media screen and (max-width: 900px) {
+  body {
+    background-color: red;
+  }
   .project {
-    flex-direction: column;
+    flex-direction: column !important;
 
     &-img {
       border-bottom-left-radius: 0 !important;
