@@ -1,10 +1,10 @@
 html {
-  font-family: "Roboto" !important;
+  font-family: 'Roboto' !important;
   font-size: 16px !important;
 }
 
 nav {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-size: 16px;
   font-weight: 500;
 }
@@ -53,10 +53,14 @@ h6 {
 p {
   text-align: justify;
   line-height: 1.6rem;
-  margin: 0  0 20px 0;
+  margin: 0 0 20px 0;
 }
 
-h2+p, h3+p, h4+p, h5+p, h6+p {
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p {
   margin: 10px 0 20px;
 }
 
@@ -69,7 +73,7 @@ blockquote {
   overflow: hidden;
   padding: 30px 40px;
 
-  p:last-of-type{
+  p:last-of-type {
     margin-bottom: 0;
   }
 
@@ -88,7 +92,7 @@ span {
   display: inline;
 }
 
-a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github){
+a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github) {
   color: rgb(58, 134, 255);
   border-bottom: 2px solid;
   font-weight: 500;
@@ -102,19 +106,21 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github){
   }
 }
 
-.navbar-brand{
+.navbar-brand {
   &:hover {
     background-color: rgb(58, 134, 255) !important;
+    color: black;
   }
-} 
+}
 
 img {
   display: block;
   margin: 0 auto;
 }
 
-ol, ul:not(.post-list):not(.navbar-nav):not(.social-media-items):not(.timeline):not(.project-tags):not(.projects) {
-	list-style: inside;
+ol,
+ul:not(.post-list):not(.navbar-nav):not(.social-media-items):not(.timeline):not(.project-tags):not(.projects) {
+  list-style: inside;
   margin-left: 30px;
 }
 
@@ -137,7 +143,6 @@ code {
   border-radius: 6px;
 }
 
-
 pre {
   padding: 10px;
   margin: 0 0 30px;
@@ -147,7 +152,7 @@ pre {
   line-height: 1.3rem;
 
   & * {
-      background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
   }
 
   code {
@@ -155,9 +160,9 @@ pre {
   }
 
   .lineno {
-      border-radius: 0;
-      border-right: 1px solid black;
-      margin: 0;
+    border-radius: 0;
+    border-right: 1px solid black;
+    margin: 0;
   }
 
   overflow-x: auto;

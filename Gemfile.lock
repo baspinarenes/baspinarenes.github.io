@@ -68,7 +68,6 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll
-  rouge
 
 BUNDLED WITH
    2.2.16
