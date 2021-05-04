@@ -1,0 +1,24 @@
+---
+layout: default
+title: Ana Sayfa
+---
+
+<div class="page-cover d-flex flex-column justify-content-center border-bottom px-5">
+    <img src="assets\img\home-img.svg" style="width: 50%; margin-bottom: 30px;">
+    <h1 class="text-center" style="font-size: 2.5rem; margin-bottom: 10px;">
+        Selam, ben <span class="clr-blue">Enes</span>.
+    </h1>
+    <h1 class="text-center" style="height: 50px; font-size: 2.5rem;"><span class="typed"></span></h1>
+</div>
+
+<script>
+    var options = {
+        strings: ['Bilgisayar mühendisliği öğrencisiyim.', 'Front-End ile uğraşıyorum.', 'Javascript ve React\'ta kendimi geliştiriyorum.'],
+        typeSpeed: 60,
+        loop: true,
+        backSpeed: 20,
+        backDelay: 1500,
+        startDelay: 700
+    };
+    var typed = new Typed('.typed', options);
+</script>
