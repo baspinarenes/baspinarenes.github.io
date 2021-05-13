@@ -1,14 +1,13 @@
 ---
 layout: post
 title: Frontend Öğrenim Kaynakları
-excerpt: ''
 tag: [resource, guide, cheatsheet]
 ---
 
-"İnternette artık her konuda bir sürü kaynak var." sözünü sürekli duyuyoruz. Ancak nitelikli kaynakları erişmekte her
-zaman kolay olmuyor veyahut bazılarına denk gelemeyebiliyoruz. Bu yazıda bulduğum en iyi kaynakları sizinle paylaşacağım
-ve kendi bitirdiklerimi de burada kaydediyor olacağım. Yazı elbette sürekli güncelleniyor, söylemeyi sevdiğim şekilde
-"yaşayan" bir yazı, olacak.
+"İnternette artık her konuda bir sürü kaynak var." lafını sürekli duyuyoruz. Ancak nitelikli kaynaklara erişebilmek her
+zaman kolay olmuyor veyahut bazılarına denk gelemeyebiliyoruz. Bu yazıda bulduğum iyi kaynakları sizinle paylaşacağım ve
+takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım. Bu yazı sürekli güncel, benim tabirimle
+"yaşayan" bir yazı olacak.
 
 ## Genel Kaynakları
 
