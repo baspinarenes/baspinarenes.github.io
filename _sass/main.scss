@@ -109,7 +109,7 @@
 
             &-title {
               margin-right: 10px;
-              height: 17px;
+              line-height: 25px;
             }
 
             &-divider {
@@ -118,6 +118,7 @@
 
             &-date {
               margin-left: 10px;
+              flex-shrink: 0;
             }
           }
         }

@@ -266,6 +266,11 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                     <a href="https://frontarm.com/courses/react-fundamentals/">React Fundamentals</a>
                     <!-- <p style="margin-top: 10px;"></p> -->
                 </li>
+                <li style="margin-bottom: 15px;">
+                    <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
+                    <a href="https://frontendmasters.com/learn/react/">Frontend Masters React</a>
+                    <!-- <p style="margin-top: 10px;"></p> -->
+                </li>
             </ul>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
