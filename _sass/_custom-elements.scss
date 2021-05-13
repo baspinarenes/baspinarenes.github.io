@@ -97,7 +97,7 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github) {
   border-bottom: 2px solid;
   font-weight: 500;
   padding-bottom: 1px;
-  line-height: 25px;
+  line-height: 10px;
 
   &:hover {
     color: black;
@@ -121,12 +121,6 @@ ul:not(.post-list):not(.navbar-nav):not(.social-media-items):not(.timeline):not(
 iframe {
   display: block;
   margin: 0 auto;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid #dadce0;
-  margin: 8px 0;
 }
 
 code {

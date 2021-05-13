@@ -104,10 +104,12 @@
           .post {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
 
             &-title {
               margin-right: 10px;
+              height: 17px;
             }
 
             &-divider {
@@ -314,6 +316,12 @@
   }
 }
 
+.cv-header {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #dee2e6;
+}
+
 .tag {
   font-size: 0.8rem;
   font-weight: 500;
@@ -325,7 +333,6 @@
 
 .site-footer {
   position: fixed;
-  max-width: 1000px;
   margin: 0 auto;
   bottom: 0px;
   right: 48px;
@@ -360,7 +367,7 @@
 @media screen and (max-width: 1250px) {
   .site-footer {
     position: static;
-    border: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
 
     .copyright {
       display: block !important;
@@ -375,7 +382,7 @@
       }
 
       &-item {
-        font-size: 2.1rem !important;
+        font-size: 1.6rem !important;
       }
     }
   }
@@ -388,7 +395,6 @@
     &-img {
       border-bottom-left-radius: 0 !important;
       border-top-right-radius: 10px !important;
-      border-bottom: 1px solid #dee2e6;
     }
   }
 }
@@ -414,6 +420,6 @@
 
 @media screen and (max-width: 560px) {
   html {
-    font-size: 13px !important;
+    font-size: 14px !important;
   }
 }

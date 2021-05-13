@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Git Öğrenim Kaynakları
-excerpt: ''
 tag: [resource, guide, cheatsheet]
 ---
 
