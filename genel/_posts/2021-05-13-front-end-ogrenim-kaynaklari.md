@@ -10,7 +10,7 @@ zaman kolay olmuyor veyahut bazılarına denk gelemeyebiliyoruz. Bu yazıda buld
 ve kendi bitirdiklerimi de burada kaydediyor olacağım. Yazı elbette sürekli güncelleniyor, söylemeyi sevdiğim şekilde
 "yaşayan" bir yazı, olacak.
 
-## Genel Frontend Kaynakları
+## Genel Kaynakları
 
 ---
 
