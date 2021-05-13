@@ -28,7 +28,7 @@
 
   &:before,
   &:after {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 0;
     height: 100%;
@@ -69,5 +69,11 @@
     to {
       opacity: 1;
     }
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .scroll-arrow {
+    margin-bottom: 35px;
   }
 }

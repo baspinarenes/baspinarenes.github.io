@@ -1,0 +1,10 @@
+- name: genel
+  logo: genel-logo
+# - name: javascript
+#   logo: javascript-logo
+# - name: git
+#   logo: git-logo
+- name: python
+  logo: python-logo
+- name: ubuntu
+  logo: ubuntu-logo

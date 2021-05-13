@@ -9,8 +9,7 @@
 
 .nav-link {
   &:hover {
-    border-bottom: 3px solid rgb(58, 134, 255);
-    padding: 7px;
+    color: rgb(58, 134, 255) !important;
   }
 }
 
@@ -338,7 +337,7 @@
   .social-media {
     .social-media-items {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       flex-direction: column;
 
       .social-media-item {
