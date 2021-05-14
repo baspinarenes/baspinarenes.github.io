@@ -39,14 +39,21 @@
   color: white !important;
 }
 
-.clr-genel,
-.clr-css {
+.clr-genel {
   color: black !important;
 }
 
-.bg-color-genel,
-.bg-color-css {
+.bg-color-genel {
   background-color: black !important;
+  color: white !important;
+}
+
+.clr-css {
+  color: #264de4 !important;
+}
+
+.bg-color-css {
+  background-color: #264de4 !important;
   color: white !important;
 }
 
@@ -65,7 +72,7 @@
 
 .bg-color-javascript {
   background-color: #f7df1e !important;
-  color: black !important;
+  color: white !important;
 }
 
 .clr-bootstrap {
