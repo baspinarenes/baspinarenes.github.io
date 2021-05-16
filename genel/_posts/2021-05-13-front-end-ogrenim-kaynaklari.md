@@ -9,11 +9,11 @@ zaman kolay olmuyor veyahut bazılarına denk gelemeyebiliyoruz. Bu yazıda buld
 takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım. Bu yazı sürekli güncel, benim tabirimle
 "yaşayan" bir yazı olacak.
 
-## Genel Kaynakları
+## Genel Kaynaklar
 
 ---
 
-<ul style="list-style: none; margin-top: 25px; margin-bottom: 25px;  margin-left: 0;padding: 0 12px;">
+<ul style="list-style: none; margin-top: 25px; margin-bottom: 25px; padding: 0 12px;">
     <li style="margin-bottom: 15px;">
         <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
         <a href="https://roadmap.sh/frontend">Frontend Roadmap</a>
@@ -57,9 +57,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Uçtan Uca Rehberler</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://www.internetingishard.com/html-and-css/">Interneting Is Hard</a>
@@ -87,9 +87,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Başucu Kaynakları</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://www.w3schools.com/html/default.asp">W3Schools HTML</a>
@@ -129,9 +129,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Proje Siteleri</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://www.codementor.io/projects/html_css">Codementor HTML & CSS Projects</a>
@@ -148,9 +148,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Uçtan Uca Rehberler</h3>
-            <ul style="list-style: none; list-style-position: outside; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; list-style-position: outside; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://eloquentjavascript.net/">Eloquent Javascript</a>
@@ -183,9 +183,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Başucu Kaynakları</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://www.w3schools.com/JSREF/default.asp">W3Schools Javascript</a>
@@ -198,9 +198,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Proje Siteleri</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://javascript30.com/">30 Day Javascript</a>
@@ -217,9 +217,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Uçtan Uca Rehberler</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 0;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://tr.reactjs.org/">React Official Docs</a>
@@ -273,9 +273,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Başucu Kaynakları</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 25px;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://devdocs.io/react/">Devdocs React</a>
@@ -288,9 +288,9 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
                 </li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4 p-0">
             <h3>Proje Siteleri</h3>
-            <ul style="list-style: none; margin-top: 25px; margin-left: 25px;">
+            <ul style="list-style: none; margin-top: 25px;">
                 <li style="margin-bottom: 15px;">
                     <input type="checkbox" style="margin-right: 10px;" onclick="return false;">
                     <a href="https://react.rocks/">React Rocks</a>
