@@ -1,0 +1,279 @@
+- title: Genel
+  resources:
+    - name: Frontend Roadmap
+      link: https://roadmap.sh/frontend
+      img: roadmap-sh.png
+      tag: yol-haritasi
+
+    - name: Frontend Daily
+      link: https://frontendaily.com
+      img: frontend-daily.png
+      tag: proje
+
+    - name: Frontend Developer Handbook 2019
+      link: https://frontendmasters.com/books/front-end-handbook/2019/
+      img: frontend-handbook-2019.png
+      tag: kitap
+
+    - name: Frontend Developer Handbook 2018
+      link: https://frontendmasters.com/books/front-end-handbook/2018/
+      img: frontend-handbook-2018.png
+      tag: kitap
+
+    - name: Frontend Developer Handbook 2017
+      link: https://frontendmasters.com/books/front-end-handbook/2017/
+      img: frontend-handbook-2017.png
+      tag: kitap
+
+    - name: Frontend Developer Handbook 2016
+      link: https://frontendmasters.com/books/front-end-handbook/2016/
+      img: frontend-handbook-2016.png
+      tag: kitap
+
+    - name: Free Frontend Books
+      link: https://jsbooks.revolunet.com
+      img: js-books.png
+      tag: kitap
+
+- title: HTML
+  resources:
+    - name: Interneting Is Hard
+      link: https://www.internetingishard.com/html-and-css/
+      img: interneting-is-hard.png
+      tag: rehber
+
+    - name: Shayhowe Learn to Code
+      link: https://learn.shayhowe.com
+      img: shayhowe.png
+      tag: rehber
+
+    - name: Dash Learn to Code
+      link: https://dash.generalassemb.ly/projects
+      img: dash.png
+      tag: rehber
+
+    - name: MDN HTML
+      link: https://developer.mozilla.org/en-US/docs/Learn/HTML
+      img: mdn-html.png
+      tag: rehber
+
+    - name: Learn HTML
+      link: https://www.learn-html.org
+      img: learn-html.png
+      tag: rehber
+
+    - name: W3Schools HTML
+      link: https://www.w3schools.com/html/default.asp
+      img: w3-html.png
+      tag: rehber
+
+    - name: Digital HTML Cheatsheet
+      link: https://digital.com/tools/html-cheatsheet/
+      img: digital-html-cheatsheet.png
+      tag: referans
+
+    - name: HTML Reference
+      link: https://htmlreference.io/
+      img: html-reference.png
+      tag: referans
+
+    - name: Devdocs HTML
+      link: https://devdocs.io/html/
+      img: devdocs-html.png
+      tag: referans
+
+    - name: HTML Best Practices
+      link: https://hail2u.github.io/html-best-practices/
+      img: html-best-practices.png
+      tag: referans
+
+- title: CSS
+  resources:
+    - name: Interneting Is Hard
+      link: https://www.internetingishard.com/html-and-css/
+      img: interneting-is-hard.png
+      tag: rehber
+
+    - name: Shayhowe Learn to Code
+      link: https://learn.shayhowe.com
+      img: shayhowe.png
+      tag: rehber
+
+    - name: Dash Learn to Code
+      link: https://dash.generalassemb.ly/projects
+      img: dash.png
+      tag: rehber
+
+    - name: MDN CSS
+      link: https://developer.mozilla.org/en-US/docs/Learn/CSS
+      img: mdn-css.png
+      tag: rehber
+
+    - name: W3Schools CSS
+      link: https://www.w3schools.com/css/default.asp
+      img: w3-css.png
+      tag: rehber
+
+    - name: Learn CSS Step by Step
+      link: https://www.csstutorial.net/
+      img: css-tutorial.png
+      tag: rehber
+
+    - name: Learn CSS Layout
+      link: https://learnlayout.com/
+      img: learn-css-layout.png
+      tag: konu-rehberi
+
+    - name: Codementor CSS Projects
+      link: https://www.codementor.io/projects/html_css
+      img: codementor-html-css.png
+      tag: proje
+
+    - name: Onblastblog Cheatsheet
+      link: https://www.onblastblog.com/wp-content/uploads/2017/01/CSS3-Cheat-Sheet.pdf
+      img: css3-cheatsheet.png
+      tag: referans
+
+    - name: Devdocs CSS
+      link: https://devdocs.io/css/
+      img: devdocs-css.png
+      tag: referans
+
+- title: Javascript
+  resources:
+    - name: Eloquent Javascript
+      link: https://eloquentjavascript.net/
+      img: eloquent-javascript.png
+      tag: rehber
+
+    - name: The Modern JavaScript Tutorial
+      link: https://javascript.info/
+      img: modern-js-tutorial.png
+      tag: rehber
+
+    - name: Javascript For Cats
+      link: http://jsforcats.com/
+      img: javascript-for-cats.png
+      tag: rehber
+
+    - name: MDN Javascript
+      link: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+      img: mdn-javascript.png
+      tag: rehber
+
+    - name: W3Schools Javascript
+      link: https://www.w3schools.com/JSREF/default.asp
+      img: w3-javascript.png
+      tag: rehber
+
+    - name: Javascript Enlightenment
+      link: https://frontendmasters.com/books/javascript-enlightenment/
+      img: javascript-enlightenment.png
+      tag: kitap
+
+    - name: You Dont Know JS
+      link: https://github.com/getify/You-Dont-Know-JS
+      img: you-dont-know-js-yet.png
+      tag: kitap
+
+    - name: Devdocs Javascript
+      link: https://devdocs.io/javascript/
+      img: devdocs-javascript.png
+      tag: referans
+
+    - name: Codementor Javascript Projects
+      link: https://www.codementor.io/projects/javascript
+      img: 30-day-javascript.png
+      tag: proje
+
+    - name: 30 Day Javascript
+      link: https://javascript30.com/
+      img: 30-day-javascript.png
+      tag: proje
+
+    - name: Learn JS
+      link: https://www.learn-js.org/en/
+      img: learn-js.png
+      tag: rehber
+
+    - name: JavaScript Visualizer 9000
+      link: https://www.jsv9000.app/
+      img: js-visualizer.png
+      tag: yardimci-arac
+
+- title: React
+  resources:
+    - name: React Official Docs
+      link: https://tr.reactjs.org/
+      img: react-docs.png
+      tag: rehber
+
+    - name: 30 Days React
+      link: https://github.com/Asabeneh/30-Days-Of-React
+      img: 30-days-of-react.jpg
+      tag: rehber
+
+    - name: Scrimba Learn React
+      link: https://scrimba.com/learn/learnreact
+      img: scrimba-react.png
+      tag: rehber
+
+    - name: Egghead The Beginner's Guide to React
+      link: https://egghead.io/courses/the-beginner-s-guide-to-react
+      img: the-beginners-guide-to-react.png
+      tag: rehber
+
+    - name: Egghead Learn React
+      link: https://egghead.io/courses/start-learning-react
+      img: start-learning-react.png
+      tag: rehber
+
+    - name: React Fundamentals
+      link: https://frontarm.com/courses/react-fundamentals/
+      img: react-fundamentals.png
+      tag: rehber
+
+    - name: Frontend Masters React
+      link: https://frontendmasters.com/learn/react/
+      img: frontend-masters-react.png
+      tag: rehber
+
+    - name: useHooks
+      link: https://usehooks.com/
+      img: usehooks.png
+      tag: konu-rehberi
+
+    - name: useEffect Course
+      link: https://maxrozen.com/courses
+      img: useeffect.png
+      tag: konu-rehberi
+
+    - name: React Enlightenment
+      link: https://www.reactenlightenment.com/
+      img: react-enlightenment.png
+      tag: kitap
+
+    - name: React Rocks
+      link: https://react.rocks/
+      img: react-rocks.png
+      tag: proje
+
+    - name: React Examples
+      link: https://reactjsexample.com/
+      img: react-examples.png
+      tag: proje
+
+    - name: Codementor React Projects
+      link: https://www.codementor.io/projects/reactjs
+      img: codementor-react.png
+      tag: proje
+
+    - name: Devdocs React
+      link: https://devdocs.io/react/
+      img: devdocs-react.png
+      tag: referans
+
+    - name: React Patterns
+      link: https://reactpatterns.com/
+      img: react-patterns.png
+      tag: referans
