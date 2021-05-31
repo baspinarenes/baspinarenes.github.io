@@ -5,10 +5,20 @@
       img: roadmap-sh.png
       tag: yol-haritasi
 
-    - name: Frontend Daily
-      link: https://frontendaily.com
-      img: frontend-daily.png
-      tag: proje
+    - name: Web Skills
+      link: https://andreasbm.github.io/web-skills/
+      img: web-skills.png
+      tag: yol-haritasi
+
+    - name: 30 Seconds of Code
+      link: https://www.30secondsofcode.org/
+      img: 30-seconds-of-code.png
+      tag: rehber
+
+    - name: Front End Development Libraries
+      link: https://www.freecodecamp.org/learn/front-end-libraries/
+      img: freecodecamp-frontend-libraries.png
+      tag: rehber
 
     - name: Frontend Developer Handbook 2019
       link: https://frontendmasters.com/books/front-end-handbook/2019/
@@ -35,6 +45,36 @@
       img: js-books.png
       tag: kitap
 
+    - name: Frontend Daily
+      link: https://frontendaily.com
+      img: frontend-daily.png
+      tag: proje
+
+    - name: CSS Deck
+      link: https://cssdeck.com/
+      img: css-deck.png
+      tag: proje
+    
+    - name: Little Snippets
+      link: https://www.littlesnippets.net/
+      img: little-snippets.png
+      tag: proje
+
+    - name: Free Frontend
+      link: https://freefrontend.com/
+      img: free-frontend.png
+      tag: proje
+
+    - name: Frontend Practice
+      link: https://www.frontendpractice.com/
+      img: frontend-practice.png
+      tag: proje
+
+    - name: Awesome Design Systems
+      link: https://github.com/alexpate/awesome-design-systems#readme
+      img: awesome-design-systems.png
+      tag: awesome
+
 - title: HTML
   resources:
     - name: Interneting Is Hard
@@ -55,6 +95,11 @@
     - name: MDN HTML
       link: https://developer.mozilla.org/en-US/docs/Learn/HTML
       img: mdn-html.png
+      tag: rehber
+
+    - name: Tutorial Republic HTML
+      link: https://www.tutorialrepublic.com/html-tutorial/
+      img: tr-html.png
       tag: rehber
 
     - name: Learn HTML
@@ -87,6 +132,11 @@
       img: html-best-practices.png
       tag: referans
 
+    - name: HTML Validator
+      link: https://validator.w3.org/
+      img: html-validator.png
+      tag: yardimci-arac
+
 - title: CSS
   resources:
     - name: Interneting Is Hard
@@ -109,6 +159,11 @@
       img: mdn-css.png
       tag: rehber
 
+    - name: Tutorial Republic CSS
+      link: https://www.tutorialrepublic.com/css-tutorial/
+      img: tr-css.png
+      tag: rehber
+
     - name: W3Schools CSS
       link: https://www.w3schools.com/css/default.asp
       img: w3-css.png
@@ -119,9 +174,24 @@
       img: css-tutorial.png
       tag: rehber
 
+    - name: Responsive Web Design
+      link: https://www.freecodecamp.org/learn/responsive-web-design/
+      img: freecodecamp-responsive.png
+      tag: konu-rehberi
+
     - name: Learn CSS Layout
       link: https://learnlayout.com/
       img: learn-css-layout.png
+      tag: konu-rehberi
+
+    - name: CSS Grid
+      link: https://cssgrid.io/
+      img: css-grid.png
+      tag: konu-rehberi
+
+    - name: CSS Flexbox
+      link: https://flexbox.io/
+      img: css-flexbox.png
       tag: konu-rehberi
 
     - name: Codementor CSS Projects
@@ -139,6 +209,41 @@
       img: devdocs-css.png
       tag: referans
 
+    - name: CSS Layout Patterns
+      link: https://csslayout.io/
+      img: csslayout.png
+      tag: referans
+
+    - name: CSS Design Awards
+      link: https://www.cssdesignawards.com/
+      img: css-design-awards.png
+      tag: referans
+
+    - name: Awesome CSS Learning
+      link: https://github.com/micromata/awesome-css-learning#readme
+      img: awesome-css-learning.png
+      tag: awesome
+
+    - name: Reset CSS
+      link: https://meyerweb.com/eric/tools/css/reset/
+      img: reset-css.png
+      tag: yardimci-arac
+
+    - name: Normalize CSS
+      link: https://necolas.github.io/normalize.css/
+      img: normalize-css.png
+      tag: yardimci-arac
+
+    - name: CSS Validator
+      link: https://jigsaw.w3.org/css-validator/
+      img: css-validator.png
+      tag: yardimci-arac
+
+    - name: 0to255 Color Picker
+      link: https://www.0to255.com/
+      img: color-picker.png
+      tag: yardimci-arac
+
 - title: Javascript
   resources:
     - name: Eloquent Javascript
@@ -151,6 +256,26 @@
       img: modern-js-tutorial.png
       tag: rehber
 
+    - name: Full Stack Javascript Path
+      link: https://www.theodinproject.com/paths/full-stack-javascript
+      img: the-odin-js.png
+      tag: rehber
+
+    - name: Javascript Tutorial
+      link: https://www.javascripttutorial.net/
+      img: javascript-tutorial.png
+      tag: rehber
+
+    - name: Learn JS
+      link: https://www.learn-js.org/en/
+      img: learn-js.png
+      tag: rehber
+
+    - name: JavaScript Algorithms and Data Structures
+      link: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/
+      img: freecodecamp-js.png
+      tag: rehber
+
     - name: Javascript For Cats
       link: http://jsforcats.com/
       img: javascript-for-cats.png
@@ -159,6 +284,11 @@
     - name: MDN Javascript
       link: https://developer.mozilla.org/en-US/docs/Web/JavaScript
       img: mdn-javascript.png
+      tag: rehber
+
+    - name: Tutorial Republic Javascript
+      link: https://www.tutorialrepublic.com/javascript-tutorial/
+      img: tr-js.png
       tag: rehber
 
     - name: W3Schools Javascript
@@ -176,11 +306,6 @@
       img: you-dont-know-js-yet.png
       tag: kitap
 
-    - name: Devdocs Javascript
-      link: https://devdocs.io/javascript/
-      img: devdocs-javascript.png
-      tag: referans
-
     - name: Codementor Javascript Projects
       link: https://www.codementor.io/projects/javascript
       img: 30-day-javascript.png
@@ -191,10 +316,10 @@
       img: 30-day-javascript.png
       tag: proje
 
-    - name: Learn JS
-      link: https://www.learn-js.org/en/
-      img: learn-js.png
-      tag: rehber
+    - name: Devdocs Javascript
+      link: https://devdocs.io/javascript/
+      img: devdocs-javascript.png
+      tag: referans
 
     - name: JavaScript Visualizer 9000
       link: https://www.jsv9000.app/
@@ -277,3 +402,8 @@
       link: https://reactpatterns.com/
       img: react-patterns.png
       tag: referans
+
+    - name: Awesome React Design Systems
+      link: https://github.com/jbranchaud/awesome-react-design-systems#readme
+      img: awesome-react-design-systems.png
+      tag: awesome
