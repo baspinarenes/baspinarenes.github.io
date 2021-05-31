@@ -9,7 +9,7 @@ zaman kolay olmuyor veyahut bazılarına denk gelemeyebiliyoruz. Bu yazıda buld
 takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım. Bu yazı sürekli güncel, benim tabirimle
 "yaşayan" bir yazı olacak.
 
-{% for category in site.data.resources %}
+{% for category in site.data.front-end-resources %}
 
 <h2 style="text-align: center;">{{ category.title }}</h2>
 
@@ -19,7 +19,7 @@ takibini tutabilmek adına kendi bitirdiklerimi de burada kaydediyor olacağım.
     {% for resource in category.resources %}
         <li class="resource d-flex flex-column justify-content-between">
             <a href="{{ resource.link }}">
-            <img src="/assets/img/resources/{{ resource.img }}" alt="">
+            <img src="/assets/img/frontend-resources/{{ resource.img }}" alt="">
             </a>
             <a class="link" href="{{ resource.link }}">{{ resource.name }}</a>
             <span>{{ resource.tag }}</span>
