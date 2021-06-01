@@ -33,15 +33,14 @@ title: Blog
         <!-- Category - Start -->
         <div class="post-category">
             <!-- Category Header - Start -->
-            <div class="post-category-header bg-color-{{ category.name | downcase }}" href="">
+            <div class="post-category-header" href="">
                 <!-- Category Title - Start -->
                 <h2 class="post-category-header-title">
-                    {{ category.name | capitalize }}
+                    {{ category.name | upcase }}
                 </h2>
                 <!-- Category Title - End -->
                 <!-- Category Icon - Start -->
-                <img class="post-category-header-img"
-                    src="/assets/img/post-category-logos/{{ category.logo | downcase }}.svg" alt="">
+                
                 <!-- Category Icon - End -->
             </div>
             <!-- Category Header - End -->
