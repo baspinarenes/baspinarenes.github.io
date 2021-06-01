@@ -10,8 +10,12 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
                 {% for item in site.data.navigation %}
-                <a {% if page.url==item.link %} class="nav-link active" {% else %} class="nav-link" {% endif %} href={{
-                    item.link }}>
+                <a {% if page.url==item.link %} 
+                   class="nav-link active" 
+                   {% else %} 
+                   class="nav-link" 
+                   {% endif %} 
+                   href={{ item.link }}>
                     {{ item.name }}
                 </a>
                 {% endfor %}
