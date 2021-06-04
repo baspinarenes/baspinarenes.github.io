@@ -11,3 +11,6 @@
 - name: ubuntu
   title: UBUNTU
   logo: ubuntu-logo
+- name: kultur
+  title: KÜLTÜR
+  logo: kultur-logo

@@ -26,15 +26,15 @@ int dogum_tarihi = 1999
 
 Günlük yaşantımızda sayıları 10 tabanında (decimal) kullanıyoruz. Ancak bilgisayarlar bunları anlayabilmek için 2 tabanına (binary) çevirmek zorunda. Bellek temsillerinde ise nedenini bulamadım ancak 16 tabanını (hexadecimal) kullanılıyor. Aşağıda 1999 değerinin bu tabanlardaki halini görebilirsiniz:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/001.png" style="max-width: 500px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/001.png" style="max-width: 500px;">
 
 Değişkenin bellekteki şekline bakalım. 16 tabanındaki karşılığını sırayla kutulara ikişerli olarak yerleştiririz:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/002.png" style="max-width: 600px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/002.png" style="max-width: 600px;">
 
 İkişerli yerleştirme sebebimiz, 2'lik tabandaki her 8 bite karşılık 16'lık tabanda 2 karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek **dogum_tarihi** dedik:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/003.png" style="max-width: 600px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/003.png" style="max-width: 600px;">
 
 Artık biz **dogum_tarihi** değişkenini çağırdığımız zaman, CPU belleğe gider ve değişkenin başlangıcı adresi olan **90000008** adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani **00 00 07 CF** değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
 
@@ -73,7 +73,7 @@ dogum_tarihi_ptr = &dogum_tarihi; // yıldız yok dikkat edin.
 
 Şöyle genel biçimde tekrar edecek olursak; **dogum_tarihi_ptr** **pointer** değişkeni, **dogum_tarihi** değişkeninin bellek adresini işaret eder:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/004.png" style="max-width: 600px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/004.png" style="max-width: 600px;">
 
 Şu iki çıktıya bakarsak `&` işaretinin ne işe yaradığı daha net anlaşılabilir:
 
@@ -118,7 +118,7 @@ Değişken ismine bitişik olduğu için değişkene ait olduğundan emin oluruz
 
 Değişkenin adresini elde edebileceğimiz gibi adres yardımıyla değişken değerine de erişebiliriz. Şu görsele göz atalım ve sonrasında birlikte inceleyelim:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/005.png" style="max-width: 600px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/005.png" style="max-width: 600px;">
 
 Örneğin elimizdeki doğum tarihi bilgisini kullanıcının yanlış girmiş. Bunu değiştirmek istiyor. Elimizde hem değişken hem de adresini tutan **pointer** var:
 
@@ -203,7 +203,7 @@ int *sayi_dizisi_ptr = sayi_dizisi;
 
 Dizimizin bellekteki durumunu görselleştirelim:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/006.png" style="max-width: 700px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/006.png" style="max-width: 700px;">
 
 Dizilerin elemanlarına erişmek için indeksleri kullanıyorduk (bir sonraki kısımda karşılaştıracağız). Ancak arkada neler dönüyor merak ediyoruz. İşte bunu **pointer** yardımıyla anlayabiliriz. 
 
@@ -239,13 +239,13 @@ son eleman: 30
 
 Biraz kafalar karışmış olabilir. Bu tarz şeylere görsellik katmadan anlamak zordur bilirim. İkinci elemana ulaşmak için adrese 1 eklediğimizde olacak şey böyledir:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/007.png" style="max-width: 700px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/007.png" style="max-width: 700px;">
 
 Göreceğimiz gibi 1 eklediğimizde esasen `1*sizeof(int)` demek isteriz. **int** olmasının sebebi dizinin elemanlarının tam sayı olmasıdır. Tam sayı boyutunun 4 bayt olduğundan bahsetmiştik. Yani 4 kutu. 1 eklemek istediğimizde 4 kutu sonraya git demiş oluruz. Yani `sayi_dizisi_ptr` **pointer** değişkeni artık 0x7ffcd4fb6110 adresini depolayacak. Bunu yapma sebebimiz ise diğer elemanın adresine erişmek. Tekrardan 1 eklediğimizde de aynı işlemler uygulanır ve adres 0x7ffcd4fb6114 olur.
 
 Direk olarak 3. elemana erişmek isteseydik `2*sizeof(int)`, yani 2 eleman sonraya git diyebilirdik:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/008.png" style="max-width: 700px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/008.png" style="max-width: 700px;">
 
 Bu sefer sonraki 8. kutuya giderek 30 değerinin adresine sahip olurdu.
 
@@ -328,7 +328,7 @@ printf("%d", yeni_sayi_dizisi[1])
 
 30 sonucunu alırız. Çünkü dizimiz artık şu hale gelecektir:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/009.png" style="max-width: 700px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/009.png" style="max-width: 700px;">
 
 Dolayısıyla ilk eleman artık 30 olacaktır (başlangıçtan 4 kutu sonrası olarak hayal ediyorduk hatırlayın).
 
@@ -487,7 +487,7 @@ printf("%d\n", **yas_ptr_ptr);
 
 İlk satırı biliyoruz `yas_ptr_ptr`'in adresini yazdırdı. İkinci satırda ise bu **pointer**'ın değerini, yani `yas_ptr` değişkeninin adresini yazdırdık. Son satırda ise `yas_ptr_ptr` **pointer** değişkeninin adresini depoladığı `yas_ptr` **pointer** değişkeninin adresinin içerisinde bulunan değeri yazdırmış olduk. Görsel olarak da eklemiş olayım:
 
-<img src="{{ site.baseurl }}/assets/img/posts/cpp/pointerlandiramadiklarimizdanmisiniz/010.png" style="max-width: 600px;">
+<img src="{{ site.baseurl }}/assets/img/posts/genel/pointerlandiramadiklarimizdanmisiniz/010.png" style="max-width: 600px;">
 
 Yazımız burda bitti. Yeni yazılarda görüşmek üzere, esen kalın.
 
@@ -495,4 +495,4 @@ Yazımız burda bitti. Yeni yazılarda görüşmek üzere, esen kalın.
 
 [1] <a href="https://boredzo.org/pointers/">https://boredzo.org/pointers/</a><br>
 [2] <a href="https://computer.howstuffworks.com/c23.htm">https://computer.howstuffworks.com/c23.htm</a><br>
-[3] <a href="https://www3.ntu.edu.sg/home/ehchua/programming/cpp/cp4_PointerReference.html">https://www3.ntu.edu.sg/../cp4_PointerReference.html</a><br>
+[3] <a href="https://www3.ntu.edu.sg/home/ehchua/programming/genel/cp4_PointerReference.html">https://www3.ntu.edu.sg/../cp4_PointerReference.html</a><br>

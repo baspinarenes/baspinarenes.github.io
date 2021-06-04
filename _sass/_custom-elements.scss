@@ -46,8 +46,10 @@ h5 {
 h6 {
   display: block;
   font-size: 0.9rem;
-  margin: 1rem 0 1rem;
+  margin: 0.5rem 0;
   text-align: center;
+  font-style: italic;
+  color: gray;
 }
 
 p {
@@ -110,6 +112,36 @@ a:not(.nav-link):not(.navbar-brand):not(.warning-link):not(.project-github) {
 img {
   display: block;
   margin: 0 auto;
+}
+
+hr {
+  border: 0;
+  border-bottom: 3px solid #dee2e6;
+}
+
+.hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: #dee2e6;
+    margin: 35px 0px;
+}
+.hr-sect:before,
+.hr-sect:after {
+    content: "";
+    flex-grow: 1;
+    background: #dee2e6;
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+}
+
+.hr-sect:before {
+  margin-right: 8px;
+}
+
+.hr-sect:after {
+  margin-left: 8px;
 }
 
 ol,

@@ -42,7 +42,7 @@
 
     .warning {
       padding: 20px 25px;
-      background-color: red;
+      background-color: #F87171;
       border-radius: 10px;
       margin-bottom: 30px;
       color: white;
@@ -477,5 +477,10 @@
 @media screen and (max-width: 560px) {
   html {
     font-size: 14px !important;
+  }
+
+  .post-lr-img {
+    float: none !important;
+    margin: 20px auto 15px !important;
   }
 }
