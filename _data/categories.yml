@@ -1,16 +1,20 @@
 - name: genel
   title: GENEL
   logo: genel-logo
+
+- name: python
+  title: PYTHON
+  logo: python-logo
+
+- name: ubuntu
+  title: UBUNTU
+  logo: ubuntu-logo
+
+- name: kultur
+  title: KÜLTÜR
+  logo: kultur-logo
+
 # - name: javascript
 #   logo: javascript-logo
 # - name: git
 #   logo: git-logo
-- name: python
-  title: PYTHON
-  logo: python-logo
-- name: ubuntu
-  title: UBUNTU
-  logo: ubuntu-logo
-- name: kultur
-  title: KÜLTÜR
-  logo: kultur-logo
