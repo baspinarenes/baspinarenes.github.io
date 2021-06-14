@@ -308,7 +308,7 @@
 
     - name: Codementor Javascript Projects
       link: https://www.codementor.io/projects/javascript
-      img: 30-day-javascript.png
+      img: codementor-javascript.png
       tag: proje
 
     - name: 30 Day Javascript
