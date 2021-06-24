@@ -44,6 +44,10 @@
       link: https://learngitbranching.js.org/
       img: learn-git-branching.png
 
+    - name: Git Exercises
+      link: https://learngitbranching.js.org/
+      img: learn-git-branching.png
+
 - title: Başucu Kaynakları
   resources:
     - name: Basit Git Rehberi

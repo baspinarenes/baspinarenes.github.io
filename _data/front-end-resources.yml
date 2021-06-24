@@ -5,6 +5,11 @@
       img: roadmap-sh.png
       tag: yol-haritasi
 
+    - name: Frontend Masters Roadmap
+      link: https://frontendmasters.com/guides/learning-roadmap/
+      img: frontendmasters-roadmap.png
+      tag: yol-haritasi
+
     - name: Web Skills
       link: https://andreasbm.github.io/web-skills/
       img: web-skills.png
@@ -15,7 +20,7 @@
       img: 30-seconds-of-code.png
       tag: rehber
 
-    - name: Front End Development Libraries
+    - name: Frontend Development Libraries
       link: https://www.freecodecamp.org/learn/front-end-libraries/
       img: freecodecamp-frontend-libraries.png
       tag: rehber
@@ -189,6 +194,11 @@
       img: css-grid.png
       tag: konu-rehberi
 
+    - name: Euismod CSS Grid
+      link: https://www.euismod.dev/#/
+      img: euismod-css-grid.png
+      tag: konu-rehberi
+
     - name: CSS Flexbox
       link: https://flexbox.io/
       img: css-flexbox.png
@@ -244,7 +254,7 @@
       img: color-picker.png
       tag: yardimci-arac
 
-- title: Javascript
+- title: JavaScript
   resources:
     - name: Eloquent Javascript
       link: https://eloquentjavascript.net/
@@ -264,6 +274,11 @@
     - name: Javascript Tutorial
       link: https://www.javascripttutorial.net/
       img: javascript-tutorial.png
+      tag: rehber
+
+    - name: 30 Days of JavaScript
+      link: https://github.com/Asabeneh/30-Days-Of-JavaScript
+      img: 30-days-of-javascript.png
       tag: rehber
 
     - name: Learn JS
@@ -311,7 +326,7 @@
       img: codementor-javascript.png
       tag: proje
 
-    - name: 30 Day Javascript
+    - name: 30 Day Vanilla JS Coding Challenge
       link: https://javascript30.com/
       img: 30-day-javascript.png
       tag: proje
@@ -319,6 +334,16 @@
     - name: Devdocs Javascript
       link: https://devdocs.io/javascript/
       img: devdocs-javascript.png
+      tag: referans
+
+    - name: 33 JS Concepts
+      link: https://github.com/leonardomso/33-js-concepts#readme
+      img: 33-js-concepts.png
+      tag: referans
+
+    - name: JavaScript Questions
+      link: https://github.com/lydiahallie/javascript-questions#readme
+      img: js-questions.png
       tag: referans
 
     - name: JavaScript Visualizer 9000
@@ -333,7 +358,7 @@
       img: react-docs.png
       tag: rehber
 
-    - name: 30 Days React
+    - name: 30 Days of React
       link: https://github.com/Asabeneh/30-Days-Of-React
       img: 30-days-of-react.jpg
       tag: rehber
@@ -378,6 +403,11 @@
       img: react-enlightenment.png
       tag: kitap
 
+    - name: React Projects
+      link: https://react-projects.netlify.app/
+      img: react-projects.png
+      tag: proje
+
     - name: React Rocks
       link: https://react.rocks/
       img: react-rocks.png
@@ -403,7 +433,17 @@
       img: react-patterns.png
       tag: referans
 
+    - name: Awesome React
+      link: https://github.com/enaqx/awesome-react#readme
+      img: awesome-react.png
+      tag: awesome
+
     - name: Awesome React Design Systems
       link: https://github.com/jbranchaud/awesome-react-design-systems#readme
       img: awesome-react-design-systems.png
       tag: awesome
+
+    - name: React Interview Questions & Answers
+      link: https://github.com/sudheerj/reactjs-interview-questions#readme
+      img: react-interview-questions.png
+      tag: sorular
