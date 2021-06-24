@@ -44,9 +44,13 @@
       link: https://learngitbranching.js.org/
       img: learn-git-branching.png
 
+    - name: GitHowTo
+      link: https://githowto.com/
+      img: git-how-to.png
+
     - name: Git Exercises
-      link: https://learngitbranching.js.org/
-      img: learn-git-branching.png
+      link: https://gitexercises.fracz.com/
+      img: git-exercises.png
 
 - title: Başucu Kaynakları
   resources:
@@ -69,3 +73,13 @@
     - name: Git Ready
       link: http://gitready.com/
       img: git-ready.png
+
+- title: Araçlar
+  resources:
+    - name: gitignore.io
+      link: https://www.toptal.com/developers/gitignore
+      img: toptal-gitignore.png
+
+    - name: GitHub .gitignore Collection
+      link: https://github.com/github/gitignore
+      img: github-gitignore.png

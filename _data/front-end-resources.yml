@@ -25,6 +25,11 @@
       img: freecodecamp-frontend-libraries.png
       tag: rehber
 
+    - name: Service Workies
+      link: https://serviceworkies.com/
+      img: serviceworkies.png
+      tag: konu-rehberi
+
     - name: Frontend Developer Handbook 2019
       link: https://frontendmasters.com/books/front-end-handbook/2019/
       img: frontend-handbook-2019.png
@@ -55,6 +60,11 @@
       img: frontend-daily.png
       tag: proje
 
+    - name: Frontend Projects
+      link: https://www.johnsmilga.com/projects/
+      img: frontend-projects.png
+      tag: proje
+
     - name: CSS Deck
       link: https://cssdeck.com/
       img: css-deck.png
@@ -73,6 +83,11 @@
     - name: Frontend Practice
       link: https://www.frontendpractice.com/
       img: frontend-practice.png
+      tag: proje
+
+    - name: UI Design Daily
+      link: https://www.uidesigndaily.com/
+      img: ui-design-daily.png
       tag: proje
 
     - name: Awesome Design Systems
@@ -179,6 +194,11 @@
       img: css-tutorial.png
       tag: rehber
 
+    - name: Interactive CSS 3D Transforms Slide
+      link: https://rupl.github.io/unfold/
+      img: interactive-css-transforms.png
+      tag: konu-rehberi
+
     - name: Responsive Web Design
       link: https://www.freecodecamp.org/learn/responsive-web-design/
       img: freecodecamp-responsive.png
@@ -189,9 +209,24 @@
       img: learn-css-layout.png
       tag: konu-rehberi
 
+    - name: Selectors Diner
+      link: https://flukeout.github.io/
+      img: css-diner.png
+      tag: konu-rehberi
+
     - name: CSS Grid
       link: https://cssgrid.io/
       img: css-grid.png
+      tag: konu-rehberi
+
+    - name: Grid Critters
+      link: https://gridcritters.com/
+      img: gridcritters.png
+      tag: konu-rehberi
+
+    - name: Grid Garden
+      link: https://cssgridgarden.com/#tr
+      img: grid-garden.png
       tag: konu-rehberi
 
     - name: Euismod CSS Grid
@@ -199,10 +234,30 @@
       img: euismod-css-grid.png
       tag: konu-rehberi
 
-    - name: CSS Flexbox
+    - name: What The Flexbox?!
       link: https://flexbox.io/
       img: css-flexbox.png
       tag: konu-rehberi
+
+    - name: Flexbox Defense
+      link: http://www.flexboxdefense.com/
+      img: flexbox-defense.png
+      tag: konu-rehberi
+
+    - name: Flexbox Froggy
+      link: https://flexboxfroggy.com/#tr
+      img: flexbox-froggy.png
+      tag: konu-rehberi
+
+    - name: Flexbox Zombies
+      link: https://mastery.games/flexboxzombies/
+      img: flexbox-zombies.jpg
+      tag: konu-rehberi
+
+    - name: Mini Projects
+      link: https://html-css-mini-projects.netlify.app/
+      img: mini-projects.png
+      tag: proje
 
     - name: Codementor CSS Projects
       link: https://www.codementor.io/projects/html_css
@@ -219,7 +274,7 @@
       img: devdocs-css.png
       tag: referans
 
-    - name: CSS Layout Patterns
+    - name: CSS LayoutS & Patterns
       link: https://csslayout.io/
       img: csslayout.png
       tag: referans
@@ -235,7 +290,7 @@
       tag: awesome
 
     - name: Reset CSS
-      link: https://meyerweb.com/eric/tools/css/reset/
+      link: http://html5doctor.com/html-5-reset-stylesheet/
       img: reset-css.png
       tag: yardimci-arac
 
@@ -252,6 +307,16 @@
     - name: 0to255 Color Picker
       link: https://www.0to255.com/
       img: color-picker.png
+      tag: yardimci-arac
+
+    - name: CSS Grid Generator
+      link: https://cssgrid-generator.netlify.app/
+      img: css-grid-generator.png
+      tag: yardimci-arac
+
+    - name: CSS Layout Generator
+      link: https://layout.bradwoods.io/
+      img: css-layout-generator.png
       tag: yardimci-arac
 
 - title: JavaScript
@@ -291,6 +356,11 @@
       img: freecodecamp-js.png
       tag: rehber
 
+    - name: How To Code in JavaScript
+      link: https://www.digitalocean.com/community/tutorial_series/how-to-code-in-javascript
+      img: how-to-code-in-javascript.png
+      tag: rehber
+
     - name: Javascript For Cats
       link: http://jsforcats.com/
       img: javascript-for-cats.png
@@ -321,6 +391,11 @@
       img: you-dont-know-js-yet.png
       tag: kitap
 
+    - name: Javacript Projects
+      link: https://www.vanillajavascriptprojects.com/
+      img: javascript-projects.png
+      tag: proje
+
     - name: Codementor Javascript Projects
       link: https://www.codementor.io/projects/javascript
       img: codementor-javascript.png
@@ -341,10 +416,20 @@
       img: 33-js-concepts.png
       tag: referans
 
+    - name: Modern JS Cheatsheet
+      link: https://mbeaudru.github.io/modern-js-cheatsheet/
+      img: modern-js-cheatsheet.png
+      tag: referans
+
     - name: JavaScript Questions
       link: https://github.com/lydiahallie/javascript-questions#readme
       img: js-questions.png
       tag: referans
+
+    - name: JavaScript Interview Questions & Answers
+      link: https://github.com/sudheerj/javascript-interview-questions
+      img: javascript-interview-questions.png
+      tag: sorular
 
     - name: JavaScript Visualizer 9000
       link: https://www.jsv9000.app/
@@ -386,6 +471,11 @@
     - name: Frontend Masters React
       link: https://frontendmasters.com/learn/react/
       img: frontend-masters-react.png
+      tag: rehber
+
+    - name: How To Code in React.js
+      link: https://www.digitalocean.com/community/tutorial_series/how-to-code-in-react-js
+      img: how-to-code-in-react.png
       tag: rehber
 
     - name: useHooks
