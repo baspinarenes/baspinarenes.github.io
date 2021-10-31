@@ -1,0 +1,27 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baspinarenes/baspinarenes.github.io.git"
+  },
+  "keywords": [],
+  "author": "Enes Başpınar <enesbaspinar07@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baspinarenes/baspinarenes.github.io/issues"
+  },
+  "dependencies": {
+    "gatsby": "^4.0.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  }
+}
