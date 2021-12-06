@@ -17,8 +17,6 @@ const Blog = ({ data }) => {
     allPostByCategories[post.frontmatter.category].push(post);
   });
 
-  console.log(allPostByCategories);
-
   const sortCategoryByName = (a, b) => {
     if (a[0] < b[0]) return -1;
     if (a[0] > b[0]) return 1;

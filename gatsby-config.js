@@ -7,7 +7,7 @@ module.exports = {
       summary: `Taze mezun ve heyecanlı bir insanım. Öğrendiklerimi aktarmayı çok severim, uzun zamandır inaktif olan blogumu da bu amaç uğruna yeniden canlandırıyorum. Temel mottom; tekdüze ve sıkıcı blog yazılarından yazılım camiasını kurtarmak. Son olarak yandaki emoji beni kendimden daha iyi anlattığı için bunu kullanacağım. Blogun adı yok ama olsaydı bir yazılımcının çığlıkları olurdu kesin. Bu kadar goygoy yeter, devamı yazılarda!`,
     },
     description: `Taze mezun birinin yazdığı abidik gubidik blog.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://enesbaspinar.me`,
     social: {
       twitter: `enesbaspinar0`,
       github: `https://github.com/baspinarenes`,
@@ -226,7 +226,7 @@ module.exports = {
       resolve: `gatsby-source-github-api`,
       options: {
         url: `https://api.github.com/graphql`,
-        token: `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`,
+        token: `Bearer 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`,
         graphQLQuery: `
         query($author: String!) {
             user(login: $author) {

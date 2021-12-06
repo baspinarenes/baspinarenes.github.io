@@ -30,7 +30,7 @@ const useRepository = () => {
 
   return {
     myGithub: data.site.siteMetadata.social.github,
-    repositories: data.githubData.data.user.repositories.nodes,
+    repositories: [],
   };
 };
 
