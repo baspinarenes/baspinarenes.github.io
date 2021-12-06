@@ -1,5 +1,18 @@
-import React from "react";
+import * as React from "react";
+import Seo from "../components/seo";
+import Biography from "../components/biography";
+import PopularRepos from "../components/popular-repos";
+import PopularPosts from "../components/popular-posts";
 
-export default function Home() {
-  return <div>Site yenileniyor!</div>;
-}
+const Home = () => {
+  return (
+    <div className="home">
+      <Seo title="Anasayfa" />
+      <Biography />
+      <PopularRepos />
+      <PopularPosts />
+    </div>
+  );
+};
+
+export default Home;

@@ -1,0 +1,251 @@
+.page-wrapper {
+  @apply max-w-3xl mx-auto px-8;
+}
+
+.page-header {
+  @apply pt-8 pb-16 flex justify-between items-center;
+
+  .nav-links {
+    @apply hidden z-50 pt-5;
+
+    .nav-link {
+      @apply text-gray-600 hover:bg-gray-200 font-normal py-2 border-none px-8 border-t;
+
+      &--active {
+        @apply font-semibold text-gray-800;
+      }
+
+      &:nth-last-child(2) {
+        @apply border-b;
+      }
+    }
+
+    .nav-footer {
+      @apply text-center pb-4 text-sm mt-auto text-gray-500 sm:hidden;
+    }
+
+    @screen xs {
+      @apply absolute bg-gray-100 top-24 left-0 right-0 flex-col;
+      height: calc(100vh - 94px);
+    }
+
+    @screen sm {
+      /* Normal Menu */
+
+      @apply -ml-3 flex;
+
+      .nav-link {
+        @apply px-3 rounded-lg;
+      }
+    }
+  }
+
+  .socials {
+    @apply flex items-center gap-1;
+
+    .social-link {
+      @apply w-9 h-9 flex items-center justify-center border bg-gray-200 rounded-lg ring-gray-800 hover:ring-2;
+
+      img {
+        @apply w-5 h-5 text-yellow-400;
+      }
+    }
+
+    .dark-mode-toggle {
+      @apply bg-gray-200 px-2 py-1 h-9 w-9 rounded-lg ring-gray-800 hover:ring-2;
+    }
+  }
+
+  .hamburger-toggle {
+    @apply -ml-2 text-gray-600 px-2 py-1 h-9 w-9 sm:hidden;
+  }
+}
+
+.page-footer {
+  @apply mt-16 text-center py-10 text-sm text-gray-500;
+}
+
+.biography {
+  @apply flex flex-col sm:flex-row gap-8 mb-16;
+
+  .bio-content {
+    @apply flex-1 xs:order-2;
+
+    .author-name {
+      @apply mb-4;
+    }
+
+    .author-title {
+      @apply text-gray-700 mb-2 mt-0 text-base font-semibold;
+    }
+  }
+
+  .bio-avatar {
+    @apply xs:order-1 h-20 w-20 sm:h-36 sm:w-36;
+  }
+}
+
+.popular-repos {
+  @apply mb-16;
+
+  .repos {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4;
+
+    .repo {
+      @apply text-gray-500 font-normal w-full rounded-lg border-2 border-black p-4 hover:bg-gray-200;
+
+      &-star {
+        @apply flex items-center gap-1 -ml-1 text-black;
+
+        svg {
+          fill: orange;
+        }
+      }
+
+      &-name {
+        @apply leading-6 mb-2;
+      }
+    }
+  }
+}
+
+.popular-posts {
+  @apply mb-16;
+
+  .posts {
+    @apply grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4;
+
+    .post {
+      @apply text-gray-500 font-normal w-full rounded-lg border-2 border-black p-4 hover:bg-gray-200;
+
+      &-views {
+        @apply flex items-center gap-1 -ml-1 mb-2 text-black;
+
+        svg {
+          fill: orange;
+        }
+      }
+
+      &-name {
+        @apply leading-6 mb-2;
+      }
+
+      p {
+        @apply m-0;
+      }
+    }
+  }
+}
+
+.read-more {
+  @apply flex items-center gap-1 border-none text-gray-600 hover:text-black;
+}
+
+.blog {
+  .post-category {
+    h3 {
+      @apply mt-3;
+    }
+
+    .posts {
+      .post {
+        @apply mb-8;
+
+        .post-header {
+          @apply flex justify-between flex-col md:flex-row mb-1;
+
+          .post-views {
+            @apply m-0;
+          }
+
+          a {
+            @apply text-gray-600 hover:text-black border-none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.blog-post {
+  .title {
+    @apply break-words;
+    hyphens: auto;
+  }
+
+  .summary {
+    @apply text-sm text-gray-700 flex gap-1 flex-row justify-between mb-12;
+
+    .summary-left {
+      @apply flex items-center gap-2;
+
+      .avatar {
+        @apply w-6 h-6 rounded-full;
+      }
+    }
+  }
+
+  .content {
+    article img {
+      @apply mb-10;
+    }
+  }
+
+  .blog-post-nav {
+    @apply mt-16;
+  }
+
+  h2:last-of-type + p > a {
+    @apply break-all;
+  }
+}
+
+.warning-box {
+  @apply grid grid-cols-1 justify-items-center items-center sm:grid-cols-10 p-5 gap-1 sm:gap-5 bg-gray-200 mb-8 rounded-lg;
+
+  svg {
+    @apply w-12 h-10 grid sm:col-span-1;
+  }
+
+  p {
+    @apply m-0 sm:col-span-9;
+  }
+}
+
+.large-image {
+  @apply -ml-8 -mr-8 my-9 object-cover md:rounded-lg overflow-hidden border border-gray-200;
+
+  img {
+    width: 100%; /* image box size as % of container, see step 1 */
+    height: 100%; /* image box size as % of container, see step 1 */
+    object-fit: cover; /* matching of image pixels to image box, see step 2 */
+  }
+}
+
+.captioned-image {
+  @apply mb-9;
+
+  .large-image {
+    @apply mb-0;
+  }
+}
+
+.the-end {
+  @apply flex items-center my-9 text-gray-300 bg-transparent;
+
+  &:before,
+  &:after {
+    @apply flex-1 bg-gray-200 h-px;
+    content: "";
+    font-size: 0px;
+    line-height: 0px;
+  }
+
+  &:before {
+    @apply mr-2;
+  }
+
+  &:after {
+    @apply ml-2;
+  }
+}
