@@ -6,17 +6,6 @@ import useRepository from "../../hooks/useRepository";
 const PopularRepos = () => {
   const { myGithub, repositories } = useRepository();
 
-  if (repositories.length !== 3) {
-    repositories.unshift({
-      id: "missing-semester-tr.github.io",
-      name: "missing-semester-tr.github.io",
-      url: "https://github.com/missing-semester-tr/missing-semester-tr.github.io",
-      description: "Turkish version of The CS Missing Semester 📚",
-      stargazerCount: 99,
-      contributing: true,
-    });
-  }
-
   return repositories ? (
     <div className="popular-repos">
       <h2>Popüler Repolarım</h2>

@@ -222,32 +222,6 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-source-github-api`,
-      options: {
-        url: `https://api.github.com/graphql`,
-        token: `Bearer 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`,
-        graphQLQuery: `
-        query($author: String!) {
-            user(login: $author) {
-              name
-              repositories(orderBy: {field: STARGAZERS, direction: DESC}, first: 2) {
-                nodes {
-                  id
-                  name
-                  stargazerCount
-                  description
-                  url
-                }
-              }
-            }
-          }
-        `,
-        variables: {
-          author: `baspinarenes`,
-        },
-      },
-    },
     // {
     //   resolve: `gatsby-plugin-google-gtag`,
     //   options: {
