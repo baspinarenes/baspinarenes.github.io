@@ -154,8 +154,8 @@
         .post-header {
           @apply flex justify-between flex-col md:flex-row mb-1;
 
-          .post-views {
-            @apply m-0;
+          .post-date {
+            @apply m-0 text-sm;
           }
 
           a {

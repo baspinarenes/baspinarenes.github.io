@@ -10,7 +10,7 @@ const usePost = () => {
             slug
           }
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMMM DD, YYYY", locale: "tr")
             title
             description
             category

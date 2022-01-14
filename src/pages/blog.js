@@ -32,9 +32,11 @@ const Blog = ({ data }) => {
           İlk yazımı Mayıs 2020 de yazmıştım. Ancak blog belir bir süre
           inaktiflikten kırıldı. Bazılarına göre Github'ın şifresini unutmuştum
           bazılarına göre de üşengeçlik girdabındaydım. Ama şimdi daha güzel
-          döndüm. Yazılarda çok resmi olmaktan kaçınacağım ve birlikte
-          sorgulayarak ilerleyeceğiz. Okuduğunuzda kafanızda oluşacak soruları
-          öngörerek cevaplamaya da çalışacağım.
+          döndüm. Yazılarda resmiliğin sıkıcılığından uzak hafif trol olacak.
+          Teknik yazılarda birlikte sorgulayarak ilerleyeceğiz. Okuduğunuzda
+          kafanızda oluşacak soruları öngörerek cevaplamaya da çalışacağım.
+          Diğer yazılarda da ... aman her neyse bir şeyler yapmaya çalışacağız
+          işte.
         </p>
       </header>
       <section>
@@ -53,7 +55,7 @@ const Blog = ({ data }) => {
                           {post.frontmatter.title}
                         </Link>
                       </h4>
-                      {/* <p className="post-views">{0} okunma</p> */}
+                      <p className="post-date">{post.frontmatter.date}</p>
                     </header>
                     <p className="post-desc">{post.frontmatter.description}</p>
                   </article>
@@ -78,7 +80,7 @@ export const blogQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
+          date(formatString: "MMMM DD, YYYY", locale: "tr")
           title
           description
           category
