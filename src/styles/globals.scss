@@ -60,21 +60,44 @@ img {
 }
 
 // TABLES
+.table {
+  @apply -mx-8 overflow-x-scroll block bg-gray-100 mb-8 py-5 px-3;
 
-table {
-  @apply bg-gray-100 overflow-x-scroll block -mx-8 mb-8 p-7;
+  table {
+    @apply w-full py-5;
 
-  tr {
-    @apply flex text-center;
+    tr {
+      @apply text-center px-4;
 
-    th {
-      @apply capitalize flex-1 w-full pb-2 mb-3 border-b;
-      min-width: 100px;
-    }
+      th {
+        @apply capitalize pb-2 mb-3 border-b;
+        min-width: 100px;
 
-    td {
-      @apply whitespace-nowrap flex-1 w-full;
-      min-width: 100px;
+        &::before {
+          content: "";
+          @apply ml-1;
+        }
+
+        &::after {
+          content: "";
+          @apply mr-1;
+        }
+      }
+
+      td {
+        @apply whitespace-nowrap;
+        min-width: 100px;
+
+        &::before {
+          content: "";
+          @apply ml-1;
+        }
+
+        &::after {
+          content: "";
+          @apply mr-1;
+        }
+      }
     }
   }
 }

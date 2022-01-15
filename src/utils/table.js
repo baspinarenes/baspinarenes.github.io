@@ -3,6 +3,7 @@ export const WORD_TYPE = {
   ADJECTIVE: "adjective",
   VERB: "verb",
   ADVERB: "adverb",
+  EXCLAMATION: "exclamation",
 };
 
 export const getColorByWordType = wordType => {
@@ -10,23 +11,24 @@ export const getColorByWordType = wordType => {
 
   switch (wordType) {
     case "noun":
-      color = "yellow";
+      color = "text-yellow-500";
       break;
     case "adjective":
-      color = "green";
+      color = "text-green-500";
       break;
     case "verb":
-      color = "blue";
+      color = "text-blue-500";
       break;
     case "adverb":
-      color = "red";
+      color = "text-red-500";
+      break;
+    case "exclamation":
+      color = "text-pink-500";
       break;
     default:
-      color = "gray";
+      color = "text-gray-500";
       break;
   }
 
-  return {
-    color: `text-${color}-500`,
-  };
+  return { color };
 };

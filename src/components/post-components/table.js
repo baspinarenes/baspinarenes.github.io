@@ -8,28 +8,32 @@ const Table = props => {
   const dataPart = data[partName];
 
   return (
-    <table>
-      <tr>
-        {data.columnNames.map(columnName => (
-          <th key={columnName}>{columnName}</th>
-        ))}
-      </tr>
-      {dataPart.map(rowData => (
-        <tr key={rowData}>
-          {rowData.map(
-            (cellData, index) =>
-              typeof cellData == "string" && (
-                <td
-                  key={rowData + cellData}
-                  className={index === 0 && rowData[rowData.length - 1]?.color}
-                >
-                  {cellData}
-                </td>
-              )
-          )}
+    <div className="table">
+      <table>
+        <tr>
+          {data.columnNames.map(columnName => (
+            <th key={columnName}>{columnName}</th>
+          ))}
         </tr>
-      ))}
-    </table>
+        {dataPart.map(rowData => (
+          <tr key={rowData}>
+            {rowData.map(
+              (cellData, index) =>
+                typeof cellData == "string" && (
+                  <td
+                    key={rowData + cellData}
+                    className={
+                      index === 0 && rowData[rowData.length - 1]?.color
+                    }
+                  >
+                    {cellData}
+                  </td>
+                )
+            )}
+          </tr>
+        ))}
+      </table>
+    </div>
   );
 };
 

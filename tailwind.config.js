@@ -9,6 +9,9 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+      width: {
+        "fit": "fit-content",
+      },
     },
   },
   variants: {
