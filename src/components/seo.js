@@ -40,6 +40,10 @@ const Seo = ({ title, description = "", lang = "tr", meta = [] }) => {
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: siteMetadata?.siteUrl + "/icon.png",
+        },
+        {
           name: `twitter:card`,
           content: `summary`,
         },
@@ -54,6 +58,10 @@ const Seo = ({ title, description = "", lang = "tr", meta = [] }) => {
         {
           name: `twitter:description`,
           content: metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: siteMetadata?.siteUrl + "/icon.png",
         },
       ].concat(meta)}
     />
