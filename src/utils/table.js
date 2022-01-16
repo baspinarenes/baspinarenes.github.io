@@ -4,6 +4,7 @@ export const WORD_TYPE = {
   VERB: "verb",
   ADVERB: "adverb",
   EXCLAMATION: "exclamation",
+  PREPOSITION: "preposition",
 };
 
 export const getColorByWordType = wordType => {
@@ -24,6 +25,9 @@ export const getColorByWordType = wordType => {
       break;
     case "exclamation":
       color = "text-pink-500";
+      break;
+    case "preposition":
+      color = "text-blue-500";
       break;
     default:
       color = "text-gray-500";

@@ -216,4 +216,48 @@ export const wordDictionaries = {
       getColorByWordType(WORD_TYPE.NOUN),
     ],
   ],
+  day3: [
+    [
+      WORD_TYPE.NOUN,
+      "sandwich",
+      "sandviç",
+      "/sendviç/",
+      getColorByWordType(WORD_TYPE.NOUN),
+    ],
+    [
+      WORD_TYPE.ADJECTIVE,
+      "rich",
+      "zengin",
+      "/riç/",
+      getColorByWordType(WORD_TYPE.ADJECTIVE),
+    ],
+    [
+      WORD_TYPE.NOUN,
+      "child",
+      "genç çocuk",
+      "/çayld/",
+      getColorByWordType(WORD_TYPE.NOUN),
+    ],
+    [
+      WORD_TYPE.NOUN,
+      "children",
+      "çocuklar",
+      "/çıldırın/",
+      getColorByWordType(WORD_TYPE.NOUN),
+    ],
+    [
+      WORD_TYPE.NOUN,
+      "daughter",
+      "kız evlat",
+      "/doutır/",
+      getColorByWordType(WORD_TYPE.NOUN),
+    ],
+    [
+      WORD_TYPE.PREPOSITION,
+      "about",
+      "hakkında, ile ilgili",
+      "/abaut/",
+      getColorByWordType(WORD_TYPE.PREPOSITION),
+    ],
+  ],
 };
