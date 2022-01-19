@@ -51,6 +51,8 @@ export const wordDictionaries = () => {
       [WORD_TYPE.NOUN, "rice", "pirinç, pilav", "/rays/"],
       [WORD_TYPE.NOUN, "honey", "sevgilim, canım, tatlım", "/hani/"],
       [WORD_TYPE.ADJECTIVE, "important", "önemli", "/importınt/"],
+      [WORD_TYPE.NOUN, "genius", "dahi", "/ciniıs/"],
+      [WORD_TYPE.ADJECTIVE, "well", "sağlıklı, iyi", "/veal/"],
     ],
   };
 
