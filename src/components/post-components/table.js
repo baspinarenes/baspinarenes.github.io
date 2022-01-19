@@ -4,7 +4,7 @@ import allDatas from "../../data";
 const Table = props => {
   const { dataName, partName } = props;
 
-  const data = allDatas[dataName];
+  const data = allDatas[dataName]();
   const dataPart = data[partName];
 
   return (
