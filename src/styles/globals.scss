@@ -59,6 +59,11 @@ img {
   @apply sm:rounded-md;
 }
 
+// YOUTUBE VIDEO IFRAME WRAPPER
+.gatsby-resp-iframe-wrapper {
+  @apply -mx-8 rounded-lg;
+}
+
 // TABLES
 .table {
   @apply -mx-8 overflow-x-scroll block bg-gray-100 mb-8 py-5 px-3;
