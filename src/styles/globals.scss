@@ -39,8 +39,14 @@ a {
   @apply text-blue-700 font-semibold border-b-2 border-transparent hover:border-blue-700 break-words;
 }
 
-strong {
+strong,
+b {
   @apply font-semibold text-yellow-500 mx-0.5;
+}
+
+em,
+i {
+  @apply text-green-500;
 }
 
 svg {
@@ -53,6 +59,15 @@ code[class*="language-text"] {
 
 ul {
   @apply mb-5 list-inside	list-disc;
+
+  .task-list-item {
+    @apply flex gap-2 items-center;
+  }
+}
+
+// Checklist
+ul.contains-task-list {
+  @apply flex flex-col gap-1 list-none;
 }
 
 img {
@@ -61,7 +76,7 @@ img {
 
 // YOUTUBE VIDEO IFRAME WRAPPER
 .gatsby-resp-iframe-wrapper {
-  @apply -mx-8 rounded-lg;
+  @apply -mx-8 sm:rounded-md;
 }
 
 // TABLES
