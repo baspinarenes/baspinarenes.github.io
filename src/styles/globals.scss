@@ -76,12 +76,12 @@ img {
 
 // YOUTUBE VIDEO IFRAME WRAPPER
 .gatsby-resp-iframe-wrapper {
-  @apply -mx-8 sm:rounded-md;
+  @apply -mx-8 mb-10 sm:rounded-md;
 }
 
 // TABLES
 .table {
-  @apply -mx-8 overflow-x-scroll block bg-gray-100 mb-8 py-5 px-3;
+  @apply -mx-8 border-t border-b md:rounded-md md:border-l md:border-r border-gray-300 overflow-x-scroll block bg-gray-100 mb-8 pb-2;
 
   table {
     @apply w-full py-5;
@@ -90,7 +90,7 @@ img {
       @apply text-center px-4;
 
       th {
-        @apply capitalize pb-2 mb-3 border-b;
+        @apply capitalize py-2 mb-3 border-b border-gray-300;
         min-width: 100px;
 
         &::before {
@@ -110,12 +110,12 @@ img {
 
         &::before {
           content: "";
-          @apply ml-1;
+          @apply ml-3;
         }
 
         &::after {
           content: "";
-          @apply mr-1;
+          @apply mr-3;
         }
       }
     }
