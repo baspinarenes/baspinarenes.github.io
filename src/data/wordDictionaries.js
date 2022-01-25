@@ -155,7 +155,19 @@ export const wordDictionaries = () => {
       [WORD_TYPE.NOUN, "technology", "teknoloji", "/teknoloci/"],
       [WORD_TYPE.NOUN, "snack", "atıştırmalık", "/sınek/"],
     ],
+    day10: [
+      [WORD_TYPE.NOUN, "butter", "tereyağı", "/badır/"],
+      [WORD_TYPE.ADJECTIVE, "delicious", "lezzetli", "/delişıs/"],
+      [WORD_TYPE.ADJECTIVE, "disgusting", "iğrenç", "/diskasting/"],
+      [WORD_TYPE.ADJECTIVE, "awesome", "müthiş, harika", "/ovsım/"],
+      [WORD_TYPE.NOUN, "arrive", "varmak, ulaşmak", "/erayv/"],
+      [WORD_TYPE.VERB, "consider", "enine boyuna düşünmek", "/kınsidır/"],
+      [WORD_TYPE.VERB, "declare", "bildirmek", "/dikıleyır/"],
+      [WORD_TYPE.NOUN, "state", "durum", "/sıteyt/"],
+    ],
   };
+
+  // TODO: use google spreadsheet
 
   Object.keys(dictionaries).forEach(key => {
     if (key.startsWith("day")) {
