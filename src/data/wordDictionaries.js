@@ -165,6 +165,27 @@ export const wordDictionaries = () => {
       [WORD_TYPE.VERB, "declare", "bildirmek", "/dikıleyır/"],
       [WORD_TYPE.NOUN, "state", "durum", "/sıteyt/"],
     ],
+    day13: [
+      [WORD_TYPE.NOUN, "shirt", "gömlek", "/şört/"],
+      [WORD_TYPE.NOUN, "pants", "pantolon", "/pents/"],
+      [WORD_TYPE.VERB, "dress", "giyinmek, giydirmek", "/dres/"],
+      [WORD_TYPE.NOUN, "dress", "kadın elbisesi", "/dres/"],
+      [WORD_TYPE.NOUN, "skirt", "etek", "/sıkört/"],
+      [WORD_TYPE.NOUN, "coat", "palto", "/kout/"],
+      [WORD_TYPE.NOUN, "shoe", "ayakkabı", "/şıuu/"],
+      [WORD_TYPE.NOUN, "hat", "şapka", "/het/"],
+    ],
+    day14: [],
+    day15: [
+      [WORD_TYPE.VERB, "wear", "giymek, takmak", "/veyır/"],
+      [WORD_TYPE.VERB, "pay", "ödemek", "/pey/"],
+      [WORD_TYPE.VERB, "need", "ihtiyacı olmak", "/niid/"],
+      [WORD_TYPE.VERB, "touch", "dokunmak", "/taç/"],
+      [WORD_TYPE.VERB, "tell", "söylemek, demek, anlatmak", "/teıl/"],
+      [WORD_TYPE.VERB, "speak", "konuşmak", "/spiik/"],
+      [WORD_TYPE.VERB, "say", "söylemek, demek", "/sey/"],
+      [WORD_TYPE.VERB, "talk", "konuşmak", "/tolk/"],
+    ],
   };
 
   // TODO: use google spreadsheet
