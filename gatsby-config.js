@@ -10,7 +10,7 @@ module.exports = {
     siteUrl: `https://enesbaspinar.me`,
     social: {
       twitter: `enesbaspinar0`,
-      github: `https://github.com/baspinarenes`,
+      github: `baspinarenes`,
     },
   },
   plugins: [
