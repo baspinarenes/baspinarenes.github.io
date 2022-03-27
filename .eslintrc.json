@@ -6,6 +6,7 @@
     "prettier"
   ],
   "rules": {
+    "no-lonely-if": "off",
     "newline-before-return": "error",
     "import/extensions": [
       "error",
