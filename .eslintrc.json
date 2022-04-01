@@ -11,6 +11,7 @@
   ],
   "rules": {
     "no-lonely-if": "off",
+    "no-use-before-define": "off",
     "newline-before-return": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
