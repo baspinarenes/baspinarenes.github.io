@@ -1,5 +1,5 @@
 import React from "react";
-import { socials } from "../../../constants";
+import { socials } from "../../../../constants";
 import Social from "./Social";
 
 const Socials = () => (

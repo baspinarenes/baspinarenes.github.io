@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
 
-const Blog: NextPage = () => <div>Blog</div>;
+const Blog: NextPage = () => <div>Coming soon!</div>;
 
 export default Blog;

@@ -1,0 +1,28 @@
+import Link from "next/link";
+import { useContext } from "react";
+import { HamburgerMenuContext } from "../../../../contexts/hamburger-menu";
+
+type NavlinkProps = {
+  name: string;
+  path: string;
+};
+
+const Navlink = (props: NavlinkProps) => {
+  const { name, path } = props;
+
+  const { setIsOpenHamburgerMenu } = useContext(HamburgerMenuContext);
+
+  const handleClickHamburgerMenuNavlink = () => {
+    setTimeout(() => {
+      setIsOpenHamburgerMenu((prevState: boolean) => !prevState);
+    }, 100);
+  };
+
+  return (
+    <Link href={path}>
+      <a onClick={handleClickHamburgerMenuNavlink}>{name}</a>
+    </Link>
+  );
+};
+
+export default Navlink;

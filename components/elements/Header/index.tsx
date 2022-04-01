@@ -1,12 +1,12 @@
 import Image from "next/image";
 import React from "react";
-import changeTheme from "../../utils/changeTheme";
+import changeTheme from "../../../utils/changeTheme";
 import HamburgerMenu from "./HamburgerMenu";
 import NormalMenu from "./NormalMenu";
 import Socials from "./Socials";
 
 const Header = () => (
-  <div className="flex items-center mb-3">
+  <div className="flex items-center">
     <HamburgerMenu />
     <NormalMenu />
     <Socials />
