@@ -1,0 +1,73 @@
+.mdx-container {
+  h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-top: 64px;
+    margin-bottom: 20px;
+
+    @media (min-width: 640px) {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
+  > p {
+    margin-bottom: 20px;
+    line-height: 1.6rem;
+  }
+
+  a {
+    word-break: break-all;
+    font-weight: bold;
+    color: rgba(29, 78, 216);
+    border-bottom-width: 2px;
+    border-color: transparent;
+    overflow-wrap: break-word;
+    margin-bottom: 15px;
+    padding-bottom: 2px;
+
+    &:hover {
+      border-color: rgba(29, 78, 216);
+    }
+  }
+
+  b,
+  strong {
+    @apply text-orange-500;
+  }
+
+  p code {
+    @apply bg-gray-200 rounded-md px-2 py-0.5;
+  }
+
+  pre p {
+    @apply w-fit;
+  }
+
+  pre,
+  code {
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  blockquote {
+    @apply my-10 -mx-4 py-5 px-6 sm:rounded-lg overflow-hidden;
+    border-left: 8px solid #3984ff;
+    background-color: #f5f7f9;
+  }
+
+  .ch-codegroup,
+  .ch-codeblock {
+    @apply rounded-none sm:rounded-md -mx-4 my-8;
+
+    * {
+      font-family: "JetBrains Mono", monospace;
+    }
+  }
+
+  .warning-box {
+    p {
+      display: inline;
+    }
+  }
+}

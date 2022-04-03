@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import PageLayout from "../components/templates/PageLayout";
+import PageLayout from "components/templates/PageLayout";
 import { HamburgerMenuContextProvider } from "../contexts/hamburger-menu";
 import * as gtag from "../utils/gtag";
 import "../styles/globals.scss";
+import "@code-hike/mdx/dist/index.css";
 
 const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props;

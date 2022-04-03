@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import useSWR from "swr";
-import CardList from "../components/elements/Content/Home/CardList";
-import ProfileCard from "../components/elements/Content/Home/ProfileCard";
+import CardList from "components/elements/Content/Home/CardList";
+import ProfileCard from "components/elements/Content/Home/ProfileCard";
 import { siteData } from "../constants";
 
 const Home: NextPage = () => {
