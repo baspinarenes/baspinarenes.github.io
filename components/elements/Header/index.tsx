@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import changeTheme from "../../../utils/changeTheme";
 import HamburgerMenu from "./HamburgerMenu";
 import NormalMenu from "./NormalMenu";

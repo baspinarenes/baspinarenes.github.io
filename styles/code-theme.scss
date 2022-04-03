@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap");
 
 .remark-highlight {
-  // @apply bg-gray-100 sm:rounded-lg -mx-5 p-4 mb-5;
-  @apply -mx-5;
+  @apply -mx-4;
 
   * {
     font-family: "JetBrains Mono", monospace;

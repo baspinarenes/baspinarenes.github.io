@@ -3,7 +3,7 @@ import Image from "next/image";
 import readingTime from "reading-time";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
-import CustomImage from "components/elements/mdx/CustomImage";
+import * as PostComponents from "components/elements/post-components";
 import { siteData } from "../../../constants";
 import { PostPageStaticProps } from "../../../models/common";
 import { PostData } from "../../../models/post";
@@ -30,8 +30,8 @@ const Post = (props: PostProps) => {
         {title}
       </h1>
 
-      <p className="text-justify sm:text-left mb-5">{summary}</p>
-      <div className="flex gap-3 mb-15 items-center">
+      <p className="mb-5">{summary}</p>
+      <div className="flex gap-3 mb-8 items-center">
         <Image
           src="/images/icon.webp"
           height={24}
@@ -42,11 +42,13 @@ const Post = (props: PostProps) => {
           {siteData.author.name} • {date} • {readTime} dakikacık
         </div>
       </div>
-      <PostContentComponent
-        components={{
-          CustomImage,
-        }}
-      />
+      <div className="mdx-container ">
+        <PostContentComponent
+          components={{
+            ...PostComponents,
+          }}
+        />
+      </div>
     </div>
   );
 };

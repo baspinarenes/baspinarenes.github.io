@@ -1,7 +1,10 @@
+/* eslint-disable no-param-reassign */
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
+import theme from "shiki/themes/nord.json"; // kendi temani yedir
+import { remarkCodeHike } from "@code-hike/mdx";
 import { PostParams } from "../models/post";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
@@ -54,10 +57,37 @@ const getAllPostNames = () => {
 
 const getPostData = async (categoryName: string, postName: string) => {
   const fullPath = path.join(postsDirectory, categoryName, postName);
-  const fileContent = fs.readFileSync(`${fullPath}.mdx`, "utf8");
+  const source = fs.readFileSync(`${fullPath}.mdx`, "utf8");
+
+  if (process.platform === "win32") {
+    process.env.ESBUILD_BINARY_PATH = path.join(
+      process.cwd(),
+      "node_modules",
+      "esbuild",
+      "esbuild.exe"
+    );
+  } else {
+    process.env.ESBUILD_BINARY_PATH = path.join(
+      process.cwd(),
+      "node_modules",
+      "esbuild",
+      "bin",
+      "esbuild"
+    );
+  }
+
   const { code: contentHtml, frontmatter } = await bundleMDX({
-    source: fileContent,
+    source,
     cwd: postsDirectory,
+    mdxOptions(options) {
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        [remarkCodeHike, { theme, lineNumbers: true }],
+      ];
+      options.rehypePlugins = [...(options.rehypePlugins ?? [])];
+
+      return options;
+    },
   });
 
   const date = getLocaleDateString(frontmatter.date);

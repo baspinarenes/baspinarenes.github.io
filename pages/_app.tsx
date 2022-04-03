@@ -6,6 +6,7 @@ import PageLayout from "components/templates/PageLayout";
 import { HamburgerMenuContextProvider } from "../contexts/hamburger-menu";
 import * as gtag from "../utils/gtag";
 import "../styles/globals.scss";
+import "@code-hike/mdx/dist/index.css";
 
 const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props;

@@ -1,4 +1,3 @@
-import React from "react";
 import { MappedRepository } from "../../../../../models/github";
 import PostCard from "./PostCard";
 import RepositoryCard from "./RepositoryCard";

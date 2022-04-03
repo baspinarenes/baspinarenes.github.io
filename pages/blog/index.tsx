@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import BlogCategory from "../../components/elements/content/blog/BlogCategory";
+import BlogCategory from "components/elements/Content/Blog/BlogCategory";
 import { siteData } from "../../constants";
 import { PostCategory } from "../../models/post";
 import { getBlogPageData } from "../../utils/post";

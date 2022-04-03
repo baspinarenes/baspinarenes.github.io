@@ -1,4 +1,3 @@
-import React from "react";
 import { Post } from "../../../../models/post";
 import BlogPost from "./BlogPost";
 

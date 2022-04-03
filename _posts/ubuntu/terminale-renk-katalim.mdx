@@ -5,6 +5,7 @@ category: Ubuntu
 summary: Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararıyor değil mi? Öyleyse terminalimize biraz renk katalım.
 ---
 
+{/* prettier-ignore */}
 <WarningBox>
   Bu yazıda izlenilecek yöntem,{" "}
   <a class="warning-link" href="https://twitter.com/rajaraodv">
@@ -16,16 +17,25 @@ summary: Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararıyor 
     href="https://medium.com/free-code-camp/jazz-up-your-bash-terminal-a-step-by-step-guide-with-pictures-80267554cb22"
   >
     buradan
-  </a> ulaşabilirsiniz.
+  </a>
+  {" "}ulaşabilirsiniz.
 </WarningBox>
 
 Ubuntu'nun varsayılan terminaline bakınca sizinde içiniz kararmıyor mu? Elbette öyle. Aslında beni farklı arayışa iten, Git kullanmaya başlamam oldu. İzlediğim videolarda ve yazılarda, baktıkça Git kullanma hissi uyandıran terminaller vardı. Birkaç araştırma sonucu anlatacağım yönteme denk geldim ve beğenerek kullanıyorum. Kullandığım ve yazı sonunda elde edeceğimiz görüntü şu şekilde olacaktır:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-001.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/001.webp"
+  width={1111}
+  height={345}
+/>
 
 Harika, değil mi? Ubuntu'nun varsayılan terminali ile karşılaştırmak isterseniz:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-002.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/002.webp"
+  width={1105}
+  height={342}
+/>
 
 Öyleyse değişim başlasın!
 
@@ -35,11 +45,19 @@ Renk şemamızı belirleyerek başlayalım. Bu kısımda, varsayılan ya da **[G
 
 Kullanacağımız şemayı belirledikten sonra özelleştirmeler yapabiliriz. Ben "Built-in schemes" kısmından "Solarized Dark" şemasını seçtikten sonra yazı rengini beyaz ve "Palette" kısmını ise "XTerm" olarak değiştirdim:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-003.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/003.webp"
+  width={781}
+  height={593}
+/>
 
 "Default" profil olarak tanımlayabileceğiniz gibi yeni bir profil oluşturup onun üzerinden de yapılandırmayı gerçekleştirebilirsiniz. Bu işlemlerden sonra terminal şu şekilde gözükmelidir:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-004.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/004.webp"
+  width={896}
+  height={405}
+/>
 
 > Bu kısımda terminalinizde kullanıcı adınızın solunda **(base)** önekini görebilirsiniz. Bu, conda kurulumunuzdan gelen varsayılan sanal ortamdır. Yapacağımız işlemler açısından sorun teşkil etmiyor ancak `conda deactivate` komutunu yazarak devredışı bırakabilirsiniz. Yapacaklarımızdan sonra bu öneki gizlemiş olacağız.
 
@@ -65,7 +83,11 @@ Terminal her açıldığında Powerline'ın gözükmesi için Powerline Daemon'u
 $ pip3 show powerline-status
 ```
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-005.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/005.webp"
+  width={673}
+  height={262}
+/>
 
 Çıktıdaki "Location" özelliğinin değerini kopyalayım ve Powerline'ı aktif hale getirmek için `.bashrc_profile` dosyamızı açalım:
 
@@ -73,9 +95,9 @@ $ pip3 show powerline-status
 $ nano ~/.bashrc_profile
 ```
 
-Alt kısımda paylaştığım koddaki "{BU KISMA YAPIŞTIR}" alanını, terminalden aldığımız "Location" değeri ile değiştirelim. Ve değiştirdikten sonra tamamını kopyalayıp `.bashrc_profile` dosyamızın **sonuna** ekleyelim.
+Alt kısımda paylaştığım koddaki "BU KISMA YAPIŞTIR" alanını, terminalden aldığımız "Location" değeri ile değiştirelim. Ve değiştirdikten sonra tamamını kopyalayıp `.bashrc_profile` dosyamızın **sonuna** ekleyelim.
 
-```bash
+```bash .bashrc_profile
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
@@ -84,7 +106,11 @@ POWERLINE_BASH_SELECT=1
 
 Son satıra kendi bilginizi girdiğinizden emin olun! Bende dosyanın içeriği aşağıdaki gibidir:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-006.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/006.webp"
+  width={907}
+  height={260}
+/>
 
 Şimdi `.bashrc` dosyamızı açalım:
 
@@ -94,31 +120,51 @@ $ nano ~/.bashrc
 
 Dosyanın sonuna şu ifadeyi ekleyelim (halihazırda varsa bir daha eklemenize gerek yok):
 
-```bash
+```bash .bashrc
 . ~/.bashrc_profile
 ```
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-007.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/007.webp"
+  width={917}
+  height={333}
+/>
 
 Terminali kapatıp açtığımızda ekranımız aşağıdaki gibi gözükmelidir:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-008.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/008.webp"
+  width={763}
+  height={243}
+/>
 
 ## Adım 4: Kullanılacak Fontun Kurulması
 
 Sonraki aşamalarfs kolaylık sağlaması adına bir repo oluşturup içerisine gerekli dosyaları ekledim. <a href="https://github.com/baspinarenes/bash-tema-dosyalari">https://github.com/baspinarenes/bash-tema-dosyalari</a> reposuna gidip "Clone or Download" diyerek zip halinde indirelim.
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-009.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/009.webp"
+  width={937}
+  height={391}
+/>
 
 İndirdiğimiz zip doyasındakileri çıkartalım ve içindeki **Meslo LG L DZ Regular for Powerline.ttf** dosyasına çift tıklayalım. Ve **Install Font** butonu ile fontu bilgisayara yükleyelim.
 
 Bu fontu terminale eklemeliyiz. Terminal ayarlarındaki **Text** sekmesinden **Custom font** butonuna tıklayarak **Meslo LG L DZ for Powerline Regular** fontunu seçelim. Font boyutunu istediğimiz boyuta ayarlayabiliriz, 13 bana ideal gibi geldi. Ben ek olarak terminalin o gıcık sesini kapatıyorum :)
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-010.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/010.webp"
+  width={772}
+  height={593}
+/>
 
 Terminali kapatıp açtığımızda görüntü aşağıdaki gibi olmalıdır:
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-011.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/011.webp"
+  width={897}
+  height={375}
+/>
 
 ## Adım 5: Git Durum Göstergesinin Eklenmesi
 
@@ -134,9 +180,7 @@ Powerline nerede kuruluydu hatırlıyor musunuz? Yeniden bakmaktan zarar gelmez:
 $ pip3 show powerline-status
 ```
 
-Tekrardan "Location" değerini kopyalayalım:
-
-İndirdiğimiz zipi çıkartalım ve klasöre girelim:
+Tekrardan "Location" değerini kopyalayalım. İndirdiğimiz zipi çıkartalım ve klasöre girelim:
 
 ```bash
 $ cd ~/Downloads/bash-tema-dosyalari-master/
@@ -144,7 +188,7 @@ $ cd ~/Downloads/bash-tema-dosyalari-master/
 
 Git'e ait özellikleri eklediğim dosyaları bilgisayarımızda gereken konumlara kopyalayalım (eğer önceden değişiklik yaptıysanız onlar kaybolacaktır). Ve ilgili yerlere yeniden "Location" bilgisini yapıştıralım:
 
-```bash{numberLines: false}
+```bash
 $ cp default-colorscheme.json {BU KISMA YAPIŞTIR}/powerline/config_files/colorschemes/shell/default.json
 # (Benim örneğimde: cp default-colorscheme.json /home/enesbaspinar/.local/lib/python3.8/site-packages/powerline/config_files/colorschemes/shell/default.json)
 
@@ -160,6 +204,12 @@ $ powerline-daemon --replace
 
 Terminali yeniden başlattığınızda her şeyin hazır olduğunu görebilirsiniz.
 
-<CustomImage height={50} width={50} src="terminale-renk-katalim-012.webp" />
+<CustomImage
+  src="/images/post/terminale-renk-katalim/012.webp"
+  width={1086}
+  height={438}
+/>
+
+<TheEnd />
 
 Yazımız burada bitti. Yeni yazılarda görüşmek üzere, esen kalın.
