@@ -12,6 +12,13 @@ const siteData = {
     twitter: "enesbaspinar0",
     github: "baspinarenes",
   },
+  page: {
+    blog: {
+      title: "Blog",
+      description:
+        "İlk yazımı Mayıs 2020 de yazmıştım. Ancak blog üşengeçlik bataklığımda kayboldu. Ama yine yeniden döndüm. Yazılarımı genelde resmiliğin sıkıcılığından uzak tutuyorum ve hafif goygoy ile süslüyorum. Ve birlikte sorgulayarak ilerleyeceğimiz şekilde kurgulamayı seviyorum. Okuduğunuzda kafanızda oluşacak soruları öngörerek cevaplamaya da çalışıyorum. Ve işte o yazılarım.",
+    },
+  },
 };
 
 export default siteData;
