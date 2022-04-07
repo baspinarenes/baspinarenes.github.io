@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import { Octokit } from "octokit";
 import { siteData } from "../../constants";
 import {
@@ -7,7 +8,13 @@ import {
   sortRepositoriesByPopularity,
 } from "../../utils/github";
 
-export default async (req: any, res: any) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const repositories = getRepositories();
+
+  return res.status(200).json({ repositories });
+};
+
+export const getRepositories = async () => {
   const octokit = new Octokit({
     auth: process.env.GITHUB_AUTH_TOKEN,
   });
@@ -22,7 +29,5 @@ export default async (req: any, res: any) => {
     .sort(sortRepositoriesByPopularity)
     .sort(sortRepositoriesByForked);
 
-  return res.status(200).json({
-    repositories: mappedRepositoryResult,
-  });
+  return mappedRepositoryResult;
 };
