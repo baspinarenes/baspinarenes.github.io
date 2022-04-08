@@ -1,24 +1,24 @@
 import { ignoredRepositoryNames } from "../constants/repository";
 import { MappedRepository } from "../models/github";
 
-const mapRepositoryResult = (repositoryData: any): MappedRepository => {
+const mapRepository = (rawRepository: any): MappedRepository => {
   const {
     name,
     html_url: htmlUrl,
     description,
     homepage,
-    stargazers_count: stargazersCount,
-    forks_count: forksCount,
+    stargazers_count: starCount,
+    forks_count: forkCount,
     fork,
-  } = repositoryData;
+  } = rawRepository;
 
   return {
     name,
     htmlUrl,
     description,
     homepage,
-    stargazersCount,
-    forksCount,
+    starCount,
+    forkCount,
     fork,
   };
 };
@@ -45,11 +45,11 @@ const sortRepositoriesByPopularity = (
   previousRepo: MappedRepository,
   currentRepo: MappedRepository
 ) =>
-  Number(currentRepo.stargazersCount + currentRepo.forksCount) -
-  Number(previousRepo.stargazersCount + previousRepo.forksCount);
+  Number(currentRepo.starCount + currentRepo.forkCount) -
+  Number(previousRepo.starCount + previousRepo.forkCount);
 
 export {
-  mapRepositoryResult,
+  mapRepository,
   sortRepositoriesByForked,
   sortRepositoriesByPopularity,
   filterByIgnoredRepoNames,

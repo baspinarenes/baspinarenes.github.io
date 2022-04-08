@@ -3,7 +3,7 @@ export interface MappedRepository {
   htmlUrl: string;
   description: string;
   homepage: string;
-  stargazersCount: number;
-  forksCount: number;
+  starCount: number;
+  forkCount: number;
   fork: boolean;
 }

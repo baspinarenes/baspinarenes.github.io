@@ -7,7 +7,7 @@ const BlogCategory = (props: BlogCategoryProps) => {
   return (
     <div>
       <h2 className="mb-3 font-bold text-2xl sm:text-3xl">{`#${categoryName}`}</h2>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col">
         {posts.map((post) => (
           <BlogPost
             key={post.name}

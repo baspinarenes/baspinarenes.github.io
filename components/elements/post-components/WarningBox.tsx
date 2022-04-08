@@ -13,7 +13,7 @@ const WarningBox = (props: WarningBoxProps) => {
         alt="Warning icon"
         className="w-12 h-10 grid sm:col-span-1"
       />
-      <p className="m-0 sm:col-span-9">{children}</p>
+      <div className="m-0 sm:col-span-9">{children}</div>
     </div>
   );
 };

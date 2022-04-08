@@ -1,12 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Octokit } from "octokit";
+import { mapRepository } from "utils/github";
 import { siteData } from "../../constants";
-import {
-  filterByIgnoredRepoNames,
-  mapRepositoryResult,
-  sortRepositoriesByForked,
-  sortRepositoriesByPopularity,
-} from "../../utils/github";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const repositories = getRepositories();
@@ -19,15 +14,21 @@ export const getRepositories = async () => {
     auth: process.env.GITHUB_AUTH_TOKEN,
   });
 
-  const repositoryResult = await octokit.rest.repos.listForUser({
-    username: siteData.socials.github,
+  const contributerRepositories = await octokit.request(
+    "GET /repos/missing-semester-tr/missing-semester-tr.github.io"
+  );
+
+  const repositoryResult = await octokit.request("GET /search/repositories", {
+    q: `user:${siteData.socials.github}`,
+    sort: "stars",
+    order: "desc",
+    per_page: 3,
   });
 
-  const mappedRepositoryResult = repositoryResult.data
-    .map(mapRepositoryResult)
-    .filter(filterByIgnoredRepoNames)
-    .sort(sortRepositoriesByPopularity)
-    .sort(sortRepositoriesByForked);
+  const repositories = [
+    contributerRepositories.data,
+    ...repositoryResult.data.items,
+  ];
 
-  return mappedRepositoryResult;
+  return repositories.map(mapRepository);
 };
