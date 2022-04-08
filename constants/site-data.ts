@@ -1,4 +1,5 @@
 const siteData = {
+  url: "https://www.enesbaspinar.com",
   title: "Enes Başpınar",
   author: {
     name: "Enes Başpınar",

@@ -1,9 +1,10 @@
-import Head from "next/head";
 import Image from "next/image";
 import readingTime from "reading-time";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import * as PostComponents from "components/elements/post-components";
+import Meta from "components/elements/Meta";
+import { useRouter } from "next/router";
 import { siteData } from "../../../constants";
 import { PostPageStaticProps } from "../../../models/common";
 import { PostData } from "../../../models/post";
@@ -14,6 +15,10 @@ const Post = (props: PostProps) => {
   const { contentHtml, date, summary, title } = postData;
   const readTime = Math.round(readingTime(contentHtml).minutes);
 
+  const {
+    query: { categoryName, postName },
+  } = useRouter();
+
   const PostContentComponent = useMemo(
     () => getMDXComponent(contentHtml),
     [contentHtml]
@@ -21,15 +26,14 @@ const Post = (props: PostProps) => {
 
   return (
     <div>
-      <Head>
-        <title>
-          {title} | {siteData.title}
-        </title>
-      </Head>
+      <Meta
+        title={title}
+        description={summary}
+        url={`/blog/${categoryName}/${postName}`}
+      />
       <h1 className="mb-5 font-bold text-4xl sm:text-5xl text-center sm:text-left break-words">
         {title}
       </h1>
-
       <p className="mb-5">{summary}</p>
       <div className="flex gap-3 mb-8 items-center">
         <Image
