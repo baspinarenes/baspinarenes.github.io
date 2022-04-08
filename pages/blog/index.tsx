@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import BlogCategory from "components/elements/Content/Blog/BlogCategory";
+import Meta from "components/elements/Meta";
 import { siteData } from "../../constants";
 import { PostCategory } from "../../models/post";
 import { getBlogPageData } from "../../utils/post";
@@ -10,11 +10,7 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
 
   return (
     <div>
-      <Head>
-        <title>
-          {siteData.page.blog.title} | {siteData.title}
-        </title>
-      </Head>
+      <Meta />
       <h1 className="mb-10 font-bold text-4xl sm:text-5xl text-center sm:text-left">
         {siteData.page.blog.title}
       </h1>
