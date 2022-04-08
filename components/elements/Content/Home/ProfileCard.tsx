@@ -7,7 +7,7 @@ const ProfileCard = () => {
   return (
     <div className="flex flex-col-reverse sm:flex-row gap-4 sm:gap-8">
       <div className="flex flex-col gap-2 flex-1">
-        <h1 className="font-bold text-4xl sm:text-5xl text-center sm:text-left">
+        <h1 className="font-bold text-4xl sm:text-5xl text-center sm:text-left mb-3">
           {name}
         </h1>
         <h4 className="font-semibold text-center sm:text-left">{title}</h4>

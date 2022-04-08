@@ -11,7 +11,9 @@ const Home: NextPage = (props: any) => {
     <div className="flex flex-col gap-20">
       <Meta />
       <ProfileCard />
-      {repositories && <CardList type="repository" data={repositories} />}
+      {repositories?.length > 0 && (
+        <CardList type="repository" data={repositories} />
+      )}
     </div>
   );
 };

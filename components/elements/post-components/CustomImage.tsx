@@ -1,5 +1,6 @@
 /* eslint-disable react/require-default-props */
 import Image from "next/image";
+import { useState } from "react";
 
 interface CustomImageProps {
   src: string;
@@ -13,6 +14,8 @@ interface CustomImageProps {
 const CustomImage = (props: CustomImageProps) => {
   const { src, alt, height, width, reference = "", position = "" } = props;
 
+  const [isLoading, setLoading] = useState(true);
+
   const lastLayout = position ? "fixed" : "responsive";
   const marginLeftOrRight =
     position === "right" ? "float-right ml-4" : "float-left mr-4";
@@ -22,7 +25,9 @@ const CustomImage = (props: CustomImageProps) => {
     <div
       className={`${
         position ? `${marginLeftOrRight} mb-6 mt-0` : "border shadow-sm -mx-4"
-      } ${reference ? "" : "overflow-hidden"} relative leading-none my-8`}
+      } ${
+        reference ? "" : "overflow-hidden"
+      } rounded-lg relative leading-none my-8`}
     >
       <Image
         src={src}
@@ -30,7 +35,14 @@ const CustomImage = (props: CustomImageProps) => {
         height={height}
         width={width}
         layout={lastLayout as any}
-        className={`${position ? "rounded-lg" : ""} sm:rounded-lg`}
+        className={`${
+          position ? "rounded-lg" : ""
+        } sm:rounded-lg duration-700 ease-in-out group-hover:opacity-75 ${
+          isLoading
+            ? "scale-110 blur-2xl grayscale"
+            : "scale-100 blur-0 grayscale-0"
+        }`}
+        onLoadingComplete={() => setLoading(false)}
       />
       <a
         href={reference}
