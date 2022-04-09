@@ -2,11 +2,13 @@ import { Post } from "../../../../models/post";
 import BlogPost from "./BlogPost";
 
 const BlogCategory = (props: BlogCategoryProps) => {
-  const { categoryName, posts } = props;
+  const { categoryName, posts, categoryBeautifiedName } = props;
 
   return (
     <div>
-      <h2 className="mb-3 font-bold text-2xl sm:text-3xl">{`#${categoryName}`}</h2>
+      <h2 className="mb-3 font-bold text-2xl sm:text-3xl">
+        {categoryBeautifiedName}
+      </h2>
       <div className="flex flex-col">
         {posts.map((post) => (
           <BlogPost
@@ -25,6 +27,7 @@ const BlogCategory = (props: BlogCategoryProps) => {
 
 interface BlogCategoryProps {
   categoryName: string;
+  categoryBeautifiedName: string;
   posts: Post[];
 }
 

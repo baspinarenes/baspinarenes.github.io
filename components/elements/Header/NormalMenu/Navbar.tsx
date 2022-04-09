@@ -12,7 +12,10 @@ const Navbar = () => {
           key={navigation.name}
           name={navigation.name}
           path={navigation.path}
-          isActive={router.pathname === navigation.path}
+          isActive={
+            router.pathname.match(/(?<path>\/\w*)\/*/)?.groups?.path ===
+            navigation.path
+          }
         />
       ))}
     </div>
