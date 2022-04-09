@@ -34,8 +34,7 @@ const Post = (props: PostProps) => {
       <h1 className="mb-5 font-bold text-4xl sm:text-5xl text-center sm:text-left break-words">
         {title}
       </h1>
-      <p className="mb-5">{summary}</p>
-      <div className="flex gap-3 mb-8 items-center">
+      <div className="flex gap-3 mb-14 items-center">
         <Image
           src="/images/icon.webp"
           height={24}
@@ -46,6 +45,7 @@ const Post = (props: PostProps) => {
           {siteData.author.name} • {date} • {readTime} dakikacık
         </div>
       </div>
+      <p className="mb-5">{summary}</p>
       <div className="mdx-container ">
         <PostContentComponent
           components={{
