@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import { memo, useContext } from "react";
 import Image from "next/image";
+import { Icons } from "components/elements/common";
 import Navbar from "./Navbar";
 import { HamburgerMenuContext } from "../../../../contexts/hamburger-menu";
 
@@ -16,10 +17,11 @@ const HamburgerMenu = () => {
         }
       >
         <Image
-          src="/images/menu.svg"
+          src={Icons.HamburgerMenu}
           alt="Hamburger menu icon"
           height={20}
           width={20}
+          className="dark:brightness-0 dark:invert"
         />
       </button>
       <Navbar />
@@ -27,4 +29,4 @@ const HamburgerMenu = () => {
   );
 };
 
-export default HamburgerMenu;
+export default memo(HamburgerMenu);

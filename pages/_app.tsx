@@ -3,16 +3,22 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import PageLayout from "components/templates/PageLayout";
-import { HamburgerMenuContextProvider } from "../contexts/hamburger-menu";
+import { ThemeContextProvider } from "contexts/theme";
+import { changeTailwindTheme } from "utils/theme";
+import { HamburgerMenuContextProvider } from "contexts/hamburger-menu";
 import * as gtag from "../utils/gtag";
 import "../styles/globals.scss";
-import "@code-hike/mdx/dist/index.css";
 
 const MyApp = (props: AppProps) => {
   const { Component, pageProps } = props;
 
+  const cachedTheme =
+    typeof window !== "undefined" &&
+    String(localStorage.getItem("color-theme"));
+  const [theme, setTheme] = useState<string>(cachedTheme || "light");
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] =
     useState<boolean>(false);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -26,20 +32,29 @@ const MyApp = (props: AppProps) => {
     };
   }, [router.events]);
 
-  const contextData = useMemo(
+  useEffect(() => {
+    changeTailwindTheme(theme);
+  }, []);
+
+  const themeContextData = useMemo(() => ({ theme, setTheme }), [theme]);
+
+  const hamburgerMenuContextData = useMemo(
     () => ({ isOpenHamburgerMenu, setIsOpenHamburgerMenu }),
     [isOpenHamburgerMenu]
   );
 
   return (
-    <HamburgerMenuContextProvider value={contextData}>
-      <PageLayout>
-        <Head>
-          <link rel="shortcut icon" href="/favicon.ico" />
-        </Head>
-        <Component {...pageProps} />
-      </PageLayout>
-    </HamburgerMenuContextProvider>
+    <ThemeContextProvider value={themeContextData}>
+      <HamburgerMenuContextProvider value={hamburgerMenuContextData}>
+        <PageLayout>
+          <Head>
+            <link rel="shortcut icon" href="/favicon.ico" />
+          </Head>
+          {/* @ts-ignore */}
+          <Component {...pageProps} />
+        </PageLayout>
+      </HamburgerMenuContextProvider>
+    </ThemeContextProvider>
   );
 };
 

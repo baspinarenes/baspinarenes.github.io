@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Icons } from "components/elements/common";
 
 interface PostCardProps {
   name: string;
@@ -23,7 +24,7 @@ const PostCard = (props: PostCardProps) => {
         <div className="flex">
           <span>{viewerCount}</span>
           <Image
-            src="/images/users.svg"
+            src={Icons.User}
             alt="Post viewer icon"
             height={20}
             width={20}

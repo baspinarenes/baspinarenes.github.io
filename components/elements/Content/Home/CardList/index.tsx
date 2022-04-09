@@ -30,7 +30,7 @@ const CardList = (props: CardListProps) => {
   return (
     <div className="flex flex-col gap-5">
       <h2 className="font-bold text-3xl sm:text-4xl">Popüler Repolarım</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 gap-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 sm:gap-y-2">
         {cardComponents}
       </div>
     </div>

@@ -15,7 +15,8 @@
     "newline-before-return": "error",
     "prefer-named-capture-group": "error",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/ban-ts-comment": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
