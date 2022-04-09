@@ -24,8 +24,12 @@ const CustomImage = (props: CustomImageProps) => {
   return (
     <div
       className={`${
-        position ? `${marginLeftOrRight} mb-6 mt-0` : "border shadow-sm -mx-4"
-      } ${reference ? "" : "overflow-hidden"} relative leading-none my-16`}
+        position
+          ? `${marginLeftOrRight} mb-6 mt-0`
+          : "border dark:border-0 shadow-sm -mx-4"
+      } ${
+        reference ? "" : "overflow-hidden"
+      } sm:rounded-lg relative leading-none my-8`}
     >
       <Image
         src={src}

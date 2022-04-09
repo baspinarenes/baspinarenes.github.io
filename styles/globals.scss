@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import "normalize.css/normalize.css";
+@import "@code-hike/mdx/dist/index.css";
 @import "./mdx-styles.scss";
 @import "./code-theme.scss";
 
@@ -12,6 +13,10 @@ body {
   margin: 0;
   font-size: 16px;
   font-family: "Inter", sans-serif;
+
+  @media (max-width: 640px) {
+    font-size: 14px;
+  }
 }
 
 * {

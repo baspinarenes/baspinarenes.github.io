@@ -3,7 +3,7 @@ import readingTime from "reading-time";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import * as PostComponents from "components/elements/post-components";
-import Meta from "components/elements/Meta";
+import { Meta } from "components/elements/common";
 import { useRouter } from "next/router";
 import { siteData } from "../../../constants";
 import { PostPageStaticProps } from "../../../models/common";
@@ -31,7 +31,7 @@ const Post = (props: PostProps) => {
         description={summary}
         url={`/blog/${categoryName}/${postName}`}
       />
-      <h1 className="mb-5 font-bold text-4xl sm:text-5xl text-center sm:text-left break-words">
+      <h1 className="mb-5 font-bold text-4xl sm:text-5xl sm:text-left break-words">
         {title}
       </h1>
       <div className="flex gap-3 mb-14 items-center">

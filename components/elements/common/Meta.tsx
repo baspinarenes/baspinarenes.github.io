@@ -1,7 +1,7 @@
 // https://gist.github.com/reginpv/3f2918f4d605b9ec967b3ab80a040355
 
 import Head from "next/head";
-import siteData from "../../constants/site-data";
+import siteData from "../../../constants/site-data";
 
 const Meta = (props: MetaProps) => {
   const { title, description, url } = props;

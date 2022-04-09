@@ -12,14 +12,15 @@ const Social = (props: SocialProps) => {
     <a
       href={url}
       target="_blank"
-      className="bg-gray-200 w-9 h-9 rounded-lg flex items-center justify-center ring-2 ring-transparent hover:ring-gray-400 transition-all"
+      className="bg-gray-200 dark:bg-[#444] w-8 h-8 rounded-lg flex items-center justify-center ring-2 ring-transparent hover:ring-gray-400"
       rel="noreferrer"
     >
       <Image
-        src={`/images/${name}.svg`}
+        src={`/icons/${name}.svg`}
         alt={`${name} icon`}
-        height={20}
-        width={20}
+        height={17}
+        width={17}
+        className="dark:brightness-0 dark:invert"
       />
     </a>
   );

@@ -7,13 +7,17 @@ const ProfileCard = () => {
   return (
     <div className="flex flex-col-reverse sm:flex-row gap-4 sm:gap-8">
       <div className="flex flex-col gap-2 flex-1">
-        <h1 className="font-bold text-4xl sm:text-5xl text-center sm:text-left mb-3">
+        <h1 className="font-semibold text-4xl sm:text-5xl text-center sm:text-left mb-1">
           {name}
         </h1>
-        <h4 className="font-semibold text-center sm:text-left">{title}</h4>
-        <p className="text-justify sm:text-left">{summary}</p>
+        <h4 className="font-semibold text-center sm:text-left text-gray-700 dark:text-gray-200">
+          {title}
+        </h4>
+        <p className="text-justify sm:text-left text-gray-600 dark:text-gray-400">
+          {summary}
+        </p>
       </div>
-      <div className="w-24 h-24 sm:w-36 sm:h-36 order-2 mx-auto sm:mx-0">
+      <div className="w-24 h-24 sm:w-36 sm:h-36 order-2 mx-auto sm:mx-0 dark:animate-scream">
         <Image
           src="/images/icon.webp"
           alt="Scream tablo"

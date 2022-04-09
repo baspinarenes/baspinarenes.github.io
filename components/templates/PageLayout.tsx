@@ -12,9 +12,11 @@ const PageLayout = (props: PageLayoutProps) => {
 
   return (
     <div
-      className={`p-4 py-8 flex flex-col mx-auto w-full max-w-3xl text-gray-600 gap-14 ${
-        isOpenHamburgerMenu ? "h-screen overflow-hidden" : ""
-      }`}
+      className={`
+        w-full max-w-3xl
+        p-4 py-8 mx-auto
+        flex flex-col gap-14
+        ${isOpenHamburgerMenu ? "h-screen overflow-hidden" : ""}`}
     >
       <Header />
       <main>{children}</main>

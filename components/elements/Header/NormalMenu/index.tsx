@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Navbar from "./Navbar";
 
 const NormalMenu = () => (
@@ -6,4 +7,4 @@ const NormalMenu = () => (
   </div>
 );
 
-export default NormalMenu;
+export default memo(NormalMenu);

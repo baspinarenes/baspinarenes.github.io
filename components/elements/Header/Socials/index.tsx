@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { socials } from "../../../../constants";
 import Social from "./Social";
 
@@ -9,4 +10,4 @@ const Socials = () => (
   </div>
 );
 
-export default Socials;
+export default memo(Socials);

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import BlogCategory from "components/elements/Content/Blog/BlogCategory";
-import Meta from "components/elements/Meta";
+import { Meta } from "components/elements/common";
 import { siteData } from "../../constants";
 import { PostCategory } from "../../models/post";
 import { getBlogPageData } from "../../utils/post";
