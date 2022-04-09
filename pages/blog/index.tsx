@@ -11,10 +11,10 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
   return (
     <div>
       <Meta />
-      <h1 className="mb-10 font-bold text-4xl sm:text-5xl text-center sm:text-left">
+      <h1 className="mb-10 font-bold text-4xl sm:text-5xl text-center sm:text-left dark:text-white">
         {siteData.page.blog.title}
       </h1>
-      <p className="text-justify sm:text-left mb-10">
+      <p className="text-justify sm:text-left mb-10 text-gray-600 dark:text-gray-400">
         {siteData.page.blog.description}
       </p>
       <div className="flex flex-col gap-8">
@@ -22,6 +22,7 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
           <BlogCategory
             key={category.name}
             categoryName={category.name}
+            categoryBeautifiedName={category.beautifiedName}
             posts={category.posts}
           />
         ))}

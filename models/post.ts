@@ -7,6 +7,7 @@ export interface PostParams {
 
 export interface PostCategory {
   name: string;
+  beautifiedName: string;
   posts: Post[];
 }
 
@@ -20,4 +21,8 @@ export interface Post {
 export interface PostData extends Post {
   category: "Genel Programlama";
   contentHtml: string;
+}
+
+export interface BeautifiedPostCategoryNamesByName {
+  [key: string]: string;
 }

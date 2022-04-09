@@ -18,8 +18,8 @@ const RepositoryCard = (props: RepositoryCardProps) => {
       href={htmlUrl}
       className="-mx-4 border-y -mb-[1px] rounded-none flex flex-col sm:border border-gray-300 dark:border-gray-600 p-4 sm:mx-0 sm:rounded-xl hover:bg-gray-100 hover:dark:bg-gray-800"
     >
-      <div className="flex gap-1 font-bold">
-        <div className="font-bold text-yellow-500 mr-auto">
+      <div className="flex gap-1">
+        <div className="text-yellow-500 mr-auto">
           {fork ? "CONTRIBUTER" : "OWNER"}
         </div>
         {forkCount > 0 && (
@@ -46,7 +46,7 @@ const RepositoryCard = (props: RepositoryCardProps) => {
         )}
       </div>
       <h3 className="font-bold">{name}</h3>
-      <p>{description}</p>
+      <p className="dark:text-gray-400">{description}</p>
     </a>
   );
 };

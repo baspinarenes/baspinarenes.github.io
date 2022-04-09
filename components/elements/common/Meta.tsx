@@ -1,6 +1,7 @@
 // https://gist.github.com/reginpv/3f2918f4d605b9ec967b3ab80a040355
 
 import Head from "next/head";
+import SocialCardImage from "images/social-card.webp";
 import siteData from "../../../constants/site-data";
 
 const Meta = (props: MetaProps) => {
@@ -17,10 +18,7 @@ const Meta = (props: MetaProps) => {
         itemProp="description"
         content={description ?? siteData.description}
       />
-      <meta
-        itemProp="image"
-        content={`${siteData.url}/images/social-card.webp`}
-      />
+      <meta itemProp="image" content={SocialCardImage.src} />
 
       {/* <!-- Facebook Meta Tags --> */}
       <meta property="og:title" content={title ?? siteData.author.name} />
@@ -28,10 +26,7 @@ const Meta = (props: MetaProps) => {
         property="og:description"
         content={description ?? siteData.description}
       />
-      <meta
-        property="og:image"
-        content={`${siteData.url}/images/social-card.webp`}
-      />
+      <meta property="og:image" content={SocialCardImage.src} />
       <meta
         property="og:url"
         content={url ? `${siteData.url}${url}` : siteData.url}
@@ -44,10 +39,7 @@ const Meta = (props: MetaProps) => {
         name="twitter:description"
         content={description ?? siteData.description}
       />
-      <meta
-        name="twitter:image"
-        content={`${siteData.url}/images/social-card.webp`}
-      />
+      <meta name="twitter:image" content={SocialCardImage.src} />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
   );

@@ -12,7 +12,7 @@ const WarningBox = (props: WarningBoxProps) => {
         width={30}
         height={30}
         alt="Warning icon"
-        className="w-12 h-10 grid sm:col-span-1"
+        className="w-12 h-10 grid sm:col-span-1 invert"
       />
       <div className="m-0 sm:col-span-9">{children}</div>
     </div>

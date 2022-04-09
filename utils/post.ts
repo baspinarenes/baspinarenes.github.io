@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
 import theme from "shiki/themes/nord.json"; // kendi temani yedir
 import { remarkCodeHike } from "@code-hike/mdx";
+import { getBeautifiedPostCategoryName } from "constants/post";
 import { PostParams } from "../models/post";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
@@ -128,6 +129,7 @@ const getBlogPageData = () => {
 
     return {
       name: postCategoryName,
+      beautifiedName: getBeautifiedPostCategoryName(postCategoryName),
       posts,
     };
   });
