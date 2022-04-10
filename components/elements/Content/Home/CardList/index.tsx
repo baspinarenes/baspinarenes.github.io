@@ -1,4 +1,4 @@
-import { MappedRepository } from "../../../../../models/github";
+import { MappedRepository } from "models/github";
 import PostCard from "./PostCard";
 import RepositoryCard from "./RepositoryCard";
 

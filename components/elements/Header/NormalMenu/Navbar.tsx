@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
+import { navigations } from "constants/index";
 import Navlink from "./Navlink";
-import { navigations } from "../../../../constants";
 
 const Navbar = () => {
   const router = useRouter();

@@ -1,7 +1,14 @@
 import Link from "next/link";
+import useSWR from "swr";
 
 const BlogPost = (props: BlogPostProps) => {
-  const { name, title, date, summary, category } = props;
+  const { name, title, summary, category, slug } = props;
+
+  const { data } = useSWR(`/api/views/${slug}`, (url) =>
+    fetch(url).then((res) => res.json())
+  );
+
+  const views = data?.views;
 
   return (
     <Link href={`/blog/${category}/${name}`}>
@@ -10,9 +17,9 @@ const BlogPost = (props: BlogPostProps) => {
           <h3 className="text-gray-500 font-bold order-2 sm:order-1 dark:text-gray-100">
             {title}
           </h3>
-          <time className="text-sm order-1 sm:order-2  dark:text-gray-400">
-            {date}
-          </time>
+          <div className="order-1 sm:order-2 text-sm dark:text-gray-400">
+            {views && <div>{views} views</div>}
+          </div>
         </div>
         <p className="text-justify sm:text-left dark:text-gray-400">
           {summary}
@@ -25,9 +32,9 @@ const BlogPost = (props: BlogPostProps) => {
 interface BlogPostProps {
   name: string;
   title: string;
-  date: string;
   summary: string;
   category: string;
+  slug: string;
 }
 
 export default BlogPost;

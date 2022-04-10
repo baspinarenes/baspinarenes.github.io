@@ -16,9 +16,13 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "components/*": ["components/*"],
+      "components/*": ["components/elements/*", "components/templates/*"],
       "icons/*": ["public/icons/*"],
-      "images/*": ["public/images/*"]
+      "images/*": ["public/images/*"],
+      "utils/*": ["utils/*"],
+      "constants/*": ["constants/*"],
+      "contexts/*": ["contexts/*"],
+      "models/*": ["models/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

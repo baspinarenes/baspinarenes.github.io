@@ -2,22 +2,25 @@ import Image from "next/image";
 import readingTime from "reading-time";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
-import * as PostComponents from "components/elements/post-components";
-import { Meta } from "components/elements/common";
+import * as PostComponents from "components/post-components";
+import { Icons, Meta } from "components/common";
 import { useRouter } from "next/router";
-import { siteData } from "../../../constants";
-import { PostPageStaticProps } from "../../../models/common";
-import { PostData } from "../../../models/post";
-import { getAllPostNames, getPostData } from "../../../utils/post";
+import { siteData } from "constants/index";
+import { PostPageStaticProps } from "models/common";
+import { PostData } from "models/post";
+import { getAllPostNames, getPostData } from "utils/post";
+import useUpdatePostViewCount from "hooks/useUpdatePostViewCount";
 
 const Post = (props: PostProps) => {
   const { postData } = props;
-  const { contentHtml, date, summary, title } = postData;
+  const { contentHtml, date, summary, title, views } = postData;
   const readTime = Math.round(readingTime(contentHtml).minutes);
 
   const {
     query: { categoryName, postName },
   } = useRouter();
+
+  useUpdatePostViewCount(categoryName as string, postName as string);
 
   const PostContentComponent = useMemo(
     () => getMDXComponent(contentHtml),
@@ -41,8 +44,21 @@ const Post = (props: PostProps) => {
           width={24}
           alt="Author image"
         />
-        <div className="text-sm">
-          {siteData.author.name} • {date} • {readTime} dakikacık
+        <div className="flex text-sm child-exclude-last:after:content-['•'] child-exclude-last:after:mx-1">
+          <div>{siteData.author.name}</div>
+          <div>{date}</div>
+          <div>{readTime} dk</div>
+          {views && (
+            <div className="inline-flex gap-1">
+              <span>{views}</span>{" "}
+              <Image
+                src={Icons.Views}
+                alt="Views icon"
+                height={12}
+                width={12}
+              />
+            </div>
+          )}
         </div>
       </div>
       <p className="mb-5">{summary}</p>

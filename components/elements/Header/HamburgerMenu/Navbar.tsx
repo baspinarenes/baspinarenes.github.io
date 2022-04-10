@@ -1,7 +1,7 @@
 import { useContext } from "react";
+import { navigations, siteData } from "constants/index";
+import { HamburgerMenuContext } from "contexts/hamburger-menu";
 import Navlink from "./Navlink";
-import { navigations, siteData } from "../../../../constants";
-import { HamburgerMenuContext } from "../../../../contexts/hamburger-menu";
 
 const Navbar = () => {
   const { isOpenHamburgerMenu } = useContext(HamburgerMenuContext);

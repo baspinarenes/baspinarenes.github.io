@@ -1,4 +1,4 @@
-import { Post } from "../../../../models/post";
+import { Post } from "models/post";
 import BlogPost from "./BlogPost";
 
 const BlogCategory = (props: BlogCategoryProps) => {
@@ -16,7 +16,7 @@ const BlogCategory = (props: BlogCategoryProps) => {
             name={post.name}
             title={post.title}
             summary={post.summary}
-            date={post.date}
+            slug={post.slug}
             category={categoryName}
           />
         ))}

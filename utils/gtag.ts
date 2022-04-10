@@ -1,4 +1,4 @@
-import { GTagEvent } from "../models/gtag";
+import { GTagEvent } from "models/gtag";
 
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID;
 

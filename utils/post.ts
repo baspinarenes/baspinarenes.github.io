@@ -3,10 +3,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
-import theme from "shiki/themes/nord.json"; // kendi temani yedir
+import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
-import { getBeautifiedPostCategoryName } from "constants/post";
-import { PostParams } from "../models/post";
+import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
+import { PostParams } from "models/post";
+import axios from "axios";
+import siteData from "constants/site-data";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 
@@ -37,6 +39,9 @@ const getPostNamesByCategoryName = (categoryName: string): string[] => {
 
   return postNames;
 };
+
+const getBeautifiedPostCategoryName = (rawCategoryName: string): string =>
+  BEAUTIFIED_POST_CATEGORY_NAMES[rawCategoryName];
 
 const getAllPostNames = () => {
   const postParams: PostParams[] = [];
@@ -98,7 +103,19 @@ const getPostData = async (categoryName: string, postName: string) => {
     date,
     contentHtml,
     name: postName,
+    views: await getViewsByPost(categoryName, postName),
   };
+};
+
+const getViewsByPost = async (categoryName: string, postName: string) => {
+  const slug = `/blog/${categoryName}/${postName}`;
+  const baseUrl =
+    process.env.NODE_ENV !== "production"
+      ? "http://localhost:3000"
+      : siteData.url;
+  const viewApiResult = await axios.get(`${baseUrl}/api/views${slug}`);
+
+  return viewApiResult.data.views || 0;
 };
 
 const getPostMeta = (categoryName: string, postName: string) => {
@@ -119,9 +136,12 @@ const getBlogPageData = () => {
     const posts = categoryPostNames.map((postName) => {
       const { title, summary, date } = getPostMeta(postCategoryName, postName);
 
+      const slug = `/blog/${postCategoryName}/${postName}`;
+
       return {
         title,
         summary,
+        slug,
         name: postName,
         date: getLocaleDateString(date),
       };
@@ -139,7 +159,8 @@ const getBlogPageData = () => {
 
 export {
   getPostData,
-  getPostNamesByCategoryName,
   getAllPostNames,
   getBlogPageData,
+  getPostNamesByCategoryName,
+  getBeautifiedPostCategoryName,
 };

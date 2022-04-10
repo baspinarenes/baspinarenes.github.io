@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { socials } from "../../../../constants";
+import { socials } from "constants/index";
 import Social from "./Social";
 
 const Socials = () => (

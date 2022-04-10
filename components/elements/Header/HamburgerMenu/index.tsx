@@ -1,8 +1,8 @@
 import { memo, useContext } from "react";
 import Image from "next/image";
-import { Icons } from "components/elements/common";
+import { Icons } from "components/common";
+import { HamburgerMenuContext } from "contexts/hamburger-menu";
 import Navbar from "./Navbar";
-import { HamburgerMenuContext } from "../../../../contexts/hamburger-menu";
 
 const HamburgerMenu = () => {
   const { setIsOpenHamburgerMenu } = useContext(HamburgerMenuContext);

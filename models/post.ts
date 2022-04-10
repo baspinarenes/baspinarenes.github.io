@@ -16,6 +16,8 @@ export interface Post {
   title: string;
   date: string;
   summary: string;
+  slug: string;
+  views?: number;
 }
 
 export interface PostData extends Post {

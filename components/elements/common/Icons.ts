@@ -8,6 +8,7 @@ import Star from "icons/star.svg";
 import Twitter from "icons/twitter.svg";
 import User from "icons/user.svg";
 import Warning from "icons/warning.svg";
+import Views from "icons/views.svg";
 
 export default {
   Close,
@@ -20,4 +21,5 @@ export default {
   Twitter,
   User,
   Warning,
+  Views,
 };
