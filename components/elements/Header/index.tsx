@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Icons } from "components/elements/common";
+import { Icons } from "components/common";
 import { useContext } from "react";
 import { ThemeContext } from "contexts/theme";
-import { changeTailwindTheme } from "../../../utils/theme";
+import { changeTailwindTheme } from "utils/theme";
 import HamburgerMenu from "./HamburgerMenu";
 import NormalMenu from "./NormalMenu";
 import Socials from "./Socials";

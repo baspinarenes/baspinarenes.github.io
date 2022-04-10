@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import CardList from "components/elements/Content/Home/CardList";
-import ProfileCard from "components/elements/Content/Home/ProfileCard";
-import { Meta } from "components/elements/common";
-import { getRepositories } from "./api/github";
+import CardList from "components/Content/Home/CardList";
+import ProfileCard from "components/Content/Home/ProfileCard";
+import { Meta } from "components/common";
+import { getRepositories } from "utils/github";
 
 const Home: NextPage = (props: any) => {
   const { repositories } = props;

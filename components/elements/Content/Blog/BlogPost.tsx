@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const BlogPost = (props: BlogPostProps) => {
-  const { name, title, date, summary, category } = props;
+  const { name, title, summary, category } = props;
 
   return (
     <Link href={`/blog/${category}/${name}`}>
@@ -10,9 +10,6 @@ const BlogPost = (props: BlogPostProps) => {
           <h3 className="text-gray-500 font-bold order-2 sm:order-1 dark:text-gray-100">
             {title}
           </h3>
-          <time className="text-sm order-1 sm:order-2  dark:text-gray-400">
-            {date}
-          </time>
         </div>
         <p className="text-justify sm:text-left dark:text-gray-400">
           {summary}
@@ -25,7 +22,6 @@ const BlogPost = (props: BlogPostProps) => {
 interface BlogPostProps {
   name: string;
   title: string;
-  date: string;
   summary: string;
   category: string;
 }

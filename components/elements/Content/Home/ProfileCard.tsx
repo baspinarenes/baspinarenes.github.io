@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { siteData } from "../../../../constants";
+import { siteData } from "constants/index";
 
 const ProfileCard = () => {
   const { name, title, summary } = siteData.author;

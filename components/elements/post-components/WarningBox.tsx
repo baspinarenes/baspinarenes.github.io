@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Icons } from "components/elements/common";
+import { Icons } from "components/common";
 
 const WarningBox = (props: WarningBoxProps) => {
   const { children } = props;
@@ -12,7 +12,7 @@ const WarningBox = (props: WarningBoxProps) => {
         width={30}
         height={30}
         alt="Warning icon"
-        className="w-12 h-10 grid sm:col-span-1 invert"
+        className="w-12 h-10 grid sm:col-span-1 dark:invert"
       />
       <div className="m-0 sm:col-span-9">{children}</div>
     </div>

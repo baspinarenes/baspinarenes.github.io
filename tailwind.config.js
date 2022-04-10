@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -23,5 +24,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("child", "& > *");
+      addVariant("child-exclude-last", "& > *:not(:last-child)");
+    },
+  ],
 };

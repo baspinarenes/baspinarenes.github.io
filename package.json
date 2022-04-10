@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "version": "0.1.0",
-  "author": "Enes B <ensbaspinar@gmail.com>",
+  "author": "Enes B <enesbaspinar07@gmail.com>",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -15,7 +15,6 @@
     "@mdx-js/loader": "^2.1.1",
     "@mdx-js/react": "^2.1.1",
     "@next/mdx": "^12.1.4",
-    "@supabase/supabase-js": "^1.33.3",
     "axios": "^0.26.1",
     "cssnano": "^5.1.7",
     "esbuild": "^0.14.30",

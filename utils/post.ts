@@ -3,10 +3,12 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
-import theme from "shiki/themes/nord.json"; // kendi temani yedir
+import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
-import { getBeautifiedPostCategoryName } from "constants/post";
-import { PostParams } from "../models/post";
+import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
+import { PostParams } from "models/post";
+import axios from "axios";
+import siteData from "constants/site-data";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 
@@ -37,6 +39,9 @@ const getPostNamesByCategoryName = (categoryName: string): string[] => {
 
   return postNames;
 };
+
+const getBeautifiedPostCategoryName = (rawCategoryName: string): string =>
+  BEAUTIFIED_POST_CATEGORY_NAMES[rawCategoryName];
 
 const getAllPostNames = () => {
   const postParams: PostParams[] = [];
@@ -92,10 +97,12 @@ const getPostData = async (categoryName: string, postName: string) => {
   });
 
   const date = getLocaleDateString(frontmatter.date);
+  const slug = `/blog/${categoryName}/${postName}`;
 
   return {
     ...frontmatter,
     date,
+    slug,
     contentHtml,
     name: postName,
   };
@@ -118,8 +125,10 @@ const getBlogPageData = () => {
     const categoryPostNames = getPostNamesByCategoryName(postCategoryName);
     const posts = categoryPostNames.map((postName) => {
       const { title, summary, date } = getPostMeta(postCategoryName, postName);
+      const slug = `/blog/${postCategoryName}/${postName}`;
 
       return {
+        slug,
         title,
         summary,
         name: postName,
@@ -139,7 +148,8 @@ const getBlogPageData = () => {
 
 export {
   getPostData,
-  getPostNamesByCategoryName,
   getAllPostNames,
   getBlogPageData,
+  getPostNamesByCategoryName,
+  getBeautifiedPostCategoryName,
 };

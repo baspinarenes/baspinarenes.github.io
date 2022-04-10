@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Icons } from "components/elements/common";
+import { Icons } from "components/common";
 
 interface RepositoryCardProps {
   name: string;

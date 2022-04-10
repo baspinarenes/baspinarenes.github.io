@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { HamburgerMenuContext } from "../../contexts/hamburger-menu";
-import { Footer, Header } from "../elements";
+import { HamburgerMenuContext } from "contexts/hamburger-menu";
+import { Footer, Header } from "components/index";
 
 interface PageLayoutProps {
   children: React.ReactNode;

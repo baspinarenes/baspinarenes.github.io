@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import BlogCategory from "components/elements/Content/Blog/BlogCategory";
-import { Meta } from "components/elements/common";
-import { siteData } from "../../constants";
-import { PostCategory } from "../../models/post";
-import { getBlogPageData } from "../../utils/post";
+import BlogCategory from "components/Content/Blog/BlogCategory";
+import { Meta } from "components/common";
+import { siteData } from "constants/index";
+import { PostCategory } from "models/post";
+import { getBlogPageData } from "utils/post";
 
 const Blog: NextPage<BlogProps> = (props: BlogProps) => {
   const { postCategories } = props;
