@@ -39,9 +39,9 @@ const CustomImage = (props: CustomImageProps) => {
         layout={lastLayout as any}
         className={`${
           position ? "rounded-lg" : ""
-        } sm:rounded-lg duration-700 ease-in-out group-hover:opacity-75 ${
+        } sm:rounded-lg duration-500 ease-in-out group-hover:opacity-50 ${
           isLoading
-            ? "scale-110 blur-2xl grayscale"
+            ? "scale-110 blur-lg grayscale"
             : "scale-100 blur-0 grayscale-0"
         }`}
         onLoadingComplete={() => setLoading(false)}

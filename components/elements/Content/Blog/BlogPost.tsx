@@ -14,7 +14,7 @@ const BlogPost = (props: BlogPostProps) => {
             {title}
           </h3>
           <div className="order-1 sm:order-2 text-sm dark:text-gray-400">
-            {views || "—"} views
+            {views || "—"} görüntülenme
           </div>
         </div>
         <p className="text-justify sm:text-left dark:text-gray-400">

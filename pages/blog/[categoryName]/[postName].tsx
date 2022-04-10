@@ -39,7 +39,7 @@ const Post = (props: PostProps) => {
           <div>{siteData.author.name}</div>
           <div>{date}</div>
           <div>{readTime} dk</div>
-          <div>{views || "—"} views</div>
+          <div>{views || "—"} okunma</div>
         </div>
       </div>
       <p className="mb-5">{summary}</p>

@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        "full-outside-header": "calc(100vh - 76px)",
+        "full-outside-header": "calc(100vh - 5rem)",
       },
       spacing: {
         15: "60px",
