@@ -16,6 +16,7 @@ const BlogCategory = (props: BlogCategoryProps) => {
             name={post.name}
             title={post.title}
             summary={post.summary}
+            slug={post.slug}
             category={categoryName}
           />
         ))}

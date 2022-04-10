@@ -7,8 +7,6 @@ import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
 import { PostParams } from "models/post";
-import axios from "axios";
-import siteData from "constants/site-data";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 

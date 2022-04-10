@@ -8,11 +8,14 @@ import { siteData } from "constants/index";
 import { PostPageStaticProps } from "models/common";
 import { PostData } from "models/post";
 import { getAllPostNames, getPostData } from "utils/post";
+import usePostViewCount from "hooks/usePostViewCount";
 
 const Post = (props: PostProps) => {
   const { postData } = props;
   const { contentHtml, date, summary, title, slug } = postData;
   const readTime = Math.round(readingTime(contentHtml).minutes);
+
+  const views = usePostViewCount(slug);
 
   const PostContentComponent = useMemo(
     () => getMDXComponent(contentHtml),
@@ -36,6 +39,7 @@ const Post = (props: PostProps) => {
           <div>{siteData.author.name}</div>
           <div>{date}</div>
           <div>{readTime} dk</div>
+          <div>{views || "—"} views</div>
         </div>
       </div>
       <p className="mb-5">{summary}</p>

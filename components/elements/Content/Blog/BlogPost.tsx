@@ -1,7 +1,10 @@
+import usePostViewCount from "hooks/usePostViewCount";
 import Link from "next/link";
 
 const BlogPost = (props: BlogPostProps) => {
-  const { name, title, summary, category } = props;
+  const { name, title, summary, category, slug } = props;
+
+  const views = usePostViewCount(slug, true);
 
   return (
     <Link href={`/blog/${category}/${name}`}>
@@ -10,6 +13,9 @@ const BlogPost = (props: BlogPostProps) => {
           <h3 className="text-gray-500 font-bold order-2 sm:order-1 dark:text-gray-100">
             {title}
           </h3>
+          <div className="order-1 sm:order-2 text-sm dark:text-gray-400">
+            {views || "—"} views
+          </div>
         </div>
         <p className="text-justify sm:text-left dark:text-gray-400">
           {summary}
@@ -24,6 +30,7 @@ interface BlogPostProps {
   title: string;
   summary: string;
   category: string;
+  slug: string;
 }
 
 export default BlogPost;
