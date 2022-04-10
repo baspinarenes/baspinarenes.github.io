@@ -17,6 +17,8 @@ const RepositoryCard = (props: RepositoryCardProps) => {
     <a
       href={htmlUrl}
       className="-mx-4 border-y -mb-[1px] rounded-none flex flex-col sm:border border-gray-300 dark:border-gray-600 p-4 sm:mx-0 sm:rounded-xl hover:bg-gray-100 hover:dark:bg-gray-800"
+      rel="noreferrer"
+      target="_blank"
     >
       <div className="flex gap-1">
         <div className="text-yellow-500 mr-auto">

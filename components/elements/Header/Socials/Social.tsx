@@ -11,9 +11,9 @@ const Social = (props: SocialProps) => {
   return (
     <a
       href={url}
-      target="_blank"
       className="bg-gray-200 dark:bg-[#444] w-8 h-8 rounded-lg flex items-center justify-center ring-2 ring-transparent hover:ring-gray-400"
       rel="noreferrer"
+      target="_blank"
     >
       <Image
         src={`/icons/${name}.svg`}
