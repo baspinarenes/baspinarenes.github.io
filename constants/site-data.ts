@@ -1,5 +1,8 @@
 const siteData = {
-  url: "https://www.enesbaspinar.com",
+  url:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://www.enesbaspinar.com",
   title: "Enes Başpınar",
   author: {
     name: "Enes Başpınar",

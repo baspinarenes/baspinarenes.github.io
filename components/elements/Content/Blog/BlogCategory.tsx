@@ -2,7 +2,7 @@ import { Post } from "models/post";
 import BlogPost from "./BlogPost";
 
 const BlogCategory = (props: BlogCategoryProps) => {
-  const { categoryName, posts, categoryBeautifiedName } = props;
+  const { posts, categoryBeautifiedName } = props;
 
   return (
     <div>
@@ -13,11 +13,10 @@ const BlogCategory = (props: BlogCategoryProps) => {
         {posts.map((post) => (
           <BlogPost
             key={post.name}
-            name={post.name}
             title={post.title}
             summary={post.summary}
             slug={post.slug}
-            category={categoryName}
+            views={post.views}
           />
         ))}
       </div>
@@ -26,7 +25,6 @@ const BlogCategory = (props: BlogCategoryProps) => {
 };
 
 interface BlogCategoryProps {
-  categoryName: string;
   categoryBeautifiedName: string;
   posts: Post[];
 }
