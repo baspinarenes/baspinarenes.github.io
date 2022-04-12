@@ -1,12 +1,13 @@
 /* eslint-disable no-param-reassign */
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 import { bundleMDX } from "mdx-bundler";
 import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
 import { PostParams } from "models/post";
+import siteData from "constants/site-data";
+import axios from "axios";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 
@@ -96,48 +97,35 @@ const getPostData = async (categoryName: string, postName: string) => {
 
   const date = getLocaleDateString(frontmatter.date);
   const slug = `/blog/${categoryName}/${postName}`;
+  const viewsResponse = await axios(`${siteData.url}/api/views/${slug}/`);
+  const views = viewsResponse.data.viewCount;
 
   return {
     ...frontmatter,
     date,
     slug,
+    views,
     contentHtml,
     name: postName,
   };
 };
 
-const getPostMeta = (categoryName: string, postName: string) => {
-  const fullPath = path.join(postsDirectory, categoryName, postName);
-  const fileContent = fs.readFileSync(`${fullPath}.mdx`, "utf8");
-  const matterResult = matter(fileContent);
-
-  return {
-    ...matterResult.data,
-  };
-};
+const getPostForHome = (flatPosts: any) =>
+  flatPosts.map((x: any) => getPostData(x[0], x[1]));
 
 const getBlogPageData = () => {
   const postCategoryNames = getPostCategoryNames();
 
-  const postCategories = postCategoryNames.map((postCategoryName) => {
+  const postCategories = postCategoryNames.map(async (postCategoryName) => {
     const categoryPostNames = getPostNamesByCategoryName(postCategoryName);
-    const posts = categoryPostNames.map((postName) => {
-      const { title, summary, date } = getPostMeta(postCategoryName, postName);
-      const slug = `/blog/${postCategoryName}/${postName}`;
-
-      return {
-        slug,
-        title,
-        summary,
-        name: postName,
-        date: getLocaleDateString(date),
-      };
-    });
+    const posts = categoryPostNames.map((postName) =>
+      getPostData(postCategoryName, postName)
+    );
 
     return {
       name: postCategoryName,
       beautifiedName: getBeautifiedPostCategoryName(postCategoryName),
-      posts,
+      posts: (await Promise.allSettled(posts)).map((x: any) => x.value),
     };
   });
 
@@ -146,6 +134,7 @@ const getBlogPageData = () => {
 
 export {
   getPostData,
+  getPostForHome,
   getAllPostNames,
   getBlogPageData,
   getPostNamesByCategoryName,

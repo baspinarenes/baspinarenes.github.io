@@ -10,6 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const pretifiedSlug: string =
     typeof slug === "string" ? slug : slug.join("/");
 
+  console.log("SSSSS", pretifiedSlug);
   if (req.method === "POST") {
     const ref = db.ref("pageViews").child(pretifiedSlug);
     const { snapshot } = await ref.transaction((currentViews) => {

@@ -21,7 +21,6 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
         {postCategories.map((category: PostCategory) => (
           <BlogCategory
             key={category.name}
-            categoryName={category.name}
             categoryBeautifiedName={category.beautifiedName}
             posts={category.posts}
           />
@@ -32,7 +31,9 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
 };
 
 export async function getStaticProps() {
-  const postCategories: PostCategory[] = getBlogPageData();
+  const postCategories = (await Promise.allSettled(getBlogPageData()))
+    .map((x: any) => x.value)
+    .filter((x) => x);
 
   return {
     props: {
