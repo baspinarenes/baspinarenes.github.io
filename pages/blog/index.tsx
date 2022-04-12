@@ -31,9 +31,7 @@ const Blog: NextPage<BlogProps> = (props: BlogProps) => {
 };
 
 export async function getStaticProps() {
-  const postCategories = (await Promise.allSettled(getBlogPageData()))
-    .map((x: any) => x.value)
-    .filter((x) => x);
+  const postCategories = getBlogPageData();
 
   return {
     props: {

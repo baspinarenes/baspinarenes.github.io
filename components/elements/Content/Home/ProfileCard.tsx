@@ -2,7 +2,7 @@ import Image from "next/image";
 import { siteData } from "constants/index";
 
 const ProfileCard = () => {
-  const { name, title, summary } = siteData.author;
+  const { name, title, company, summary } = siteData.author;
 
   return (
     <div className="flex flex-col-reverse sm:flex-row gap-4 sm:gap-8">
@@ -10,8 +10,8 @@ const ProfileCard = () => {
         <h1 className="font-semibold text-4xl sm:text-5xl text-center sm:text-left mb-1">
           {name}
         </h1>
-        <h4 className="font-semibold text-center sm:text-left text-gray-700 dark:text-gray-200">
-          {title}
+        <h4 className="text-center sm:text-left text-gray-700 dark:text-gray-200">
+          {title} at <span className="font-semibold ">{company}</span>
         </h4>
         <p className="text-justify sm:text-left text-gray-600 dark:text-gray-400">
           {summary}

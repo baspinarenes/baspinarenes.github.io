@@ -1,28 +1,25 @@
 import Image from "next/image";
 import { Icons } from "components/common";
-
-interface PostCardProps {
-  name: string;
-  viewerCount: number;
-  description: string;
-  type: string;
-  postUrl: string;
-}
+import usePostViewCount from "hooks/usePostViewCount";
 
 const PostCard = (props: PostCardProps) => {
-  const { name, viewerCount, description, type, postUrl } = props;
+  const { title, summary, type, slug } = props;
+
+  const views = usePostViewCount(slug, false);
 
   return (
     <a
-      href={postUrl}
-      className="flex flex-col border border-gray-300 p-4 rounded-xl hover:bg-gray-100"
+      href={slug}
+      className="-mx-4 border-y -mb-[1px] rounded-none flex flex-col sm:border border-gray-300 dark:border-gray-600 p-4 sm:mx-0 sm:rounded-xl hover:bg-gray-100 hover:dark:bg-gray-800"
     >
-      <div className="flex justify-between">
-        <div className="font-bold text-yellow-500">
+      <div className="flex gap-1">
+        <div className="text-yellow-500 mr-auto">
           {type === "translate" ? "TRANSLATER" : "WRITER"}
         </div>
-        <div className="flex">
-          <span>{viewerCount}</span>
+        <div className="flex gap-1">
+          <span className="text-yellow-500 ml-[2px]">
+            {views > 0 ? views.toLocaleString() : "–––"}
+          </span>
           <Image
             src={Icons.User}
             alt="Post viewer icon"
@@ -31,10 +28,17 @@ const PostCard = (props: PostCardProps) => {
           />
         </div>
       </div>
-      <h3 className="font-bold">{name}</h3>
-      <p>{description}</p>
+      <h3 className="font-bold">{title}</h3>
+      <p className="dark:text-gray-400">{summary.slice(0, 75)}...</p>
     </a>
   );
 };
+
+interface PostCardProps {
+  title: string;
+  summary: string;
+  type: string;
+  slug: string;
+}
 
 export default PostCard;

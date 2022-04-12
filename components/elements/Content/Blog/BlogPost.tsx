@@ -1,7 +1,10 @@
+import usePostViewCount from "hooks/usePostViewCount";
 import Link from "next/link";
 
 const BlogPost = (props: BlogPostProps) => {
-  const { title, summary, slug, views } = props;
+  const { title, summary, slug } = props;
+
+  const views = usePostViewCount(slug, false);
 
   return (
     <Link href={slug}>
@@ -11,7 +14,7 @@ const BlogPost = (props: BlogPostProps) => {
             {title}
           </h3>
           <div className="order-1 sm:order-2 text-sm dark:text-gray-400">
-            {views || "—"} okunma
+            {views > 0 ? views.toLocaleString() : "–––"} views
           </div>
         </div>
         <p className="text-justify sm:text-left dark:text-gray-400">
@@ -26,7 +29,6 @@ interface BlogPostProps {
   title: string;
   summary: string;
   slug: string;
-  views?: number;
 }
 
 export default BlogPost;

@@ -18,6 +18,7 @@ export interface Post {
   summary: string;
   slug: string;
   views?: number;
+  readTime: number;
 }
 
 export interface PostData extends Post {

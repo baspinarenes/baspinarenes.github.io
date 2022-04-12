@@ -1,24 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const usePostViewCount = (slug: string, isBlogPage = false) => {
+const usePostViewCount = (slug: string, shouldApiUpdate = true) => {
   const [views, setViews] = useState(0);
 
   useEffect(() => {
-    async function runViewsApiRequests() {
+    (async () => {
       const { data } = await axios(`/api/views/${slug}`);
+
       setViews(data?.viewCount);
 
-      if (process.env.NODE_ENV !== "development" && !isBlogPage) {
-        const registerView = () =>
-          fetch(`/api/views/${slug}`, {
-            method: "POST",
-          });
-
-        registerView();
+      if (process.env.NODE_ENV !== "development" && shouldApiUpdate) {
+        axios.post(`/api/views/${slug}`);
       }
-    }
-    runViewsApiRequests();
+    })();
   }, []);
 
   return views;

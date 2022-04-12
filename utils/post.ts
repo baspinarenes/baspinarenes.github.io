@@ -6,8 +6,8 @@ import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
 import { PostParams } from "models/post";
-import siteData from "constants/site-data";
-import axios from "axios";
+import matter from "gray-matter";
+import readingTime from "reading-time";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 
@@ -19,7 +19,7 @@ const getLocaleDateString = (dateString: string) => {
   }
 
   return `0${date.toLocaleString("tr-TR", {
-    month: "short",
+    month: "long",
     day: "numeric",
     year: "numeric",
   })}`.replace(/^0(?=\d{2})/, "");
@@ -97,16 +97,26 @@ const getPostData = async (categoryName: string, postName: string) => {
 
   const date = getLocaleDateString(frontmatter.date);
   const slug = `/blog/${categoryName}/${postName}`;
-  const viewsResponse = await axios(`${siteData.url}/api/views/${slug}/`);
-  const views = viewsResponse.data.viewCount;
+
+  const readTime = Math.round(readingTime(source).minutes) + 5;
 
   return {
     ...frontmatter,
     date,
     slug,
-    views,
+    readTime,
     contentHtml,
     name: postName,
+  };
+};
+
+const getPostMeta = (categoryName: string, postName: string) => {
+  const fullPath = path.join(postsDirectory, categoryName, postName);
+  const fileContent = fs.readFileSync(`${fullPath}.mdx`, "utf8");
+  const matterResult = matter(fileContent);
+
+  return {
+    ...matterResult.data,
   };
 };
 
@@ -116,16 +126,25 @@ const getPostForHome = (flatPosts: any) =>
 const getBlogPageData = () => {
   const postCategoryNames = getPostCategoryNames();
 
-  const postCategories = postCategoryNames.map(async (postCategoryName) => {
+  const postCategories = postCategoryNames.map((postCategoryName) => {
     const categoryPostNames = getPostNamesByCategoryName(postCategoryName);
-    const posts = categoryPostNames.map((postName) =>
-      getPostData(postCategoryName, postName)
-    );
+    const posts = categoryPostNames.map((postName) => {
+      const { title, summary, date } = getPostMeta(postCategoryName, postName);
+      const slug = `/blog/${postCategoryName}/${postName}`;
+
+      return {
+        slug,
+        title,
+        summary,
+        name: postName,
+        date: getLocaleDateString(date),
+      };
+    });
 
     return {
       name: postCategoryName,
       beautifiedName: getBeautifiedPostCategoryName(postCategoryName),
-      posts: (await Promise.allSettled(posts)).map((x: any) => x.value),
+      posts,
     };
   });
 

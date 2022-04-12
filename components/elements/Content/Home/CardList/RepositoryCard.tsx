@@ -11,7 +11,7 @@ interface RepositoryCardProps {
 }
 
 const RepositoryCard = (props: RepositoryCardProps) => {
-  const { name, htmlUrl, description, fork, starCount, forkCount } = props;
+  const { name, htmlUrl, description, fork, starCount } = props;
 
   return (
     <a
@@ -24,7 +24,7 @@ const RepositoryCard = (props: RepositoryCardProps) => {
         <div className="text-yellow-500 mr-auto">
           {fork ? "CONTRIBUTER" : "OWNER"}
         </div>
-        {forkCount > 0 && (
+        {/* {forkCount > 0 && (
           <div className="flex">
             <Image
               src={Icons.Fork}
@@ -34,16 +34,16 @@ const RepositoryCard = (props: RepositoryCardProps) => {
             />
             <span className="text-yellow-500 ml-[2px]">{forkCount}</span>
           </div>
-        )}
+        )} */}
         {starCount > 0 && (
           <div className="flex">
+            <span className="text-yellow-500">{starCount}</span>
             <Image
               src={Icons.Star}
               alt="Repository star icon"
               height={20}
               width={20}
             />
-            <span className="text-yellow-500">{starCount}</span>
           </div>
         )}
       </div>

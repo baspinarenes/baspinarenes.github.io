@@ -1,5 +1,4 @@
 import Image from "next/image";
-import readingTime from "reading-time";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
 import * as PostComponents from "components/post-components";
@@ -12,8 +11,7 @@ import usePostViewCount from "hooks/usePostViewCount";
 
 const Post = (props: PostProps) => {
   const { postData } = props;
-  const { contentHtml, date, summary, title, slug } = postData;
-  const readTime = Math.round(readingTime(contentHtml).minutes);
+  const { contentHtml, date, summary, title, slug, readTime } = postData;
 
   const views = usePostViewCount(slug);
 
@@ -28,18 +26,20 @@ const Post = (props: PostProps) => {
       <h1 className="mb-5 font-bold text-4xl sm:text-5xl sm:text-left break-words">
         {title}
       </h1>
-      <div className="flex gap-3 mb-14 items-center">
-        <Image
-          src="/images/icon.webp"
-          height={24}
-          width={24}
-          alt="Author image"
-        />
-        <div className="flex text-sm child-exclude-last:after:content-['•'] child-exclude-last:after:mx-1">
-          <div>{siteData.author.name}</div>
+      <div className="flex justify-between mb-14 items-center">
+        <div className="flex text-sm items-center">
+          <Image
+            src="/images/icon.webp"
+            height={24}
+            width={24}
+            alt="Author image"
+          />
+          <div className="mx-1">{siteData.author.name} /</div>
           <div>{date}</div>
-          <div>{readTime} dk</div>
-          <div>{views || "—"} okunma</div>
+        </div>
+        <div className="flex text-sm">
+          <div className="mr-1">{readTime} min read •</div>
+          <div>{views > 0 ? views.toLocaleString() : "–––"} views</div>
         </div>
       </div>
       <p className="mb-5">{summary}</p>

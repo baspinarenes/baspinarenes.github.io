@@ -16,7 +16,6 @@ const BlogCategory = (props: BlogCategoryProps) => {
             title={post.title}
             summary={post.summary}
             slug={post.slug}
-            views={post.views}
           />
         ))}
       </div>
