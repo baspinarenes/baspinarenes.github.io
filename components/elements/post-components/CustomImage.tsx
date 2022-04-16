@@ -29,7 +29,7 @@ const CustomImage = (props: CustomImageProps) => {
           : "border dark:border-0 shadow-sm -mx-4"
       } ${
         reference ? "" : "overflow-hidden"
-      } sm:rounded-lg relative leading-none my-8`}
+      } sm:rounded-lg relative leading-none mt-8 mb-12`}
     >
       <Image
         src={src}
@@ -48,7 +48,7 @@ const CustomImage = (props: CustomImageProps) => {
       />
       <a
         href={reference}
-        className="absolute left-0 bottom-[-2.7rem] inline-block w-full text-center hover:border-none"
+        className="absolute left-0 bottom-[-2.7rem] inline-block w-full text-center border-none"
       >
         [{imageNo}]
       </a>

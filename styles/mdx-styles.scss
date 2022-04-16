@@ -15,29 +15,55 @@
   > p {
     margin-bottom: 20px;
     line-height: 1.6rem;
+
+    & ~ ul {
+      margin-top: -5px;
+    }
   }
 
   a {
-    word-break: break-all;
-    font-weight: bold;
-    color: rgba(29, 78, 216);
-    border-bottom-width: 2px;
-    border-color: transparent;
-    overflow-wrap: break-word;
-    margin-bottom: 15px;
-    padding-bottom: 2px;
+    @apply mb-3.5 font-bold break-all break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
 
     &:hover {
-      border-color: rgba(29, 78, 216);
+      color: rgb(5, 56, 157);
+      border-color: rgb(5, 56, 157);
     }
   }
 
   b,
   strong {
-    @apply text-yellow-500;
+    @apply text-yellow-500 font-normal;
   }
 
-  p code {
+  i,
+  em {
+    @apply font-bold not-italic;
+  }
+
+  ul {
+    margin-bottom: 20px;
+
+    li {
+      margin-left: 15px;
+      margin-bottom: 7px;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        margin-right: 6px;
+        margin-bottom: 2px;
+        height: 5px;
+        width: 5px;
+        background-color: black;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  > p code,
+  ul code,
+  section > p > code,
+  blockquote code {
     @apply bg-gray-200 dark:bg-[#e0e0e0] dark:text-[#121212] rounded-md px-2 py-0.5;
   }
 
@@ -54,7 +80,11 @@
     background-color: #f5f7f9;
     border-left: 8px solid #3984ff;
 
-    @apply my-10 -mx-4 py-5 px-6 sm:rounded-md overflow-hidden dark:bg-gray-700;
+    @apply my-5 -mx-4 py-5 px-6 sm:rounded-md overflow-hidden dark:bg-gray-700;
+
+    ul {
+      margin: 15px 0 0;
+    }
   }
 
   .ch-codegroup,
@@ -77,6 +107,27 @@
       padding-right: 10px;
       width: auto !important;
     }
+
+    .ch-code-bg-annotation {
+      width: 100% !important;
+
+      .ch-code-bg-annotation-border {
+        display: none;
+      }
+    }
+  }
+
+  .ch-section-link {
+    @apply text-[#2e3440] dark:text-current font-bold underline underline-offset-2 decoration-2 rounded-md dark:text-yellow-500 p-1;
+
+    &[data-active="true"] {
+      @apply dark:bg-gray-700;
+    }
+  }
+
+  .ch-editor-tab-active {
+    width: fit-content;
+    max-width: 150px;
   }
 
   .warning-box {

@@ -34,11 +34,11 @@ const Post = (props: PostProps) => {
             width={24}
             alt="Author image"
           />
-          <div className="mx-1">{siteData.author.name} /</div>
+          <div className="mx-1">{siteData.author.name} •</div>
           <div>{date}</div>
         </div>
         <div className="flex text-sm">
-          <div className="mr-1">{readTime} min read •</div>
+          <div className="mr-1">{readTime} min •</div>
           <div>{views > 0 ? views.toLocaleString() : "–––"} views</div>
         </div>
       </div>
