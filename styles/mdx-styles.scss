@@ -37,17 +37,21 @@
 
   i,
   em {
-    @apply font-bold not-italic;
+    @apply font-bold not-italic dark:text-yellow-500;
   }
 
   ul {
     margin-bottom: 20px;
 
     li {
+      @apply dark:text-[#e0e0e0];
+
       margin-left: 15px;
       margin-bottom: 7px;
 
       &:before {
+        @apply dark:bg-white;
+
         content: "";
         display: inline-block;
         margin-right: 6px;

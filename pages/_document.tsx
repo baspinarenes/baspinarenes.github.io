@@ -33,7 +33,7 @@ const Document = () => (
         rel="stylesheet"
       />
     </Head>
-    <body className="dark:bg-[#121212] text-gray-600 dark:text-[#e0e0e0]">
+    <body className="dark:bg-[#121212]">
       <Main />
       <NextScript />
     </body>

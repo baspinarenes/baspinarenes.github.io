@@ -1,5 +1,5 @@
 const Footer = () => (
-  <div className="text-center text-sm mt-10">
+  <div className="text-center text-sm mt-10 dark:text-[#e0e0e0]">
     2022 © No rights are reserved. Inspired by{" "}
     <a
       href="https://leerob.io/"

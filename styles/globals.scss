@@ -21,3 +21,15 @@ body {
 * {
   box-sizing: border-box;
 }
+
+p {
+  @apply text-gray-600 dark:text-[#e0e0e0];
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  @apply text-black dark:text-white;
+}

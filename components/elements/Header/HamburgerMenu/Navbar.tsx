@@ -15,7 +15,7 @@ const Navbar = () => {
       {navigations.map((navigation) => (
         <Navlink key={navigation.name} {...navigation} />
       ))}
-      <div className="absolute bottom-10 left-4 right-4 text-center text-sm">
+      <div className="absolute bottom-10 left-4 right-4 text-center text-sm dark:text-[#e0e0e0]">
         {siteData.footer}
       </div>
     </div>

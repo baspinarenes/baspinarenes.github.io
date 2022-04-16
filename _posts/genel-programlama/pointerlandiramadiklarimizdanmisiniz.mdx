@@ -6,11 +6,19 @@ summary: "C, C++ gibi dillerde daha yoğun olsa da programlama genelinde bu kavr
 
 ## Değişkenler Nereye ve Nasıl Kaydedilir?
 
-Programlamanın bir aşamasında "Tanımladığımız değişkenler nereye gidiyor?" diye hepimiz düşünmüşüzdür. Cevap basit: RAM belleğe.
+Programlamanın bir aşamasında "Tanımladığımız değişkenler nereye gidiyor?" diye
+hepimiz düşünmüşüzdür. Cevap basit: RAM belleğe.
 
-RAM bellek, alt alta kutular şeklinde tasvir edilir denk gelmişseniz. Her biri 8 bit yani 1 bayt yer kaplayan kutular halinde. 1 GB kapasitesi olan RAM'de 1.073.741.824 adet kutu vardır. Bu da 4 bayt yer tutan tamsayılar ile dolduracak olursak maksimum 268.435.456 adet tam sayı saklayabileceğimiz anlamına gelir. Her bir kutunun kendine özel, bellekte bulundukları konumu tarif eden adresi vardır. Bu sayede CPU kutulara veri yerleştirebilir ve yerleştirdiği verilere sonradan erişebilir.
+RAM bellek, alt alta kutular şeklinde tasvir edilir denk gelmişseniz. Her biri 8
+bit yani 1 bayt yer kaplayan kutular halinde. 1 GB kapasitesi olan RAM'de
+1.073.741.824 adet kutu vardır. Bu da 4 bayt yer tutan tamsayılar ile dolduracak
+olursak maksimum 268.435.456 adet tam sayı saklayabileceğimiz anlamına gelir.
+Her bir kutunun kendine özel, bellekte bulundukları konumu tarif eden adresi
+vardır. Bu sayede CPU kutulara veri yerleştirebilir ve yerleştirdiği verilere
+sonradan erişebilir.
 
-> Adresler sayıdır ancak bildiğimiz sayılardan değil. 16'lık (hexadecimal) tabanda ifade edilirler.
+> Adresler sayıdır ancak bildiğimiz sayılardan değil. 16'lık (hexadecimal)
+> tabanda ifade edilirler.
 
 Örneklendirmeye bir tam sayı değişkeni tanımlayarak başlayalım:
 
@@ -18,33 +26,45 @@ RAM bellek, alt alta kutular şeklinde tasvir edilir denk gelmişseniz. Her biri
 int dogum_tarihi = 1999;
 ```
 
-> Şunu anlamakta yarar var: bellekteki her değere adresi ile erişim sağlarız. Ancak programlama dillerinde bununla uğraşmamıza gerek bırakmayan değişken kavramı vardır. Biz bu ismi verdiğimizde CPU hangi adrese bakacağını anlar. Örnekteki `dogum_tarihi` dediğimizde CPU "He tamam, bu 1999 değerini istiyor." der.
+> Şunu anlamakta yarar var: bellekteki her değere adresi ile erişim sağlarız.
+> Ancak programlama dillerinde bununla uğraşmamıza gerek bırakmayan değişken
+> kavramı vardır. Biz bu ismi verdiğimizde CPU hangi adrese bakacağını anlar.
+> Örnekteki `dogum_tarihi` dediğimizde CPU "He tamam, bu 1999 değerini istiyor."
+> der.
 
-Günlük yaşantımızda sayıları 10 tabanında (decimal) kullanıyoruz. Ancak bilgisayarlar bunları anlayabilmek için 2 tabanına (binary) çevirmek zorunda. Bellek temsillerinde ise nedenini bulamadım ancak 16 tabanını (hexadecimal) kullanılıyor. Aşağıda 1999 değerinin bu tabanlardaki halini görebilirsiniz:
+Günlük yaşantımızda sayıları 10'luk tabanda (decimal) kullanıyoruz. Ancak
+bilgisayarlar bunları anlayabilmek için 2'lik tabana (binary) çevirmek zorunda.
+Bellek temsillerinde ise 16 tabanını (hexadecimal) kullanılıyor. Aşağıda 1999
+değerinin bu tabanlardaki halini görebilirsiniz:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/001.webp"
   width={718}
   height={167}
+  fluid
 />
 
-Değişkenin bellekteki şekline bakalım. 16 tabanındaki karşılığını sırayla kutulara ikişerli olarak yerleştiririz:
+Değişkenin bellekteki şekline bakalım. 16'lık tabandaki karşılığını kutulara
+ikişerli olarak yerleştiririz:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/002.png"
   width={856}
   height={504}
+  fluid
 />
 
-İkişerli yerleştirme sebebimiz, 2'lik tabandaki her 8 bite karşılık 16'lık tabanda 2 karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek **dogum_tarihi** dedik:
+İkişerli yerleştirme sebebimiz, 2'lik tabandaki her 8 bitin 16'lık tabanda 2
+karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek *dogum_tarihi* dedik:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/003.png"
   width={869}
   height={492}
+  fluid
 />
 
-Artık biz **dogum_tarihi** değişkenini çağırdığımız zaman, CPU belleğe gider ve değişkenin başlangıcı adresi olan **90000008** adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani **00 00 07 CF** değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
+Artık biz bu değişkeni çağırdığımızda CPU belleğe gider ve değişkenin başlangıcı adresi olan *90000008* adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani *00 00 07 CF* değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
 
 ## Bellek Adresini Bilmek Ne İşimize Yarar?
 
@@ -54,7 +74,7 @@ Verinin kendisi yerine adresini kullanmak, onu kopyalamadan birden fazla yerden 
 
 ## Değişkenlerin Adreslerini Nasıl Elde Ederiz?
 
-Burada devreye, bellek adresi tutan değişkenler girer. Değerleri nasıl değişkenlerde depolayabiliyorsak bellek adreslerini de aynı şekilde depolayabiliriz. Bunu gerçekleştiren yapılara `pointer` denir. Aslında **pointer**'da bir değişkendir.
+Burada devreye, bellek adresi tutan değişkenler girer. Değerleri nasıl değişkenlerde depolayabiliyorsak bellek adreslerini de aynı şekilde depolayabiliriz. Bunu gerçekleştiren yapılara *pointer* denir. Aslında kendisi de bir değişkendir.
 
 Önceki kısımda görsel olarak anlattığımız örneği kodlama ortama dökelim. İlk olarak değişken tanımımızı yapalım:
 
@@ -62,7 +82,7 @@ Burada devreye, bellek adresi tutan değişkenler girer. Değerleri nasıl deği
 int dogum_tarihi = 1999;
 ```
 
-Dediğimiz gibi **dogum_tarihi** 1999 tamsayı değerini depoluyor. Şimdi bu değerin bellekteki adresini elde edelim:
+Dediğimiz gibi `dogum_tarihi` 1999 tamsayı değerini depoluyor. Şimdi bu değerin bellekteki adresini elde edelim:
 
 ```cpp
 // 1. tanımlama biçimi
@@ -77,9 +97,7 @@ dogum_tarihi_ptr = &dogum_tarihi; // yıldız yok dikkat edin.
 
 Şimdi bu sözdizimini inceleyelim.
 
-`dogum_tarihi_ptr` değişkenimizin türü, göreceğimiz üzere `int*`. Bu da bize tamsayı değişkenin adresini tutan pointer olduğunu gösterir. Değişkenin başına koyduğumuz `&` işareti ise değişkenimizin adresini elde etmemize yarayan **address-of** operatörüdür. Yani `&dogum_tarihi`, **dogum_tarihi** değişkeninin bellekteki adresidir.
-
-Şöyle genel biçimde tekrar edecek olursak; **dogum_tarihi_ptr** **pointer** değişkeni, **dogum_tarihi** değişkeninin bellek adresini işaret eder:
+`dogum_tarihi_ptr` değişkenimizin türü, göreceğimiz üzere _int*_. Bu da bize tamsayı değişkenin adresini tutan pointer olduğunu gösterir. Başına koyduğumuz '&'' işareti ise değişkenimizin adresini elde etmemize yarayan *address-of* operatörüdür. Yani `&dogum_tarihi`, `dogum_tarihi` değişkeninin bellekteki adresidir.
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/004.png"
@@ -87,7 +105,7 @@ dogum_tarihi_ptr = &dogum_tarihi; // yıldız yok dikkat edin.
   height={243}
 />
 
-Şu iki çıktıya bakarsak `&` işaretinin ne işe yaradığı daha net anlaşılabilir:
+Şu iki çıktıya bakarsak '&' işaretinin ne işe yaradığı daha net anlaşılabilir:
 
 ```cpp
 printf("%d\n", dogum_tarihi);
@@ -97,14 +115,13 @@ printf("%p\n", &dogum_tarihi);
 printf("%p\n", dogum_tarihi_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 1999
 0x7ffd83c692bc
 0x7ffd83c692bc
 </CodeResult>
 
-Hemen toparlayalım. **dogum_tarihi** ifadesi, bildiğimiz **int** değişkenidir. Ve 1999 sayısını depolar. `&dogum_tarihi` ifadesi, değişkenimizin adresidir. **dogum_tarihi_ptr** ifadesi ise elde ettiğimiz adresi depoladığımız değişkendir. Tipi ise **int\*** dir. Yani değişken adresi depolayan değişken diyebiliriz :)<br /><br />
+Hemen toparlayalım. `dogum_tarihi` ifadesi, bildiğimiz int değişkenidir. Ve 1999 sayısını depolar. `&dogum_tarihi` ifadesi, değişkenimizin adresidir. *dogum_tarihi_ptr* ifadesi ise elde ettiğimiz adresi depoladığımız değişkendir. Tipi ise *int\** dir. Yani değişken adresi depolayan değişken diyebiliriz :)
 
 Bu kısmı tamamlarken bir noktaya daha değinmekte fayda görüyorum. Pointer tanımlarken `int *dogum_tarihi_ptr`, `int* dogum_tarihi_ptr` sözdimlerinden herhangi birini kullanabiliriz. Yıldızın sabit konumu yoktur, sadece tip ile değişken ismi arasında olmalıdır. Ancak C/C++ programcıları geleneksel olarak `int *dogum_tarihi_ptr` yazımını kullanılır. Bunun sebebi aşağıdaki kullanımda yarattığı kafa karışıklığıdır:
 
@@ -129,15 +146,16 @@ Değişken ismine bitişik olduğu için değişkene ait olduğundan emin oluruz
 
 ## Adresler ile Değişken Değerlerine Erişmek
 
-Değişkenin adresini elde edebileceğimiz gibi adres yardımıyla değişken değerine de erişebiliriz. Şu görsele göz atalım ve sonrasında birlikte inceleyelim:
+Değişkenin adresini elde edebileceğimiz gibi adres yardımıyla değişken değerine de erişebiliriz. Şu görseli birlikte inceleyelim:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/005.png"
   width={1000}
   height={400}
+  fluid
 />
 
-Örneğin elimizdeki doğum tarihi bilgisini kullanıcının yanlış girmiş. Bunu değiştirmek istiyor. Elimizde hem değişken hem de adresini tutan **pointer** var:
+Örneğin elimizdeki doğum tarihi bilgisini kullanıcının yanlış girmiş. Bunu değiştirmek istiyor. Elimizde hem değişken hem de adresini tutan pointer var:
 
 ```cpp
 int dogum_tarihi = 1999;
@@ -150,7 +168,7 @@ Değişkenlerin değerini nasıl değiştirebileceğimizi zaten biliyorduk:
 dogum_tarihi = 1990;
 ```
 
-> "Peki neden hala o yöntemle değiştirmeye devam etmiyoruz?" diyorsanız çoğunlukla öyle yapacak olacak olsakta bazı zamanlar gelecek ki <br /><strong>pointer</strong> kullanmak zorunda kalacağız. İleride göreceğiz.
+> "Peki neden hala o yöntemle değiştirmeye devam etmiyoruz?" diyorsanız çoğunlukla öyle yapacak olsakta bazı zamanlar gelecek ki pointer kullanmak zorunda kalacağız. İleride göreceğiz.
 
 Artık pointer vasıtasıyla da değiştirebiliriz:
 
@@ -161,18 +179,17 @@ printf("%d", dogum_tarihi_ptr);
 printf("%d", *dogum_tarihi_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 0x7ffc0206d83c // başındaki "0x" hexadecimal olduğunu belirtir
 </CodeResult>
 
-Burada kafalar çorba olabiliyor. **Pointer** tanımlanırken kullanılan _ işareti, onun pointer olduğunu belirtmek için konur ve başka amacı yoktur. Ancak tanımlandıktan sonra kullanacağımız her _ işareti, **pointer**'ın işaret ettiği adresteki değeri temsil eder. Buradaki yıldız işaretine **dereference operator** denir.
+Burada kafalar çorba olabiliyor. Pointer tanımlanırken kullanılan * işareti, onun pointer olduğunu belirtmek için konur ve başka amacı yoktur. Ancak tanımlandıktan sonra kullanacağımız her * işareti, pointer'ın işaret ettiği adresteki değeri temsil eder. Buna *dereference operator* denir.
 
 ## Adresler ile Dizi Elemanlarına Erişmek
 
-> Bu kısma geçmeden önce küçük bir ipucu vermek istiyorum. String değişkenler tanımlarken `char[] isim = "Ahmet"` şeklindeki bir kullanıma denk gelmişsinizdir. C'de aslında string diye bir tip yoktur. Son elemanının **\0** karakteri olan karakter dizileri ile ifade edilirler. Yani bu anlatacaklarım onlar için de geçerli olacak.
+> Bu kısma geçmeden önce küçük bir ipucu vermek istiyorum. String değişkenler tanımlarken `char[] isim = "Ahmet"` şeklindeki bir kullanıma denk gelmişsinizdir. C'de aslında string diye bir tip yoktur. Son elemanının '\0' karakteri olan karakter dizileri ile ifade edilirler. Yani bu anlatacaklarım onlar için de geçerli olacak.
 
-Dizi isimleri farklı kullanımlarda farklı anlam ifade edebilirler. **Pointer** kavramı, dizileri anlamak için önemlidir. Bu sebeple bir dizi oluşturup **pointer** ile ilişkisini görelim:
+Dizi isimleri farklı kullanımlarda farklı anlam ifade edebilirler. Pointer kavramı, dizileri anlamak için önemlidir. Bu sebeple bir dizi oluşturup pointer ile ilişkisini görelim:
 
 ```cpp
 int sayi_dizisi[] = {10, 20, 30};
@@ -186,7 +203,6 @@ printf("%p\n", &sayi_dizisi);    //dizinin adresi
 printf("%p\n", &sayi_dizisi[0]); //ilk elemanın adresi
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 0x7ffcd4fb610c
 0x7ffcd4fb610c
@@ -201,7 +217,6 @@ printf("%p\n", &sayi_dizisi[0]); //ilk elemanın adresi
 printf("%d", sizeof(sayi_dizisi)); // 4 bayt * 3 = 12 bayt
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 5
 </CodeResult>
@@ -218,7 +233,7 @@ int *sayi_dizisi_ptr = sayi_dizisi;
 // &sayi_dizisi de yazılabilir
 ```
 
-`sayi_dizisi` zaten adres tutuyordu değil mi? İkinci bir yerde daha tutmak için `sayi_dizisi_ptr` **pointer**'ını oluşturduk.
+`sayi_dizisi` zaten adres tutuyordu değil mi? İkinci bir yerde daha tutmak için `sayi_dizisi_ptr` pointer'ını oluşturduk.
 
 Dizimizin bellekteki durumunu görselleştirelim:
 
@@ -226,9 +241,10 @@ Dizimizin bellekteki durumunu görselleştirelim:
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/006.png"
   width={1200}
   height={400}
+  fluid
 />
 
-Dizilerin elemanlarına erişmek için indeksleri kullanıyorduk (bir sonraki kısımda karşılaştıracağız). Ancak arkada neler dönüyor merak ediyoruz. İşte bunu **pointer** yardımıyla anlayabiliriz.
+Dizilerin elemanlarına erişmek için indeksleri kullanıyorduk (bir sonraki kısımda karşılaştıracağız). Ancak arkada neler dönüyor merak ediyoruz. İşte bunu pointer yardımıyla anlayabiliriz.
 
 Her bir elemana dizi adresine uyguladığımız aritmetik işlemler ile erişiyoruz. Şu örneğe bakalım:
 
@@ -247,7 +263,6 @@ printf("son adres: %p\n", sayi_dizisi_ptr);
 printf("son eleman: %i\n", *sayi_dizisi_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 ilk adres: 0x7ffcd4fb610c
 ilk eleman: 10
@@ -259,7 +274,7 @@ son eleman: 30
 
 İsmin ilk öğeye işaretçi olduğunu söylemiştik. Dolayısıyla `*array_ptr` dediğimizde ilk öğeyi verdiğini biliyoruz. Bu kısım tamam. Peki `array_ptr += 1;` ne anlama geliyor?
 
-**Pointer**'a 1 eklediğimizde bir sonraki kutunun adresini tutmasını istiyoruz.
+Pointer'a 1 eklediğimizde bir sonraki kutunun adresini tutmasını istiyoruz.
 
 Biraz kafalar karışmış olabilir. Bu tarz şeylere görsellik katmadan anlamak zordur bilirim. İkinci elemana ulaşmak için adrese 1 eklediğimizde olacak şey böyledir:
 
@@ -267,9 +282,10 @@ Biraz kafalar karışmış olabilir. Bu tarz şeylere görsellik katmadan anlama
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/007.png"
   width={1207}
   height={348}
+  fluid
 />
 
-Göreceğimiz gibi 1 eklediğimizde esasen `1*sizeof(int)` demek isteriz. **int** olmasının sebebi dizinin elemanlarının tam sayı olmasıdır. Tam sayı boyutunun 4 bayt olduğundan bahsetmiştik. Yani 4 kutu. 1 eklemek istediğimizde 4 kutu sonraya git demiş oluruz. Yani `sayi_dizisi_ptr` **pointer** değişkeni artık 0x7ffcd4fb6110 adresini depolayacak. Bunu yapma sebebimiz ise diğer elemanın adresine erişmek. Tekrardan 1 eklediğimizde de aynı işlemler uygulanır ve adres 0x7ffcd4fb6114 olur.
+Göreceğimiz gibi 1 eklediğimizde esasen `1*sizeof(int)` demek isteriz. int olmasının sebebi dizinin elemanlarının tam sayı olmasıdır. Tam sayı boyutunun 4 bayt olduğundan bahsetmiştik. Yani 4 kutu. 1 eklemek istediğimizde 4 kutu sonraya git demiş oluruz. Yani `sayi_dizisi_ptr` pointer değişkeni artık 0x7ffcd4fb6110 adresini depolayacak. Bunu yapma sebebimiz ise diğer elemanın adresine erişmek. Tekrardan 1 eklediğimizde de aynı işlemler uygulanır ve adres 0x7ffcd4fb6114 olur.
 
 Direk olarak 3. elemana erişmek isteseydik `2*sizeof(int)`, yani 2 eleman sonraya git diyebilirdik:
 
@@ -277,6 +293,7 @@ Direk olarak 3. elemana erişmek isteseydik `2*sizeof(int)`, yani 2 eleman sonra
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/008.png"
   width={1215}
   height={362}
+  fluid
 />
 
 Bu sefer sonraki 8. kutuya giderek 30 değerinin adresine sahip olurdu.
@@ -292,7 +309,6 @@ printf("adres: %p\n", sayi_dizisi_ptr);
 printf("eleman: %i\n", *sayi_dizisi_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 adres: 0x7ffcd4fb6114
 eleman: 30
@@ -306,7 +322,6 @@ printf("adres: %p\n", sayi_dizisi_ptr);
 printf("eleman: %i\n", *sayi_dizisi_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 adres: 0x7ffcd4fb6110
 eleman: 20
@@ -326,7 +341,6 @@ printf("ikinci eleman: %i\n", sayi_dizisi[1]);
 printf("son eleman: %i\n", sayi_dizisi[2]);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 ilk eleman: 10
 ikinci eleman: 20
@@ -343,21 +357,19 @@ printf("ikinci eleman: %d\n", *(sayi_dizisi + 1));
 printf("son eleman: %d\n", *(sayi_dizisi + 2));
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 ilk eleman: 10
 ikinci eleman: 20
 son eleman: 30
 </CodeResult>
 
-Ancak bu kısımda dikkat etmemiz gereken bir şey var. Bir dizinin 2. elemanının adresini depolayan bir **pointer** tanımlayalım. Ve indeks 1'deki değere bakalım:
+Ancak bu kısımda dikkat etmemiz gereken bir şey var. Bir dizinin 2. elemanının adresini depolayan bir pointer tanımlayalım. Ve indeks 1'deki değere bakalım:
 
 ```cpp
 int *yeni_sayi_dizisi = &sayi_dizisi[1]; // ya da (sayi_dizisi + 2)
 printf("%d", yeni_sayi_dizisi[1])
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 30
 </CodeResult>
@@ -368,6 +380,7 @@ printf("%d", yeni_sayi_dizisi[1])
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/009.png"
   width={1200}
   height={600}
+  fluid
 />
 
 Dolayısıyla ilk eleman artık 30 olacaktır (başlangıçtan 4 kutu sonrası olarak hayal ediyorduk hatırlayın).
@@ -393,7 +406,6 @@ int main() {
 }
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 Fonksiyon öncesinde sayı: 12
 Fonksiyon içinde sayı: 144
@@ -421,7 +433,6 @@ int main() {
 }
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 Fonksiyon öncesinde sayı: 12
 Fonksiyon içinde sayı: 144
@@ -430,7 +441,7 @@ Fonksiyon sonrasında sayı: 144
 
 Farkı net bir şekilde görebilirsiniz. Fonksiyona değişkenin adresini gönderdiğimizde yapılan işlemler orjinal değişkeni değiştirir. Adresteki içeriğin karesi alır ve adresin içeriği değiştirilir. Fonksiyon sonrasında o adrese bakacak olursak değiştiğini görürüz.
 
-> Bu özelliğin yararı çok fazladır. Örneğin çok sayıda veri üzerinde çalışıyorsunuz, mesela 100.000 adet resmimiz var. Ve bu resimleri nesne tespitini yapacak fonksiyona göndermek istiyoruz. Ancak **pointer** olmasaydı ve hepsinin kopyasını göndermiş olsaydık, bellekte 200.000 resim depolanmış olurdu. Muazzam bir yer işgali olacaktır ve performans düşecektir. Bu sebeple, sadece adresin içeriğinde değişiklik yapmak faydalıdır. Her yerden orjinal içeriğe erişebiliriz.
+> Bu özelliğin yararı çok fazladır. Örneğin çok sayıda veri üzerinde çalışıyorsunuz, mesela 100.000 adet resmimiz var. Ve bu resimleri nesne tespitini yapacak fonksiyona göndermek istiyoruz. Ancak pointer olmasaydı ve hepsinin kopyasını göndermiş olsaydık, bellekte 200.000 resim depolanmış olurdu. Muazzam bir yer işgali olacaktır ve performans düşecektir. Bu sebeple, sadece adresin içeriğinde değişiklik yapmak faydalıdır. Her yerden orjinal içeriğe erişebiliriz.
 
 Peki dizi göndermek istesek ne olurdu? Dizi isimlerinin pointer olduğundan bahsetmiştik. Diziyi fonksiyona kabul ederken parametre olarak tanımlayabileceğimiz ve temelde aynı olan 2 seçeneğimiz var.
 
@@ -466,7 +477,6 @@ int main() {
 }
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 6 13 8 12 10
 </CodeResult>
@@ -491,59 +501,56 @@ int main() {
 }
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 En büyük sayi: 8
 </CodeResult>
 
-## Matruşka Pointer'lar
+## Matruşka Pointerlar
 
 Bunu sona bırakmak istedim. Pointer'ın en çok kafa karıştıran kısmıdır. Basitçe anlatmaya çalışacağım.
 
-**pointer** değişkenin adres depoladığını artık biliyoruz. Elbette **pointer** değişkenlerde bellekte depolanır. Bu sebeple **pointer** adresi tutan **pointer** oluşturmak mümkündür. Bir değişken ve **pointer** oluşturalım:
+pointer değişkenin adres depoladığını artık biliyoruz. Elbette pointer değişkenlerde bellekte depolanır. Bu sebeple pointer adresi tutan pointer oluşturmak mümkündür. Bir değişken ve pointer oluşturalım:
 
 ```cpp
 int yas = 21;
 int *yas_ptr = &yas;
 ```
 
-Şimdi bu **pointer**'ın adresini depolayan bir **pointer** daha oluşturalım:
+Şimdi bu pointer'ın adresini depolayan bir pointer daha oluşturalım:
 
 ```cpp
-int **yas_ptr_ptr = &yas_ptr;
+int *yas_ptr_ptr = &yas_ptr;
 ```
 
-Bu da ne, hani tek yıldız ile oluşturuluyordu? Sakin. Hala tek yıldız ile oluşturuluyor. Yukarıda `int **yas_ptr_ptr` ismini `int** yas_ptr_ptr` olarak ifade ederek analize başlayalım. `int` tipinde `yas` değişkenin adresini bir **pointer**'a atarsak bunun tipinin `int*` olduğunu gördük. Şimdi ise `int*` tipini tutan pointer oluşturmuş oluruz. Yeni değişkenimizin tipi ise `int**` olur. Şimdi biraz daha netleşti değil mi?
+Bu da ne, hani tek yıldız ile oluşturuluyordu? Sakin. Hala tek yıldız ile oluşturuluyor. Yukarıda `int *yas_ptr_ptr` ismini `int* yas_ptr_ptr` olarak ifade ederek analize başlayalım. int tipinde `yas` değişkenin adresini bir pointer'a atarsak bunun tipinin int* olduğunu gördük. Şimdi ise int* tipini tutan pointer oluşturmuş oluruz. Yeni değişkenimizin tipi ise int* olur. Biraz daha netleşti değil mi?
 
-Yeni **pointer** ile ilgili birkaç çıktıya bakalım:
+Yeni pointer ile ilgili birkaç çıktıya bakalım:
 
 ```cpp
 printf("%p\n", yas_ptr_ptr);
 printf("%p\n", *yas_ptr_ptr);
-printf("%d\n", **yas_ptr_ptr);
+printf("%d\n", *yas_ptr_ptr);
 ```
 
-{/* prettier-ignore */}
 <CodeResult>
 0x7fffd4e80798
 0x7fffd4e80794
 50
 </CodeResult>
 
-İlk satırı biliyoruz `yas_ptr_ptr`'in adresini yazdırdı. İkinci satırda ise bu **pointer**'ın değerini, yani `yas_ptr` değişkeninin adresini yazdırdık. Son satırda ise `yas_ptr_ptr` **pointer** değişkeninin adresini depoladığı `yas_ptr` **pointer** değişkeninin adresinin içerisinde bulunan değeri yazdırmış olduk. Görsel olarak da eklemiş olayım:
+İlk satırı biliyoruz `yas_ptr_ptr`'in adresini yazdırdı. İkinci satırda ise bu pointer'ın değerini, yani `yas_ptr` değişkeninin adresini yazdırdık. Son satırda ise `yas_ptr_ptr` pointer değişkeninin adresini depoladığı `yas_ptr` pointer değişkeninin adresinin içerisinde bulunan değeri yazdırmış olduk. Görsel olarak da eklemiş olayım:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/010.png"
   width={1000}
   height={400}
+  fluid
 />
 
-<TheEnd />
-
-Yazımız burda bitti. Yeni yazılarda görüşmek üzere, esen kalın.
+Yeni yazılarda görüşmek üzere, esen kalın.
 
 ## Kaynaklar
 
-[https://boredzo.org/pointers/](https://boredzo.org/pointers/)  
-[https://computer.howstuffworks.com/c23.htm](https://computer.howstuffworks.com/c23.htm)  
-[https://www3.ntu.edu.sg/home/ehchua/programming/genel/cp4_PointerReference.html](https://www3.ntu.edu.sg/../cp4_PointerReference.html)
+- [https://boredzo.org/pointers/](https://boredzo.org/pointers/)  
+- [https://computer.howstuffworks.com/c23.htm](https://computer.howstuffworks.com/c23.htm)  
+- [https://www3.ntu.edu.sg/home/ehchua/programming/genel/cp4_PointerReference.html](https://www3.ntu.edu.sg/../cp4_PointerReference.html)

@@ -26,7 +26,7 @@ const Post = (props: PostProps) => {
       <h1 className="mb-5 font-bold text-black dark:text-white text-4xl sm:text-5xl sm:text-left break-words">
         {title}
       </h1>
-      <div className="flex justify-between mb-14 items-center">
+      <div className="flex justify-between mb-14 items-center dark:text-[#e0e0e0]">
         <div className="flex text-sm items-center">
           <Image
             src="/images/icon.webp"

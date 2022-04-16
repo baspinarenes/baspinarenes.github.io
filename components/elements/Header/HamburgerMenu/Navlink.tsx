@@ -22,7 +22,7 @@ const Navlink = (props: NavlinkProps) => {
     <Link href={path}>
       <a
         onClick={handleClickHamburgerMenuNavlink}
-        className="px-5 py-4 text-lg"
+        className="px-5 py-4 text-lg dark:text-[#e0e0e0]"
       >
         {name}
       </a>

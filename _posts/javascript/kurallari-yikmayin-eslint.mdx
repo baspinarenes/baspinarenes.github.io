@@ -4,7 +4,7 @@ date: 2022-04-15
 summary: "Bize sürekli hata fırlatan ancak her şeye rağmen asla vazgeçemediğimiz ESLint'in ne olduğuna birlikte bakalım."
 ---
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/001.webp" width={1080} height={652} />
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/001.webp" width={1080} height={652} fluid />
 
 Trendyol'da Mweb ekibi olarak kullandığımız ESLint kuralları, isterlerimizin
 tamamını kapsamıyordu ve düzensizdi. Bu kuralları derli toplu hale getirmek,
@@ -12,40 +12,23 @@ kullandığımız kütüphanelere özgü pluginleri dahil etmek ve ileride özel
 tanımlayabilmek adına takıma özel bir plugin oluşturmaya karar verdik. Bu süreçte
 edindiğim deneyimleri bir yazıya dökmek istedim. İşte bu sebeple burdayız :)
 
-> _Dikkat Tanım Var!_ Az sonra bir tanımla karşılaşacaksınız. Çok üzerinde
+> _Dikkat Tanım Var!_ Az sonra kitabi olmasa da bir tanımla karşılaşacaksınız. 
+> Tanımları hiç sevmem o yüzden çok üzerinde durmayacağım. Çok üzerinde
 > durmadan arkalara doğru ilerleyelim. Bizim işimiz tanım ezberlemek değil, işin
-> özüne dair fikir sahibi olmak.
+> özüne dair fikir edinmek.
 
 ## ESLint Nedir?
 
 *ESLint*, Javascript kodlarımızın yazılış şeklini belirli kurallara göre analiz
 eden ve hatta düzelten bir garip araçtır. Kodlarımızı belirlediğimiz standarda
 göre otomatik formatlayabilir. Bu sayede takım projelerinde her satır ayrı telden
-çalmaz, okunması ve debug edilmesi kolaylaşır. Mesela Allahlık bir kodun
-ESLint'ten elinden geçtikten sonraki halini görelim:
-
-```javascript
-// Bozuk Kod
-for (let i = 100;     i 
-    >= 0; 
-    
-    i--) { 
-      console.
-      
-      log(`Sayı: ${i}`);
-}
-
-// Düzeltilmiş Kod
-for (let i = 100; i >= 0; i--) {
-  console.log(`Sayı: ${i}`);
-}
-```
+çalmaz, okunması ve debug edilmesi kolaylaşır.
 
 <CH.Section>
 
-Sağladığı önemli şeylerden birisi de kodu çalıştırmadan önce belirli bugları
-tespit edebilmesidir. Örneğin aşağıdaki gibi `for` içinde [değişkeni deklare etmeyi
-unutursanız](focus://3[6:12]) ya da 100'den geriye saymayı amaçladığınız bir kodda
+Bunun yanı sıra kod çalıştırmadan önce belirli bugları tespit edebilir. Örneğin
+aşağıdaki gibi `for` içinde [değişkeni deklare etmeyi unutursanız](focus://3[6:12])
+ya da 100'den geriye saymayı amaçladığınız bir kodda
 [değişkenin her döngüde artmasını](focus://3[23:25]) söylerseniz döngü yönünün
 yanlış olduğuna dair sizi uyarır:
 
@@ -57,19 +40,17 @@ for (i = 100; i >= 0; i++) {
   console.log(`Sayı: ${i}`);
 }
 
-// Hatasız Kullanım
+// Hatalardan arındırılmış kod
 for (let i = 100; i >= 0; i--) {
   console.log(`Sayı: ${i}`);
 }
 ```
 </CH.Section>
 
-İstenmeyen durumlara karşı tavrı nettir. Bir gün taskınızı bitirmişsinizdir
+İstenmeyen durumlara karşı da tavrı nettir. Bir gün taskınızı bitirmişsinizdir
 arkanıza yaslanıp commit atarsınız ancak o da ne ESLint karşınızda:
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/002.webp" width={715} height={429} />
-
-Bu arada kitabi tanımını her yerde bulabilirsiniz ancak kimin umrunda. Tanımlarda boğulmak istemiyoruz. Örneklendirdiğimizde kafamızda zaten netleşecek.
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/002.webp" width={715} height={429} fluid/>
 
 ## Kullanacağımız Ortamın Kurulması
 
@@ -118,10 +99,10 @@ ettiği değerleri kullanmamızı sağlar. ESLint ekibi de bize bazı değerler 
 Her bir kurala tek tek değer atamakla zaman kaybetmeden konfigüre etmiş oluruz. Bu
 sayede sadece özelleştirmek istediğimiz kuralları *[rules](focus://11,12)* altında
 belirtiriz. Ancak şuan için başka hatalarla uğraşmadan senaryomuza odaklanmak
-adına [ilgili satırı](focus://10) silerek diğer ayarları kapatacağız.
+adına [ilgili satırı](focus://10) silerek diğer tüm kuralları kapatacağız.
 
 > Blog yazısı içerisinde altı noktalı metinlere denk gelirseniz üzerinde durun.
-> Belirttiğim kısımların kod bloğundaki yerini gösteriyor olacağım.
+> Belirttiğim kısımların kod bloğundaki yerini gösterir.
 
 ```javascript .eslintrc.js
 module.exports = {
@@ -142,7 +123,7 @@ module.exports = {
 </CH.Section>
 
 Bu arada özel dosyasını kullanmayı tercih edeceğiz ancak oluşturmak istemezseniz
-`package.json` içerisinde `eslintConfig` kullanarak da konfigürasyonumuzu yapabiliriz.
+`package.json` içerisinde `eslintConfig` kullanarak da konfigürasyonumuzu yapabiliriz. Ancak daha derli toplu olacağı için `.eslintrc.js` ile ilerlemek sağlıklıdır.
 
 ```javascript package.json focus=4:19
 {
@@ -208,14 +189,15 @@ module.exports = {
   }
 }
 ```
-Peki ne tür değerler atayabiliriz? Öncelikle davranışlarından bahsedelim. Üç
-farklı şekilde olabilir:
+
+ESLint kurallara verilen değerlere göre üç farklı şekilde davranır:
 
 - `"off"` ya da `0` - kuralı kapatır
 - `"warn"` ya da `1` - kuralı uyarı verecek biçimde aktifleştirir
 - `"error"` ya da `2` - kuralı hata verecek biçimde aktifleştirir
 
-Farklı kullanımlara sahip bazı örnekleri inceleyelim.
+Bazı kurallar sadece bu değeri kabul eder, bazıları ise özelleştirebilmemize
+imkan sağlar. Farklı kullanımlara sahip bazı örnekleri inceleyelim.
 
 ```javascript .eslintrc.js
 module.exports = {
@@ -237,8 +219,8 @@ module.exports = {
 }
 ```
 
-Neyse basit senaryomuza geri dönelim. Kurallarımızı tanımlamıştık. Bunlarla
-birlikte kodumuzu analiz edelim ve çıktımızı görelim.
+Neyse basit senaryomuza geri dönelim. Tanımladığımız kurallarla birlikte kodumuzu
+analiz ederek çıktımızı görelim.
 
 ```powershell
 npx eslint src/sum.js
@@ -257,12 +239,12 @@ npx eslint src/sum.js
 Üç tane hata fırlattı. Bunları elle düzeltebiliriz falan filan ama neden biz
 uğraşalım ki? Pekala ESLint'e yaptırabiliriz.
 [Dökümantasyona](https://eslint.org/docs/rules/) bakarsak bazı kuralların
-yanlarında ingiliz anahtarı vardır. BU "fixable" olduğunu yani otomatik
-düzeltilebildiği anlamına gelir. Kullandığımız iki kural da aslında
+yanlarında ingiliz anahtarı olduğunu görebilirsiniz. Bu "fixable" olduğunu yani 
+otomatik düzeltilebildiği anlamına gelir. Kullandığımız iki kural da aslında
 bu şekildedir. 
 
-Terminalimizde ESLint çalıştırırken `--fix` bayrağı eklersek
-düzeltmeleri yapar ve dosyanızın üzerine yazar. Öncesinde kodumuza son kez bakalım.
+"Fixable" olarak belirtilen kurallar `--fix` bayrağı eklenerek düzeltilebilir.
+Öncesinde kodumuza son kez bakalım.
 
 ```javascript src/sum.js
 var sum = (num1, num2) => {
@@ -284,6 +266,8 @@ let sum = (num1, num2) => {
 };
 ```
 
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/tumblr_ory2yvkgAn1ujmvy2o1_500.jpeg" width={441} height={334} />
+
 Artık `let`'imiz ve noktalı virgülümüz var. Muazzam bir şey değil mi?
 
 ## VSCode ESLint Eklentisi
@@ -293,19 +277,19 @@ Eski blogumu yaparken birkaç yazı takip etmiştim ama aklımı karıştıran
 kurmamız gerekiyor? Bize tam olarak ne sağlıyor?". Siz de de oluştuysa hemen bu
 soruları def edelim.
 
-Halihazırda bahsetmiş olduğumu *ESLint paketi*, terminalden çalıştırdığımız
+Halihazırda bahsetmiş olduğumuz *ESLint paketi*, terminalden çalıştırdığımız
 komutla kodumuzu analiz eden ve uymayanları konsoldan bize bildirir. *VSCode
 ESLint eklentisi* ise arkaplanda ESLint paketini kullanır ve hataları hiçbir komut
 çalıştırmadan, kodu yazarken editörde görmemizi sağlar.
 
 Hemen indirip deneyelim.
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/004.png" width={1460} height={ 364} />
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/004.png" width={1460} height={ 364} fluid />
 
 İndirdikten sonra `src/sum.js` dosyamızı en baştaki hale getirelim ve eklentinin
 yaptığı sihre odaklanalım.
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/008.gif" width={600} height={ 377} />
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/008.gif" width={600} height={ 377} fluid />
 
 > Bu menüyü fareyle açmak zorunda değilsiniz klavyeden `CTRL/CMD + .` kombinasyonunu kullanabilirsiniz.
 
@@ -326,7 +310,7 @@ Peki bizim için son bir şarkı çalıp `CTRL/CMD + S` ile kaydettiğimizde tü
 
 Artık dosyayı kaydettiğimizde otomatik düzelttiğini görebiliriz.
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} />
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} fluid />
 
 Düzeltmeleri hızlıca uygulayıp kod yazabilecek duruma geldik. Dosya kaydetmeyi
 çok sık kullanacağız buna alışmak güzel bir kazanım olur. Kendimden örnek verecek
@@ -420,9 +404,7 @@ VSCode ESLint eklentisiyle birlikte kurallara uymayan bölümleri editörde canl
 canlı görebiliriz. Aynı zamanda otomatik formatlamayı her kaydedişte ve ya
 belirli tuş kombinasyonlarıyla tetikleyebiliriz.
 
-<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} />
-
-<TheEnd />
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} fluid />
 
 İlk yazımız burada biter benden bu kadar. Serinin devamında çok daha fazla
 şaşıracağınıza taahhüt ediyorum (`git commit -m "Çok daha fazla şaşıracaksınız"`).
