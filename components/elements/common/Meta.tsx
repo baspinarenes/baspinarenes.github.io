@@ -43,7 +43,7 @@ const Meta = (props: MetaProps) => {
       />
       <meta
         name="twitter:image"
-        content={`${siteData.url}/images/social-card.png`}
+        content={`${siteData.url}/images/social-card.png?2`} // add parameter for refresh twitter card
       />
       <meta name="twitter:card" content="summary_large_image" />
     </Head>
