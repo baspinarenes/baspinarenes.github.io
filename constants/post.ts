@@ -5,4 +5,5 @@ export const BEAUTIFIED_POST_CATEGORY_NAMES: Record<string, string> = {
   "genel-programlama": "Genel Programlama",
   "hayatin-icinden": "Hayatın İçinden",
   ubuntu: "Ubuntu",
+  javascript: "Javascript / Typescript",
 };

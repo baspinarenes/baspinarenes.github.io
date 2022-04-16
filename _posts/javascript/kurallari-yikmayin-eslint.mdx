@@ -1,0 +1,430 @@
+---
+title: "Kuralları Yıkmayın: ESLint - Bölüm 1"
+date: 2022-04-15
+summary: "Bize sürekli hata fırlatan ancak her şeye rağmen asla vazgeçemediğimiz ESLint'in ne olduğuna birlikte bakalım."
+---
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/001.webp" width={1080} height={652} />
+
+Trendyol'da Mweb ekibi olarak kullandığımız ESLint kuralları, isterlerimizin
+tamamını kapsamıyordu ve düzensizdi. Bu kuralları derli toplu hale getirmek,
+kullandığımız kütüphanelere özgü pluginleri dahil etmek ve ileride özel kurallar
+tanımlayabilmek adına takıma özel bir plugin oluşturmaya karar verdik. Bu süreçte
+edindiğim deneyimleri bir yazıya dökmek istedim. İşte bu sebeple burdayız :)
+
+> _Dikkat Tanım Var!_ Az sonra bir tanımla karşılaşacaksınız. Çok üzerinde
+> durmadan arkalara doğru ilerleyelim. Bizim işimiz tanım ezberlemek değil, işin
+> özüne dair fikir sahibi olmak.
+
+## ESLint Nedir?
+
+*ESLint*, Javascript kodlarımızın yazılış şeklini belirli kurallara göre analiz
+eden ve hatta düzelten bir garip araçtır. Kodlarımızı belirlediğimiz standarda
+göre otomatik formatlayabilir. Bu sayede takım projelerinde her satır ayrı telden
+çalmaz, okunması ve debug edilmesi kolaylaşır. Mesela Allahlık bir kodun
+ESLint'ten elinden geçtikten sonraki halini görelim:
+
+```javascript
+// Bozuk Kod
+for (let i = 100;     i 
+    >= 0; 
+    
+    i--) { 
+      console.
+      
+      log(`Sayı: ${i}`);
+}
+
+// Düzeltilmiş Kod
+for (let i = 100; i >= 0; i--) {
+  console.log(`Sayı: ${i}`);
+}
+```
+
+<CH.Section>
+
+Sağladığı önemli şeylerden birisi de kodu çalıştırmadan önce belirli bugları
+tespit edebilmesidir. Örneğin aşağıdaki gibi `for` içinde [değişkeni deklare etmeyi
+unutursanız](focus://3[6:12]) ya da 100'den geriye saymayı amaçladığınız bir kodda
+[değişkenin her döngüde artmasını](focus://3[23:25]) söylerseniz döngü yönünün
+yanlış olduğuna dair sizi uyarır:
+
+```javascript
+// The update clause in this loop moves the variable
+// in the wrong direction. (for-direction)
+for (i = 100; i >= 0; i++) {
+  // 'i' is not defined. (no-undef)
+  console.log(`Sayı: ${i}`);
+}
+
+// Hatasız Kullanım
+for (let i = 100; i >= 0; i--) {
+  console.log(`Sayı: ${i}`);
+}
+```
+</CH.Section>
+
+İstenmeyen durumlara karşı tavrı nettir. Bir gün taskınızı bitirmişsinizdir
+arkanıza yaslanıp commit atarsınız ancak o da ne ESLint karşınızda:
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/002.webp" width={715} height={429} />
+
+Bu arada kitabi tanımını her yerde bulabilirsiniz ancak kimin umrunda. Tanımlarda boğulmak istemiyoruz. Örneklendirdiğimizde kafamızda zaten netleşecek.
+
+## Kullanacağımız Ortamın Kurulması
+
+Yazı boyunca örnekleri sizinle birlikte kodlamak istiyorum. Bu sebeple herkesin
+aynı sayfada olduğundan emin olmak için ortamımızı kuralım.
+
+```powershell
+# istediğimiz bir dizinde klasör oluşturalım
+mkdir example-eslint-project && cd example-eslint-project
+
+# klasörümüzü npm projesine çevirelim.
+npm init -y
+
+# eslint paketini sadece localde çalışacağı deployment'a
+# dahil edilmeyeceği için devDependency olarak ekleyelim
+npm i eslint -D
+
+# eslint konfigürasyonu yapacağımız dosyayı oluşturmak
+# üzere hazırlanan programı kullanalım
+npm init @eslint/config
+```
+
+<CodeResult>
+? How would you like to use ESLint?
+&nbsp;✔ To check syntax and find problems
+? What type of modules does your project use?
+&nbsp;✔ JavaScript modules (import/export)
+? Which framework does your project use?
+&nbsp;✔ None of these
+? Does your project use TypeScript?
+&nbsp;✔ No
+? Where does your code run? >
+&nbsp;✔ Node
+? What format do you want your config file to be in?
+&nbsp;✔ JavaScript
+</CodeResult>
+
+Bu komutlar sonucunda `.eslintrc.js` dosyası oluşturulur. Bu dosya, ESLint'i
+konfigüre edeceğimiz yerdir. Kurallarımızı buraya ekleyeceğiz.
+
+<CH.Section>
+
+İçerisine göz gezdirdiğimizde bazı ayarların otomatik oluşturulduğunu görebiliriz.
+*[extends](focus://10)* kısmı, kural setlerini oluşturan ekibin tavsiye
+ettiği değerleri kullanmamızı sağlar. ESLint ekibi de bize bazı değerler önerir.
+Her bir kurala tek tek değer atamakla zaman kaybetmeden konfigüre etmiş oluruz. Bu
+sayede sadece özelleştirmek istediğimiz kuralları *[rules](focus://11,12)* altında
+belirtiriz. Ancak şuan için başka hatalarla uğraşmadan senaryomuza odaklanmak
+adına [ilgili satırı](focus://10) silerek diğer ayarları kapatacağız.
+
+> Blog yazısı içerisinde altı noktalı metinlere denk gelirseniz üzerinde durun.
+> Belirttiğim kısımların kod bloğundaki yerini gösteriyor olacağım.
+
+```javascript .eslintrc.js
+module.exports = {
+  "env": {
+      "es2021": true,
+      "node": true
+  },
+  "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+  }
+}
+```
+
+</CH.Section>
+
+Bu arada özel dosyasını kullanmayı tercih edeceğiz ancak oluşturmak istemezseniz
+`package.json` içerisinde `eslintConfig` kullanarak da konfigürasyonumuzu yapabiliriz.
+
+```javascript package.json focus=4:19
+{
+  "name": "example-eslint-project",
+  "version": "1.0.0",
+  ...
+  "eslintConfig": {
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "semi": "error",
+        "no-var": "error"
+    }
+  }
+}
+```
+
+## Kuralların Tanımlanması ve Kullanılması
+
+Toplama fonksiyonumuzu yazarak basit bir senaryo çizelim.
+
+```javascript src/sum.js
+var sum = (num1, num2) => {
+  return num1 + num2
+}
+```
+
+Fonksiyonu incelediğimizde (ne var da neyini inceleyeceğiz acaba) farkedeceğimiz
+(etmiş gibi yapın burdan bana dönüş yok) ilk şey `var` kullanımı. "Bu devirde
+halla kullanan kaldı mı?" dediğinizi duyar gibiyim, olur mu olur. İkincisi ise
+noktalı virgül kullanılmaması. Bazı insanlar sever bazı insanlar sevmez ancak
+otomatik formatlama hatalarının önüne geçmek için kullanmamızın yararı var.
+Özetlersek, noktalı virgülün daima konulmasını ve `var` kullanılmamasını istiyoruz.
+
+> Kuralların tam olarak nasıl çalıştıklarına serinin diğer yazılarında değineceğiz.
+> Önce uygulanışını görelim ki anlatırken kafamızda eşleşsin.
+
+ESLint ekibi bize built-in [kurallar](https://eslint.org/docs/rules/) sağlar.
+Yani plugin paketlerinden, diğer yazıda bahsedeceğiz, indirmemiz gerekmeden
+kullanabiliriz. Senaryomuza uygun iki kurala bakalım:
+
+- `semi` kuralı, statement sonlarında noktalı virgül konulmasını zorunlu kılar
+ya da kullanımını engeller.
+- `no-var` kuralı, `var` yerine `let` ya da `const` kullanılmasını zorunlu kılar
+ya da `var` keyword'üne izin verir.
+
+ESLint`e bu senaryomuzda istemediğimiz bir durumla karşılaşırsan yazılımcıyı uyar
+diyeceğiz. Kurallarımızı bu doğrultuda ekleyelim:
+
+```javascript .eslintrc.js focus=4,5
+module.exports = {
+  // ...
+  "rules": {
+    "semi": "error",
+    "no-var": "error"
+  }
+}
+```
+Peki ne tür değerler atayabiliriz? Öncelikle davranışlarından bahsedelim. Üç
+farklı şekilde olabilir:
+
+- `"off"` ya da `0` - kuralı kapatır
+- `"warn"` ya da `1` - kuralı uyarı verecek biçimde aktifleştirir
+- `"error"` ya da `2` - kuralı hata verecek biçimde aktifleştirir
+
+Farklı kullanımlara sahip bazı örnekleri inceleyelim.
+
+```javascript .eslintrc.js
+module.exports = {
+  // ...
+  "rules": {
+    "no-restricted-syntax": "off",
+    // kuralların hata değil uyarı vermesini istiyorsak 'warn' geçebiliriz.
+    // adından belli olduğu gibi "error" aksine "warn" olarak belirtilen
+    // kuralları düzeltme zorunluluğumuz yok.
+    "spaced-comment": "warn",
+    // "semi": ["error", "always"] şeklinde de yazabilirdik ve her seferinde
+    // hata ver manasına gelirdi tahmin edebileceğimiz gibi.
+    // varsayılan değer 'always' olduğu için yazılmadan geçilebilir.
+    "semi": "error", // ya da ["error"]
+    "quotes": ["error", "double"],
+    // bazı kuralları ise options ile özelleştirebiliriz.
+    "camelcase": ["error", { "ignoreDestructuring": true }],
+  }
+}
+```
+
+Neyse basit senaryomuza geri dönelim. Kurallarımızı tanımlamıştık. Bunlarla
+birlikte kodumuzu analiz edelim ve çıktımızı görelim.
+
+```powershell
+npx eslint src/sum.js
+```
+
+<CodeResult>
+/Users/enes.baspinar/Projects/posts-codes/example-eslint-project/src/sum.js
+  1:1   error  Unexpected var, use let or const instead  no-var
+  2:21  error  Missing semicolon                         semi
+  3:2   error  Missing semicolon                         semi
+
+✖ 3 problems (3 errors, 0 warnings)
+  3 errors and 0 warnings potentially fixable with the `--fix` option.
+</CodeResult>
+
+Üç tane hata fırlattı. Bunları elle düzeltebiliriz falan filan ama neden biz
+uğraşalım ki? Pekala ESLint'e yaptırabiliriz.
+[Dökümantasyona](https://eslint.org/docs/rules/) bakarsak bazı kuralların
+yanlarında ingiliz anahtarı vardır. BU "fixable" olduğunu yani otomatik
+düzeltilebildiği anlamına gelir. Kullandığımız iki kural da aslında
+bu şekildedir. 
+
+Terminalimizde ESLint çalıştırırken `--fix` bayrağı eklersek
+düzeltmeleri yapar ve dosyanızın üzerine yazar. Öncesinde kodumuza son kez bakalım.
+
+```javascript src/sum.js
+var sum = (num1, num2) => {
+  return num1 + num2
+}
+```
+
+Şimdi otomatik düzeltilmesini istediğimizi belirterek kodumuzu çalıştıralım.
+
+```powershell
+npx eslint src/sum.js --fix
+```
+
+`src/sum.js` dosyasına yeniden baktığımızda değiştiğini görebiliriz.
+
+```javascript src/sum.js
+let sum = (num1, num2) => {
+  return num1 + num2;
+};
+```
+
+Artık `let`'imiz ve noktalı virgülümüz var. Muazzam bir şey değil mi?
+
+## VSCode ESLint Eklentisi
+
+Eski blogumu yaparken birkaç yazı takip etmiştim ama aklımı karıştıran
+şeyler vardı. "ESLint paketi kurduktan sonra neden bir de VSCode extension
+kurmamız gerekiyor? Bize tam olarak ne sağlıyor?". Siz de de oluştuysa hemen bu
+soruları def edelim.
+
+Halihazırda bahsetmiş olduğumu *ESLint paketi*, terminalden çalıştırdığımız
+komutla kodumuzu analiz eden ve uymayanları konsoldan bize bildirir. *VSCode
+ESLint eklentisi* ise arkaplanda ESLint paketini kullanır ve hataları hiçbir komut
+çalıştırmadan, kodu yazarken editörde görmemizi sağlar.
+
+Hemen indirip deneyelim.
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/004.png" width={1460} height={ 364} />
+
+İndirdikten sonra `src/sum.js` dosyamızı en baştaki hale getirelim ve eklentinin
+yaptığı sihre odaklanalım.
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/008.gif" width={600} height={ 377} />
+
+> Bu menüyü fareyle açmak zorunda değilsiniz klavyeden `CTRL/CMD + .` kombinasyonunu kullanabilirsiniz.
+
+Peki bizim için son bir şarkı çalıp `CTRL/CMD + S` ile kaydettiğimizde tüm düzeltmeleri otomatik yapsa? O halde hemen VSCode ayarlarına girip bir ekleme yapalım. 
+
+> Her kaydedişte düzeltme yapmasını istemeyeceğimiz durumlar olabilir. Aşağıdaki değişikliği atlayıp VSCode'a sağ tıkladığımızda çıkan menüden 'Format Document' seçeneğini kullanabilirsiniz.
+
+
+```json settings.json focus=3:6
+{
+  ...
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
+}
+```
+
+Artık dosyayı kaydettiğimizde otomatik düzelttiğini görebiliriz.
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} />
+
+Düzeltmeleri hızlıca uygulayıp kod yazabilecek duruma geldik. Dosya kaydetmeyi
+çok sık kullanacağız buna alışmak güzel bir kazanım olur. Kendimden örnek verecek
+olursam neredeyse her kelimeden sonra otonom bir şekilde kendimi `CTRL/CMD + S` yaparken
+buluyorum.
+
+## Kuralları Dosya ve Satır Bazlı Kapatma
+
+Pekala artık hatamızı kollayan iki tane kuralımız. Ama bu kadar baskı(!) bazılarına çok fazla gelebilir. Hayatta hepimizin tamamen özgür
+hissettiği alanlar vardır. Projemizde neden olmasın? Hemen `freedom.js` isimli
+bir dosya oluşturalım ve bu dosya, özgür dünyanın(!!) projemizdeki temsili olsun,
+isteyen istediği kuralı göz ardı edebilsin ve istediği gibi geliştirme yapabilsin.
+Bunun için birkaç farklı yol kullanabiliriz:
+
+- dosya genelinde göz ardı etmek istiyorsak;
+
+```javascript src/freedom.js
+/* eslint-disable */
+
+var sum = (num1, num2) => {
+  return num1 + num2
+}
+```
+- dosyanın bir kısmında göz ardı etmek istiyorsak;
+
+```javascript src/freedom.js
+/* eslint-disable */
+
+var sum = (num1, num2) => {
+  return num1 + num2
+}
+
+/* eslint-enable */
+
+// give error
+var sqr = (num1) => {
+  return num1 ** 2
+}
+```
+
+- satır bazlı göz ardı etmek istiyorsak;
+
+```javascript src/freedom.js
+// eslint-disable-next-line
+var sqr = (num1) => {
+  return num1 ** 2 // eslint-disable-line
+} // eslint-disable-line 
+```
+
+Örnek kullanımlarda ilgili blok için tüm kuralları kapatır. Hepsini değil de
+bazılarını kapatmak istersek ismini belirtebiliriz.
+
+```javascript
+// eslint-disable-next-line no-var
+var sqr = (num1) => {
+  return num1 ** 2 // eslint-disable-line semi
+} // give 'semi' error
+```
+
+## Özetle..
+
+ESLint, spesifik kurallar dahilinde kodu analiz eder ve kod stilini belirli
+kalıplarda tutar. Böylece çok fazla kişinin çalıştığı projelerin her satırı ayrı
+telden çalmaz. Aynı zamanda noktalı virgül, boşluk gibi çok fazla kullandığınız
+stillendirmeleri otomatik formatlamak için de faydalıdır.
+
+<CH.Section>
+
+Her kurallarını `.eslintrc.js` dosyasından ya da `eslintConfig` alanından yönetir. Kodu ESLint'in doğru parse etmesi için [ayarlamalar](focus://2:9) yapabilir ve [kural](focus://10:13) tanımlayabiliriz.  
+
+```javascript .eslintrc.js
+module.exports = {
+  "env": {
+      "es2021": true,
+      "node": true
+  },
+  "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+  },
+  "rules": {
+    "semi": "error",
+    "no-var": "error"
+  }
+}
+```
+
+</CH.Section>
+
+VSCode ESLint eklentisiyle birlikte kurallara uymayan bölümleri editörde canlı
+canlı görebiliriz. Aynı zamanda otomatik formatlamayı her kaydedişte ve ya
+belirli tuş kombinasyonlarıyla tetikleyebiliriz.
+
+<CustomImage src="/images/post/kurallari-yikmayin-eslint/009.gif" width={800} height={502} />
+
+<TheEnd />
+
+İlk yazımız burada biter benden bu kadar. Serinin devamında çok daha fazla
+şaşıracağınıza taahhüt ediyorum (`git commit -m "Çok daha fazla şaşıracaksınız"`).
+
+Sağlıcakla kalın.

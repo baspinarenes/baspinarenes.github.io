@@ -14,7 +14,7 @@ const PageLayout = (props: PageLayoutProps) => {
     <div
       className={`
         w-full max-w-3xl
-        p-4 py-6 mx-auto
+        p-4 pt-6 pb-10 mx-auto
         flex flex-col gap-14
         ${isOpenHamburgerMenu ? "h-screen overflow-hidden" : ""}`}
     >

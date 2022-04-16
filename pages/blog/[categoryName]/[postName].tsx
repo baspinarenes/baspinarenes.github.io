@@ -23,7 +23,7 @@ const Post = (props: PostProps) => {
   return (
     <div>
       <Meta title={title} description={summary} url={slug} />
-      <h1 className="mb-5 font-bold text-4xl sm:text-5xl sm:text-left break-words">
+      <h1 className="mb-5 font-bold text-black dark:text-white text-4xl sm:text-5xl sm:text-left break-words">
         {title}
       </h1>
       <div className="flex justify-between mb-14 items-center">
@@ -34,11 +34,11 @@ const Post = (props: PostProps) => {
             width={24}
             alt="Author image"
           />
-          <div className="mx-1">{siteData.author.name} /</div>
+          <div className="mx-1">{siteData.author.name} •</div>
           <div>{date}</div>
         </div>
         <div className="flex text-sm">
-          <div className="mr-1">{readTime} min read •</div>
+          <div className="mr-1">{readTime} min •</div>
           <div>{views > 0 ? views.toLocaleString() : "–––"} views</div>
         </div>
       </div>

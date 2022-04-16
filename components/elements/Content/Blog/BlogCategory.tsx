@@ -6,7 +6,7 @@ const BlogCategory = (props: BlogCategoryProps) => {
 
   return (
     <div>
-      <h2 className="mb-3 font-bold text-2xl sm:text-3xl">
+      <h2 className="mb-3 font-bold text-black dark:text-white text-2xl sm:text-3xl">
         {categoryBeautifiedName}
       </h2>
       <div className="flex flex-col">

@@ -22,7 +22,7 @@ export interface Post {
 }
 
 export interface PostData extends Post {
-  category: "Genel Programlama";
+  category: string;
   contentHtml: string;
 }
 

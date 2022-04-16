@@ -10,12 +10,12 @@ const Navbar = () => {
     <div
       className={`${
         isOpenHamburgerMenu ? "flex" : "hidden"
-      } fixed z-10 top-20 left-0 w-screen h-full-outside-header bg-gray-100 dark:bg-[#444] flex-col gap-5 p-5`}
+      } fixed z-10 top-20 left-0 w-screen h-full-outside-header bg-gray-100 dark:bg-[#444] flex-col pt-4`}
     >
       {navigations.map((navigation) => (
         <Navlink key={navigation.name} {...navigation} />
       ))}
-      <div className="absolute bottom-3 left-4 right-4 text-center text-sm">
+      <div className="absolute bottom-10 left-4 right-4 text-center text-sm">
         {siteData.footer}
       </div>
     </div>

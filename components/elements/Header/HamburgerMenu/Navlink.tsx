@@ -20,7 +20,12 @@ const Navlink = (props: NavlinkProps) => {
 
   return (
     <Link href={path}>
-      <a onClick={handleClickHamburgerMenuNavlink}>{name}</a>
+      <a
+        onClick={handleClickHamburgerMenuNavlink}
+        className="px-5 py-4 text-lg"
+      >
+        {name}
+      </a>
     </Link>
   );
 };

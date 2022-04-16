@@ -29,7 +29,7 @@ const CardList = (props: CardListProps) => {
 
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="font-bold text-3xl sm:text-4xl">
+      <h2 className="font-bold text-black dark:text-white text-3xl sm:text-4xl">
         {type === "repository"
           ? "Popüler Repolarım"
           : "En Çok Okunan Yazılarım"}

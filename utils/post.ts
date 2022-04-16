@@ -6,24 +6,11 @@ import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
 import { PostParams } from "models/post";
-import matter from "gray-matter";
 import readingTime from "reading-time";
+import matter from "gray-matter";
+import { getLocaleDateString, getPreviousDay } from "./date";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
-
-const getLocaleDateString = (dateString: string) => {
-  const date = new Date(dateString);
-
-  if (!date) {
-    return "";
-  }
-
-  return `0${date.toLocaleString("tr-TR", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  })}`.replace(/^0(?=\d{2})/, "");
-};
 
 const getPostCategoryNames = (): string[] => {
   const categoryFolderNames = fs.readdirSync(postsDirectory);
@@ -96,13 +83,15 @@ const getPostData = async (categoryName: string, postName: string) => {
   });
 
   const date = getLocaleDateString(frontmatter.date);
+  const isToday = date === getLocaleDateString(new Date().toLocaleDateString());
+  const isYesterday = date === getPreviousDay();
   const slug = `/blog/${categoryName}/${postName}`;
-
   const readTime = Math.round(readingTime(source).minutes) + 5;
 
   return {
     ...frontmatter,
-    date,
+    // eslint-disable-next-line no-nested-ternary
+    date: isToday ? "Bugün" : isYesterday ? "Dün" : date,
     slug,
     readTime,
     contentHtml,
