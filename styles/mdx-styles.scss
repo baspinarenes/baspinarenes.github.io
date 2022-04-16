@@ -48,6 +48,8 @@
       margin-bottom: 7px;
 
       &:before {
+        @apply dark:bg-white;
+
         content: "";
         display: inline-block;
         margin-right: 6px;

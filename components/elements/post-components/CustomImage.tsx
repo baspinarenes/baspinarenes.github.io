@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface CustomImageProps {
   src: string;
+  fluid: boolean;
   alt?: string;
   height?: number;
   width?: number;
@@ -12,7 +13,17 @@ interface CustomImageProps {
 }
 
 const CustomImage = (props: CustomImageProps) => {
-  const { src, alt, height, width, reference = "", position = "" } = props;
+  const {
+    src,
+    alt,
+    height,
+    width,
+    fluid = false,
+    reference = "",
+    position = "",
+  } = props;
+
+  console.log(fluid);
 
   const [isLoading, setLoading] = useState(true);
 
@@ -23,10 +34,12 @@ const CustomImage = (props: CustomImageProps) => {
 
   return (
     <div
-      className={`${
+      className={`${fluid ? "-mx-4 w-[auto]" : ""} ${
+        !fluid && !position ? "w-96" : ""
+      } ${
         position
           ? `${marginLeftOrRight} mb-6 mt-0`
-          : "border dark:border-0 shadow-sm -mx-4"
+          : "border dark:border-0 shadow-sm mx-auto"
       } ${
         reference ? "" : "overflow-hidden"
       } sm:rounded-lg relative leading-none mt-8 mb-12`}
