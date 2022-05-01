@@ -47,8 +47,15 @@ const RepositoryCard = (props: RepositoryCardProps) => {
           </div>
         )}
       </div>
-      <h3 className="font-bold">{name}</h3>
-      <p className="dark:text-gray-400">{description}</p>
+      <h4 className="
+        text-lg md:text-lg
+        font-medium tracking
+        w-full 
+        mb-0
+      ">
+        {name}
+      </h4>
+      <p className="mb-0">{description}</p>
     </a>
   );
 };

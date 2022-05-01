@@ -23,27 +23,25 @@ const Post = (props: PostProps) => {
   return (
     <div>
       <Meta title={title} description={summary} url={slug} />
-      <h1 className="mb-5 font-bold text-black dark:text-white text-4xl sm:text-5xl sm:text-left break-words">
-        {title}
-      </h1>
-      <div className="flex justify-between mb-14 items-center dark:text-[#e0e0e0]">
-        <div className="flex text-sm items-center">
+      <h1 className="mb-4">{title}</h1>
+      <div className="flex justify-between mb-10">
+        <div className="flex items-center">
           <Image
             src="/images/icon.webp"
             height={24}
             width={24}
             alt="Author image"
           />
-          <div className="mx-1">{siteData.author.name} •</div>
-          <div>{date}</div>
+          <small className="ml-2 mr-1">{siteData.author.name} /</small>
+          <small>{date}</small>
         </div>
-        <div className="flex text-sm">
-          <div className="mr-1">{readTime} min •</div>
-          <div>{views > 0 ? views.toLocaleString() : "–––"} views</div>
+        <div className="flex items-center">
+          <small className="mr-1">{readTime} min read •</small>
+          <small>{views > 0 ? views.toLocaleString() : "–––"} views</small>
         </div>
       </div>
-      <p className="mb-5">{summary}</p>
-      <div className="mdx-container ">
+      <p>{summary}</p>
+      <div className="mdx-container">
         <PostContentComponent
           components={{
             ...PostComponents,
