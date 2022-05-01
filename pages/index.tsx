@@ -11,7 +11,7 @@ const Home: NextPage = (props: any) => {
   const { repositories, postsWithViews } = props;
 
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-10">
       <Meta />
       <ProfileCard />
       {repositories?.length > 0 && (

@@ -6,30 +6,72 @@
 @import "@code-hike/mdx/dist/index.css";
 @import "./mdx-styles.scss";
 
-html,
+html {
+  font-family: "IBM Plex Sans";
+  scroll-behavior: smooth;
+}
+
 body {
-  padding: 0;
-  margin: 0;
-  font-size: 16px;
-  font-family: "Inter", sans-serif;
-
-  @media (max-width: 640px) {
-    font-size: 14px;
-  }
+  @apply bg-gray-50 dark:bg-gray-900;
 }
 
-* {
-  box-sizing: border-box;
+#__next {
+  @apply bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 flex flex-col min-h-screen;
 }
 
-p {
-  @apply text-gray-600 dark:text-[#e0e0e0];
-}
 
 h1,
 h2,
 h3,
 h4,
-h5 {
-  @apply text-black dark:text-white;
+h5,
+h6 {
+  @apply font-bold tracking-tight text-black dark:text-white break-words;
+}
+
+h1 {
+  @apply text-3xl md:text-5xl mb-1 -ml-0.5;
+}
+
+h2 {
+  @apply text-2xl mb-6 mt-12 font-semibold tracking-normal text-gray-700 dark:text-gray-200;
+}
+
+h3 {
+  @apply mt-8 mb-4 font-bold text-2xl md:text-3xl;
+}
+
+h4 {
+  @apply mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-300;
+}
+
+p {
+  @apply mb-5;
+}
+
+pre,
+code {
+  font-family: "JetBrains Mono";
+}
+
+code {
+  &::before {
+    content: "" !important;
+  }
+
+  &::after {
+    content: "" !important;
+  }
+}
+
+pre {
+  @apply overflow-x-auto;
+}
+
+a {
+  @apply break-words;
+}
+
+blockquote {
+  @apply bg-gray-200 -mx-4 px-6 py-4;
 }

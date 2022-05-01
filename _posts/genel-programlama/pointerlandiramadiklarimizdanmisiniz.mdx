@@ -1,7 +1,7 @@
 ---
 title: "Pointer'landıramadıklarımızdan Mısınız?"
 date: 2020-06-15
-summary: "C, C++ gibi dillerde daha yoğun olsa da programlama genelinde bu kavramdan kaçışınız yoktur. Bu sebeple 'Pointer' kavramını herkesin anlayabileceği bir seviyeye çekelim."
+summary: "C, C++ gibi dillerde daha yoğun olsa da programlama genelinde bu kavramdan kaçışınız yoktur. Bu sebeple 'Pointer' kavramını herkesin anlayabileceği seviyeye çekelim."
 ---
 
 ## Değişkenler Nereye ve Nasıl Kaydedilir?
@@ -55,7 +55,7 @@ ikişerli olarak yerleştiririz:
 />
 
 İkişerli yerleştirme sebebimiz, 2'lik tabandaki her 8 bitin 16'lık tabanda 2
-karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek *dogum_tarihi* dedik:
+karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek **dogum_tarihi** dedik:
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/003.png"
@@ -64,7 +64,7 @@ karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek *dogum_tar
   fluid
 />
 
-Artık biz bu değişkeni çağırdığımızda CPU belleğe gider ve değişkenin başlangıcı adresi olan *90000008* adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani *00 00 07 CF* değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
+Artık biz bu değişkeni çağırdığımızda CPU belleğe gider ve değişkenin başlangıcı adresi olan **90000008** adresine uğrar. Değişken int ise 4 bayt olacaktır. Dolayısıyla 4 kutu okur ve birleştirir. Yani **00 00 07 CF** değerini elde eder ve 10 tabanına çevirerek 1999 sayısını verir.
 
 ## Bellek Adresini Bilmek Ne İşimize Yarar?
 
@@ -74,7 +74,7 @@ Verinin kendisi yerine adresini kullanmak, onu kopyalamadan birden fazla yerden 
 
 ## Değişkenlerin Adreslerini Nasıl Elde Ederiz?
 
-Burada devreye, bellek adresi tutan değişkenler girer. Değerleri nasıl değişkenlerde depolayabiliyorsak bellek adreslerini de aynı şekilde depolayabiliriz. Bunu gerçekleştiren yapılara *pointer* denir. Aslında kendisi de bir değişkendir.
+Burada devreye, bellek adresi tutan değişkenler girer. Değerleri nasıl değişkenlerde depolayabiliyorsak bellek adreslerini de aynı şekilde depolayabiliriz. Bunu gerçekleştiren yapılara **pointer** denir. Aslında kendisi de bir değişkendir.
 
 Önceki kısımda görsel olarak anlattığımız örneği kodlama ortama dökelim. İlk olarak değişken tanımımızı yapalım:
 
@@ -97,7 +97,7 @@ dogum_tarihi_ptr = &dogum_tarihi; // yıldız yok dikkat edin.
 
 Şimdi bu sözdizimini inceleyelim.
 
-`dogum_tarihi_ptr` değişkenimizin türü, göreceğimiz üzere _int*_. Bu da bize tamsayı değişkenin adresini tutan pointer olduğunu gösterir. Başına koyduğumuz '&'' işareti ise değişkenimizin adresini elde etmemize yarayan *address-of* operatörüdür. Yani `&dogum_tarihi`, `dogum_tarihi` değişkeninin bellekteki adresidir.
+`dogum_tarihi_ptr` değişkenimizin türü, göreceğimiz üzere int*. Bu da bize tamsayı değişkenin adresini tutan pointer olduğunu gösterir. Başına koyduğumuz '&'' işareti ise değişkenimizin adresini elde etmemize yarayan **address-of** operatörüdür. Yani `&dogum_tarihi`, `dogum_tarihi` değişkeninin bellekteki adresidir.
 
 <CustomImage
   src="/images/post/pointerlandiramadiklarimizdanmisiniz/004.png"
@@ -121,7 +121,7 @@ printf("%p\n", dogum_tarihi_ptr);
 0x7ffd83c692bc
 </CodeResult>
 
-Hemen toparlayalım. `dogum_tarihi` ifadesi, bildiğimiz int değişkenidir. Ve 1999 sayısını depolar. `&dogum_tarihi` ifadesi, değişkenimizin adresidir. *dogum_tarihi_ptr* ifadesi ise elde ettiğimiz adresi depoladığımız değişkendir. Tipi ise *int\** dir. Yani değişken adresi depolayan değişken diyebiliriz :)
+Hemen toparlayalım. `dogum_tarihi` ifadesi, bildiğimiz int değişkenidir. Ve 1999 sayısını depolar. `&dogum_tarihi` ifadesi, değişkenimizin adresidir. `dogum_tarihi_ptr` ifadesi ise elde ettiğimiz adresi depoladığımız değişkendir. Tipi ise int*'dir. Yani değişken adresi depolayan değişken diyebiliriz :)
 
 Bu kısmı tamamlarken bir noktaya daha değinmekte fayda görüyorum. Pointer tanımlarken `int *dogum_tarihi_ptr`, `int* dogum_tarihi_ptr` sözdimlerinden herhangi birini kullanabiliriz. Yıldızın sabit konumu yoktur, sadece tip ile değişken ismi arasında olmalıdır. Ancak C/C++ programcıları geleneksel olarak `int *dogum_tarihi_ptr` yazımını kullanılır. Bunun sebebi aşağıdaki kullanımda yarattığı kafa karışıklığıdır:
 
@@ -183,7 +183,7 @@ printf("%d", *dogum_tarihi_ptr);
 0x7ffc0206d83c // başındaki "0x" hexadecimal olduğunu belirtir
 </CodeResult>
 
-Burada kafalar çorba olabiliyor. Pointer tanımlanırken kullanılan * işareti, onun pointer olduğunu belirtmek için konur ve başka amacı yoktur. Ancak tanımlandıktan sonra kullanacağımız her * işareti, pointer'ın işaret ettiği adresteki değeri temsil eder. Buna *dereference operator* denir.
+Burada kafalar çorba olabiliyor. Pointer tanımlanırken kullanılan * işareti, onun pointer olduğunu belirtmek için konur ve başka amacı yoktur. Ancak tanımlandıktan sonra kullanacağımız her * işareti, pointer'ın işaret ettiği adresteki değeri temsil eder. Buna **dereference operator** denir.
 
 ## Adresler ile Dizi Elemanlarına Erişmek
 
@@ -300,7 +300,7 @@ Bu sefer sonraki 8. kutuya giderek 30 değerinin adresine sahip olurdu.
 
 Açıklaması biraz uzun sürmüş olabilir. Ama kafanızda netleşeceğini düşünüyorum. Anlayıp anlamadığınızı bir sorgulayın. Eğer anladıysanız devam, anlamadıysanız editörü açın ve bir takım C/C++ deneyleri yapın.
 
-> Söylememe gerek var mı bilmiyorum ancak pointer'a tekrar atama yaptığımız için adres değişir diyoruz. Yani `sayi_dizisi_ptr += 1;` ifadesi adresi kalıcı olarak değiştirir. Sonraki adresi yazdırmak amacıyla `sayi_dizisi_ptr + 1;` ifadesini kullansaydık adresin değeri değişmezdi. Oradaki `=` kritik öneme sahip.
+> Söylememe gerek var mı bilmiyorum ancak pointer'a tekrar atama yaptığımız için adres değişir diyoruz. Yani `sayi_dizisi_ptr += 1;` ifadesi adresi kalıcı olarak değiştirir. Sonraki adresi yazdırmak amacıyla `sayi_dizisi_ptr + 1;` ifadesini kullansaydık adresin değeri değişmezdi. Oradaki = kritik öneme sahiptir.
 
 Son işlemin ardından artık `sayi_dizisi_ptr` sonuncu elemanın adresini tutacaktır:
 

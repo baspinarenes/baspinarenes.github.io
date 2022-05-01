@@ -1,53 +1,22 @@
 .mdx-container {
-  h2 {
-    font-weight: bold;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    margin-top: 64px;
-    margin-bottom: 20px;
-
-    @media (min-width: 640px) {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-  }
-
-  > p {
-    margin-bottom: 20px;
-    line-height: 1.6rem;
-
-    & ~ ul {
-      margin-top: -5px;
-    }
-  }
-
   a {
-    @apply mb-3.5 font-bold break-all break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
+    @apply mb-3.5 font-bold break-all no-underline break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
 
     &:hover {
-      color: rgb(5, 56, 157);
-      border-color: rgb(5, 56, 157);
+      @apply text-[#0e35a1] border-[#0e35a1] dark:text-[rgba(234,179,8,0.6)] dark:border-[rgba(234,179,8,0.6)];
     }
   }
 
   b,
   strong {
-    @apply text-yellow-500 font-normal;
-  }
-
-  i,
-  em {
-    @apply font-bold not-italic dark:text-yellow-500;
+    @apply dark:text-white;
   }
 
   ul {
-    margin-bottom: 20px;
+    @apply pl-0 mb-5;
 
     li {
-      @apply dark:text-[#e0e0e0];
-
-      margin-left: 15px;
-      margin-bottom: 7px;
+      @apply list-none pl-0 mb-2 dark:text-[#e0e0e0];
 
       &:before {
         @apply dark:bg-white;
@@ -68,26 +37,27 @@
   ul code,
   section > p > code,
   blockquote code {
-    @apply bg-gray-200 dark:bg-[#e0e0e0] dark:text-[#121212] rounded-md px-2 py-0.5;
-  }
-
-  pre p {
-    @apply w-fit;
+    @apply bg-gray-200 dark:bg-[#e0e0e0] dark:text-[#121212] rounded-md px-2;
   }
 
   pre,
   code {
     font-family: "JetBrains Mono", monospace;
+
+    > p {
+      @apply w-fit my-0;
+    }
   }
 
   blockquote {
-    background-color: #f5f7f9;
-    border-left: 8px solid #3984ff;
-
-    @apply my-5 -mx-4 py-5 px-6 sm:rounded-md overflow-hidden dark:bg-gray-700;
+    @apply my-5 -mx-4 py-5 px-6 sm:rounded-md overflow-hidden not-italic border-l-8 border-l-[#3984ff] bg-[#f5f7f9] dark:bg-[rgba(55,65,81,0.2)];
 
     ul {
       margin: 15px 0 0;
+    }
+
+    p {
+     @apply before:content-none after:content-none m-0
     }
   }
 

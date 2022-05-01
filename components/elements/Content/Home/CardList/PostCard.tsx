@@ -17,7 +17,7 @@ const PostCard = (props: PostCardProps) => {
           {type === "translate" ? "TRANSLATER" : "WRITER"}
         </div>
         <div className="flex gap-1">
-          <span className="text-yellow-500 ml-[2px]">
+          <span className="text-yellow-500">
             {views > 0 ? views.toLocaleString() : "–––"}
           </span>
           <Image
@@ -28,8 +28,15 @@ const PostCard = (props: PostCardProps) => {
           />
         </div>
       </div>
-      <h3 className="font-bold">{title}</h3>
-      <p className="dark:text-gray-400">{summary.slice(0, 75)}...</p>
+      <h4 className="
+        text-lg md:text-lg
+        font-medium tracking
+        w-full 
+        mb-0
+      ">
+        {title}
+      </h4>
+      <p className="mb-0">{summary.slice(0, 75)}...</p>
     </a>
   );
 };
