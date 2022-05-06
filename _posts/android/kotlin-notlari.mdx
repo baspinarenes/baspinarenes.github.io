@@ -1,0 +1,113 @@
+---
+title: "Kotlin Notlarım"
+date: 1999-21-03
+summary: "Android development öğrenirken Kotlin üzerine tuttuğum notlar. Bu yazıyı öğrendikçe iyileştireceğim."
+---
+
+<CustomImage src="/images/post/android/kotlin-notlari/001.png" width={1920} height={1080} fluid />
+
+## Basics
+
+- **Package Name**, Android sisteminin kullanması için uygulamaya tanımlanan
+benzersiz isimdir. Gelenek olarak organizasyon isminden sonra verilir.
+-  `fun main() { ... }` tüm Kotlin programlarının başlangıç noktasıdır.
+
+## Variable
+
+- Değişken tanımlarken `var`, read-only olması için `val` keywordü kullanılır.
+Değişkenlerin tipini isminden sonra belirtiriz. Eğer tip belirtmezsek Kotlin
+bizim yerimize tipini tahmin eder.
+
+```kotlin
+fun main() {
+  var num1: Int = 19
+  num1 = 28
+  val num2: Int = 7
+  // num2 = 8 (Error! Val cannot be reassigned.)
+  val num3: Int
+  num3 = 20
+}
+```
+- String tanımlarken `"` kullanabileceğimizi biliyoruz. Bunun yanı sıra yazdığımız girintileri ve boşlukları aynen korumak istiyorsak `"""` kullanabiliriz.
+
+```kotlin
+fun main() {
+  val formattedText = """
+    for (c in "foo")
+      print(c)
+  """
+  print(formattedText)
+}
+```
+<CodeResult>
+(alt çizgiler boşlukları temsil ediyor)
+____for (c in "foo")
+______print(c)
+</CodeResult>
+
+- Değişkenleri metin içerisine yazdırırken **string templates** kullanabiliriz.
+Süslü parantezi olmayan kullanımda değişkenleri, olan kullanımda ise
+expressionları yazdırabiliriz.
+
+```kotlin
+fun main() {
+  val s = "abc"
+  println("$s.length is ${s.length}")
+}
+```
+<CodeResult>
+abc.length is 3
+</CodeResult>
+
+## Conditions and Loops
+
+- Bir fonksiyonu n kez çalıştırmak için `repeat()` kullanılır.
+
+```kotlin
+fun main() {
+  repeat(3) {
+      println("Hello")
+  }
+
+  println()
+
+  repeat(3) { index ->
+    println("Hello with index $index")
+  }
+}
+```
+<CodeResult>
+Hello
+Hello
+Hello
+
+Hello with index 0
+Hello with index 1
+Hello with index 2
+</CodeResult>
+
+## Functions
+
+- Fonksiyon tanımlarken `fun` keywordü kullanılır.
+- Konsola bir şey yazdırmak için `print()` ve `println()` (metin sonunda '\n' varmış gibi davranır) kullanılır.
+
+```kotlin
+fun main() {
+  print("Benim adım ")
+  print("Cafer.\n")
+  print("Boyum 1.10. ")
+  println("Kilom 25.")
+  println("Gözlerimin rengini bilmiyorum.")
+}
+```
+<CodeResult>
+Benim adım Cafer.
+Boyum 1.10. Kilom 25.
+Gözlerimin rengini bilmiyorum.
+</CodeResult>
+
+<TheEnd />
+
+Android geliştirme öğrenirken önemli gördüğüm noktalardan kesitleri bir yerde tutmak istedim. Yazıyı sürekli güncelliyor olacağım.
+
+Sağlıcakla kalın.

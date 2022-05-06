@@ -1,0 +1,31 @@
+---
+title: "Android Development Notlarım"
+date: 1999-21-03
+summary: "Android development öğrenirken tuttuğum notlar. Bu yazıyı öğrendikçe iyileştireceğim."
+---
+
+<CustomImage src="/images/post/android/android-development-notlari/001.png" width={1920} height={1080} fluid />
+
+## Basics
+
+- **Package Name**, her bir uygulamanın sahip olduğu benzersiz isimdir. Gelenek olarak organizasyon isminden sonra verilir. Sallamasyon bir örnek verecek olursam: `com.google.youtube`.
+
+## UI
+
+- Kullanıcının ekranda gördüğü her nesne (metin, resim, buton vs) **View** olarak adlandırılır. Uygulama 
+ekranında görülen hemen her şey bir View'dır.
+- View'ları belirli bir düzende tutmak için konteynırlar kullanılır. Bunlara **ViewGroup** denir. Ve aslında bu da View nesnesinden türer.
+- `ConstraintLayout` içerisindeki View nesnelerini esnek bir şekilde düzenleyebilmemizi sağlar. **Constraint**, View'ın şablonda bulunacağı yeri belirten margin değeridir.
+- Metin göstermek için `TextView` kullanılır.
+
+## Testing
+
+- **Unit Test**, kod parçalarını düzgün çalıştığından emin olmak için doğrudan test eder. Emülatöre ihtiyaç duymaz. Örn: fonksiyona iletilen argümanlara göre doğru çıktı alınması.
+- **Instrumentation Test**, arayüz testi için kullanılan terimdir. Örn: Kullanıcının login olduktan sonra sepet ekranına gidip ekli ürünleri onaylamasının test edilmesi.
+- src dizininin altındaki `test` klasörü unit test'leri, `androidTest` klasörü ise instrumentation test'leri barındırır. 
+
+<TheEnd />
+
+Android geliştirme öğrenirken önemli gördüğüm noktalardan kesitleri bir yerde tutmak istedim. Yazıyı sürekli güncelliyor olacağım.
+
+Sağlıcakla kalın.
