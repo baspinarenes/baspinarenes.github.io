@@ -1,4 +1,8 @@
 .mdx-container {
+  h3 {
+    @apply mt-8 mb-4 font-semibold text-lg md:text-xl text-gray-700;
+  }
+
   a {
     @apply mb-3.5 font-bold break-all no-underline break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
 
@@ -61,12 +65,32 @@
     }
   }
 
+  .ch-editor-frame {
+    height: auto !important;
+    max-height: unset !important;
+    height: max-content !important;
+
+    .ch-editor-tab {
+      width: fit-content !important;
+    }
+  }
+
   .ch-codegroup,
   .ch-codeblock {
     @apply rounded-none sm:rounded-md -mx-4 my-8;
 
     .dark\:ch-code-line-number {
       color: red !important;
+    }
+
+    div[data-ch-panel] {
+      height: fit-content !important;
+      overflow: unset !important;
+      min-height: unset !important;
+
+      & > div {
+        height: fit-content !important;
+      }
     }
 
     * {
@@ -77,9 +101,11 @@
   .ch-code-scroll-content {
     overflow: initial !important;
 
-    div div {
-      padding-right: 10px;
-      width: auto !important;
+    div {
+      div {
+        padding-right: 10px;
+        width: auto !important;
+      }
     }
 
     .ch-code-bg-annotation {
