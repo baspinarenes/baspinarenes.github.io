@@ -6,21 +6,294 @@ summary: "Android development öğrenirken tuttuğum notlar. Bu yazıyı öğren
 
 <CustomImage src="/images/post/android/android-development-notlari/001.png" width={1920} height={1080} fluid />
 
-## Basics
+> **Sorular:**  
+> 1- onRestoreInstanceState ne zaman kullanılır?
 
-- **Package Name**, her bir uygulamanın sahip olduğu benzersiz isimdir. Gelenek olarak organizasyon isminden sonra verilir. Sallamasyon bir örnek verecek olursam: `com.google.youtube`.
+## General
 
-## UI
+- **Package Name**, her bir uygulamanın sahip olduğu benzersiz isimdir. Gelenek
+olarak organizasyon isminden sonra verilir. Sallamasyon bir örnek verecek
+olursam: `com.google.youtube`.
+- Android Studio'da önlerinde 🔧 olan attribute'lar yalnızca geliştirme sırasında
+Design ekranında görüntülenir. Bir nevi placeholder'dır. Programı emülatörde
+çalıştırırsak gelmediğini görebiliriz.
+- Kotlin'de `println` olsa da Android debugging için en iyi seçenek `Log` sınıfıdır.
+Duruma göre mesaj tipleri vardır. Debug ve Verbose mesajları release build'e
+dahil edilmez.
+
+```kotlin
+private const val TAG = "MainActivity"
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    logging()
+}
+
+fun logging() {
+    Log.e(TAG, "ERROR: a serious error like an app crash")
+    Log.w(TAG, "WARN: warns about the potential for serious errors")
+    Log.i(TAG, "INFO: reporting technical information, such as an operation succeeding")
+    Log.d(TAG, "DEBUG: reporting technical information useful for debugging")
+    Log.v(TAG, "VERBOSE: more verbose than DEBUG logs")
+}
+```
+
+- **dp**, ekran çözünürlükleri farklı olan aynı boyuttaki ekranlarda View'ların
+aynı boyutta olmasını sağlayan özel bir birimdir. Bunun için yoğunluğa bağlı
+hesaplama yapılır. Alttaki resimden fark görülebilir. 
+
+<CustomImage
+  src="/images/post/android/android-development-notlari/002.png"
+  reference="https://blog.mindorks.com/understanding-density-independent-pixel-sp-dp-dip-in-android"
+  width={1920}
+  height={1080}
+  fluid
+/>
+
+- **sp**, yazı boyutları için özel bir birimdir. Ekrandaki yazıları kullanıcının
+telefonunda ayarladığı yazı boyutuna göre boyutlandırır.
+- Projede kullanılan resimler **Drawable** olarak geçer ve Resource Manager'dan
+eklenir.
+- Tasarım içine string gömülmesi tavsiye edilmez. Hepsine hızlıca erişilebilir ve
+istediğimizde diğer dillere çevirilebilir bir yapıda tutmak isteriz. Bu sebeple
+bir xml oluşturulur (app > res > values > strings.xml). Ve bu değer Attribute
+ekranında `@string/login_text` olarak kullanılır.
+
+```xml app/res/values/strings.xml
+<resources>
+    <string name="app_name">Happy Birthday</string>
+    <string name="login_text">Login</string>
+</resources>
+```
+
+- `aapt` tool'u `res/` dizinindeki tüm kaynakları gezerek id'leri `R` isimli
+sınıfta toplar. Uygulamadaki resource'lara id'leriyle erişebiliriz.
+
+```kotlin
+// Kodda kullanırken
+val imageView: ImageView = findViewById(R.id.myimageview)
+imageView.setImageResource(R.drawable.myimage)
+
+val title: TextView = findViewById(R.id.title)
+title.setText(R.string.title_text)
+```
+```xml
+<!-- XML de kullanırken -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello</string>
+    <string name="hi">@string/hello</string>
+</resources>
+```
+
+## Activity
+
+- Kullanıcıların uygulamayla etkileşime girmesine izin veren ekranlara **Activity** denir. Ana ekranın oluşturulduğu Activity genellikle `MainActivity` olarak adlandırılır.
+
+<CustomImage
+  src="/images/post/android/android-development-notlari/003.png"
+  reference="https://developer.android.com/codelabs/basic-android-kotlin-training-create-dice-roller-app-with-button#3"
+  width={760}
+  height={ 428} 
+  fluid
+/>
+
+```kotlin
+package com.example.appName
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+  }
+}
+```
+- Activity'lerin yedi yaşam döngüsü callback'i vardır:
+  <li style={{ listStyleType: "none"}}>
+    <CustomImage
+      src="/images/post/android/android-development-notlari/004.png"
+      reference="https://www.raywenderlich.com/2705552-introduction-to-android-activities-with-kotlin"
+      width={639}
+      height={ 429} 
+      fluid
+    />
+  </li>
+  - `onCreate()` ━ Activity ilk oluşturulduğunda tetiklenir. Activity ömrü
+  boyunca yalnızca bir kez çalışması gereken kodları burda çalıştırırız. Ekranın
+  düzeni burada tanımlanır.
+    - Parametre olarak önceden kaydedilmiş state'i içeren `Bundle` tipindeki
+  `saveInstanceState` nesnesini alır. Daha önce yoksa değeri `null` olur.
+  - `onStart()` ━ Activity kullanıcıya gösterilmeden önce tetiklenir.
+  Genellikle UI animasyonlarını ve ses gibi aksiyonlar başlatılabilir. Ardından
+  **onResume()** çağrılır.
+  - `onResume()` ━ Activity ön plana geldiğinde bu metot çağrılır.
+  Animasyonları yeniden başlatmak, UI nesnelerini güncellemek, ses/video
+  oynatmaya devam ettirmek gibi aksiyonlar gerçekleştirilebilir.
+  - `onPause()` ━ Activity arka plana geçmeden önce çağrılır. UI animasyonları,
+  ses veya kamera burada durdurulur. Ardından Activity ön plana
+  dönerse **onResume()**, gizlenirse **onStop()** izler.
+  - `onStop()` ━ Activity artık kullanıcı tarafından görülmediğinde
+  **onPause()**'dan hemen sonra çağrılır. Diske kaydetmek istediğiniz veriler
+  varsa iyi bir yerdir. Ardından Activity tekrar ön plana gelirse **onRestart()**,
+  bellekten serbest bırakılıyorsa **onDestroy()** çağrılır.
+  - `onRestart()` ━ Activity durdurulduktan sonra tekrar başlamadan hemen önce
+  çağrılır. Ardından **onStart()** çağrılır.
+  - `onDestroy()` ━ Activity yok edilmeden önce OS'un çağıracağı son
+  callback'tir. **finish()**'i çağırarak ya da sistemin hafızayı boşaltması
+  gerektiği zaman tetiklenir.
+
+<CH.Code>
+```kotlin onCreate
+var gameState: String? = null
+var textView: TextView? = null
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.main_activity)
+
+    gameState = savedInstanceState?.getString(GAME_STATE_KEY)
+    textView = findViewById(R.id.text_view)
+}
+
+override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    textView.text = savedInstanceState?.getString(TEXT_VIEW_KEY)
+}
+
+override fun onSaveInstanceState(outState: Bundle?) {
+    outState?.run {
+        putString(GAME_STATE_KEY, gameState)
+        putString(TEXT_VIEW_KEY, textView.text.toString())
+    }
+    super.onSaveInstanceState(outState)
+}
+```
+</CH.Code>
+
+- `onSaveInstanceState()` metodu `onStop()`'dan önce (`onPause()`'dan önce de
+olabilir sonra da) mevcut state'i kaydetmek için kullanılır. Normalde kayıtlı
+state varsa `onCreate()`'de restore edilir ancak başka stateler de geri yüklemek
+istersek `onRestoreInstanceState()` metodu ile özelleştirebiliriz.
+
+```kotlin
+var gameState: String? = null
+var textView: TextView? = null
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.main_activity)
+
+    gameState = savedInstanceState?.getString(GAME_STATE_KEY)
+    textView = findViewById(R.id.text_view)
+}
+
+override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+  // uygulama yeniden başlatılmadan önce state geri yüklenir.
+  textView.text = savedInstanceState?.getString(TEXT_VIEW_KEY)
+}
+
+// uygulama duraklatılmadan önce state kaydedilir.
+override fun onSaveInstanceState(outState: Bundle?) {
+    // bu metodun içerisindeki tüm metodların başına otomatik olarak
+    // outState ekleyerek metodu ilgili nesneden çalıştırır.
+    outState?.run {
+        putString(GAME_STATE_KEY, gameState)
+        putString(TEXT_VIEW_KEY, textView.text.toString())
+    }
+    super.onSaveInstanceState(outState)
+}
+```
+
+- UI state'inin uygulama döndürüldüğünde, çoklu pencere moduna geçirme ya da
+başka uygulamara gidip geri gelindiğinde state'inin korunmasını bekleriz. Bunun
+için `ViewModel`, `onSaveInstanceState()` ya da `local storage` kullanabiliriz.
+Eğer çok küçük bir veri değilse `onSaveInstanceState()`'den kaçınmalıyız.
+Varsayılan olarak sistem, her bir View bilgilerini kaydetmek için Bundle
+instance state kullanır. Activity yok edilip tekrar oluşturulduğunda düzenin
+otomatik olarak önceki state geri yüklenir. Ancak kullanıcının Activity'deki
+ilerlemesini tutan değişkenleri geri yüklemek istersek manuel yapmalıyız.
+
+## Views
 
 - Kullanıcının ekranda gördüğü her nesne (metin, resim, buton vs) **View** olarak adlandırılır. Uygulama 
 ekranında görülen hemen her şey bir View'dır.
 - View'ları belirli bir düzende tutmak için konteynırlar kullanılır. Bunlara **ViewGroup** denir. Ve aslında bu da View nesnesinden türer.
-- `ConstraintLayout` içerisindeki View nesnelerini esnek bir şekilde düzenleyebilmemizi sağlar. **Constraint**, View'ın şablonda bulunacağı yeri belirten margin değeridir.
+- `ConstraintLayout` içerisindeki View nesnelerini esnek bir şekilde düzenleyebilmemizi sağlar. Bunu içindeki elemanları absolute olan bir dive benzetebiliriz. **Constraint** ise View'ın şablonda bulunacağı yeri belirten üstten/alttan/soldan/sağdan mesafedir. Bu mesafe 0 ayarlanırsa otomatik olarak hesaplanır. CSS'teki `margin: auto;` gibi bir mantık söz konusu. 
+- View'lar Component Tree'deki sıraya göre ekrana çizdirilir.
 - Metin göstermek için `TextView` kullanılır.
+- Metin düzenleme elemanı için `EditText` kullanılır.
+- Resimleri göstermek için `ImageView` kullanılır.
+- Kodda bir UI nesnesini bulmak için `findViewById(viewId)` fonksiyonu kullanılır.
+
+```kotlin
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class MainActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    val title: TextView = findViewById(R.id.title)
+    title.text = "Deneme" // ya da title.setText(R.string.title_text)
+  }
+}
+```
+- Kodda bir UI nesnesini bulmak için `findViewById(viewId)` fonksiyonu kullanılır.
+
+## XML
+
+- Uygulama yapmak için designer kullanabilsek de bu sonunda XML'e çevrilir.
+  - **androidx** ile başlayanlar Android Jetpack kütüphanesinin parçası olduğunu
+  belirtir.
+  - **xmlns**, XML ad alanı anlamına gelir ve yanındaki keyword ile ilgili
+  nitelikler için bir şema tanımlar. Örneğin, `android:` Android sistemi
+  tarafından tanımlanan nitelikleri işaretler.
+  - Constraint kullanırken source mevcut view olmak üzere target hizalandığı yer
+  olmak üzere `layout_constraint<Source>_to<Target>Of` şeklindedir.
+  - `android:orientation` düzenin dikey veya yatay olarak ayarlanmasını sağlar.
+  - `android:layout_width="0dp"` ayarlamak constraint'e göre genişliğin
+  hesaplanmasını söyler.
+
+```xml
+<androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:text="Hello World!" />
+    <Button
+        android:text="Calculate" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
 
 ## Testing
 
-- **Unit Test**, kod parçalarını düzgün çalıştığından emin olmak için doğrudan test eder. Emülatöre ihtiyaç duymaz. Örn: fonksiyona iletilen argümanlara göre doğru çıktı alınması.
+- **Unit Test**, kod parçalarını düzgün çalıştığından emin olmak için doğrudan test eder. **JUnit** paketi kullanılır. Emülatöre ihtiyaç duymaz. Örn: fonksiyona iletilen argümanlara göre doğru çıktı alınması.
+
+```kotlin
+import org.junit.Test
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+
+class ExampleUnitTest {
+  @Test
+  fun addition_isCorrect() {
+    assertEquals(4, 2 + 2)
+  }
+
+  @Test
+  fun generates_number() {
+    val randomSide = (1..20).random()
+    val dice = MainActivity.Dice(randomSide)
+    val rollResult = dice.roll()
+
+    assertTrue("The value of rollResult was not between 1 and 6", rollResult in 1..randomSide)
+  }
+}
+```
+
 - **Instrumentation Test**, arayüz testi için kullanılan terimdir. Örn: Kullanıcının login olduktan sonra sepet ekranına gidip ekli ürünleri onaylamasının test edilmesi.
 - src dizininin altındaki `test` klasörü unit test'leri, `androidTest` klasörü ise instrumentation test'leri barındırır. 
 
@@ -29,3 +302,7 @@ ekranında görülen hemen her şey bir View'dır.
 Android geliştirme öğrenirken önemli gördüğüm noktalardan kesitleri bir yerde tutmak istedim. Yazıyı sürekli güncelliyor olacağım.
 
 Sağlıcakla kalın.
+
+## Kaynaklar
+
+- [https://developer.android.com/kotlin/style-guide](https://developer.android.com/kotlin/style-guide)

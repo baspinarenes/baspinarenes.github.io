@@ -6,6 +6,9 @@ summary: "Android development öğrenirken Kotlin üzerine tuttuğum notlar. Bu 
 
 <CustomImage src="/images/post/android/kotlin-notlari/001.png" width={1920} height={1080} fluid />
 
+> **Sorular:**  
+> 1- Abstract classda parametreyi parent classa iletirken val kullanmak neden gerekmiyor?
+
 ## Basics
 
 - **Package Name**, Android sisteminin kullanması için uygulamaya tanımlanan
@@ -59,7 +62,55 @@ fun main() {
 abc.length is 3
 </CodeResult>
 
+- Bir sayı aralığı tanımlamak istersek `IntRange` veri tipini kullanabiliriz.
+Belirli aralıkta rastgele sayı elde etmek istersek `.random()` metodunu
+kullanabiliriz. `(1..6).random()` şeklinde kısaltabiliriz.
+
+```kotlin
+fun main() {
+  val diceRange = 1..6
+  println("Minimum number is ${diceRange.start}.")
+  println("Maximum number is ${diceRange.endInclusive}.")
+	println("The random number is ${diceRange.random()}.")
+}
+```
+<CodeResult>
+Minimum number is 1.
+Maximum number is 6.
+The random number is 3.
+</CodeResult>
+
+
 ## Conditions and Loops
+
+- Eğer çok fazla koşulumuz varsa else if karmaşası yaratmadan `when`
+kullanabiliriz. Eğer değer return ediyorsak bir değişkene atayabiliriz.
+
+<CH.Code>
+
+```kotlin example1
+when (x) {
+  1 -> print("x == 1")
+  2 -> print("x == 2")
+  else -> {
+    print("x is neither 1 nor 2")
+  }
+}
+```
+
+```kotlin example2
+val drawableResource = when (diceRoll) {
+   1 -> R.drawable.dice_1
+   2 -> R.drawable.dice_2
+   3 -> R.drawable.dice_3
+   4 -> R.drawable.dice_4
+   5 -> R.drawable.dice_5
+   else -> R.drawable.dice_6
+}
+
+diceImage.setImageResource(drawableResource)
+```
+</CH.Code>
 
 - Bir fonksiyonu n kez çalıştırmak için `repeat()` kullanılır.
 
@@ -89,6 +140,71 @@ Hello with index 2
 ## Functions
 
 - Fonksiyon tanımlarken `fun` keywordü kullanılır.
+- Fonksiyonlara parametre geçerken isimlerini kullanabiliriz.
+
+```kotlin
+fun main() {
+  reformat(
+    "String!",
+    false,
+    upperCaseFirstLetter = false,
+    divideByCamelHumps = true,
+    '_'
+  )
+
+  reformat("This is a short String!", upperCaseFirstLetter = false, wordSeparator = '_')
+}
+
+fun reformat(
+    str: String,
+    normalizeCase: Boolean = true,
+    upperCaseFirstLetter: Boolean = true,
+    divideByCamelHumps: Boolean = false,
+    wordSeparator: Char = ' ',
+) { /*...*/ }
+```
+
+- Argümanlara varsayılan değer atamak için **=** kullanabiliriz. Hatta önceki
+bir parametreden türettiğimiz değeri bile verebiliriz.
+
+```kotlin
+fun read(
+    b: ByteArray,
+    off: Int = 0,
+    len: Int = b.size,
+) { /*...*/ }
+```
+
+- Varsayılan değeri olan parametrelerden sonra gelen bir lambda parametresi
+varsa ismiyle ya da parantez dışında iletebiliriz.
+
+```kotlin
+fun main() {
+  foo() { print("Hello!") }
+  foo(1, 2) { print("Hello!") }
+  foo(bar = 5, qux = { print("Hello!") })
+  foo { print("Hello!") }
+}
+
+fun foo(
+    bar: Int = 0,
+    baz: Int = 1,
+    qux: () -> Unit,
+) {
+  print("Bar: ${bar} - ")
+  print("Baz: ${baz} - ")
+  print("Qux result: ")
+  qux()
+  println()
+}
+```
+<CodeResult>
+Bar: 0 - Baz: 1 - Qux result: Hello!
+Bar: 1 - Baz: 2 - Qux result: Hello!
+Bar: 5 - Baz: 1 - Qux result: Hello!
+Bar: 0 - Baz: 1 - Qux result: Hello!
+</CodeResult>
+
 - Konsola bir şey yazdırmak için `print()` ve `println()` (metin sonunda '\n' varmış gibi davranır) kullanılır.
 
 ```kotlin
@@ -105,6 +221,194 @@ Benim adım Cafer.
 Boyum 1.10. Kilom 25.
 Gözlerimin rengini bilmiyorum.
 </CodeResult>
+
+- `with()` fonksiyonu verdiğimiz objeyi context olarak alır ve bloğu içindeki
+kodlarda nesne özelliklerini nesneyi belirtmemize gerek kalmadan
+kullanabilmemizi sağlar.
+
+```kotlin
+// normal hali
+println("\nRound Hut\n=========")
+println("Material: ${roundHut.buildingMaterial}")
+println("Capacity: ${roundHut.capacity}")
+println("Has room? ${roundHut.hasRoom()}")
+
+// with ile kısaltılmış hali
+with(roundHut) {
+  println("\nRound Hut\n=========")
+  println("Material: ${buildingMaterial}")
+  println("Capacity: ${capacity}")
+  println("Has room? ${hasRoom()}")
+}
+```
+
+## Class
+
+- Class oluşturmak için `class` keywordü kullanılır.
+
+```kotlin
+fun main() {
+  val myFirstDice = Dice()
+  println("Your ${myFirstDice.sides} sided dice rolled ${myFirstDice.roll()}!")
+}
+
+class Dice {
+  var sides = 6
+
+  fun roll(): Int {
+    val randomNumber = (1..6).random()
+    return randomNumber
+  }
+}
+```
+
+-  Constructor kullanmak istersek aşağıdaki şekilde kullanabiliriz. Aynı şekilde
+varsayılan değer verebilir ve bazı argümanların read-only olmasını sağlayabiliriz.
+
+```kotlin
+fun main() {
+  val person1 = Person("Enes", "Başpınar", 23)
+
+  println("First name: ${person1.firstName}")
+  println("Full name: ${person1.name}")
+  println("Is he/she an adult: ${person1.isAdult()}")
+  println("Has he/she a job: ${person1.isEmployed}")
+}
+
+class Person(
+  val firstName: String,
+  val lastName: String,
+  val age: Int,
+  var isEmployed: Boolean = true
+) {
+    val name = "$firstName $lastName"
+    
+    fun isAdult(): Boolean {
+        return age > 18
+    }
+}
+```
+<CodeResult>
+First name: Enes
+Full name: Enes Başpınar
+Is he/she an adult: true
+Has he/she a job: true
+</CodeResult>
+
+- **Inheritance**, basitçe bir sınıfın tüm özelliklerini içeren ve üzerine kendi
+özelliklerini ekleyen yeni bir sınıf türetme sürecidir.
+- **Abstract Class**, class'ın şablonu yaratmak için kullanılan taslak classtır.
+- Inherit edilen class'ta property'leri ezmek istersek başına `ovveride`
+koyabiliriz.
+- Class abstract değilse ancak subclass üretmemiz gerekirse `open` anahtar
+kelimesi kullanabiliriz.
+
+> Inherited sınıfların özelliklerinin değerleri ve fonksiyonların
+> implementasyonları bilinmiyorsa, sınıf abstract olmalıdır. Örneğin sebzelerin
+> ortak noktası şekilleri olmasıdır. Ancak şeklin ne olduğu parent class'tan
+> belirlenemez. Şeklinin olduğu belirtilip değeri sebze sınıfında verilmelidir.
+
+```kotlin
+import kotlin.math.PI
+import kotlin.math.sqrt
+
+fun main() {
+  val squareCabin = SquareCabin(6, 50.0)
+  val roundHut = RoundHut(3, 10.0)
+  val roundTower = RoundTower(4, 15.5)
+
+  with(squareCabin) {
+    println("\nSquare Cabin\n============")
+    println("Material: ${buildingMaterial}")
+    println("Capacity: ${capacity}")
+    println("Has room? ${hasRoom()}")
+    println("Floor area: %.2f".format(floorArea()))
+  }
+
+  with(roundHut) {
+    println("\nRound Hut\n=========")
+    println("Material: ${buildingMaterial}")
+    println("Capacity: ${capacity}")
+    println("Has room? ${hasRoom()}")
+    println("Floor area: %.2f".format(floorArea()))
+    println("Carpet size: ${calculateMaxCarpetSize()}")
+    println("Has room? ${hasRoom()}")
+    getRoom()
+    println("Has room? ${hasRoom()}")
+    getRoom()
+  }
+
+  with(roundTower) {
+    println("\nRound Tower\n==========")
+    println("Material: ${buildingMaterial}")
+    println("Capacity: ${capacity}")
+    println("Has room? ${hasRoom()}")
+    println("Floor area: %.2f".format(floorArea()))
+    println("Carpet size: ${calculateMaxCarpetSize()}")
+  }
+}
+
+abstract class Dwelling(private var residents: Int) {
+  abstract val buildingMaterial: String
+  abstract val capacity: Int
+  abstract fun floorArea(): Double
+
+  fun hasRoom(): Boolean {
+    return residents < capacity
+  }
+
+  fun getRoom() {
+    if (capacity > residents) {
+      residents += 1
+      println("You got a room!")
+    } else {
+      println("Sorry, at capacity and no rooms left.")
+    }
+  }
+}
+
+class SquareCabin(
+  residents: Int,
+  val length: Double,
+) : Dwelling(residents) {
+  override val buildingMaterial = "Wood"
+  override val capacity = 6
+
+  override fun floorArea(): Double {
+    return length * length
+  }
+}
+
+open class RoundHut(
+  residents: Int,
+  val radius: Double,
+) : Dwelling(residents) {
+  override val buildingMaterial = "Straw"
+  override val capacity = 4
+
+  override fun floorArea(): Double {
+    return PI * radius * radius
+  }
+
+  fun calculateMaxCarpetSize(): Double {
+    val diameter = 2 * radius
+    return sqrt(diameter * diameter / 2)
+  }
+}
+
+class RoundTower(
+  residents: Int,
+  radius: Double,
+  val floors: Int = 2,
+) : RoundHut(residents, radius) {
+  override val buildingMaterial = "Stone"
+  override val capacity = 4 * floors
+
+  override fun floorArea(): Double {
+    return super.floorArea() * floors
+  }
+}
+```
 
 <TheEnd />
 
