@@ -17,23 +17,29 @@
   }
 
   ul {
-    @apply pl-0 mb-5;
+    @apply mb-5;
+
+    ul {
+      @apply pl-5 my-2;
+    }
 
     li {
-      @apply list-none pl-0 mb-2 dark:text-[#e0e0e0];
+      @apply pl-0 mb-2 dark:text-[#e0e0e0];
 
-      &:before {
-        @apply dark:bg-white;
+      list-style-type: square;
 
-        content: "";
-        display: inline-block;
-        margin-right: 6px;
-        margin-bottom: 2px;
-        height: 5px;
-        width: 5px;
-        background-color: black;
-        border-radius: 50%;
-      }
+      // &:before {
+      //   @apply dark:bg-white;
+
+      //   content: "";
+      //   display: inline-block;
+      //   margin-right: 6px;
+      //   margin-bottom: 2px;
+      //   height: 5px;
+      //   width: 5px;
+      //   background-color: black;
+      //   border-radius: 50%;
+      // }
     }
   }
 

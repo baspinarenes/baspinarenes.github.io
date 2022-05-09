@@ -28,7 +28,6 @@ const CustomImage = (props: CustomImageProps) => {
   const lastLayout = position ? "fixed" : "responsive";
   const marginLeftOrRight =
     position === "right" ? "float-right ml-4" : "float-left mr-4";
-  const imageNo = src.match(/(?<no>[1-9]+).\w+$/)?.groups?.no;
 
   return (
     <div
@@ -61,7 +60,7 @@ const CustomImage = (props: CustomImageProps) => {
         href={reference}
         className="absolute left-0 bottom-[-2.3rem] inline-block w-full text-center border-none"
       >
-        [{imageNo}]
+        kaynak
       </a>
     </div>
   );
