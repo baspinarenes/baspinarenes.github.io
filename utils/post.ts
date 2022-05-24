@@ -14,8 +14,8 @@ const postsDirectory = path.join(process.cwd(), "_posts");
 
 const getPostCategoryNames = (): string[] => {
   const categoryFolderNames = fs.readdirSync(postsDirectory);
-
-  return categoryFolderNames;
+  
+  return Object.keys(BEAUTIFIED_POST_CATEGORY_NAMES) || categoryFolderNames;
 };
 
 const getPostNamesByCategoryName = (categoryName: string): string[] => {

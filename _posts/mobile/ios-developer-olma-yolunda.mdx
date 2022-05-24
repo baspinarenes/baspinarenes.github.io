@@ -1,0 +1,707 @@
+---
+title: "IOS Developer Olma Yolunda"
+date: 1999-21-03
+summary: "Frontend'den IOS developer olma yolundaki adımlarımı paylaşacağım."
+---
+
+<CustomImage src="/images/post/mobile/ios-developer-olma-kariyerim/001.png" width={1920} height={1080} fluid />
+
+> Bu yazıdaki gün kavramı, IOS ile uğraştığım günleri ifade ediyor. Ardışık olarak 
+> düşünmeyin. İki gün arasında haftalar olabilir.
+
+## GÜN 1
+
+IOS geliştirmede kullanılan Swift diliyle başlıyorum. Klasik değişken tipleri,
+type, enum ile başlangıcı yaptım.
+
+### Notlarım:
+
+- Değişken oluşturmak için `var`, değeri asla değişmeyecek değişkenler
+için `let` kullanırız.
+
+```swift
+let cityName = "Bursa"
+let cityPlateCode = 16
+let cityAreaInKm2 = 10.82
+var cityPopulation = 2_161_990
+let isCapital = false
+```
+
+> Integerlar alt cizgi ile basamakları daha okunabilir halde yazılabilir.
+
+- Swift otomatik olarak değişken tiplerini tahmin eder (**inference**) ancak manuel
+olarak da verebiliriz. Ondalıklı sayıları varsayılan olarak **Double** tipinde tutar.
+
+```swift
+let cityName: String = "Bursa"
+let cityPlateCode: Int = 16
+var cityPopulation: Int = 2_161_990
+let cityAreaInKm2: Float = 10.82 // ya da Double
+let isCapital: Bool = false
+```
+
+> Programlamada genel kabul ilk tanımlarken constant olarak tanımlayıp eğer
+> sonradan değerini değiştiriyorsak normale çekmek yapmak yönünde. 
+
+- Ekrana bir şey yazdırmak için `print()` ya da `println()` kullanabiliriz.
+İki ekstra parametre kabul eder. `separator = " "` metinleri birleştiren, 
+`terminator = "\n"` ise birleştirilmiş metnin sonuna koyulan karakterdir.
+
+```swift
+print("Selam.", "Ben Enes.", "23 yaşındayım. \n")
+print("Selam.", "Ben Enes.", "23 yaşındayım.", separator: "\n", terminator: "THE END.")
+```
+<CodeResult>
+Selam. Ben Enes. 23 yaşındayım. 
+
+Selam.
+Ben Enes.
+23 yaşındayım.THE END.
+</CodeResult>
+
+- Değişkenleri string içerisinde yazdırmak için **String Interpolation**
+kullanabiliriz.
+
+```swift
+let unluckiestTeamInWorld = "Fenerbahçe";
+print("\(unluckiestTeamInWorld) dünyanın en şanssız takımıdır.")
+```
+<CodeResult>
+Fenerbahçe dünyanın en şanssız takımıdır.
+</CodeResult>
+
+- **Array**'lerin tanımlanması ve elemanlarına erişilmesi klasik. Tip verirken iki
+yolumuz var:
+
+```swift
+let oddNumbers: Array<Int> = [1, 3, 5, 7, 9, 11, 13, 15]
+let evenNumbers: [Int] = [2, 4, 6, 8, 10, 12, 14, 16]
+```
+
+- **Set**, unordered ve tüm öğeleri benzersiz olan veri koleksiyonudur. Sıranın
+korunmasının gerekmemesi hızlıca arama yapabilmemiz gibi ek faydalar sağlar.
+
+```swift
+let colors = Set(["red", "green", "blue"])
+let colors2 = Set(["red", "green", "blue", "red", "blue"]) // red, green, blue
+let colors3: Set<String> = ["red", "green", "blue"]
+```
+
+- **Tuple**, boyutu sabit veri koleksiyonudur. Öğe ekleyemeyiz ve silemeyiz.
+korunmasının gerekmemesi hızlıca arama yapabilmemiz gibi ek faydalar sağlar.
+
+```swift
+var person: (String. Int, Bool) = (name: "Paul", age: 40, isMarried: true)
+print(name.0)
+print(name.name)
+
+var product: (String. Int) = ("MacBook", 1099.99)
+print(product.0)
+print(product.1)
+```
+
+- **Dictionary**, key-value çiftlerini barındıran veri koleksiyonudur. Key yoksa
+`nil` döner. Ve varsayılan değer tanımlayabiliriz.
+
+```swift
+let examResults = [
+    "english": 100,
+    "french": 85,
+    "geography": 75
+]
+
+print(examResults["english"])
+print(examResults["history"])
+print(examResults["history", default: 0])
+```
+
+<CodeResult>
+Optional(100)
+nil
+0
+</CodeResult>
+
+- Boş koleksiyonlar oluşturmak için tiplerini kullanabiliriz.
+
+```swift
+var results = [Int]()
+var results2 = Array<Int>()
+
+var words = Set<String>()
+
+var scores = [String: Int]()
+var scores = Dictionary<String, Int>()
+```
+
+- **Enumerations** ya da kısa ismiyle **Enums**, ilişkili değerleri gruplamanın
+bir yoludur.
+
+<CH.Code>
+
+```swift example1
+enum Direction {
+    case north
+    case south
+    case east
+    case west
+}
+
+let direction = Direction.south
+```
+
+```swift example2
+enum Direction: Int {
+    // default enum starts with 0. now starts with 1.
+    case north = 1
+    case south
+    case east
+    case west
+}
+
+let direction = Direction.south
+
+print("Type direction:", type(of: direction)) // Direction
+print("Direction:", direction) // south
+print("Direction RawValue:", direction.rawValue) // 2
+```
+</CH.Code>
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/1](https://www.hackingwithswift.com/100/1)
+- [https://www.hackingwithswift.com/100/2](https://www.hackingwithswift.com/100/2)
+- [https://www.avanderlee.com/swift/array-vs-set-differences-explained/](https://www.avanderlee.com/swift/array-vs-set-differences-explained/)
+
+## GÜN 2:
+
+Operatörlere, koşullu ifadelere, döngülere ve fonksiyonlara girdim. Swift çok 
+temiz bir dil. JS neymiş öyle arkadaş ya :D
+
+### Notlarım:
+
+- Swift, sayı değişkenleri arasındaki matematiksel işlemlerde otomatik tip
+dönüştürmez.
+
+```swift
+let result = 2 + 1.0
+print(result)
+
+let num1: Int = 2
+let num2: Double = 1.0
+let result2 = num1 + num2
+print(result2)
+```
+<CodeResult>
+3.0
+Error: binary operator '+' cannot be applied to operands of type 'Int' and 'Double'
+</CodeResult>
+
+- İki Int bölüyorsak sonuç otomatik sıfıra yuvarlanır. Engellemek için tip
+atayabiliriz.
+
+```swift
+let result1 = 365 / 7
+let result2: Double = 365 / 7
+print("result1:", result1)
+print("result2:", result2)
+```
+<CodeResult>
+result1: 52
+result2: 52.142857142857146
+</CodeResult>
+
+- String ve Array birleştirme işlemi `+` operatörüyle yapılabilir. Buna
+**Operator Overloading** denir.
+
+```swift
+let fakers = "Fakers gonna "
+let action = fakers + "fake"
+
+let firstHalf = ["John", "Paul"]
+let secondHalf = ["George", "Ringo"]
+let beatles = firstHalf + secondHalf
+```
+
+- Enum değerlerini karşılaştırma operatörüyle kullanıma uygun hale getirebiliriz.
+
+```swift
+enum Sizes: Comparable {
+    case small
+    case medium
+    case large
+}
+
+let first = Sizes.small
+let second = Sizes.large
+print(first < second)
+```
+<CodeResult>
+true
+</CodeResult>
+
+- Ternary operatör JS'dekinin aynısı gibi uygulanabilir.
+
+```swift
+let firstCard = 11
+let secondCard = 10
+print(firstCard == secondCard ? "Cards are the same" : "Cards are different")
+```
+<CodeResult>
+Cards are different
+</CodeResult>
+
+- Aynı şekilde klasik Switch yapısı da mevcut. Otomatik olarak her case'e
+default ekler. Eğer eşleşen case'in altındakileri de çalıştırmak istersek
+`fallthrough` keyword`ünü kullanabiliriz.
+
+```swift
+let weather = "sunny";
+
+switch weather {
+case "rain":
+    print("Bring an umbrella")
+case "snow":
+    print("Wrap up warm")
+case "sunny":
+    print("Wear sunscreen")
+    fallthrough
+default:
+    print("Enjoy your day!")
+}
+```
+<CodeResult>
+Wear sunscreen
+Enjoy your day!
+</CodeResult>
+
+- Sayı aralıkları tanımlamak için `Range` sınıfı mevcuttur. Bu değişkenler
+**range operator** ile oluşturulur. Üst limiti dahilse `...`, değilse `..<`
+kullanabiliriz.
+
+```swift
+let names = ["Piper", "Alex", "Suzanne", "Gloria"]
+
+print(names[1...2])
+print(names[1..<2])
+print(names[1...])
+print(names[...2])
+print(names[..<2])
+print(names[...])
+```
+<CodeResult>
+["Alex", "Suzanne"]
+["Alex"]
+["Alex", "Suzanne", "Gloria"]
+["Piper", "Alex", "Suzanne"]
+["Piper", "Alex"]
+["Piper", "Alex", "Suzanne", "Gloria"]
+</CodeResult>
+
+```swift
+let score = 85
+
+switch score {
+case 0..<50:
+    print("You failed badly.")
+case 50...85:
+    print("You did OK.")
+default:
+    print("You did great!")
+}
+```
+<CodeResult>
+You did OK.
+</CodeResult>
+
+- Dizi üzerinde döngü kurmak istersek `for in` kullanabiliriz.
+
+<CH.Code>
+
+```swift example1
+let albums = ["Red", "1989", "Reputation"]
+
+for album in albums {
+    print("\(album) is on Apple Music")
+}
+```
+
+```swift example2
+let count = 1...10
+
+for number in count {
+    print("Number is \(number)")
+}
+```
+
+```swift example3
+for _ in 1...5 {
+    print("repeat")
+}
+```
+</CH.Code>
+
+- Do-while yapısına ihtiyacımız olursa `repeat` kullanabiliriz.
+
+```swift
+let numbers = [1, 2, 3, 4, 5]
+var random: [Int]
+
+repeat {
+    random = numbers.shuffled()
+} while random == numbers
+```
+<CodeResult>
+1
+</CodeResult>
+
+- Döngülerden çıkmak için `break` kullanabiliriz. İç içe döngülerde tümünden
+çıkmak istersek label verebiliriz.
+
+```swift
+let options = ["up", "down", "left", "right"]
+let secretCombination = ["up", "up", "right"]
+
+outerLoop: for option1 in options {
+    for option2 in options {
+        for option3 in options {
+            print("Wrong combination!")
+            let attempt = [option1, option2, option3]
+
+            if attempt == secretCombination {
+                print("\(attempt) is correct combination!")
+                break outerLoop
+            }
+        }
+    }
+}
+```
+<CodeResult>
+Wrong combination!
+Wrong combination!
+Wrong combination!
+Wrong combination!
+["up", "up", "right"] is correct combination!
+</CodeResult>
+
+- Fonksiyon tanımı için `func` keywordü kullanılır. Birden çok değer
+döndüreceksek tuple kullanmak güzel bir tercih.
+
+```swift
+func square(number: Int) -> Int {
+    return number * number
+}
+
+let result = square(number: 8)
+print(result)
+```
+<CodeResult>
+65
+</CodeResult>
+
+- Eğer fonksiyon bloğunda yalnızca return varsa kısaltabiliriz.
+
+```swift
+func square(number: Int) -> Int { number * number }
+
+func greet(name: String) -> String { name == "" ? "Hello!" : "Hi, \(name)" }
+```
+
+- Fonksiyon parametrelerinde blok içinde ve çağrılırken kullanılacak iki isim
+verebiliriz. Buna **label** denir. Varsayılan vermek JS ile aynı.
+
+```swift
+func setAge(for person: String, to value: Int = 0) {
+    print("\(person) is now \(value)")
+}
+
+setAge(for: "Paul", to: 40) // set age for Paul to 40
+```
+<CodeResult>
+Paul is now 23
+</CodeResult>
+
+- Fonksiyon çağırırken parametre adını atlamak istersek label olarak `_`
+kullanabiliriz.
+
+```swift
+func greet(_ person: String) {
+    print("Hello, \(person)!")
+}
+
+greet("Taylor")
+```
+<CodeResult>
+Hello, Taylor!
+</CodeResult>
+
+- Aynı türden herhangi bir sayıda parametreyi kabul eden fonksiyonlara
+`variadic func` denir.
+
+```swift
+func customPrint(_ texts: String...) {
+    print(texts.joined(separator: " "))
+}
+
+func square(numbers: Int...) {
+    for number in numbers {
+        print("\(number) squated is \(number * number)")
+    }
+}
+
+customPrint("Welcome", "to", "calculator!")
+customPrint()
+square(numbers: 1, 2, 3, 4, 5)
+```
+<CodeResult>
+Welcome to calculator!
+
+1 squared is 1
+2 squared is 4
+3 squared is 9
+4 squared is 16
+5 squared is 25
+</CodeResult>
+
+- Error Handling'i aşağıdaki biçimde gerçekleştirebiliriz. `Error` interface'inden türetilmiş enum kullanılarak `throw` ile hata
+fırlatılır. Hatayı yakalamak için `do-cath` blokları kullanılır. Hata beklenen
+fonksiyonun önüne `try` eklenir.
+
+```swift
+enum PasswordError: Error {
+    case obvious
+}
+
+
+func checkPassword(_ password: String) throws -> Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+
+    return true
+}
+
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You cant use that password!")
+}
+```
+<CodeResult>
+You cant use that password!
+</CodeResult>
+
+- Varsayılan olarak fonksiyon parametreleri constant'tır. Ancak in-place
+değişiklik yapmak istersek `inout` keywordünü kullanabiliriz.
+
+```swift
+func doubleInPlace(number: inout Int) { number *= 2 }
+
+var num = 10
+doubleInPlace(number: &num)
+
+print(num)
+```
+<CodeResult>
+20
+</CodeResult>
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/3](https://www.hackingwithswift.com/100/3)
+- [https://www.hackingwithswift.com/100/4](https://www.hackingwithswift.com/100/4)
+- [https://www.hackingwithswift.com/100/5](https://www.hackingwithswift.com/100/5)
+
+## GÜN 3:
+
+Bugün Closure'lardan devam ediyorum.
+
+### Notlarım:
+
+- Fonksiyonları değişkene atayabiliriz ve diğer fonksiyonlara iletebiliriz.
+Bu tip fonksiyonlara **closure** denir.
+
+```swift
+let driving = {
+    print("I'm driving in my car.")
+}
+
+func travel(action: () -> Void) {
+    print("I'm getting ready to go.")
+    action()
+    print("I arrived!")
+}
+
+travel(action: driving)
+```
+<CodeResult>
+I'm getting ready to go.
+I'm driving in my car.
+I arrived!
+</CodeResult>
+
+- Closure'lar parametreleri tuple tanımı ile karışmasını önlemek için parantez 
+içinde kabul ederler. Fonksiyon gövdesinin başladığını belirtmek için de `in`
+kullanılır. Çağrılırken parametre ismini kullanmazlar.
+
+```swift
+let payment = { () -> Bool in
+    print("Paying an anonymous person…")
+    return true
+}
+
+let drivingWithReturn = { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+```
+
+- Bir fonksiyonun son parametresi closure ise özel bir syntax ile yazabiliriz.
+Başka parametre yoksa parantezleri uçurabiliriz.
+
+```swift
+func animate(duration: Double, animations: () -> Void) {
+    print("Starting a \(duration) second animation…")
+    animations()
+}
+
+animate(duration: 3) {
+    print("Fade out the image")
+}
+```
+
+- Parametre olarak iletilen Closure'ları daha da kısaltabiliriz. Zaten
+fonksiyonda belirtildiği için tip belirtmeye gerek kalmaz. Aynı zamanda
+parametreler indeksine göre kullanılabilir.
+
+```swift
+func travel(action: (String) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London")
+    print(description)
+    print("I arrived!")
+}
+
+travel { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+
+travel { place in
+    "I'm going to \(place) in my car"
+}
+
+travel {
+    "I'm going to \($0) in my car"
+}
+```
+
+- Fonksiyonlar return olarak closure döndürebilir.
+
+```swift
+func getIncrementer() -> (Int) -> Void {
+    var count = 0
+    
+    return { step in
+        count += step
+        print(count)
+    }
+}
+
+let incrementer = getIncrementer()
+incrementer(5)
+incrementer(2)
+incrementer(3)
+```
+<CodeResult>
+5
+7
+10
+</CodeResult>
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/6](https://www.hackingwithswift.com/100/6)
+- [https://www.hackingwithswift.com/100/7](https://www.hackingwithswift.com/100/7)
+
+## GÜN 4:
+
+Bugün Struct'lardan devam ediyorum.
+
+### Notlarım:
+
+- Swift'te kendi değişken türlerimizi oluşturmanın yollarından birisi
+`struct`'tır. Kendi değişkenlerini işlevlerini saklayabilir. Barındırdığı
+değişkenlere `property` denir. İki çeşidi bulunur.
+
+```swift
+struct Sport {
+    var name: String
+    var isOlympicSport: Bool = false
+    
+    var olympicStatus: String {
+        if isOlympicSport {
+            return "\(name) is an Olympic sport"
+        } else {
+            return "\(name) is not an Olympic sport"
+        }
+    }
+
+    func startTournament() -> Bool {
+        print("Tournament started!")
+    }
+}
+
+let chessBoxing = Sport(name: "Chessboxing", isOlympicSport: false)
+print(chessBoxing.olympicStatus)
+```
+<CodeResult>
+Chessboxing is not an Olympic sport
+</CodeResult>
+
+- Property değerlerinin değişmesi sonucunda bir işlem yapmak isteyebiliriz.
+Değişiklik öncesinde bir işlem yapmak için `willSet`, sonrasında yapmak için
+`didSet` kullanabiliriz. Bu yapılara **property observer** denir.
+
+```swift
+struct Progress {
+    var task: String
+    var amount: Int {
+        didSet {
+            print("\(task) is now \(amount)% complete")
+        }
+    }
+}
+
+var progress = Progress(task: "Loading data", amount: 0)
+progress.amount = 30
+progress.amount = 80
+progress.amount = 100
+```
+<CodeResult>
+Loading data is now 30% complete
+Loading data is now 80% complete
+Loading data is now 100% complete
+</CodeResult>
+
+- Metodlardan property'leri değiştirebilmek için `mutating` keywordüyle
+işaretlemeliyiz.
+
+```swift
+struct Person {
+    var name: String
+
+    mutating func makeAnonymous() {
+        name = "Anonymous"
+    }
+}
+
+var person = Person(name: "Ed")
+person.makeAnonymous()
+```
+
+- Değişken türleri `struct` örnekleridir. 
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/8](https://www.hackingwithswift.com/100/8)
+
+<TheEnd />
+
+Android geliştirme öğrenirken önemli gördüğüm noktalardan kesitleri bir yerde tutmak istedim. Yazıyı sürekli güncelliyor olacağım.
+
+Sağlıcakla kalın.
