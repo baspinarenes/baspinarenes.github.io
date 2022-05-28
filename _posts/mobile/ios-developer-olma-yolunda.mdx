@@ -627,7 +627,8 @@ Bugün Struct'lardan devam ediyorum.
 
 - Swift'te kendi değişken türlerimizi oluşturmanın yollarından birisi
 `struct`'tır. Kendi değişkenlerini işlevlerini saklayabilir. Barındırdığı
-değişkenlere `property` denir. İki çeşidi bulunur.
+değişkenlere `property` denir. Değeri hesaplanması gerekiyorsa `computed`
+propertydir.
 
 ```swift
 struct Sport {
@@ -695,10 +696,555 @@ var person = Person(name: "Ed")
 person.makeAnonymous()
 ```
 
-- Değişken türleri `struct` örnekleridir. 
+- Değişken türleri `struct` örnekleridir.
+- Normalde propertyler **memberwise initializer** ile değer alır. Özel
+**initializer** da tanımlayabiliriz.
+
+```swift
+struct User {
+    var username: String
+
+    init() {
+        username = "Anonymous"
+        print("Creating a new user!")
+    }
+}
+
+var user = User()
+```
+<CodeResult>
+Creating a new user!
+</CodeResult>
+
+- Objenin kendisine erismek icin `self` kullanılır. Burda self kullanmadan da
+atama işlemini gerçekleştirebilirdik.
+
+```swift
+struct Person {
+    var name: String
+    
+    init(name: String) {
+        print("Hello \(name)")
+        self.name = name
+    }
+}
+
+struct PersonWithoutSelf {
+    var name: String
+    
+    init(name studentName: String) {
+        print("Hello \(name)")
+        name = studentName
+    }
+}
+
+Person(name: "Enes")
+```
+<CodeResult>
+Hello Enes
+</CodeResult>
+
+- Performans olarak bir takım optimizasyon yapmak için `lazy` keywordünü
+kullanabiliriz. Property'nin oluşturulması için ilk erişimi bekler.
+
+```swift
+struct FamilyTree {
+    init() {
+        print("Creating family tree!")
+    }
+}
+
+struct Person {
+    var name: String
+    lazy var familyTree = FamilyTree()
+    
+    init(name: String) {
+        print(name)
+        self.name = name
+    }
+}
+
+var ed = Person(name: "Enes")
+print("Person created!")
+ed.familyTree
+```
+<CodeResult>
+Enes
+Person created!
+Creating family tree!
+</CodeResult>
+
+- Nesneler arası yani sınıfın propertysi tanımlamak için `static` kullanırız.
+
+```swift
+struct Student {
+    static var classSize = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+        Student.classSize += 1
+    }
+}
+
+print(Student.classSize)
+let student1 = Student(name: "Enes")
+print(Student.classSize)
+```
+<CodeResult>
+0
+1
+</CodeResult>
+
+- Property ve metodlar için erişim yetkisi tanımlayabiliriz. `private` struct
+dışına gizler, `public` ise erişime izin verir.
+
+```swift
+struct Person {
+    private var id: String
+
+    init(id: String) {
+        self.id = id
+    }
+
+    func identify() -> String {
+        return "My social security number is \(id)"
+    }
+}
+
+let person = Person(id: "1")
+// person.id'ye erişilemez.
+print(person.identify())
+```
+<CodeResult>
+My social security number is 1
+</CodeResult>
+
 
 ### Kaynaklar:
 - [https://www.hackingwithswift.com/100/8](https://www.hackingwithswift.com/100/8)
+- [https://www.hackingwithswift.com/100/9](https://www.hackingwithswift.com/100/9)
+
+## GÜN 5:
+
+### Notlarım:
+- Class'larda structan ayrı olarak memberwise initializer bulunmaz yani `init`
+daima tanımlanmalı.
+
+```swift
+class Dog {
+    var name: String
+    var breed: String
+
+    init(name: String, breed: String) {
+        self.name = name
+        self.breed = breed
+    }
+}
+```
+
+- Başka bir class'tan type atar gibi inheritance yapabiliriz. Miras alınan
+**parent class** alan **child class** olarak isimlendirilir.
+
+```swift
+class Dog {
+    var name: String
+    var breed: String
+    
+    init(name: String, breed: String) {
+        self.name = name
+        self.breed = breed
+    }
+}
+
+
+class Poodle: Dog {
+    init(name: String) {
+        super.init(name: name, breed: "Poodle")
+    }
+}
+```
+
+- Child class'tan parent class metodlarının implementasyonlarını
+değiştirebiliriz. Buna `overriding` denir.
+
+```swift
+class Dog {
+    func makeNoise() {
+        print("Hav!")
+    }
+}
+
+class Poodle:Dog {
+    override func makeNoise() {
+        print("Yip!")
+    }
+}
+
+let anotherDog = Dog()
+let poodle = Poodle()
+
+anotherDog.makeNoise()
+poodle.makeNoise()
+```
+<CodeResult>
+Hav!
+Yip!
+</CodeResult>
+
+- Inherit edilmemesini istediğimiz sınıfları `final` ile tanımlayabiliriz.
+
+- Struct `value type`, class `reference type` dır. Dolayısıyla nesnelerinden
+oluşturulan atamalar farklı davranır.
+
+<CH.Code>
+```swift class
+class SingerClass {
+    var name = "Taylor Swift"
+}
+
+let singer = SingerClass()
+var singerCopy = singer
+singerCopy.name = "Justin Bieber"
+print(singer.name) // Justin Bieber
+```
+
+```swift struct
+struct SingerClass {
+    var name = "Taylor Swift"
+}
+
+let singer = SingerClass()
+var singerCopy = singer
+singerCopy.name = "Justin Bieber"
+print(singer.name) // Taylor Swift
+```
+</CH.Code>
+
+- Class'ta örnek destroy edildiğinde çalışan `deinitializer` yapısı vardır.
+
+```swift
+class Person {
+    var name = "John Doe"
+
+    init() {
+        print("\(name) is alive!")
+    }
+
+    deinit {
+        print("\(name) is dead!")
+    }
+}
+
+for _ in 1...3 {
+    let person = Person()
+}
+```
+<CodeResult>
+John Doe is alive!
+John Doe is dead!
+John Doe is alive!
+John Doe is dead!
+John Doe is alive!
+John Doe is dead!
+</CodeResult>
+
+- Constant class örneğindeki property değerleri değiştirilebilir.
+Değiştirilmesini engellemek için property `let` ile tanımlanmalı.
+
+```swift
+class Singer {
+    var name = "Taylor Swift"
+}
+
+let taylor = Singer()
+taylor.name = "Ed Sheeran"
+print(taylor.name)
+```
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/10](https://www.hackingwithswift.com/100/10)
+
+## GÜN 5:
+
+### Notlarım:
+- `Protocol` nesnelerin hangi property ve methodlara sahip olması gerektiğini
+tanımlar. Protocolde olmayan şeyler eklenebilir.
+
+```swift
+protocol Purchaseable {
+    var name: String { get set }
+}
+
+struct Book: Purchaseable {
+    var name: String
+    var author: String
+}
+
+struct Movie: Purchaseable {
+    var name: String
+    var actors: [String]
+}
+
+struct Car: Purchaseable {
+    var name: String
+    var manufacturer: String
+}
+
+struct Coffee: Purchaseable {
+    var name: String
+    var strength: Int
+}
+
+
+func buy(_ item: Purchaseable) {
+    print("I'm buying \(item.name)")
+}
+```
+
+- Protocoller **protocol inheritance** ile miras alabilir.
+
+<CH.Code>
+```swift example1
+protocol Payable {
+    func calculateWages() -> Int
+}
+
+protocol NeedsTraining {
+    func study()
+}
+
+protocol HasVacation {
+    func takeVacation(days: Int)
+}
+
+protocol Employee: Payable, NeedsTraining, HasVacation { }
+```
+
+```swift example2
+protocol Product {
+    var price: Double { get set }
+    var weight: Int { get set }
+}
+
+protocol Computer: Product {
+    var cpu: String { get set }
+    var memory: Int { get set }
+    var storage: Int { get set }
+}
+
+protocol Laptop: Computer {
+    var screenSize: Int { get set }
+}
+```
+</CH.Code>
+
+- Var olan tiplere method eklemek için `extension` yapısını kullanabiliriz.
+Property eklemek için computed property olması gerekir.
+
+```swift
+extension Int {
+    var isEven: Bool {
+        return self % 2 == 0;
+    }
+    
+    func squared() -> Int {
+        return self * self
+    }
+}
+
+let num1 = 14
+num1.isEven
+num1.squared()
+```
+
+```swift
+extension String {
+    var isLong: Bool {
+        return count > 25 // propertyleri direk kullanabiliriz.
+    }
+}
+```
+
+- Birden çok türe aynı anda eklemek yapmak istersek `protocol extension`
+uygulamamız gerekir. Hem array hem de set veri tipi `Collection` protocokolünden
+çağırılırlar. Bu yüzden bu protokole bir şey eklersek ikisi de etkilenir.
+
+```swift
+extension Collection {
+    func summarize() {
+        print("There are \(count) of us:")
+
+        for name in self {
+            print(name)
+        }
+    }
+}
+```
+
+- Protocol methodlarını miras alan nesnelerin her birinde tek tek tanımlamak
+yerine protocol extension ile default tanımlayabiliriz.
+
+```swift
+protocol Identifiable {
+    var id: String { get set }
+    func identify()
+}
+
+extension Identifiable {
+    func identify() {
+        print("My ID is \(id).")
+    }
+}
+
+struct User: Identifiable {
+    var id: String
+}
+
+let twostraws = User(id: "twostraws")
+twostraws.identify()
+```
+
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/11](https://www.hackingwithswift.com/100/11)
+
+## GÜN 6:
+
+### Notlarım:
+
+- Swiftte değeri olmayan değişkenler `nil` değerini alır. Bunlar isteğe `optional`
+değişken olarak geçer. Bunu kullanmak istersek kontrol sağlamalıyız. Buna
+`unwrapping` denir. En yaygın yolu da `if let` syntaxıdır.
+
+```swift
+var name: String? = nil
+
+if let unwrapped = name {
+    print("\(unwrapped.count) letters")
+} else {
+    print("Missing name.")
+}
+```
+
+- `if let` alternatifi `guard let`'tir. Tek fark kod bloğunun devamında unwrapped
+kullanılabilir. Kontrol başarısız olursa mevcut işlevden, döngüden veya koşuldan
+çıkmak için kullanılır.
+
+> `guard` aslında bir kod bloğunun çalıştırılmadan önce her şeyin doğru olduğu
+> aksi takdirde return, throw vs ile bloktan çıkılması gereken durumlarda kullanılır.
+
+```swift
+func greet(_ name: String?) {
+    guard let unwrapped = name else {
+        print("You didnt provide a name!")
+        return
+    }
+    
+    print("Hello \(unwrapped)")
+}
+```
+
+- Bazen Optional değerlerin boş olmadığından emin oluruz. Unwrapping yapmaya
+zorlamak için `!` kullanabiliriz.
+
+```swift
+let names = ["Zoey", "Chloe", "Amani", "Amaia"]
+let randomName = names.randomElement()! // return optional value
+```
+
+- Her yerde kullanmaktan ziyade tanımlarken de force unwrapping yapabiliriz. 
+Değişkenin boş başlayacağı, ancak onu kullanmak istediğiniz zaman boş olmayacağı
+durumlarda kullanışlıdır.
+
+```swift
+let age: Int! = nil
+```
+
+- Eğer değişken değeri `nil` ise başka değer vermek istersek
+`nil coalescing operator` kullanabiliriz. Zincirleyebiliriz.
+
+```swift
+func username(for id: Int) -> String? {
+    if id == 1 {
+        return "Taylor Swift"
+    } else {
+        return nil
+    }
+}
+
+let user = username(for: 15) ?? "Anonymous"
+```
+
+- Nesne propertylerine erişirken `nil` ile karşılaşırsak kodumuz hata verir.
+Bunu engellemek için `optional chaining operator` kullanabiliriz. Eğer boş değer
+gelirse geri kalanı çalıştırmadan `nil` döndürür.
+
+```swift
+let names = ["Vincent": "van Gogh", "Pablo": "Picasso", "Claude": "Monet"]
+let surnameLetter = names["Vincent"]?.first?.uppercased() ?? "?"
+```
+
+- do-cath yapısını optional kontrolüyle birlikte de kullanabiliriz. Buna
+`optional try` denir. Hem `nil` dönerse hem hata fırlatırsa else bloğuna girer.
+
+```swift
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You can't use that password.")
+}
+
+if let result = try? checkPassword("password") {
+    print("That password is good!")
+} else {
+    print("You can't use that password.")
+}
+```
+
+- Eğer struct ya da class'tan nesne oluştururken bazı caselerde boş değer vermek
+istersek `failable initializer` kullanabiliriz.
+
+```swift
+struct Person {
+    var id: String
+
+    init?(id: String) {
+        if id.count == 9 {
+            self.id = id
+        } else {
+            return nil
+        }
+    }
+}
+
+let person = Person(id: "invalid") // nill
+```
+
+- Eğer inherited sınıflar arasında typecast yapmak istersek `as?` kullanabiliriz. Eğer
+işlem başarısız olursa if let nil olacağından bloğu çalıştırmaz.
+
+```swift
+class Animal {}
+class Fish: Animal {}
+class Dog: Animal {
+    func makeNoise() {
+        print("Hav!")
+    }
+}
+
+let pets = [Fish(), Dog(), Fish(), Dog()]
+
+for pet in pets {
+    if let dog = pet as? Dog {
+        dog.makeNoise()
+    }
+}
+```
+ 
+### Kaynaklar:
+- [https://www.hackingwithswift.com/100/12](https://www.hackingwithswift.com/100/12)
+- [https://www.avanderlee.com/swift/guard-statements/](https://www.avanderlee.com/swift/guard-statements/)
 
 <TheEnd />
 
