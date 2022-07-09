@@ -519,7 +519,7 @@ int *yas_ptr = &yas;
 Şimdi bu pointer'ın adresini depolayan bir pointer daha oluşturalım:
 
 ```cpp
-int *yas_ptr_ptr = &yas_ptr;
+int **yas_ptr_ptr = &yas_ptr;
 ```
 
 Bu da ne, hani tek yıldız ile oluşturuluyordu? Sakin. Hala tek yıldız ile oluşturuluyor. Yukarıda `int *yas_ptr_ptr` ismini `int* yas_ptr_ptr` olarak ifade ederek analize başlayalım. int tipinde `yas` değişkenin adresini bir pointer'a atarsak bunun tipinin int* olduğunu gördük. Şimdi ise int* tipini tutan pointer oluşturmuş oluruz. Yeni değişkenimizin tipi ise int* olur. Biraz daha netleşti değil mi?
@@ -529,7 +529,7 @@ Yeni pointer ile ilgili birkaç çıktıya bakalım:
 ```cpp
 printf("%p\n", yas_ptr_ptr);
 printf("%p\n", *yas_ptr_ptr);
-printf("%d\n", *yas_ptr_ptr);
+printf("%d\n", **yas_ptr_ptr);
 ```
 
 <CodeResult>
