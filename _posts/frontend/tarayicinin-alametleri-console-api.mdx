@@ -1,0 +1,286 @@
+---
+title: "Tarayıcının Alametleri: Console API"
+date: 2022-09-23
+summary: "Console nesnesinin log metodunu metodunu çokca kullanıyoruz. Peki yaptıkları bununla sınırlı mı?"
+---
+
+Tarayıcılarla ilgili bazı bilgiler vermek için yeni seriye başlamak istedim sanki başladıklarımı bitirmiş gibi. İşte ilk yazım. Yeniler varsa kafa karıştıran her şeye API deme olayına bir açıklık getirelim öncelikle. Basitçe bir konuda sorumluluk sahibi olan bir uygulamanın özel bilgilerine erişmek için fonksiyonlar/parametreler barındıran yapıya **API (application programming interface)** diyebiliriz. `console`'un yanında `document`, `window`, `fetch` şeklinde örnekler çoğaltılabilir.  
+
+ `console.log()` metodunu yazılımcılar olarak çok fazla kullanıyoruz hatta en fazla yazdığımız metod olabileceğine de bahse girerim. Peki `console` nesnesi bu kadarla mı sınırlı? Hiç sanmam. Öyleyse bir bakalım.
+
+## log() - info() - warn() - error() - debug()
+
+Önce bi klasiklerden başlayalım. Konsola yazdığımız metinler farklı önem seviyelerine sahip olurlar. Ve hatta önemlerini belirten renk ve simgeler gibi görsel uyarıcılar ile gösterilebilirler.
+
+`log()`, geliştirme yaparken değişkenin anlık durumunu görmek için geçici olarak kullanılabilir.
+```js
+console result = await axios.get(...);
+console.log("sadasdasdas", result);
+```
+`info()`, son kullanıcıya bir metodun doğru biçimde nasıl kullanılacağıyle ilgili bilgi verebilir.
+```js
+console.info("React Hook "useState" is called conditionally. React Hooks must be called in the exact same order in every component render. (react-hooks/rules-of-hooks)")
+```
+`warn()`, bir metodun isminin değiştiğini ya da artık kullanımdan kaldırılacağıyla ilgili kullanıcıya bildirebilir.
+```js
+console.warn("Warning: componentWillMount has been renamed, and is not recommended for use. See https:/fb.me/react-unsafe-component-lifecycles for details.")
+```
+`error()`, kod çalıştırılırken karşılaşılan bir hatayı ya da yapılması unutulan bir şeyi bildirmek için kullanılabilir.
+```js
+console.error('SyntaxError: /src/App.js: Unexpected token, expected "(" (5:2)')
+```
+`debug()`, bu da geliştirme yaparken anlık olarak değişkenleri görmek için kullanılabilir.
+```js
+console.warn("Örnek bulamadım örnek...")
+```
+
+Bunları geliştirdiğimiz yazılımlarda her zaman aktif kullanmıyoruz ancak bir paket yazdığımız senaryoyu düşündüğümüzde kullanıcının herhangi bir hata ya da uyarıyı doğru bir şekilde anladığından emin olmak isteriz.
+
+## assert()
+
+<CH.Section>
+Konsola belirli koşullara göre mesaj yazdırmamızı sağlar. İşte olay budur. [İlk parametrede](focus://4[16:33]) verdiğimiz koşul false ise verdiğimiz [ikinci parametreyi](focus://4[36:81]) yazdırır. `if` içlerine log atmaya son!
+
+```js
+const response = await fetch("https://jsonplaceholder.typicode.com/users");
+const statusCode = response.status;
+
+console.assert(statusCode === 200, {data: statusCode, error: "Occured an error!"})
+// ya da
+console.assert(statusCode === 200, "Occured an error!")
+```
+</CH.Section>
+
+## clear()
+
+O ana kadar atılmış olan tüm mesajları temizler. 
+
+```js
+console.clear()
+```
+
+> Tarayıcıda çalışsa da Node terminalinde temizlemez. Eğer bu işlevi isteniyorsa `process.stdout.write('\033c');` gibi stdout'a direk müdahale eden bir kod tercih edilebilir.
+
+## count() - countReset()
+
+<CH.Section>
+İşte güzel bir tane geliyor. Normalde bir şeyin ne kadar render olduğunu vs kontrol etmek için geçici değişken oluşturup kullanırız ya heh işte artık gerek yok. `count()` reis kodda koyduğumuz yerde ne kadar çalıştığını tutar ver konsola çıktı olarak verir. Eğer sıfırlamak istersek de `countReset()` kullanırız. Sayaçları özelleştirmek için [label parametresi](focus://3[17:27]) verebilir ve sıfırlarken yine bu [parametreyi](focus://10[24:34]) kullanırız.
+
+```js
+for (let i = 0; i < 5; i++) {
+  console.count();
+  console.count("myCounter");
+
+  if (i === 2) {
+    console.countReset();
+  }
+
+  if (i === 4) {
+    console.countReset("myCounter");
+  }
+}
+```
+<CodeResult>
+default: 1
+myCounter: 1
+default: 2
+myCounter: 2
+default: 1
+myCounter: 3
+default: 2
+myCounter: 4
+default: 3
+myCounter: 1
+</CodeResult>
+</CH.Section>
+
+Ama sıfırlamayı sakın unutmayın. Unutursanız kaldığı yerden saymaya devam ederler.
+
+## group() - groupCollapsed() - groupEnd()
+
+Bazen çıktılar birbiriyle bağımlı oluyor. Mesela bir ilişkili değişkenlerin değerlerini görmek istiyoruz ancak bir döngü içerisindeseler ayıklamak zor olabiliyor. `group()` (genişletilmiş) ve `groupCollapsed()` (daraltılmış) ile grup oluştururuz. Gruplamayı bitirmek için `groupEnd()` kullanırız.
+
+```js
+const name = "Enes";
+const age = 21;
+const city = "Bursa";
+const country = "Turkey";
+
+console.group("Person"); // ya da console.groupCollapsed()
+console.log("Age: ", age);
+console.log("City: ", city);
+console.log("Country: ", country);
+console.groupEnd();
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/001.png"
+  width={1580}
+  height={420}
+  fluid
+/>
+
+Ve hatta iç içe bile kümelemeyebiliriz.
+
+```js
+const name = "Enes";
+const age = 21;
+const city = "Bursa";
+const country = "Turkey";
+
+console.group("Person"); // ya da console.groupCollapsed()
+console.log("Age: ", age);
+console.group("Location");
+console.log("City: ", city);
+console.log("Country: ", country);
+console.groupEnd();
+console.groupEnd();
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/002.png"
+  width={1570}
+  height={512}
+  fluid
+/>
+
+## table()
+
+Nesneleri ve dizileri konsolda okumak ölüm gibi oluyor. Bunları tablo şeklinde görselleştirebiliriz.
+
+```js
+console.table(["Turkey", "Italy", "England"]);
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/003.png"
+  width={1588}
+  height={280}
+  fluid
+/>
+
+```js
+const people = [
+    {firstName: "Kemal", age: 21},
+    {firstName: "Can", age: 5},
+    {firstName: "Gürbüz", age: 76},
+];
+
+console.table(people, ["firstName", "age"]);
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/004.png"
+  width={1588}
+  height={420}
+  fluid
+/>
+
+```js
+class Product {
+  constructor(name, color, price) {
+    this.name = name;
+    this.color = color;
+    this.price = price;
+  }
+}
+
+const product = new Product("Elbise", "Kırmızı", 299.9);
+console.table(product);
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/005.png"
+  width={1592}
+  height={494}
+  fluid
+/>
+
+
+```js
+class Product {
+  constructor(name, color, price) {
+    this.name = name;
+    this.color = color;
+    this.price = price;
+  }
+}
+
+const dress = new Product("Elbise", "Kırmızı", 299.9);
+const shoe = new Product("Ayakkabı", "Beyaz", 123);
+const hat = new Product("Şapka", "Siyah", 520);
+
+console.table([dress, shoe, hat], ["name", "color", "price"]);
+```
+
+<CustomImage
+  src="/images/post/frontend/cok-guzel-olan-ama-asla-kullanmayacaginiz-console-metodlari/006.png"
+  width={1590}
+  height={570}
+  fluid
+/>
+
+## time() - timeEnd() - timeLog()
+
+Bazen kodların çalışma süresini ölçmek isteriz. Başlangıçta tarih alırız, bitince tarih alırız ve aradaki farkı buluruz. Ancak bir kısayolumuz var. Zamanlayıcıyı başlatmak için `time()`, anlık değerini almak için `timeLog()`, sonlandırıp süresini ekrana yazdırmak için `timeEnd()` kullanırız.
+
+```
+console.time("myTimer");
+for(let i = 0; i < 10; i+=1) { 
+  console.timeLog("myTimer")
+}
+console.timeEnd("myTimer");
+```
+<CodeResult>
+myTimer: 0.003173828125 ms
+myTimer: 0.06396484375 ms
+myTimer: 0.08984375 ms
+myTimer: 0.114013671875 ms
+myTimer: 0.135009765625 ms
+myTimer: 0.154052734375 ms
+myTimer: 0.196044921875 ms
+myTimer: 0.2119140625 ms
+myTimer: 0.23193359375 ms
+myTimer: 0.251953125 ms
+myTimer: 0.27392578125 ms
+</CodeResult>
+
+## trace()
+
+Bir fonksiyonun çağrılmasına kadar hangi sırayla hangi fonksiyonların çalıştığını görmek istersek kullanırız.
+
+```
+function mapData(result) {
+  console.trace();
+
+  return {
+    name: result.name,
+    username: result.username,
+    email: result.email
+  };
+}
+
+async function getResult(response) {
+  const result = await response.json();
+  return mapData(result);
+}
+
+async function fetchData(string) {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+  return getResult(response);
+}
+
+await fetchData();
+```
+<CodeResult>
+console.trace
+overrideMethod
+mapData
+getResult
+await in getResult (async)
+fetchData
+await in fetchData (async)
+(anonymous)
+</CodeResult>
+
+Serin ve muazzam bir cuma akşamının verdiği mutlulukla böyle minik bir yazı yazayım dedim. Sağlıcakla kalın.
