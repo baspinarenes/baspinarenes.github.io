@@ -11,6 +11,10 @@
     }
   }
 
+  img {
+    @apply -mx-4 w-screen;
+  }
+
   b,
   strong {
     @apply dark:text-white;
@@ -67,7 +71,7 @@
     }
 
     p {
-     @apply before:content-none after:content-none m-0
+      @apply before:content-none after:content-none m-0;
     }
   }
 

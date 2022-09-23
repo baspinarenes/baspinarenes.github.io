@@ -38,7 +38,7 @@ Bellek temsillerinde ise 16 tabanını (hexadecimal) kullanılıyor. Aşağıda 
 değerinin bu tabanlardaki halini görebilirsiniz:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/001.webp"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/001.webp"
   width={718}
   height={167}
   fluid
@@ -48,7 +48,7 @@ Değişkenin bellekteki şekline bakalım. 16'lık tabandaki karşılığını k
 ikişerli olarak yerleştiririz:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/002.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/002.png"
   width={856}
   height={504}
   fluid
@@ -58,7 +58,7 @@ ikişerli olarak yerleştiririz:
 karaktere karşılık gelmesidir. Ve bu kısma özel bir isim vererek **dogum_tarihi** dedik:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/003.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/003.png"
   width={869}
   height={492}
   fluid
@@ -100,7 +100,7 @@ dogum_tarihi_ptr = &dogum_tarihi; // yıldız yok dikkat edin.
 `dogum_tarihi_ptr` değişkenimizin türü, göreceğimiz üzere int*. Bu da bize tamsayı değişkenin adresini tutan pointer olduğunu gösterir. Başına koyduğumuz '&'' işareti ise değişkenimizin adresini elde etmemize yarayan **address-of** operatörüdür. Yani `&dogum_tarihi`, `dogum_tarihi` değişkeninin bellekteki adresidir.
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/004.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/004.png"
   width={728}
   height={243}
 />
@@ -149,7 +149,7 @@ Değişken ismine bitişik olduğu için değişkene ait olduğundan emin oluruz
 Değişkenin adresini elde edebileceğimiz gibi adres yardımıyla değişken değerine de erişebiliriz. Şu görseli birlikte inceleyelim:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/005.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/005.png"
   width={1000}
   height={400}
   fluid
@@ -238,7 +238,7 @@ int *sayi_dizisi_ptr = sayi_dizisi;
 Dizimizin bellekteki durumunu görselleştirelim:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/006.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/006.png"
   width={1200}
   height={400}
   fluid
@@ -279,7 +279,7 @@ Pointer'a 1 eklediğimizde bir sonraki kutunun adresini tutmasını istiyoruz.
 Biraz kafalar karışmış olabilir. Bu tarz şeylere görsellik katmadan anlamak zordur bilirim. İkinci elemana ulaşmak için adrese 1 eklediğimizde olacak şey böyledir:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/007.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/007.png"
   width={1207}
   height={348}
   fluid
@@ -290,7 +290,7 @@ Göreceğimiz gibi 1 eklediğimizde esasen `1*sizeof(int)` demek isteriz. int ol
 Direk olarak 3. elemana erişmek isteseydik `2*sizeof(int)`, yani 2 eleman sonraya git diyebilirdik:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/008.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/008.png"
   width={1215}
   height={362}
   fluid
@@ -377,7 +377,7 @@ printf("%d", yeni_sayi_dizisi[1])
 30 sonucunu alırız. Çünkü dizimiz artık şu hale gelecektir:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/009.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/009.png"
   width={1200}
   height={600}
   fluid
@@ -541,7 +541,7 @@ printf("%d\n", **yas_ptr_ptr);
 İlk satırı biliyoruz `yas_ptr_ptr`'in adresini yazdırdı. İkinci satırda ise bu pointer'ın değerini, yani `yas_ptr` değişkeninin adresini yazdırdık. Son satırda ise `yas_ptr_ptr` pointer değişkeninin adresini depoladığı `yas_ptr` pointer değişkeninin adresinin içerisinde bulunan değeri yazdırmış olduk. Görsel olarak da eklemiş olayım:
 
 <CustomImage
-  src="/images/post/pointerlandiramadiklarimizdanmisiniz/010.png"
+  src="/images/post/genel-programlama/pointerlandiramadiklarimizdanmisiniz/010.png"
   width={1000}
   height={400}
   fluid

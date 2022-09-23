@@ -10,6 +10,7 @@ interface CustomImageProps {
   width?: number;
   reference?: string;
   position?: string;
+  borderless?: boolean;
 }
 
 const CustomImage = (props: CustomImageProps) => {
@@ -21,6 +22,7 @@ const CustomImage = (props: CustomImageProps) => {
     fluid = false,
     reference = "",
     position = "",
+    borderless = false,
   } = props;
 
   const [isLoading, setLoading] = useState(true);
@@ -36,7 +38,7 @@ const CustomImage = (props: CustomImageProps) => {
       } ${
         position
           ? `${marginLeftOrRight} mb-6 mt-0`
-          : "border-y sm:border dark:border-0 mx-auto"
+          : `${!borderless ? "border-y sm:border dark:border-0" : ""} mx-auto`
       } ${
         reference ? "" : "overflow-hidden"
       } sm:rounded-lg relative leading-none my-8`}
