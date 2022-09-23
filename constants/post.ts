@@ -2,7 +2,6 @@
 
 export const TIMEOUT_FOR_ACCEPTABLE_READED = 5000;
 export const BEAUTIFIED_POST_CATEGORY_NAMES: Record<string, string> = {
-  mobile: "Android/IOS",
   frontend: "Frontend",
   "genel-programlama": "Genel Programlama",
   "hayatin-icinden": "Hayatın İçinden",
