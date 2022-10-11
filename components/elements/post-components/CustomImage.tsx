@@ -60,7 +60,7 @@ const CustomImage = (props: CustomImageProps) => {
       />
       <a
         href={reference}
-        className="absolute left-0 bottom-[-2.3rem] inline-block w-full text-center border-none"
+        className="absolute left-0 bottom-[-2.3rem] text-xs inline-block w-full text-center border-none"
       >
         kaynak
       </a>
