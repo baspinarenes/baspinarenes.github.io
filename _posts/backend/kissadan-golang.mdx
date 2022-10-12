@@ -8,7 +8,7 @@ summary: "Golang çalışırken tuttuğum kısa notlar."
 
 ## Golang Nedir?
 
-Golang, C gibi ama daha basit, hızlıca derlenebilen, multi thread bir dildir.
+Golang, C gibi ama daha basit, hızlıca derlenebilen, multithread bir dildir.
 Daha çok mikroservis uygulamalarında kullanılır.
 
 ## Temel Dosya İçeriği
@@ -20,11 +20,11 @@ Daha çok mikroservis uygulamalarında kullanılır.
 // aynı klasör içinde bulunan dosyalarda paket ismi aynı olmalıdır.
 package main 
 
-// klasik library dahil etme şekli
+// kütüphaneler klasik şekilde dahil edilir.
 import "fmt"
 
-// programın giriş noktasıdir.
-// her pakette yalnızca bir dosyada main fonksiyonu olabilir.
+// programın giriş noktasıdır.
+// her pakette bir main fonksiyonu olabilir.
 func main() {
   fmt.Println("Hello World")
 }
@@ -49,7 +49,7 @@ func main(){
   fmt.Printf("Hi! My name is %s. I have lived in %s for %d years. They say the weather is amazing, which is %t", "Enes", "Bursa", 23, true)
 
   // "Hello Enes!" metni döndürür ama çıktı vermez.
-  fmt.Sprintf("Hello %s!", "Enes")
+  result := fmt.Sprintf("Hello %s!", "Enes")
 }
 ```
 
@@ -154,18 +154,105 @@ for i <= 100 {
 }
 ```
 
+## Fonksiyon
+
+* Fonksiyonda tipleri verirken TypeScript'ten farklı olarak iki nokta kullanmayız.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	fmt.Println(getAgeByYear(1999))
+}
+
+func getAgeByYear(yearOfBirth int) int {
+	return time.Now().Year() - yearOfBirth
+}
+```
+
+* Birden fazla değer döndürebiliriz.
+
+```go
+func blaBla() (int, int)  {
+  return 4, 5
+}
+```
+
+* Ve hatta döndüreceğimiz değerleri otomatik değişkene atayıp dönmesini sağlayabiliriz. 
+
+```go
+func getAgeByYear(yearOfBirth int) (age int) {
+	age = time.Now().Year() - yearOfBirth
+	return
+}
+```
+
+* Belirsiz sayıda argümanı koleksiyon olarak almak istersek `...` operatörünü kullanabiliriz.
+Bu fonksiyonlara **variadic function** denir.
+
+```go
+func printNames(names ...string) {
+	for _, name := range names {
+		fmt.Println(name)
+	}
+}
+ ```
+
+## Array
+
+* Dizi tanımlarken boyutu sabit, elemanları ise tek tip olmalıdır.
+Dikkat etmek gereken şey tip tanımının içerisinde bulunmasıdır. Yani
+`[5]int != [4]int`. Eğer girdiğimiz eleman kadar boyut alsın istersek
+yine `...` operatörünü kullanabiliriz.
+
+```go
+var nums [5]int
+fmt.Println(nums)
+
+var nums2 [2]float64 = [2]float64{2.2, 3.8}
+fmt.Println(nums2)
+
+names := [4]string{"Ali", "Veli"}
+fmt.Println(names)
+
+names2 := [...]string{"Ali", "Veli", "Ahmet"}
+fmt.Print(names2)
+fmt.Println(" - type: ", reflect.TypeOf(names2))
+```
+<CodeResult>
+[0 0 0 0 0]
+[2.2 3.8]
+[Ali Veli  ]
+[Ali Veli Ahmet] - type: [3]string
+</CodeResult>
+
 * Dizilerin elemanlarını iterate etmek istersek `range` kullanabiliriz.
+
+```go
+nums := [5]int{1, 2, 3, 4, 5}
+
+// indexi göz ardı edeceksek '_' kullanabiliriz.
+for _, num := range nums {
+  fmt.Print(num)
+}
+```
+<CodeResult>
+12345
+</CodeResult>
 
 ```go
 var mySentence = "Sentence"
 
-// indexi göz ardı edeceksek '_' kullanabiliriz.
 for index, letter := range mySentence {
   // letter byte değerini döner. harfi almak için stringe çeviririz.
   fmt.Println("Index:", index, "Letter:", string(letter))
 }
 ```
-
 <CodeResult>
 Index: 0 Letter: S
 Index: 1 Letter: e
@@ -175,6 +262,110 @@ Index: 4 Letter: e
 Index: 5 Letter: n
 Index: 6 Letter: c
 Index: 7 Letter: e
+</CodeResult>
+
+* Sabit boyut demişken dinamik tanımı da bilmek isteriz. `map(type, len, cap)`,
+slice, map ve channel türünden nesne oluşturur ve bellekte yer ayırır.
+
+```go
+// var mySlice []int dersek bu hataya sebep olur. çünkü bellekte
+// ayıracağı boyutu bilemez. map ilk eleman dizinin tipidir.
+// ikincisi başlangıç boyutudur. üçüncüsü ise maksimum kapasitedir.
+var mySlice []int = make([]int, 5, 10)
+
+fmt.Println(len(mySlice))
+fmt.Println(cap(mySlice))
+```
+
+* Dizinin bir parçasını almak istersek klasik dizi söz dizimini kullanabiliriz.
+
+```go
+nums := [5]int{1, 2, 3, 4, 5}
+someNums := nums[2:4] // bellekte kapasitesi 5 olacak şekilde yer ayırır. 
+fmt.Println(reflect.TypeOf(someNums))
+fmt.Println(someNums)
+```
+<CodeResult>
+[]int
+[3, 4]
+</CodeResult>
+
+* Dinamik diziye eleman eklemek için `append()` kullanırız.
+Ekleme yapılacak diziyi ve elemanları alır.
+
+```go
+var arr []int = make([]int, 3, 10)
+newArr := append(arr, 5, 2, 7, 12)
+
+fmt.Println(newArr)
+```
+<CodeResult>
+[0 0 0 5 2 7 12]
+</CodeResult>
+
+## Map
+
+* Bildiğimiz anahtar değer çifti tutan veri tipi.
+
+```go
+// var userInfo map[string]string şeklinde tanımlarsak
+// başlangıç için bellek ayırma yapamaz.
+// slice'dan farklı olarak başlangıç boyutu vermeye gerek yok.
+var userInfo map[string]string = make(map[string]string)
+userInfo["name"] = "Enes"
+userInfo["surname"] = "Başpınar"
+fmt.Println(userInfo)
+
+userInfo2 := map[string]string{
+  "name": "Cem",
+  "surname": "Yılmaz",
+}
+fmt.Println(userInfo2)
+```
+<CodeResult>
+map[name:Enes surname:Başpınar]
+map[name:Cem surname:Yılmaz]
+</CodeResult>
+
+* Bir anahtarın olup olmadığını kontrol etmek istersek exception
+fırlatmayacağı için farklı bir yol kullanmamız gerekir. Döndürdüğü
+ikinci değer işlemin başarılı olup olmadığını belirtir.
+
+```go
+userInfo := map[string]string{
+  "name":    "Cem",
+  "surname": "Yılmaz",
+}
+
+city, ok := userInfo["city"]
+fmt.Println("value:", city)
+fmt.Println("ok", ok)
+
+// yukarıdaki case'i if ile birleştirip 
+// bir anahtar mevcutsa bir işlem yapmak istersek:
+if city, ok := userInfo["city"]; ok {
+  fmt.Printf("%s live in %s", userInfo["name"], city)
+}
+```
+<CodeResult>
+value: 
+ok false
+</CodeResult>
+
+* Herhangi bir anahtarı silmek istersek `delete()` kullanabiliriz.
+
+```go
+userInfo := map[string]string{
+	"name":    "Cem",
+	"surname": "Yılmaz",
+}
+
+delete(userInfo, "surname")
+
+fmt.Println(userInfo)
+```
+<CodeResult>
+map[name:Cem]
 </CodeResult>
 
 ## Diğer
@@ -194,3 +385,7 @@ func Sprintf(format string, a ...any) string
 func Sprintln(a ...any) string
 ...
 ```
+
+## Kaynaklar
+
+- [Frontend Masters: Go for JS Developer](https://frontendmasters.com/courses/go-for-js-devs/)
