@@ -4,7 +4,7 @@
   }
 
   a {
-    @apply mb-3.5 font-bold break-all no-underline break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
+    @apply mb-3.5 break-all no-underline break-words border-b-2 text-[rgba(29,78,216)] border-[rgba(29,78,216)] dark:text-yellow-500 dark:border-yellow-500;
 
     &:hover {
       @apply text-[#0e35a1] border-[#0e35a1] dark:text-[rgba(234,179,8,0.6)] dark:border-[rgba(234,179,8,0.6)];
@@ -15,9 +15,13 @@
     @apply -mx-4 w-screen;
   }
 
+  iframe {
+    @apply -mx-4 my-8 w-[-webkit-fill-available];
+  }
+
   b,
   strong {
-    @apply dark:text-white;
+    @apply font-medium dark:text-white;
   }
 
   ul {
