@@ -1,6 +1,6 @@
 .mdx-container {
   h3 {
-    @apply mt-8 mb-4 font-semibold text-lg md:text-xl text-gray-700;
+    @apply mt-8 mb-4 font-semibold text-lg md:text-xl;
   }
 
   a {
@@ -28,7 +28,7 @@
     }
 
     li {
-      @apply pl-0 mb-2 dark:text-[#e0e0e0];
+      @apply pl-0 mb-2;
 
       list-style-type: square;
 

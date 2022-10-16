@@ -19,22 +19,21 @@ body {
   @apply bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-400 flex flex-col min-h-screen;
 }
 
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  @apply font-bold tracking-tight text-black dark:text-white break-words;
+  @apply font-bold tracking-tight text-gray-700 dark:text-gray-200 dark:text-white break-words;
 }
 
 h1 {
-  @apply text-3xl md:text-5xl mb-1 -ml-0.5;
+  @apply text-3xl md:text-5xl mb-1 -ml-0.5 text-black;
 }
 
 h2 {
-  @apply text-2xl mb-6 mt-12 font-semibold tracking-normal text-gray-700 dark:text-gray-200;
+  @apply text-2xl mb-6 mt-12 font-semibold tracking-normal;
 }
 
 h3 {
@@ -42,7 +41,7 @@ h3 {
 }
 
 h4 {
-  @apply mb-2 text-lg font-medium text-gray-900 md:text-xl dark:text-gray-300;
+  @apply mb-2 text-lg font-medium md:text-lg;
 }
 
 p {
