@@ -8,14 +8,16 @@ const BlogCategory = (props: BlogCategoryProps) => {
     <div>
       <h3 className="mb-3">{categoryBeautifiedName}</h3>
       <div className="flex flex-col">
-        {posts.map((post) => (
-          <BlogPost
-            key={post.name}
-            title={post.title}
-            summary={post.summary}
-            slug={post.slug}
-          />
-        ))}
+        {posts
+          .sort((a, b) => b.date - a.date)
+          .map((post) => (
+            <BlogPost
+              key={post.name}
+              title={post.title}
+              summary={post.summary}
+              slug={post.slug}
+            />
+          ))}
       </div>
     </div>
   );

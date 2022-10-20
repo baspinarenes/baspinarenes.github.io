@@ -14,7 +14,7 @@ export interface PostCategory {
 export interface Post {
   name: string;
   title: string;
-  date: string;
+  date: number;
   summary: string;
   slug: string;
   views?: number;

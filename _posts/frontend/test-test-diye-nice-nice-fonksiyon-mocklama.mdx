@@ -1,0 +1,746 @@
+---
+title: "Test Test Diye Nice Nice: Fonksiyon Mocklama"
+date: 2022-10-20
+summary: "Test yazarken çokça karşılaştığımız mock kavramına bakalım."
+---
+
+## Bölümler
+
+- Test Test Diye Nice Nice - 1: Fonksiyon Mocklama (Şu anda
+burdasınız!)
+- Test Test Diye Nice Nice - 2: Modül Mocklama (Yakında!)
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-unit-test-mocking-1/001.jpeg"
+  reference="https://techbeacon.com/app-dev-testing/test-automation-tools-8-trends-techniques-watch"
+  width={800}
+  height={375}
+  fluid
+  borderless 
+/>
+
+Yazıya geçmeden önce seriye isim verirken esinlendiğim üstat Aşık Veysel'in
+muazzam şarkısını izninizle şuraya iliştirmek istiyorum.
+
+<iframe 
+  style={{borderRadius: 12}}
+  src="https://open.spotify.com/embed/track/7KBwZWuhVfscYVgWMhazEW?utm_source=generator"
+  width="100%"
+  height={152}
+  frameBorder="0"
+  allowfullscreen=""
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+  loading="lazy">
+</iframe>
+
+E-ticaret uygulamalarını düşünelim. Kullanıcılar ürünlerin bilgilerini 
+görebilir, önerileri keşfedebilir, ürün satın alabilir, taksit yaptırabilir ve
+daha nice işlem gerçekleştirebilir. Tüm bunların doğru çalıştığından emin olmak
+yazılım geliştirme sürecinin önemli bir parçasıdır. Bunu gözardı ettiğimizde
+uygulamanın güvenilirliği düşer ve hataların düzeltilmesi çok maliyetli
+olabilir. İşte bu noktada yazılımcılar olarak kodlarımızın her senaryo 
+karşısında beklediğimiz cevabı verdiğinden emin olmak isteriz. 
+
+Kısa bir girişten sonra makalemizin asıl konusu olan mocklamaya geçelim.
+
+## Mock Nedir ve Hangi Problemi Çözer?
+
+Mocklamak işin temelinde bir fonksiyona "Senin ne hesapladığın umrumda değil, 
+ne olursa olsun benim verdiğim değeri döndür." demektir. Bazen statik değer 
+olur bazen de gönderilen argümana göre dinamik. Örneğin indirimi olan ürünün 
+fiyatının doğru gösterilip gösterilmediğini test etmek istiyoruz. API o anda 
+bana indirimli ürün döndürüyor olabilir ama yarın döndüreceğinin garantisi yok. 
+İşte o zaman yandık, test geçmez. Dolayısıyla işimizi şansa bırakmayıp 
+ihtiyacımız olan bilgilere sahip sahte bir ürün döndürebilirim. Bu sayede 
+testimiz kırılgan olmamış olur.
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-unit-test-mocking-1/002.png"
+  width={996}
+  height={ 383}
+  fluid
+  borderless
+/>
+
+Gerçek veri/API kullanmak ciddi problemlere de sebep olabilir. Örnekteki normal 
+ödeme akışında checkout servisimize istek atıyoruz ve o da banka servisine
+ödeme isteğimizi iletiyor. Binlerce kez bunu tekrar ettiğimizi bir düşünsenize?
+DDoS atar gibi adamların banka servisini servisini çökertip kıyamet kopartırız.
+Bunların yerine sahte akış yürütürüz. Bazı şeyleri dümenden yapmak hayat 
+kurtarır.
+
+## Mock Türleri
+
+Test ile uğraştıysanız mock yerine stub, mock, fake, dummy gibi bir sürü kelime 
+kullanıldığına denk gelmişsinizdir. **Gerard Meszaros** kitabında bu kargaşayı 
+önlemek için gerçek nesnenin yerine konulacak sahte nesneye **Test Double** 
+yani test dublörü kavramını kullanıyor. Oyuncuların yerine geçen dublörler 
+gibisine. Test dublörünü de altı alt kategoriye ayırıyor:
+- **Dummy**: Fonksiyona geçmemiz gereken parametreleri doldurmak için verilir 
+  ancak gerçekte kullanılmaz.
+- **Fake**: Kodun basitleştirilmiş ancak çalışan bir halini içerir. Buna 
+  verebileceğimiz örnek şifrelerin hashlerini almak için veritabanına gitmek 
+  yerine test verisi tutan bir nesneden okumak ya da gerçek API yerine sahte 
+  bir ödeme sistemi mekanizması kurmak.
+- **Stub**: Test sırasındaki fonksiyon çağrılarında planlanmış yanıtlar 
+  döndürmek için kullanılır. İlk çağrıldığında A sonucunu ikincisinde B 
+  sonucunu diğerlerinde C sonucunu döndür diyebiliriz.
+- **Spy**: Fonksiyonların kaç kez çağrıldığı, hangi parametreler ile çağrıldığı 
+  ve ne cevaplar döndüğü gibi ekstra bilgileri kaydeder.
+- **Mock**: Belirli argümanlarla çağrılmasını beklediğimiz fonksiyonların ne    
+  cevap döndüreceğine
+  planlamak için kullanılır. Beklenmedik argümanlarla çağrıldığında hata 
+  fırlatır.
+
+Ancak biz bunlar yerine genelde **mock** kelimesi kullanıyoruz. Giriş kısmı 
+bittiğine göre sevdiğimiz JS testing framework'lerinden olan **Jest** ile 
+kodlamaya başlayalım.
+
+## Fonksiyon Mocklama
+
+### Girizgah
+
+> Bana mocklanan bir fonksiyonun resmini çizebilir misin Abidin?
+
+Bahsettiğimiz gibi mocklamak, sonucu manipüle etmek demektir. Böylece 
+fonksiyonun kaç kez ve hangi parametrelerle çağırıldığını takip edebiliriz, 
+döndürecekleri değerleri belirtebiliriz. Jest metodlarına geçmeden önce Axios'un
+`get()` metodunun mockladıktan sonraki halini nasıl görselleştirelim.
+
+<CH.Code>
+```javascript normal-func
+const axios = require("axios");
+
+async function getProduct(productId) {
+  const response = await axios.get(
+    `https://dummyjson.com/products/${productId}`
+  );
+
+  return response.data;
+}
+```
+```javascript mocked-func focus=3:25
+const axios = require("axios");
+
+axios.get = () => {
+  return {
+    data: {
+      id: 1,
+      title: "iPhone 9",
+      description: "An apple mobile which is nothing like apple",
+      price: 549,
+      discountPercentage: 12.96,
+      rating: 4.69,
+      stock: 94,
+      brand: "Apple",
+      category: "smartphones",
+      thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+      images: [
+        "https://dummyjson.com/image/i/products/1/1.jpg",
+        "https://dummyjson.com/image/i/products/1/2.jpg",
+        "https://dummyjson.com/image/i/products/1/3.jpg",
+        "https://dummyjson.com/image/i/products/1/4.jpg",
+        "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+      ],
+    },
+  };
+};
+
+async function getProduct(productId) {
+  const response = await axios.get(
+    `https://dummyjson.com/products/${productId}`
+  );
+
+  return response.data;
+}
+```
+</CH.Code>
+
+Görebileceğimiz gibi fonksiyonun içeriğini tamamen ezip yerine sabit bir değer 
+dönen fonksiyon vermiş oluyoruz. Peki neden gerçek değerler yerine manuel 
+vermek isteyelim ki? Mesela 95% indirime giren ürünlerde "Büyük Fırsat" rozeti 
+koymak istiyoruz. Bu çok az üründe karşılaşacağımız bir durum olduğundan veri 
+bulmak zor olacaktır. Test etmek için günlerce bir satıcının indirim yapmasını 
+mı bekleyelim yoksa satıcıdan indirim yapmasını rica mı edelim? Tabii ki 
+ikiside değil. Bu gibi durumlarda test etmek istediğimiz veriyi yapıştırır 
+geçeriz.
+
+### Uygulama
+
+Jest'te mock fonksiyon oluşturmak için `jest.fn(implementation?)` metodunu 
+kullanırız. İsteğe bağlı bir parametre alır ve bu parametre fonksiyonun 
+implementasyonudur. Implementasyon derken de fonksiyon lojiğinden bahsediyoruz.
+
+```javascript
+// typescript ile kullanıyorsak tip verebiliriz: jest.fn<...>()
+const mockFunction = jest.fn();
+console.log(mockFunction)
+```
+<CodeResult>
+mockFunction [Function: mockConstructor] \{
+`  _isMockFunction: true,`
+`  getMockImplementation: [Function (anonymous)],`
+`  mock: [Getter/Setter],`
+`  mockClear: [Function (anonymous)],`
+`  mockReset: [Function (anonymous)],`
+`  mockRestore: [Function (anonymous)],`
+`  mockReturnValueOnce: [Function (anonymous)],`
+`  mockResolvedValueOnce: [Function (anonymous)],`
+`  mockRejectedValueOnce: [Function (anonymous)],`
+`  mockReturnValue: [Function (anonymous)],`
+`  mockResolvedValue: [Function (anonymous)],`
+`  mockRejectedValue: [Function (anonymous)],`
+`  mockImplementationOnce: [Function (anonymous)],`
+`  withImplementation: [Function: bound withImplementation],`
+`  mockImplementation: [Function (anonymous)],`
+`  mockReturnThis: [Function (anonymous)],`
+`  mockName: [Function (anonymous)],`
+`  getMockName: [Function (anonymous)]`
+\}
+</CodeResult>
+
+Mocklamak istediğimiz metodları ise sahte fonksiyonlar ile değiştiririz. 
+Dolayısıyla Axios'un `get()` metodunu mocklamak istersek:
+
+```javascript
+const axios = require("axios");
+
+const mockAxiosGet = jest.fn();
+axios.get = mockAxiosGet;
+```
+
+#### .mock Niteliği
+
+Mocklanmış fonksiyonlar testte kullanabilmemiz için ekstra bilgiler sağlarlar. 
+Bunlara `mock` özelliği ile erişebiliriz. 
+- `mock.calls` - Fonksiyonun çağrıldığı argümanları listeler. Dizinin her elemanı bir çağrıya karşılık gelir.
+- `mock.results` - Fonksiyon çağrılarının sonucunu listeler. Dönüş türü, **return**, **throw** ya da **incomplete** olabilir.
+- `mock.instances` - Fonksiyon constructor ise üretilen nesneleri listeler.
+- `mock.contexts` - Fonksiyon çağrıldığı andaki **this** nesnelerini listeler.
+- `mock.lastCall` - Son çağrının argümanlarını gösterir.
+
+```javascript
+function manipulateArray(array, manipulateMethod) {
+  return array.map((item) => manipulateMethod(item));
+}
+
+test("playground", () => {
+  const array = [0, 1, 2]
+
+  const manipulateMethod = jest.fn((x) => x + 2);
+
+  manipulateArray(array, manipulateMethod);
+
+  console.log("manipulateMethod", manipulateMethod.mock);
+});
+```
+<CodeResult>
+`manipulateMethod: {`
+`  "calls": [[0], [1], [2]],`
+`  "contexts": [null, null, null],`
+`  "instances": [null, null, null],`
+`  "results": [`
+`    { "type": "return", "value": 2 },`
+`    { "type": "return", "value": 3 },`
+`    { "type": "return", "value": 4 },`
+`  ],`
+`  "lastCall": [2]`
+`}`
+</CodeResult>
+
+#### Statik Değer Döndürme
+
+Mock fonksiyonunu bir değer döndürmeye zorlamak için iki farklı metoda sahibiz.
+Döndürülecek değeri `mockReturnValue(value)` ile her çağrılış için, 
+`mockReturnValueOnce(value)` ile bir seferliğine belirleyebiliriz.
+
+```javascript
+test("playground", () => {
+  const mockFunction = jest
+    .fn()
+    .mockReturnValue("other calls")
+    .mockReturnValueOnce("first call")
+    .mockReturnValueOnce("second call");
+
+  for (let index = 0; index < 5; index++) {
+    console.log("mockedProduct", mockFunction());
+  }
+});
+```
+<CodeResult>
+mockedProduct first call
+mockedProduct second call
+mockedProduct other calls
+mockedProduct other calls
+mockedProduct other calls
+</CodeResult>
+
+Daha net bir örneğine göz atalım. `localStorage`'den değer okumak için bir 
+fonksiyonumuz olsun. `key` verdiğimizde doğru `value` döndürdüğünü test 
+edeceğiz ve bunun için de `window.localStorage.getItem()` metodunu 
+mocklayacağız.
+
+İkinci örneğimizde ise gelecekteki bir tarihe kalan süreyi hesaplamak 
+istiyoruz. Eğer dokunmazsak mevcut tarihi verdiğimiz değerle test eder. Zamanın 
+akışına kapılıp o tarihi geçtiğimizde test istediğimiz sonucu vermeyecek ve 
+patlamalar başlayacaktır. İşte bu sebeple `new Date()`'in döndüreceği değeri mocklayıp gelecek tarihten önce olduğundan emin olacağız.
+
+<CH.Code>
+```javascript example-1
+function getFromLocalStorage(key) {
+  return window.localStorage.getItem(key);
+}
+
+test("should get data from local storage correctly", () => {
+  const key = "testKey";
+  const value = "testValue";
+  // mock fonksiyonunu oluşturalım.
+  const mockLocalStorageGet = jest.fn();
+
+  // window.localStorage.getItem'a mock fonksiyonu atayalım.
+  // böylece test etmek için istediğimiz değeri döndürebiliriz.
+  Object.defineProperty(window, "localStorage", {
+    value: {
+      getItem: mockLocalStorageGet,
+    },
+  });
+
+  // window.localStorage.getItem çağrıldığında "testValue"
+  // döndürmesini istiyoruz. burada mock fonksiyonu da mockladığımız
+  // fonksiyonu da kullanabiliriz. 
+  // örn: window.localStorage.getItem.mockReturnValue(value);
+  mockLocalStorageGet.mockReturnValue(value);
+  // artık test edeceğimiz fonksiyonu çağıralım.
+  getFromLocalStorage(key);
+
+  // fonksiyonun mocklanıp mocklanmadığına bakalım.
+  expect(jest.isMockFunction(window.localStorage.getItem)).toBe(true)
+  // window.localStorage.getItem "testKey" ile çağırıldı mı diye
+  // kontrol edelim.
+  expect(mockLocalStorageGet.mock.lastCall[0]).toBe(key);
+  // window.localStorage.getItem "testKey" ile çağırıldında
+  // belirlediğimiz değeri dönüyor mu diye kontrol edelim.
+  expect(mockLocalStorageGet.mock.results[0].value).toBe(value);
+});
+```
+```javascript example-2
+function getRemainingTime(endDate, startDate = new Date()) {
+  let delta = (endDate - startDate) / 1000;
+
+  return {
+    remainingDays: Math.floor(delta / (60 * 60 * 24)),
+    remainingHours: Math.floor((delta / (60 * 60)) % 24),
+    remainingMinutes: Math.floor((delta / 60) % 60),
+    remainingSeconds: Math.floor(delta % 60),
+  };
+}
+
+test("should return remaining data when give future date", () => {
+  const endDate = new Date(2023, 1, 1);
+
+  // new Date() ile döndürülecek değeri belirleyelim'.
+  const mockCurrDate = new Date(2022, 10, 16, 16, 9, 25);
+
+  // Date constructor'ından oluşacak nesnenin mockCurrDate
+  // olmasını sağlayalım.
+  global.Date = jest.fn().mockReturnValue(mockCurrDate);
+
+  expect(getRemainingTime(endDate)).toEqual({
+    remainingDays: 76,
+    remainingHours: 7,
+    remainingMinutes: 50,
+    remainingSeconds: 35,
+  });
+});
+```
+</CH.Code>
+
+#### Dinamik Değer Döndürme
+
+Fonksiyonları statik değer döndürmeye zorladık. Peki ya argümana göre dinamik değer
+döndürmesini istersek? `mockImplementation(func)` ve `mockImplementationOnce(func)`
+metodları da bunun için var.
+
+```javascript
+function manipulateArray(array, manipulateMethod) {
+  return array.map((item) => manipulateMethod(item));
+}
+
+test("playground", () => {
+  const array = [0, 1, 2];
+
+  const manipulateMethod = jest.fn().mockImplementation((x) => x + 2);
+
+  manipulateArray(array, manipulateMethod);
+
+  console.log(manipulateMethod.mock.results);
+});
+```
+<CodeResult>
+`[`
+`  { type: 'return', value: 2 },`
+`  { type: 'return', value: 3 },`
+`  { type: 'return', value: 4 }`
+`]`
+</CodeResult>
+
+Üçüncü ve daha az kullanılan yöntem ise yalnızca belirli kodlar için mock
+uygulayabilmemizi sağlayan `withImplementation(func, callback)` metodudur.
+
+```javascript
+test("playground", () => {
+  const mockMethod = jest.fn(() => 'outside callback');
+
+  console.log(mockMethod());
+
+  mockMethod.withImplementation(
+    () => 'inside callback', // mockMethod implementasyonu
+    () => { // implementasyonun geçerli olacagi kod bloğu
+      console.log(mockMethod());
+    },
+  );
+
+  console.log(mockMethod());
+});
+```
+<CodeResult>
+outside callback
+inside callback
+outside callback
+</CodeResult>
+
+#### Mock Verilerini Temizleme
+
+Mock fonksiyonunun çağrılma verileri bir testten diğerine aktarılır. 
+Dolayısıyla önceki testten veriler kalmış olabilir. Örneğin:
+
+```javascript
+describe("playground suite", () => {
+  const mockFunction = jest.fn().mockReturnValue("placeholder");
+
+  test("playground 1", () => {
+    for (let index = 0; index < 2; index++) {
+      console.log("mockFunction() result: ", mockFunction());
+    }
+
+    console.log(mockFunction.mock.calls.length);
+  });
+
+  test("playground 2", () => {
+    for (let index = 0; index < 2; index++) {
+      console.log("mockFunction() result: ", mockFunction());
+    }
+
+    console.log(mockFunction.mock.calls.length);
+  });
+});
+```
+<CodeResult>
+mockFunction() result:  placeholder
+mockFunction() result:  placeholder
+2
+mockFunction() result:  placeholder
+mockFunction() result:  placeholder
+4
+</CodeResult>
+
+Dört kez çağrıldığını görebiliriz. Halbuki diğer testleri etkilememeleri için 
+genelde test bazlı olmalarını isteriz. Bunları engellemek için üç farklı 
+metodumuz var.
+- `mockClear()` - mock özelliğindeki verileri temizler.
+- `mockReset()` - mockClear() metodunun yaptıklarını yapar. Ek olarak
+  mockReturnValue türevi fonksiyonların dönmeye zorladığı değerleri,
+  mockImplementation türevi fonksiyonların tanımladığı implementasyonları
+  temizler.
+- `mockRestore()` - mockReset() metodunun yaptıklarını yapar. Ek olarak mock 
+  jest.spyOn() ile oluşturulduysa, orjinal implementasyonunu geri 
+  yükler yani direk mocku temizler. **Spy** başlığı altında değineceğiz.
+
+Bunları metodları genellikle `afterEach` içerisinde kullanmayı tercih ederiz. 
+Böylece her testten önce mock verilerinin temizlendiğinden emin oluruz.
+
+```javascript
+describe("playground suite", () => {
+  const mockFunction = jest.fn().mockReturnValue("placeholder");
+
+  afterEach(() => {
+    mockFunction.mockReset();
+  });
+
+  test("playground 1", () => {
+    for (let index = 0; index < 2; index++) {
+      console.log("mockFunction() result: ", mockFunction());
+    }
+
+    console.log(mockFunction.mock.calls.length);
+  });
+
+  test("playground 2", () => {
+    for (let index = 0; index < 2; index++) {
+      console.log("mockFunction() result: ", mockFunction());
+    }
+
+    console.log(mockFunction.mock.calls.length);
+  });
+});
+```
+<CodeResult>
+mockFunction() result:  placeholder
+mockFunction() result:  placeholder
+2
+mockFunction() result:  undefined
+mockFunction() result:  undefined
+2
+</CodeResult>
+
+Bu örnekte yalnızca bir fonksiyonun mockuyla ilgilendik. O ana kadar yapılan 
+tüm mocklar için bu işlemi uygulamak istersek `jest.clearAllMocks()`,
+`jest.resetAllMocks()` ve `jest.restoreAllMocks()` kullanabiliriz. 
+
+Son olarak sürekli `afterEach` yazıp durmak istemiyorsak `jest.config.js` 
+dosyasında her testten önce otomatik olarak çalışacak şekilde
+aktifleştirebiliriz.
+
+```javascript jest.config.js
+export default {
+  //...
+  clearMocks: false,
+  resetMocks: false,
+  restoreMocks: false,
+  //...
+};
+```
+
+#### Asenkron Fonksiyonları Mocklama
+
+Asenkron fonksiyonlar bildiğimiz gibi **Promise** döndürürler. Dolayısıyla 
+asenkron fonksiyon mockladığımızda da sonucun Promise olmasını isteriz. Şu ana 
+kadar gördüğümüz `mockImplementation()` metoduyla bunu
+`jest.fn().mockImplementation(() => Promise.resolve(value));` ya da 
+`jest.fn().mockImplementation(() => Promise.reject(value));` olacak şekilde 
+yapabiliriz. Ancak Jest bu kullanımların kısayolları olan `mockResolvedValue
+(value)`, `mockRejectedValue(value)` ve tekli türevleri olmak üzere dört 
+yardımcı method sağlar. Böylece asenkron fonksiyonların resolved ve reject 
+hallerini test edebiliriz.
+
+```javascript
+const axios = require("axios");
+
+async function getProduct(productId) {
+  try {
+    const response = await axios.get(
+      `https://dummyjson.com/products/${productId}`
+    );
+
+    console.log("response.data", response.data);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+describe("getProduct tests", () => {
+  beforeEach(() => {
+    axios.get = jest.fn();
+  });
+
+  afterEach(() => {
+    axios.get.mockReset();
+  });
+
+  test("should be return product data when request is succesfully", async () => {
+    const mockedValue = {
+      data: {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+        thumbnail: "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+        images: [
+          "https://dummyjson.com/image/i/products/1/1.jpg",
+          "https://dummyjson.com/image/i/products/1/2.jpg",
+          "https://dummyjson.com/image/i/products/1/3.jpg",
+          "https://dummyjson.com/image/i/products/1/4.jpg",
+          "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
+        ],
+      },
+    };
+    axios.get.mockResolvedValue(mockedValue);
+
+    const result = await getProduct();
+
+    expect(result).toStrictEqual(mockedValue.data);
+  });
+
+  test("should be return product data when request is failed", async () => {
+    axios.get.mockRejectedValue(new Error("Error occured when fetching data!"));
+
+    const result = await getProduct();
+
+    expect(result).toStrictEqual(null);
+  });
+});
+
+```
+<CodeResult>
+PASS  src/tests/getProduct.test.js
+`  getProduct tests`
+`    ✓ should be return product data when request is succesfully (20 ms)`
+`    ✓ should be return product data when request is failed (1 ms)`
+</CodeResult>
+
+### Spy
+
+Eveeet. Şu ana kadar fonksiyonlarımızı `jest.fn()` ile mockladık. Ancak ikinci 
+bir yöntem daha var: `jest.spyOn(object, methodName)`. Peki bunun farkı ne ola 
+ki kullanalım?
+
+**Spy** varsayılan olarak fonksiyonun varolan implementasyonunu kullanır yani 
+fonksiyonu manipüle etmez. Bununla birlikte `jest.fn()` de olduğu gibi 
+fonksiyon çağrılarına dair detayları gözlemleyebilmemizi sağlar. Dönüş değeri 
+yine mock fonksiyonudur ve hala şu ana kadar bahsettiğimiz tüm metodları 
+kullanabiliriz.
+
+> Pek. Eğer bir fonksiyonun sadece kaç kez ve hangi parametrelerle çağrıldığını 
+> izlemek istiyorsak, implementasyonla ilgilenmiyorsak `jest.fn()` yerine 
+> `jest.spyOn()` kullananiliriz.
+
+Karşılaştırabilmek için `jest.fn()` çıktısını tekrar görelim.
+
+```javascript
+test("playground", () => {
+  global.Date.now = jest.fn();
+
+  console.log("First call return value:", Date.now());
+  console.log("Second call return value:", Date.now());
+  console.log("\nMocked function content:", Date.now);
+
+  expect(global.Date.now.mock.calls).toHaveLength(2);
+});
+```
+<CodeResult>
+`First call return value: undefined`
+`Second call return value: undefined`
+
+`Mocked function content: [Function: mockConstructor] {`
+`  _isMockFunction: true,`
+`  getMockImplementation: [Function (anonymous)],`
+`  mock: [Getter/Setter],`
+`  mockClear: [Function (anonymous)],`
+`  mockReset: [Function (anonymous)],`
+`  mockRestore: [Function (anonymous)],`
+`  mockReturnValueOnce: [Function (anonymous)],`
+`  mockResolvedValueOnce: [Function (anonymous)],`
+`  mockRejectedValueOnce: [Function (anonymous)],`
+`  mockReturnValue: [Function (anonymous)],`
+`  mockResolvedValue: [Function (anonymous)],`
+`  mockRejectedValue: [Function (anonymous)],`
+`  mockImplementationOnce: [Function (anonymous)],`
+`  withImplementation: [Function: bound withImplementation],`
+`  mockImplementation: [Function (anonymous)],`
+`  mockReturnThis: [Function (anonymous)],`
+`  mockName: [Function (anonymous)],`
+`  getMockName: [Function (anonymous)]`
+`}`
+</CodeResult>
+
+Göreceğimiz üzere return değerlerinde sonucunda `undefined` aldık. Çünkü `jest.fn()` bir
+fonksiyona atandığı anda orjinal lojiği siler. Dolayısıyla fonksiyonun içi boş olduğu için
+değer dönemez. Implementasyon ya da mock değer belirtmek durumundayız. Bir de rakibine göz
+atalım.
+
+```javascript
+test("playground", () => {
+
+  // ilk değer mocklayacağımız metodun ait olduğu nesnedir.
+  // ikinci değer ise mocklamak istediğiniz metodun ismidir.
+  jest.spyOn(global.Date, "now");
+
+  console.log("First call return value:", Date.now());
+  console.log("Second call return value:", Date.now());
+  console.log("\nMocked function content:", Date.now);
+
+  expect(global.Date.now.mock.calls).toHaveLength(2);
+});
+```
+<CodeResult>
+`First call return value: 1665948858783`
+`Second call return value: 1665948858785`
+
+`Mocked function content: [Function: mockConstructor] {`
+`  _isMockFunction: true,`
+`  getMockImplementation: [Function (anonymous)],`
+`  mock: [Getter/Setter],`
+`  mockClear: [Function (anonymous)],`
+`  mockReset: [Function (anonymous)],`
+`  mockRestore: [Function (anonymous)],`
+`  mockReturnValueOnce: [Function (anonymous)],`
+`  mockResolvedValueOnce: [Function (anonymous)],`
+`  mockRejectedValueOnce: [Function (anonymous)],`
+`  mockReturnValue: [Function (anonymous)],`
+`  mockResolvedValue: [Function (anonymous)],`
+`  mockRejectedValue: [Function (anonymous)],`
+`  mockImplementationOnce: [Function (anonymous)],`
+`  withImplementation: [Function: bound withImplementation],`
+`  mockImplementation: [Function (anonymous)],`
+`  mockReturnThis: [Function (anonymous)],`
+`  mockName: [Function (anonymous)],`
+`  getMockName: [Function (anonymous)]`
+`}`
+</CodeResult>
+
+Dönüş değerlerinin olduğunu çünkü implementasyonu biz istemedikçe silmediğini 
+görebiliriz. Dönüş değeri `jest.fn()` ile aynı olduğu için bahsettiğimiz tüm 
+metodları kullanabiliriz. Üç farklı şekilde tanımlayabiliriz:
+- Spy üzerinden: `jest.spyOn(global.Date, "now").mockImplementation(() => {});`
+- Atadığımız değişken üzerinden: `spyDateNow.mockImplementation(() => {});`
+- Mockladığımız metod üzerinden: `global.Date.now.mockImplementation(() => {});`
+
+`spyOn()` ile mock fonksiyona nasıl implementasyon tanımlayacağımıza bakalım ve 
+de zamanı gelmişken `mockRestore` ile nasıl çalıştığını da görmüş olalım:
+
+```javascript
+test("playground", () => {
+  jest.spyOn(global.Date, "now");
+  console.log("First call return value: ", Date.now());
+  
+  global.Date.now.mockImplementation(() => "Hacked by Ayyıldız Team!");
+  console.log("Second call return value: ", Date.now());
+  
+  global.Date.now.mockRestore();
+  console.log("Third call return value: ", Date.now());
+});
+```
+<CodeResult>
+First call return value:  1665950263745
+Second call return value:  Hacked by Ayyıldız Team!
+Third call return value:  1665952546022
+</CodeResult>
+
+## Kapanış
+
+Test konusu bu alanda yeni olan insanları zorlayabiliyor. Bu sebeple ki yeni bir seri başlatmak istedim.
+Jest'i anlattığım bir giriş yazısını daha sonra yazacağım. Geri bildirimlerinizi her zaman bekliyorum.
+Son olarak bu konuya dair yaptığım caps ile kapatıyorum.
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-unit-test-mocking-1/003.png"
+  width={1140}
+  height={1139}
+  fluid
+  borderless 
+/>
+
+
+Yazı burada biter. Sağlıcakla kalın.
+
+## Kaynaklar
+
+- [https://jestjs.io/docs](https://jestjs.io/docs)
+- [https://martinfowler.com/bliki/TestDouble.html](https://martinfowler.com/bliki/TestDouble.html)

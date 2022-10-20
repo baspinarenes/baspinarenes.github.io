@@ -1,20 +1,20 @@
 /* eslint-disable no-param-reassign */
-import fs from "fs";
-import path from "path";
-import { bundleMDX } from "mdx-bundler";
-import theme from "shiki/themes/nord.json";
 import { remarkCodeHike } from "@code-hike/mdx";
 import { BEAUTIFIED_POST_CATEGORY_NAMES } from "constants/post";
-import { PostParams } from "models/post";
-import readingTime from "reading-time";
+import fs from "fs";
 import matter from "gray-matter";
+import { bundleMDX } from "mdx-bundler";
+import { PostParams } from "models/post";
+import path from "path";
+import readingTime from "reading-time";
+import theme from "shiki/themes/nord.json";
 import { getLocaleDateString, getPreviousDay } from "./date";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
 
 const getPostCategoryNames = (): string[] => {
   const categoryFolderNames = fs.readdirSync(postsDirectory);
-  
+
   return Object.keys(BEAUTIFIED_POST_CATEGORY_NAMES) || categoryFolderNames;
 };
 
@@ -126,7 +126,7 @@ const getBlogPageData = () => {
         title,
         summary,
         name: postName,
-        date: getLocaleDateString(date),
+        date: date.valueOf(),
       };
     });
 

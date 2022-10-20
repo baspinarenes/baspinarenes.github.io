@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { getMDXComponent } from "mdx-bundler/client";
-import { useMemo } from "react";
-import * as PostComponents from "components/post-components";
 import { Meta } from "components/common";
+import * as PostComponents from "components/post-components";
 import { siteData } from "constants/index";
+import usePostViewCount from "hooks/usePostViewCount";
+import { getMDXComponent } from "mdx-bundler/client";
 import { PostPageStaticProps } from "models/common";
 import { PostData } from "models/post";
+import Image from "next/image";
+import { useMemo } from "react";
 import { getAllPostNames, getPostData } from "utils/post";
-import usePostViewCount from "hooks/usePostViewCount";
 
 const Post = (props: PostProps) => {
   const { postData } = props;
@@ -40,7 +40,6 @@ const Post = (props: PostProps) => {
           <small>{views > 0 ? views.toLocaleString() : "–––"} views</small>
         </div>
       </div>
-      <p>{summary}</p>
       <div className="mdx-container">
         <PostContentComponent
           components={{
