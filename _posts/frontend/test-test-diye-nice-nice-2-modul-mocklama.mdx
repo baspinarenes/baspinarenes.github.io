@@ -1,0 +1,1111 @@
+---
+title: "Test Test Diye Nice Nice: Mocklama - 2"
+date: 2022-10-25
+summary: "Modül metodlarını nasıl mocklayabileceğimizi görelim."
+---
+
+## Bölümler
+
+- [Test Test Diye Nice Nice: Mocklama - 1](/blog/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama)
+- Test Test Diye Nice Nice: Mocklama - 2 (Şu anda buradasınız!)
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-unit-test-mocking-1/001.jpeg"
+  width={800}
+  height={375}
+  fluid
+  borderless 
+/>
+
+Önceki yazıda mock'un ne olduğuna ve hangi ihtiyaçtan dolayı ortaya çıktığına 
+değindik. Kütüphanelerin ve tarayıcı API'lerinin metodlarını nasıl 
+mocklayacağımızdan bahsettik. Peki ya dosyalardan export ettiğimiz 
+fonksiyonları mocklamak istersek?
+
+## Modül Nedir?
+
+Uygulamalar büyüdükçe dosyalara bölme ihtiyacı hissederiz. Bu dosyaların her 
+birine **modül** denir. Modül nedire çok detaylı girmeyeceğim ancak mocklama 
+kısmına geçmeden önce `import` ve `require` ile dosyaları içe aktardığımızda ne 
+tür değer döndürdüğünün bilincinde olmamızı istiyorum. Mocklarken kullanacağız.
+
+CommonJs kullanarak yapabileceğimiz farklı import çeşitleri:
+
+> Dosyaların içeriklerini görmek için sekmeler arasında geçiş yapabilirsiniz.
+
+<CH.Code>
+```typescript utils.test.ts
+const utils = require("./utils");
+const { getProduct } = require("./utils");
+
+test("playground", () => {
+  console.log("require with default:", utils);
+  console.log("require with partial :", getProduct);
+}
+```
+
+```typescript utils.ts
+const axios = require("axios");
+
+const API_URL = "https://dummyjson.com";
+
+async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+function getProduct(productId: number): Promise<any> {
+  return get(`${API_URL}/products/${productId}`);
+}
+
+function getUser(userId: number): Promise<any> {
+  return get(`${API_URL}/users/${userId}`);
+}
+
+module.exports = {
+  get,
+  getUser,
+  getProduct,
+};
+```
+</CH.Code>
+
+<CodeResult>
+`require with default: {`
+`  get: [Function: get],`
+`  getUser: [Function: getUser],`
+`  getProduct: [Function: getProduct],`
+`  default: {`
+`    get: [Function: get],`
+`    getUser: [Function: getUser],`
+`    getProduct: [Function: getProduct]`
+`  }`
+`}`
+
+`require with partial : [Function: getProduct]`
+</CodeResult>
+
+> **Örnekte `any` kullanmışsın, hayırdır?**
+> <br />
+> Odak noktamız TypeScript olmadığı için karmaşık tipler tanımlamak yerine 
+> `any` kullandığımı görebilirsiniz. Bazen de kullanılır. `any` alerjisi 
+> olanlara bu yazı tavsiye edilmemektedir!
+
+ES Modules kullanarak yapabileceğimiz farklı import çeşitleri:
+
+<CH.Code>
+```typescript utils.test.ts
+import * as utilsWithStar from "./utils";
+import utilsWithDefault, { getProduct } from "./utils";
+
+test("playground", () => {
+  console.log("import with * as:", utilsWithStar);
+  console.log("import with default:", utilsWithDefault);
+  console.log("import with partial:", getProduct);
+});
+```
+
+```typescript utils.ts
+import axios from "axios";
+
+const API_URL = "https://dummyjson.com";
+
+async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+function getProduct(productId: number): Promise<any> {
+  return get(`${API_URL}/products/${productId}`);
+}
+
+function getUser(userId: number): Promise<any> {
+  return get(`${API_URL}/users/${userId}`);
+}
+
+export { get, getUser, getProduct };
+
+export default {
+  get,
+  getUser,
+  getProduct,
+};
+```
+</CH.Code>
+
+<CodeResult>
+`import with * as: {`
+`  get: [Function: get],`
+`  getUser: [Function: getUser],`
+`  getProduct: [Function: getProduct],`
+`  default: {`
+`    get: [Function: get],`
+`    getUser: [Function: getUser],`
+`    getProduct: [Function: getProduct]`
+`  }`
+`}`
+
+`import with default: {`
+`  get: [Function: get],`
+`  getUser: [Function: getUser],`
+`  getProduct: [Function: getProduct]`
+`}`
+
+`import with partial: [Function: getProduct]`
+</CodeResult>
+
+## Girizgah
+
+Uygulamamızda ürün ve kullanıcı bilgilerini çekmek için yardımcı fonksiyonlar 
+oluşturduğumuzu varsayalım.
+
+> Bildiğimiz üzere yardımcı metodlara çıkarmak abstract etmek demektir. Örneğin 
+> ürün bilgisini çeken kodları `getProduct()` isimli bir fonksiyonda 
+> gruplayabilirim. Koda bakan birisi bu fonksiyonunun ne döndüreceğini isminden 
+> ötürü bilebilir ancak hangi API'ye istek attığını ve nasıl maplediğini 
+> içeriğine bakmadan bilemez ve bilmesine de gerek yoktur. Abstraction eksra 
+> olarak test yazılmasını da kolaylaştırır.
+
+Önce mevcut bilgilerimizle mocklamayı deneyelim. `* as` ile import ettiğimizde 
+obje döndürdüğünü görmüştük. Önceki makalede de bu şekilde mocklayabiliyorduk 
+hatırlarsanız. Dolayısıyla aşağıdaki kodun çalışacağını düşünebiliriz.
+
+<CH.Code>
+```javascript utils.test.ts
+import * as Utils from "./utils";
+
+describe("utils tests", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("get() tests", () => {
+    test("should be mock", () => {
+      // TS ERROR!
+      // Cannot assign to 'getProduct' because it is a read-only property.
+      Utils.get = jest.fn();
+
+      expect(jest.isMockFunction(Utils.get)).toBe(true);
+    });
+  });
+
+  describe("getProduct() tests", () => {
+    test("should be mock", () => {
+      // TS ERROR!
+      // Cannot assign to 'getProduct' because it is a read-only property.
+      Utils.getProduct = jest.fn();
+
+      expect(jest.isMockFunction(Utils.getProduct)).toBe(true);
+    });
+  });
+});
+```
+```javascript utils.ts
+import axios from "axios";
+
+const API_URL = "https://dummyjson.com";
+
+export async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export function getProduct(productId: number): Promise<any> {
+  return get(`${API_URL}/products/${productId}`);
+}
+
+export function getUser(userId: number): Promise<any> {
+  return get(`${API_URL}/users/${userId}`);
+}
+```
+</CH.Code>
+
+Ancak alnımızın çatına TypeScript hatasını yeriz. Olsun, güzel denemeydi. Zaten 
+direk modül importuna müdahale edebilseydik uygulamayı bozabilirdik çünkü aynı 
+dosya yolundan yapılan her import için aynı nesne kullanılır. Dilerseniz 
+Jest'in bizim için neler yapabileceğine bir bakalım.
+
+## Modül Mocklama
+
+Modülleri mocklarken `jest.mock(moduleName, factory, options)` kullanabiliriz. 
+Sadece dosya yolu verilmişse export edilen her şeyi otomatik olarak mocklar yani varsayılan olarak `jest.fn()` atanır. Kodun çıktısını görelim.
+
+<CH.Code>
+```typescript utils.test.ts
+import * as utils from "./utils";
+
+jest.mock("./utils");
+
+test("playground", () => {
+  console.log("utils Module:", utils);
+});
+```
+```javascript utils.ts
+import axios from "axios";
+
+const API_URL = "https://dummyjson.com";
+
+export async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export function getProduct(productId: number): Promise<any> {
+  return get(`${API_URL}/products/${productId}`);
+}
+
+export function getUser(userId: number): Promise<any> {
+  return get(`${API_URL}/users/${userId}`);
+}
+```
+</CH.Code>
+<CodeResult>
+`utils Module: {`
+`  __esModule: true,`
+`  getProduct: [Function: getProduct] {`
+`    _isMockFunction: true,`
+`    getMockImplementation: [Function (anonymous)],`
+`    mock: [Getter/Setter],`
+`    mockClear: [Function (anonymous)],`
+`    mockReset: [Function (anonymous)],`
+`    mockRestore: [Function (anonymous)],`
+`    mockReturnValueOnce: [Function (anonymous)],`
+`    mockResolvedValueOnce: [Function (anonymous)],`
+`    mockRejectedValueOnce: [Function (anonymous)],`
+`    mockReturnValue: [Function (anonymous)],`
+`    mockResolvedValue: [Function (anonymous)],`
+`    mockRejectedValue: [Function (anonymous)],`
+`    mockImplementationOnce: [Function (anonymous)],`
+`    withImplementation: [Function: bound withImplementation],`
+`    mockImplementation: [Function (anonymous)],`
+`    mockReturnThis: [Function (anonymous)],`
+`    mockName: [Function (anonymous)],`
+`    getMockName: [Function (anonymous)]`
+`  },`
+`  getUser: [Function: getUser] {`
+`    _isMockFunction: true,`
+`    ...`
+`  },`
+`  default: [Function: get] {`
+`    _isMockFunction: true,`
+`    ...`
+`  }`
+`}`
+</CodeResult>
+
+Modül mocklamayla ilgili olarak eğer fonksiyonumuzun bulunduğu dosyada 
+`import ... from "./utils"` ifadesi varsa başarıyla mocklar ve her bir mock 
+yalnızca ilgili dosyada aktif olur. Her zaman aklımızda bir not olarak kalsın.
+
+> **Peki neden import ismini değil de dosya yolunu veriyoruz?**
+> <br />
+> Dosya yolunu vererek 'Verdiğim dosya yoluna sahip import ifadelerini takip 
+> et, çalıştırıldığında devreye gir ve mocklanmış halini döndür.' demiş 
+> oluyoruz.
+
+Patlayan testimizi yeniden kurgulayalım.
+
+```javascript
+import * as Utils from "./utils";
+
+jest.mock("./utils");
+
+describe("utils tests", () => {
+  test("get() should be mock", () => {
+    expect(jest.isMockFunction(Utils.get)).toBe(true);
+  });
+
+  test("getProduct() should be mock", () => {
+    expect(jest.isMockFunction(Utils.getProduct)).toBe(true);
+  });
+});
+```
+<CodeResult>
+PASS  src/blabla/utils.test.ts
+`  utils tests`
+`    ✓ get() should be mock`
+`    ✓ getProduct() should be mock`
+</CodeResult>
+
+> **Fonksiyonları kullanmadan önce mocklamıştık. Modüllerde de import 
+> edilmeden önce mocklamamız gerekmez miydi?**
+> <br />
+> Çok güzel bir noktaya parmak bastın. Esasen dediğin gibi olmak zorunda. 
+> Bu noktada Jest EcmaScript modüllerinde bizim için güzellik yapar. 
+> Biliyoruz ki `import`'ların en üstte olması JS yazılımcılarının genel 
+> alışkanlığıdır. Jest bu yapıyı bozmamak için `jest.mock` ifadelerini `var` ve 
+> `function` da olduğu gibi hoist eder yani nereye yazarsak yazalım ilgili 
+> kapsamın en üstüne taşır. 
+
+Jest'in sınırlarını keşfetmeye, keşfettikçe de örneğimizin testlerini yazmaya 
+devam edelim.
+
+### Modüldeki Fonksiyonların Mocklanması
+
+Mocklanan modüllerdeki fonksiyonlara varsayılan olarak `jest.fn()` atanmış 
+olduğundan bahsetmiştik. Dolayısıyla implementasyonu ya da dönüş değerini 
+önceki yazıdaki yöntemlerle mocklayabiliriz. 
+
+`get` fonksiyonumuzun testini yazalım.
+
+<CH.Code>
+```typescript utils.test.ts
+import axios from "axios";
+import * as Utils from "./utils";
+
+// axios paketini mockluyoruz.
+jest.mock("axios");
+
+// jest metodlarının tiplerini modül fonksiyonlarına sarıyoruz.
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("get() tests", () => {
+    test("should return product when request is success", async () => {
+      // fonksiyonumuzun verdiğimiz parametreyi axios.get'e doğru
+      // şekilde ilettiğini test etmek için url'i değişkene atıyoruz.
+      const apiUrl = "https://dummyjson.com/product/1";
+      // sahte ürünümüzü oluşturuyoruz.
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+      // test ettiğimiz fonksiyon içerisindeki farklı pakete bağımlı
+      // olan axios.get fonksiyonunun çağrıldığında mock veri ile
+      // resolve olmasını sağlıyoruz.
+      mockedAxios.get.mockResolvedValueOnce({
+        data: mockProduct,
+      });
+
+      // test edeceğimiz fonksiyonu çağırıyoruz.
+      const result = await Utils.get(apiUrl);
+
+      // axios.get'in ilettiğimiz url ile çağrıldığını test ediyoruz
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      // istek başarısız olduğu zaman null döndürdüğünü test ediyoruz.
+      expect(result).toStrictEqual(mockProduct);
+    });
+
+    test("should return null when request is failed", async () => {
+      const apiUrl = "https://dummyjson.com/product/1000";
+
+      mockedAxios.get.mockRejectedValueOnce(
+        new Error("Error occured when fetching data!")
+      );
+
+      const result = await Utils.get(apiUrl);
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      expect(result).toBeNull();
+    });
+  });
+});
+```
+```typescript utils.ts
+import axios from "axios";
+
+export async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+export function getProduct(productId: number): Promise<any> {
+  return get(`https://dummyjson.com/products/${productId}`);
+}
+
+export function getUser(userId: number): Promise<any> {
+  return get(`https://dummyjson.com/users/${userId}`);
+}
+```
+</CH.Code>
+<CodeResult>
+`PASS  src/tests/utils.test.ts`
+`  utils tests`
+`    get() tests`
+`      ✓ should return product whe request is success`
+`      ✓ should return null when request is failed`
+</CodeResult>
+
+Jest, modülleri mockladıktan sonra kendi metodları için TypeScript tipleri 
+eklemez. Editörün otomatik tamamlama özelliğinden faydalanmak isterseniz modül 
+fonksiyonlarına Jest metodlarının tiplerini sarmalamak için 
+`jest.mocked(source)` metodunu kullanabiliriz.
+
+### Factory Parametresi
+
+Modül mocklanırken fonksiyonlara mock implementasyon ya da dönüş değeri 
+belirtmek için `factory` parametresini kullanabiliriz. Örneğimize dönecek olursak mock fonksiyonun dönüş değeri test içerisinde mocklanmadıysa varsayılan olarak isteğin reject olduğunu varsayalım.
+
+<CH.Section>
+```typescript focus=4:10,34:36,44:51
+import axios from "axios";
+import * as Utils from "./utils";
+
+jest.mock("axios", () => {
+  return {
+    get: jest
+      .fn()
+      .mockRejectedValue(new Error("Error occured when fetching data!")),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  describe("get() tests", () => {
+    test("should return product when request is success", async () => {
+      const apiUrl = "https://dummyjson.com/product/1";
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({
+        data: mockProduct,
+      });
+
+      const result = await Utils.get(apiUrl);
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      expect(result).toStrictEqual(mockProduct);
+    });
+
+    test("should return null when request is failed", async () => {
+      const apiUrl = "https://dummyjson.com/product/1000";
+
+      const result = await Utils.get(apiUrl);
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      expect(result).toBeNull();
+    });
+  });
+});
+```
+</CH.Section>
+<CodeResult>
+`PASS  src/tests/utils.test.ts`
+`  utils tests`
+`    get() tests`
+`      ✓ should return product whe request is success`
+`      ✓ should return null when request is failed`
+</CodeResult>
+
+Varsayılan olarak reject etmesini istediğimizden mütevellit ikinci testten 
+`mockRejectedValueOnce` metodunu silebiliriz.
+
+> **Peki ne zaman `factory` kullanmalıyız?**
+> <br />
+> Eğer fonksiyonlarımızın mocklamaları testler boyunca aynı kalacaksa ya da 
+> default mock değeri tanımlamak istiyorsak kullanabiliriz.
+
+Burada dikkatinizi çekmek istediğim bir nokta, factory ve test içerisinde 
+eklediğimiz mockların birlikte kullanılış şeklidir. Sözel olarak anlatılması 
+zor olacaktır. Üç farklı kullanım örneği ile daha kendiniz anlayacaksınızdır:
+
+<CH.Code>
+```typescript example-1
+import axios from "axios";
+
+jest.mock("axios", () => {
+  return {
+    get: jest.fn().mockResolvedValue("Mock in module factory"),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+test("playground", async () => {
+  const apiUrl = "https://dummyjson.com";
+
+  mockedAxios.get.mockResolvedValue("Mock in test");
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in test
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in test
+});
+
+```
+```javascript example-2
+import axios from "axios";
+
+jest.mock("axios", () => {
+  return {
+    get: jest.fn().mockResolvedValue("Mock in module factory"),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+test("playground", async () => {
+  const apiUrl = "https://dummyjson.com";
+
+  mockedAxios.get.mockResolvedValueOnce("Mock in test");
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in test
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in module factory
+});
+```
+
+```typescript example-3
+import axios from "axios";
+
+jest.mock("axios", () => {
+  return {
+    get: jest.fn().mockResolvedValueOnce("Mock in module factory"),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+test("playground", async () => {
+  const apiUrl = "https://dummyjson.com";
+
+  mockedAxios.get.mockResolvedValue("Mock in test");
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in module factory
+  console.log(await mockedAxios.get(apiUrl)); // Output: Mock in test
+});
+```
+</CH.Code>
+
+`factory` parametresinin bilmemiz gereken son iki özelliğiyle bu bölümü 
+bitirebiliriz:
+
+- `export default` gibi ES modüle özel şeyleri mocklamak istersek 
+`__esModule: true` eklemeliyiz.
+
+```typescript
+jest.mock('../moduleName', () => {
+  return {
+    __esModule: true,
+    default: ...,
+  };
+});
+```
+
+- Modüldeki bazı fonksiyonların mocklanmasını, bazılarının ise orjinal halini
+korumasını istersek `jest.requireActual()` ile modülün mocklanmamış haline ve dolayısıyla mocklanmamış fonksiyonlara erişebiliriz.
+
+```typescript
+jest.mock('../moduleName', () => {
+  const originalModule = jest.requireActual('../moduleName');
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    functionThatBeMock: jest.fn(),
+  };
+});
+```
+
+## Spesifik Testlerde Modül Mocklamak
+
+`get` fonksiyonu için test yazmıştık. Dilerseniz `getProduct` fonksiyonunun 
+testiyle devam edelim. Bu fonksiyon `get` fonksiyonuna bağımlıdır. 
+Test ettiğimiz foksiyonun bağımlı olduğu diğer fonksiyonları 
+mocklamak iyi bir pratiktir. `getProduct` içerisinde kullanılan `get` 
+fonksiyonunun dönüş tipini mocklayacağız.
+
+```typescript
+import axios from "axios";
+import * as UtilsModule from "./utils";
+
+jest.mock("./utils");
+jest.mock("axios", () => {
+  return {
+    get: jest
+      .fn()
+      .mockRejectedValue(new Error("Error occured when fetching data!")),
+  };
+});
+
+const mockedUtils = jest.mocked(UtilsModule);
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  // ...
+  
+  describe("getProduct() tests", () => {
+    test("should call get func with api product endpoint when given product id", () => {
+      const productId = 1;
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      mockedUtils.get.mockResolvedValue(mockProduct);
+
+      const result = UtilsModule.getProduct(productId);
+
+      expect(UtilsModule.get).toHaveBeenCalledWith(
+        `https://dummyjson.com/products/${productId}`
+      );
+      expect(result).toStrictEqual(mockProduct);
+    });
+  });
+});
+```
+<CodeResult>
+`utils tests`
+`    get() tests`
+`      ✕ should return product whe request is success (4 ms)`
+`      ✕ should return null when request is failed`
+`    getProduct() tests`
+`      ✕ should call get func with api product endpoint when given product id`
+` `
+`  ● utils tests › get() tests › should return product whe request is success`
+`    Expected: "https://dummyjson.com/product/1"`
+`    Number of calls: 0`
+
+`  ● utils tests › get() tests › should return null when request is failed`
+`    Expected: "https://dummyjson.com/product/1000"`
+`    Number of calls: 0`
+
+`  ● utils tests › getProduct() tests › should call get func with api product` `endpoint when given product id`
+`    Expected: "https://dummyjson.com/products/1"`
+`    Number of calls: 0`
+</CodeResult>
+
+Hoppalaa... Yeni testimiz patladı, üstüne üstlük önceden geçen testlerde 
+patlamaya başladı. Çıktıyı incelediğimizde, mockladığımız fonksiyonların 
+çağırılmadığını anlıyoruz. Jest bize, "Sen bi değerle çağırılmasını bekliyordun 
+fakat bu fonksiyon hiç çağırılmadı." diyor.
+
+`getProduct` fonksiyonunun implementasyonunu mocklamak için `utils` modülünü 
+mockladık. Ancak `get` ve `getProduct` gibi testini yapacağımız gerçek 
+fonksiyonları da mocklamış olduk. Dolayısıyla `get` ve `getProduct` 
+fonksiyonlarının implementasyonları şu hale gelmiş oldu: `() => undefined`.
+
+Bunu çözmek için birkaç farklı yöntem kullanabiliriz.
+
+### Çözüm - 1: jest.doMock()
+
+Jest'te modül mocklamanın diğer bir yolu `jest.doMock()` kullanmaktır. Bunun 
+`jest.mock`'tan farkı, hoist edilmiyor olmasıdır. Yani sadece kendisinden sonra yazılan importları mocklar. 
+
+```typescript
+import axios, { AxiosInstance } from "axios";
+
+jest.mock("axios", () => {
+  return {
+    get: jest
+      .fn()
+      .mockRejectedValue(new Error("Error occured when fetching data!")),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    // tüm modüllerdeki mockları temizler. dolayısıyla
+    // dosyanın ana kapsamında yapılan mock geçersiz olur.
+    jest.resetModules();
+  });
+
+  describe("getProduct() tests", () => {
+    test("should call get func with api product endpoint when given product id", () => {
+      const productId = 1;
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      jest.doMock("./utils", () => ({
+        __esModule: true,
+        ...jest.requireActual("./utils"),
+        get: jest.fn().mockResolvedValue(mockProduct),
+      }));
+
+      const UtilsModule = require("./utils");
+
+      const result = UtilsModule.getProduct(productId);
+
+      expect(UtilsModule.get).toHaveBeenCalledWith(
+        `https://dummyjson.com/products/${productId}`
+      );
+      expect(result).toStrictEqual(mockProduct);
+    });
+  });
+});
+```
+
+> Bu arada neden direk olayı anlatmıyorsun diyorsanız hatalar karşısındaki 
+> düşünme biçimini göstermeye çalışıyorum ki aynı hatayla karşılaşınca 
+> alacağınız aksiyonları kestirebilin.
+
+Aha, yine hata. `get` metodunu mocklayamadık. Buraya pür dikkat lütfen. 
+**MOCK, YALNIZCA IMPORT ÇAĞIRILAN DOSYALARDA ÇALIŞIR.** Pekala biz `utils.
+ts`'de `./utils` dosyasının import ediyor muyuz? Hayır! Bundan dolayı da 
+mocklayamıyoruz. Teyit etmek için testimizin içinde `mockedUtils` değişkenini 
+yazdıralım.
+
+```typescript
+test("should call get func with api product endpoint when given product id", () => {
+  // ...
+  console.log("get Function: ", Utils.get);
+  // ...
+})
+```
+<CodeResult>
+`get Function: [Function: mockConstructor] {`
+`  _isMockFunction: true,`
+`  getMockImplementation: [Function (anonymous)],`
+`  mock: [Getter/Setter],`
+`  mockClear: [Function (anonymous)],`
+`  mockReset: [Function (anonymous)],`
+`  mockRestore: [Function (anonymous)],`
+`  mockReturnValueOnce: [Function (anonymous)],`
+`  mockResolvedValueOnce: [Function (anonymous)],`
+`  mockRejectedValueOnce: [Function (anonymous)],`
+`  mockReturnValue: [Function (anonymous)],`
+`  mockResolvedValue: [Function (anonymous)],`
+`  mockRejectedValue: [Function (anonymous)],`
+`  mockImplementationOnce: [Function (anonymous)],`
+`  withImplementation: [Function: bound withImplementation],`
+`  mockImplementation: [Function (anonymous)],`
+`  mockReturnThis: [Function (anonymous)],`
+`  mockName: [Function (anonymous)],`
+`  getMockName: [Function (anonymous)]`
+`}`
+</CodeResult>
+
+Şimdi bir de `getProduct` içinde `get` fonksiyonunu yazdıralım.
+
+```typescript
+export function getProduct(productId: number): Promise<any> {
+  console.log("get Function: ", get.toString());
+  // ...
+}
+```
+<CodeResult>
+get Function: [Function: get]
+</CodeResult>
+
+Görebileceğiniz üzere fonksiyon mocklanmamış. Peki ne yapacağız? Ayrı bir 
+dosyaya çıkarıp onu dosyadan mocklayabiliriz.
+
+<CH.Code>
+```typescript utils.test.ts
+import axios from "axios";
+import * as GetModule from "./get";
+
+jest.mock("axios", () => {
+  return {
+    get: jest
+      .fn()
+      .mockRejectedValue(new Error("Error occured when fetching data!")),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  // ...
+
+  describe("getProduct() tests", () => {
+    test("should call get func with api product endpoint when given product id", async () => {
+      const productId = 1;
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      jest.doMock("./get", () => {
+        return {
+          __esModule: true,
+          default: jest.fn().mockResolvedValue(mockProduct),
+        };
+      });
+      const GetModule = require("./get");
+      const UtilsModule = require("./utils");
+
+      const result = await UtilsModule.getProduct(productId);
+
+      expect(GetModule.default).toHaveBeenCalledWith(
+        `https://dummyjson.com/products/${productId}`
+      );
+      expect(result).toStrictEqual(mockProduct);
+    });
+  });
+});
+```
+```typescript utils.ts
+import get from "./get";
+
+export function getProduct(productId: number): Promise<any> {
+  return get(`https://dummyjson.com/products/${productId}`);
+}
+
+export function getUser(userId: number): Promise<any> {
+  return get(`https://dummyjson.com/users/${userId}`);
+}
+```
+```typescript get.ts
+import axios from "axios";
+
+export default async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+```
+</CH.Code>
+<CodeResult>
+utils tests
+`  get() tests`
+`    ✓ should return product whe request is success (4 ms)`
+`    ✓ should return null when request is failed`
+`  getProduct() tests`
+`    ✓ should call get func with api product endpoint when given product id`
+</CodeResult>
+
+#### jest.doMock() vs jest.mock()
+
+`jest.mock` ve `jest.doMock` farkına örneklerle değinelim. Modül import 
+edilmeden önce mocklanıyorsa ikisi de aynıdır. Eğer import ettikten sonra 
+mockluyorsak `jest.doMock()` hata verecektir. Sekmeler arasında dolaşarak 
+yanlış kullanımı ve doğrusunu görebilirsiniz.
+
+<CH.Code>
+```typescript wrong-usage
+const get = require("./get");
+
+jest.doMock("./get", () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockResolvedValue(mockProduct),
+  };
+});
+```
+```typescript correct-usage-1
+jest.doMock("./get", () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockResolvedValue(mockProduct),
+  };
+});
+
+const get = require("./get");
+```
+```typescript correct-usage-2
+const get = require("./get");
+
+jest.mock("./get", () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockResolvedValue(mockProduct),
+  };
+});
+```
+```typescript correct-usage-3
+jest.mock("./get", () => {
+  return {
+    __esModule: true,
+    default: jest.fn().mockResolvedValue(mockProduct),
+  };
+});
+
+const get = require("./get");
+```
+</CH.Code>
+
+### Çözüm - 2: jest.spyOn()
+
+Eski bir dostla karşılaşmış gibiyiz. Evet, modüllerde de `jest.spyOn()` 
+kullanabiliriz. Ayrı dosyaya çıkartma gerekliliği bunda da bulunur. Ancak hala 
+çok daha temiz bir kullanımdır.
+
+<CH.Code>
+```typescript utils.test.ts
+import axios from "axios";
+import * as GetModule from "./get";
+import * as UtilsModule from "./utils";
+
+jest.mock("axios", () => {
+  return {
+    get: jest
+      .fn()
+      .mockRejectedValue(new Error("Error occured when fetching data!")),
+  };
+});
+
+const mockedAxios = jest.mocked(axios);
+
+describe("utils tests", () => {
+  // ...
+
+  describe("getProduct() tests", () => {
+    test("should call get func with api product endpoint when given product id", async () => {
+      const productId = 1;
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      jest.spyOn(GetModule, "default").mockResolvedValue(mockProduct);
+
+      const result = await UtilsModule.getProduct(productId);
+
+      expect(GetModule.default).toHaveBeenCalledWith(
+        `https://dummyjson.com/products/${productId}`
+      );
+      expect(result).toStrictEqual(mockProduct);
+    });
+  });
+});
+```
+```typescript utils.ts
+import get from "./get";
+
+export function getProduct(productId: number): Promise<any> {
+  return get(`https://dummyjson.com/products/${productId}`);
+}
+
+export function getUser(userId: number): Promise<any> {
+  return get(`https://dummyjson.com/users/${userId}`);
+}
+```
+```typescript get.ts
+import axios from "axios";
+
+export default async function get(apiUrl: string): Promise<any> {
+  try {
+    const response = await axios.get(apiUrl);
+
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+}
+```
+</CH.Code>
+<CodeResult>
+utils tests
+`  get() tests`
+`    ✓ should return product whe request is success (4 ms)`
+`    ✓ should return null when request is failed`
+`  getProduct() tests`
+`    ✓ should call get func with api product endpoint when given product id`
+</CodeResult>
+
+## Modül Mock'unu Temizlemek
+
+Modülleri mockladık ancak mockları temizlemek de isteyebiliriz. Bunun için iki 
+methoda sahibiz. `jest.dontMock()` kendinden sonraki import nesnelerinin 
+mocklarını temizler.
+
+```typescript
+import axios from "axios"; // mocked
+
+jest.mock("axios");
+
+test("playground", () => {
+  const axiosInstance1 = require("axios"); // mocked 
+  jest.dontMock("axios");
+  const axiosInstance2 = require("axios"); // unmocked 
+});
+```
+
+`jest.unmock()` ise bulunduğu kod bloğundaki ilgili tüm import nesnelerinin 
+mocklarını temizler.
+
+```typescript
+import axios from "axios"; // mocked
+
+jest.mock("axios");
+
+test("playground", () => {
+  const axiosInstance1 = require("axios");  // unmocked
+  jest.unmock("axios");
+  const axiosInstance2 = require("axios");  // unmocked
+});
+```
+
+## Kapanış
+
+Geriye kalan fonksiyonunun testini de siz yazmaya çalışabilirsiniz. Neredeyse 
+her şeyde olduğu gibi, sürekli uygulamazsanız test öğrenmek zor gelebilir. 
+Ancak işin aslı kesinlikle öyle değil.
+
+Yazı burada biter. Sağlıcakla kalın.
+
+## Kaynaklar
+
+- [https://jestjs.io/docs](https://jestjs.io/docs)

@@ -42,7 +42,7 @@
   ul code,
   section > p > code,
   blockquote code {
-    @apply bg-gray-200 dark:bg-[#e0e0e0] dark:text-[#121212] rounded-md px-2;
+    @apply bg-gray-200 dark:bg-[#e0e0e0] dark:text-[#121212] rounded-md px-1;
   }
 
   pre,
