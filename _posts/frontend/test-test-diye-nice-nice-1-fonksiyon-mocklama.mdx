@@ -726,7 +726,7 @@ Bu arada mock metodlarımızı üç farklı şekilde kullanabiliriz:
 - Mockladığımız metod üzerinden: `global.Date.now.mockImplementation(() => {});`
 
 `spyOn()` ile mock fonksiyona nasıl implementasyon tanımlayacağımıza bakalım ve 
-de zamanı gelmişken `mockRestore` ile nasıl çalıştığını görmüş olalım:
+de zamanı gelmişken `mockRestore` ile nasıl çalıştığını görelim:
 
 ```javascript
 test("playground", () => {
@@ -744,6 +744,93 @@ test("playground", () => {
 First call return value:  1665950263745
 Second call return value:  Hacked by Ayyıldız Team!
 Third call return value:  1665952546022
+</CodeResult>
+
+## Expect Metodları
+
+Mock fonksiyonlarının neyle ve kaç kez çağrıldığını test etmek için `.mock` 
+özelliğini kullanabiliriz. Fakat Jest bu değerleri manual kontrol etmek yerine 
+bizim için yardımcı metodlar sağlar.
+
+- Çağrılış sayısını test edebiliriz:
+  - `.toHaveBeenCalled()` - çağrılıp çağrılmadığını
+  - `.toHaveBeenCalledTimes(number)` - kaç kez çağrılmadığını
+- Çağrıldığı argümanları test edebiliriz:
+  - `.toHaveBeenCalledWith(arg1, arg2, ...)` - bir kez spesifik argümanlarla 
+    çağrıldığını
+  - `.toHaveBeenLastCalledWith(arg1, arg2, ...)` - sonuncu çağrılışta spesifik 
+    argümanlarla çağrıldığını
+  - `.toHaveBeenNthCalledWith(nthCall, arg1, arg2, ....)` - n. çağrılışta 
+    spesifik argümanlarla çağrıldığını
+- Dönüş değerini test edebiliriz:
+  - `.toHaveReturned()` - başarılı (error fırlatmıyorsa) değer döndüğünü
+  - `.toHaveReturnedTimes(number)` - n kez başarılı değer döndüğünü
+  - `.toHaveReturnedWith(value)` - bir kez spesifik değer döndüğünü
+  - `.toHaveLastReturnedWith(value)` - sonuncu çağrılışta spesifik değer 
+    döndüğünü
+  - `.toHaveNthReturnedWith(nthCall, value)` - n. çağrılışta spesifik değer 
+    döndüğünü
+
+```javascript
+test("playground", async () => {
+  const mockAreaCalculate = jest.fn((x, y) => x * y);
+
+  mockAreaCalculate(7, 13);
+  mockAreaCalculate(3, 5);
+  mockAreaCalculate(5, 8);
+
+  expect(mockAreaCalculate).toHaveBeenCalled();
+  expect(mockAreaCalculate).toHaveBeenCalledTimes(3);
+  expect(mockAreaCalculate).toHaveBeenCalledWith(7, 13);
+  expect(mockAreaCalculate).toHaveBeenLastCalledWith(5, 8);
+  expect(mockAreaCalculate).toHaveBeenNthCalledWith(2, ...[3, 5]);
+
+  expect(mockAreaCalculate).toHaveReturned();
+  expect(mockAreaCalculate).toHaveReturnedTimes(3);
+  expect(mockAreaCalculate).toHaveReturnedWith(7 * 13);
+  expect(mockAreaCalculate).toHaveLastReturnedWith(5 * 8);
+  expect(mockAreaCalculate).toHaveNthReturnedWith(2, 3 * 5);
+});
+```
+<CodeResult>
+PASS  playground.test.ts
+  ✓ playground
+</CodeResult>
+
+Çağrıldığı argümanları ya da döndürdüğü değerleri kısmi olarak test etmek istersek `expect` özellikleri kullanabiliriz.
+
+- `expect.anything()` - null ve undefined dışında her tür değerle eşleşir.
+- `expect.any(constructor)` - ilgili constructor ile oluşturulmuş değerlerle eşleşir.
+eşleşir.
+- `expect.stringContaining(string)` - verilen string'i içeriyorsa eşleşir.
+- `expect.stringMatching(string | regexp)` - verilen string ya da regex ile eşleşiyorsa eşleşir.
+- `expect.arrayContaining(array)` - dizi verilen alt kümeyi içeriyorsa eşleşir. 
+- `expect.objectContaining(object)` - obje verilen alt objeyi içeriyorsa eşleşir.
+- `expect.not.stringContaining(string)` - string değilse ya da verilen string'i içermiyorsa eşleşir.
+- `expect.not.stringMatching(string | regexp)` - string değilse ya da verilen string ve regex ile eşleşmiyorsa eşleşir.
+- `expect.not.arrayContaining(array)` - dizi verilen alt kümeyi içermiyorsa eşleşir. 
+- `expect.not.objectContaining(object)` - obje verilen alt objeyi içermiyorsa eşleşir. 
+
+```javascript
+test("playground", async () => {
+  const calledArguments = [
+    [1, 2, 3],
+    { name: "Enes", surname: "Başpınar", job: "Software Developer", age: 23 },
+  ];
+
+  expect(calledArguments).toEqual([
+    expect.arrayContaining([1, 3]),
+    expect.objectContaining({
+      name: expect.anything(),
+      age: expect.any(Number),
+      job: expect.stringContaining("Developer"),
+    }),
+  ]);
+});
+```
+<CodeResult>
+PASS  playground.test.ts
+  ✓ playground
 </CodeResult>
 
 ## Kapanış
