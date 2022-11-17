@@ -6,11 +6,12 @@ summary: "Modül metodlarını nasıl mocklayabileceğimizi görelim."
 
 ## Bölümler
 
-- [Test Test Diye Nice Nice: Mocklama - 1](/blog/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama)
-- Test Test Diye Nice Nice: Mocklama - 2 (Şu anda buradasınız!)
+- [Test Test Diye Nice Nice: Mocklama - 1: Fonksiyon Mocklama](/blog/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama)
+- Test Test Diye Nice Nice: Mocklama - 2: Modül Mocklama (Şu anda buradasınız)
+- [Test Test Diye Nice Nice: Mocklama - 3: Timer Mocklama](/blog/frontend/test-test-diye-nice-nice-3-timer-mocklama)
 
 <CustomImage
-  src="/images/post/frontend/test-test-diye-nice-nice-unit-test-mocking-1/001.jpeg"
+  src="/images/post/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama/001.jpeg"
   width={800}
   height={375}
   fluid
@@ -19,8 +20,9 @@ summary: "Modül metodlarını nasıl mocklayabileceğimizi görelim."
 
 Önceki yazıda mock'un ne olduğuna ve hangi ihtiyaçtan dolayı ortaya çıktığına 
 değindik. Kütüphanelerin ve tarayıcı API'lerinin metodlarını nasıl 
-mocklayacağımızdan bahsettik. Peki ya dosyalardan export ettiğimiz 
-fonksiyonları mocklamak istersek?
+mocklayacağımızdan bahsettik. Peki ya modüllerden export ettiğimiz 
+fonksiyonları nasıl mocklayabiliriz? Konumuza geçmeden öncesinde modüle kısacık 
+değinelim.
 
 ## Modül Nedir?
 
@@ -93,8 +95,7 @@ module.exports = {
 > **Örnekte `any` kullanmışsın, hayırdır?**
 > <br />
 > Odak noktamız TypeScript olmadığı için karmaşık tipler tanımlamak yerine 
-> `any` kullandığımı görebilirsiniz. Bazen de kullanılır. `any` alerjisi 
-> olanlara bu yazı tavsiye edilmemektedir!
+> `any` kullandığımı görebilirsiniz. E bazen de kullanılır.
 
 ES Modules kullanarak yapabileceğimiz farklı import çeşitleri:
 

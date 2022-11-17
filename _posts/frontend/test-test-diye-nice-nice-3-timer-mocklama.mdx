@@ -1,0 +1,728 @@
+---
+title: "Test Test Diye Nice Nice: Mocklama - 3"
+date: 2022-11-18
+summary: "setTimeout ve türevi zamanlayıcıları içeren fonksiyonları nasıl mocklayabileceğimizi görelim."
+---
+
+- [Test Test Diye Nice Nice: Mocklama - 1: Fonksiyon Mocklama](/blog/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama)
+- [Test Test Diye Nice Nice: Mocklama - 2: Modül Mocklama](/blog/frontend/test-test-diye-nice-nice-2-modul-mocklama)
+- Test Test Diye Nice Nice: Mocklama - 3: Timer Mocklama (Şu anda buradasınız)
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-1-fonksiyon-mocklama/001.jpeg"
+  width={800}
+  height={375}
+  fluid
+  borderless 
+/>
+
+Hepimizin bildiği gibi günlük işlerimizin bazılarını zamanlayıcılarla yaparız. 
+40 dk sonra yemek yiyecek ya da her 24 saatte bir ilaç içecek olabiliriz. 
+Kodlarımızdaki eylemleri yapmak için de `setTimeout()` ve `setInterval()` gibi 
+zamanlayıcı fonksiyonlardan faydalanırız. Zamanlayıcıları kullandığımız fonksiyonları test ederken neler yapmamız 
+gerektiğini görelim.
+
+Makaleye güzel bir arkaplan müziğinin eşlik etmesini isteyenlere dev hizmet. Şahsen çok fazla dinlediğim keman virtüözü Farid Farjad'ın karma parçaları:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N0tmJOjwYUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Girizgah
+
+Her zamanki gibi işin temelini kukla bir örnekle atacağız ve ardından daha 
+güzel bir örneğe bakacağız. Parametre olarak aldığı fonksiyonu 3 saniye sonra 
+çalıştıran bol konsollu fonksiyonumuz olduğunu varsayalım.
+
+```javascript callTenSecondLater.ts
+function callTenSecondLater(callback: () => void) {
+  console.log("setTimeout çalışmadan önce");
+
+  setTimeout(() => {
+    console.log("callback çalışmadan önce");
+    callback();
+    console.log("callback çalıştıktan sonra");
+  }, 3000);
+
+  console.log("setTimeout çalıştıktan sonra");
+}
+
+callTenSecondLater(() => {});
+
+export default callTenSecondLater;
+```
+<CodeResult>
+setTimeout çalışmadan önce
+setTimeout çalıştıktan sonra
+callback çalışmadan önce
+callback çalıştıktan sonra
+</CodeResult>
+
+Yazdığımız konsollarla kodun nasıl çalıştığını kafamızda canlandıralım. 
+Ardından testlerimizi bozmaması için `callTenSecondLater(() => {});` satırını 
+silmeyi unutmayın. Şu ana kadar cebimizdeki bilgilerle basit bir test yazacak 
+olursak;
+
+<CH.Code>
+```javascript callTenSecondLater.test.ts
+import callTenSecondLater from "./callTenSecondLater";
+
+jest.spyOn(global, "setTimeout");
+
+test("should wait 3 second before call callback", () => {
+  const mockCallback = jest.fn();
+  callTenSecondLater(mockCallback);
+
+  expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
+  expect(mockCallback).toHaveBeenCalled();
+});
+```
+```javascript callTenSecondLater.ts
+function callTenSecondLater(callback: () => void) {
+  console.log("setTimeout çalışmadan önce");
+
+  setTimeout(() => {
+    console.log("callback çalışmadan önce");
+    callback();
+    console.log("callback çalıştıktan sonra");
+  }, 3000);
+
+  console.log("setTimeout çalıştıktan sonra");
+}
+
+export default callTenSecondLater;
+```
+</CH.Code>
+<CodeResult>
+console.log
+`  setTimeout çalışmadan önce`
+`  setTimeout çalıştıktan sonra`
+
+` `
+`FAIL  src/playground/index.test.ts`
+`✕ should wait 3 second before call callback`
+
+`    expect(jest.fn()).toHaveBeenCalled()`
+
+`    Expected number of calls: >= 1`
+`    Received number of calls:    0`
+</CodeResult>
+
+İlk expect'imizin başarıyla tamamlandığını ancak ikincisinin hata aldığını 
+görebiliriz. Fonksiyon 3 saniye beklemeden tamamlanır ve dolayısıyla test de 
+tamamlanır. Callback ile ilgili olan konsollar yazdırılmaz. 
+
+Kod timeout bekliyorsa testi de o süre boyunca pekala bekletebiliriz, öyle 
+değil mi?
+
+<CH.Code>
+```javascript callTenSecondLater.test.ts
+import callTenSecondLater from "./callTenSecondLater";
+
+jest.spyOn(global, "setTimeout");
+
+test("should wait 3 second before call callback", (done) => {
+  const mockCallback = jest.fn();
+  callTenSecondLater(mockCallback);
+
+  setTimeout(() => {
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
+    expect(mockCallback).toHaveBeenCalled();
+    done();
+  }, 4000);
+});
+```
+```javascript callTenSecondLater.ts
+function callTenSecondLater(callback: () => void) {
+  console.log("setTimeout çalışmadan önce");
+
+  setTimeout(() => {
+    console.log("callback çalışmadan önce");
+    callback();
+    console.log("callback çalıştıktan sonra");
+  }, 3000);
+
+  console.log("setTimeout çalıştıktan sonra");
+}
+
+export default callTenSecondLater;
+```
+</CH.Code>
+<CodeResult>
+PASS  src/playground/index.test.ts
+  ✓ should wait 3 second before call callback
+</CodeResult>
+
+Timer ve sonrasında gelecek async fonksiyonların temelinde çok basit bir 
+matematik var: Kod bekliyorsa testte beklesin. Kod 3 saniye sonra 
+çalışacağından ötürü testi de 4 saniye bekletirsek çalışmış olduğundan emin 
+olabiliriz. Testin callback'ine iletilen `done()` metodu çağırılmadığı takdirde 
+expect timeout bitene kadar expect'i tekrar tekrar kontrol eder.
+
+Ancaaak, burada bir problem var. Bekleyeceğimiz süre 24 saat ya da daha fazla 
+olsaydı ne yapacaktık? Peki ya testi başlatıp ertesi gün gelip baktığımızda 
+başarısız olsaydı...
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-3-timer-mocklama/002.jpeg"
+  width={1296}
+  height={730}
+  reference="https://playtech.ro/2017/narcos-serial-trafic-droguri/"
+  fluid
+  borderless
+/>
+
+Tam bir kabus! Acilen başka çözümlere yelken açalım.
+
+## Fake Timer
+
+İlgili metodlar kodumuzun çalışmasıyla birlikte saymaya başlayan bir 
+zamanlayıcı kullanırlar. Fonksiyonlarda yapabildiğimiz gibi zamanlayıcıları da 
+mocklayabiliriz. Sahte bir zamanlayıcıyla ilişkilendirmek için
+`jest.useFakeTimers(fakeTimersConfig?)` metodunu kullanabiliriz. Nereden 
+çağrıldığı farketmeksizin tüm dosyayı etkiler ve her çağrıldığında önceki 
+zamanlayıcılara ait bilgileri temizler. Tekrardan gerçek zamanlayıcıya dönmek 
+içinse `jest.useRealTimers()` kullanabiliriz.
+
+```javascript
+test("playground", () => {
+  jest.useFakeTimers();
+  console.log("FAKES\n-------");
+  console.log("setTimeout():", setTimeout.toString());
+  console.log("setInterval():", setInterval.toString());
+  console.log("Date.now():", Date.now.toString());
+
+  jest.useRealTimers();
+  console.log("REALS\n-------");
+  console.log("setTimeout():", setTimeout.toString());
+  console.log("setInterval():", setInterval.toString());
+  console.log("Date.now():", Date.now.toString());
+});
+```
+<CodeResult>
+`FAKES`
+`-------`
+`setTimeout(): function () {`
+`  return clock[method].apply(clock, arguments);`
+`}`
+`setInterval(): function () {`
+`  return clock[method].apply(clock, arguments);`
+`}`
+`Date.now(): function now() {`
+`  return target.clock.now;`
+`}`
+` `
+`REALS`
+`-------`
+`setTimeout(): function (handler, timeout = 0, ...args) {`
+`  if (typeof handler !== "function") {`
+`    handler = webIDLConversions.DOMString(handler);`
+`  }`
+`  timeout = webIDLConversions.long(timeout);`
+`    `
+`  return timerInitializationSteps(handler, timeout, args, { methodContext: ``window, repeat: false });`
+`}`
+`setInterval(): function (handler, timeout = 0, ...args) {`
+`  if (typeof handler !== "function") {`
+`    handler = webIDLConversions.DOMString(handler);`
+`  }`
+`  timeout = webIDLConversions.long(timeout);`
+`    `
+`  return timerInitializationSteps(handler, timeout, args, { methodContext: ``window, repeat: true });`
+`}`
+`Date.now(): function now() { [native code] }`
+</CodeResult>
+
+> Önceki yazılardaki gibi boş bir mock fonksiyon yerine önceden oluşturulmuş 
+> sahte bir zamanlayıcı atanır. Mocklamak istersek hala `jest.fn` ya da
+> `jest.spyOn` kullanabiliriz.
+
+Sahte zamanlayıcıyı özelleştirmek istersek aşağıdaki değerleri alabilen bir 
+obje sağlayabiliriz:
+- **advanceTimers (boolean | number)** - gerçek zamanlayıcıya göre ne kadar 
+  hızlı ilerleyeceğini belirtebiliriz. `true` ayarlanırsa gerçekte 1m 
+  ilerleniyorsa fake timer'da 1ms ilerler. Bir sayı iletirsek gerçekteki 1ms'e karşılık o sayı kadar daha hızlı ya da daha yavaş ilerler.
+- **doNotFake (Array)** - fake timer kullanmak istemediğimiz  metodların 
+  listesi.
+- **now (number | Date)** - fake timerların kullanacağı sistem tarihi. 
+  Varsayılan olarak `Date.now()` değerini yani mevcut tarihi alır.
+- **timerLimit** - Az sonra değineceğimiz `jest.runAllTimers()` ile 
+  çalıştırabileceğimiz maksimum timer sayısı.
+
+```javascript
+jest.useFakeTimers({
+  now: new Date(1999, 2, 21),
+  doNotFake: ["setInterval"],
+});
+
+test("playground", () => {
+  console.log("setTimeout():", setTimeout.toString());
+  console.log("setInterval():", setInterval.toString());
+  console.log("Date.now():", Date.now());
+});
+```
+<CodeResult>
+`setTimeout(): function () {`
+`  return clock[method].apply(clock, arguments);`
+`}`
+`setInterval(): function (handler, timeout = 0, ...args) {`
+`  if (typeof handler !== "function") {`
+`    handler = webIDLConversions.DOMString(handler);`
+`  }`
+`  timeout = webIDLConversions.long(timeout);`
+    
+`  return timerInitializationSteps(handler, timeout, args, { methodContext: window, repeat: true });`
+`}`
+`Date.now(): 921967200000`
+</CodeResult>
+
+## Callback'i Anında Çalıştırmak
+
+Birkaç adım öncesinde yazdığımız testi yeniden görelim.
+
+```javascript
+import callTenSecondLater from "./callTenSecondLater";
+
+jest.spyOn(global, "setTimeout");
+
+test("should wait 3 second before call callback", (done) => {
+  const mockCallback = jest.fn();
+  callTenSecondLater(mockCallback);
+
+  setTimeout(() => {
+    expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
+    expect(mockCallback).toHaveBeenCalled();
+    done();
+  }, 4000);
+});
+```
+
+İyi güzel ancak bu testi her çalıştırdığımızda 3 saniye beklememeliyiz. Test 
+sayısı arttıkça ve testleri çok fazla kez çalıştırmaya başlayınca kümülatif 
+olarak çok büyüyor bu süreler inanın bana. Pipeline yolu gözleyenler 
+dediklerimi anlayacaktır. Bu süreyi atlayıp callback'i anında çalıştırmak için
+`jest.runAllTimers()` kullanabiliriz.
+
+> O anda event loop'ta kuyrukta bulunan ve henüz tamamlanmamış fake timer 
+> sayısını görmek için `jest.getTimerCount()` metodunu kullanabiliriz.
+
+```javascript
+import callTenSecondLater from "./callTenSecondLater";
+
+jest.useFakeTimers();
+jest.spyOn(global, "setTimeout");
+
+test("should wait 10 second before call callback", () => {
+  const mockCallback = jest.fn();
+  callTenSecondLater(mockCallback);
+  console.log("kalan fake timer sayısı:", jest.getTimerCount());
+
+  // runAllTimers öncesinde timer'lar sona ermediği
+  // için callback'in çağrılmadığından emin olalım.
+  expect(mockCallback).not.toHaveBeenCalled();
+
+  jest.runAllTimers();
+  console.log("kalan fake timer sayısı:", jest.getTimerCount());
+
+  expect(mockCallback).toHaveBeenCalled();
+});
+```
+<CodeResult>
+setTimeout çalışmadan önce
+setTimeout çalıştıktan sonra
+kalan fake timer sayısı: 1
+callback çalışmadan önce
+callback çalıştıktan sonra
+kalan fake timer sayısı: 0
+
+PASS  src/playground/index.test.ts
+  ✓ should wait 10 second before call callback (29 ms)
+</CodeResult>
+
+Testimiz geçecektir. Zamanlayıcıların timeout'larını sıfırlamak için iki ana
+metodumuz bulunur:
+- `jest.runAllTicks()` - micro-task kuyruğunda mevcut olan görevler
+  (process.nextTick) ve bu görevlerden türeyen görevlerin callback'lerini 
+  çalıştırır.
+- `jest.runAllTimers()` - macro-task kuyruğunda mevcut olan görevler 
+  (setTimeout(), setInterval(), setImmediate()) ve bu görevlerden türeyen 
+  görevlerin callback'lerini çalıştırır.
+
+> Micro-macro görevler konusunda kafanızda soru işareti varsa sizi şu videoya 
+> alalım: 
+>
+> [Olay döngüsü nedir? | Philip Roberts | JSConf AB](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
+## jest.runOnlyPendingTimers()
+
+`jest.runAllTimers()` metodu, fonksiyon boyunca üretilecek olan tüm macro-task'ların bekleme süresini sıfırlar ve callback'lerini çalıştırır. Türetilmiş macro-task'lar varsa onları da zamanı geldikçe kuyruğa ekleyerek kuyruk boşalana kadar devam eder.
+
+<CH.Code>
+```javascript example
+function callbackRunner() {
+  setTimeout(() => {
+    console.log("Called callback 1.");
+
+    setTimeout(() => {
+      console.log("Called child callback 1.");
+    }, 5000);
+  }, 3000);
+
+  setTimeout(() => {
+    console.log("Called callback 2.");
+
+    setTimeout(() => {
+      console.log("Called child callback 2.");
+
+      setTimeout(() => {
+        console.log("Called childest callback 1.");
+      }, 1000);
+    }, 1000);
+  }, 3000);
+}
+
+test("playground", () => {
+  jest.useFakeTimers();
+
+  callbackRunner();
+
+  jest.runAllTimers();
+});
+```
+```javascript simplifiedCallbackRunner
+// callbackRunner method executes callback methods in
+// order of duration when we skip the timer timeout times.
+// so if we remove the setTimeouts the method becomes:
+
+function callbackRunner() {
+  console.log("Called callback 1."); // 3000ms
+  console.log("Called callback 2."); // 3000ms
+  console.log("Called child callback 2."); // 3000ms + 1000ms
+  console.log("Called childest callback 1."); // 3000ms + 1000ms + 1000ms
+  console.log("Called child callback 1."); // 3000ms + 5000ms
+}
+```
+</CH.Code>
+<CodeResult>
+Called callback 1.
+Called callback 2.
+Called child callback 2.
+Called childest callback 1.
+Called child callback 1.
+</CodeResult>
+
+> Örneğin **event loop** akışını görselleştirmek isterseniz [JavaScript Visualizer 9000](https://www.jsv9000.app/?code=ZnVuY3Rpb24gcnVubmVyKCkgewogIHNldFRpbWVvdXQoKCkgPT4gewogICAgY29uc29sZS5sb2coIkNhbGxlZCBjYWxsYmFjayAxLiIpOwoKICAgIHNldFRpbWVvdXQoKCkgPT4gewogICAgICBjb25zb2xlLmxvZygiQ2FsbGVkIGNoaWxkIGNhbGxiYWNrIDEuIik7CiAgICB9LCA1MDAwKTsKICB9LCAzMDAwKTsKCiAgc2V0VGltZW91dCgoKSA9PiB7CiAgICBjb25zb2xlLmxvZygiQ2FsbGVkIGNhbGxiYWNrIDIuIik7CgogICAgc2V0VGltZW91dCgoKSA9PiB7CiAgICAgIGNvbnNvbGUubG9nKCJDYWxsZWQgY2hpbGQgY2FsbGJhY2sgMi4iKTsKCiAgICAgIHNldFRpbWVvdXQoKCkgPT4gewogICAgICAgIGNvbnNvbGUubG9nKCJDYWxsZWQgY2hpbGQgY2FsbGJhY2sgMy4iKTsKICAgICAgfSwgMTAwMCk7CiAgICB9LCAxMDAwKTsKICB9LCAzMDAwKTsKfQoKcnVubmVyKCk%3D) sitesine aktardığım örneği görebilirsiniz.
+
+`jest.runOnlyPendingTimers()` metoduysa yalnızca mevcutta macro-task kuyruğuna 
+alınmış callback'leri çalıştırır. Türetilen görevlere dokunmaz ve dolayısıyla 
+callback'lerini çalıştırmaz. 
+
+```javascript
+function callbackRunner() {
+  setTimeout(() => {
+    console.log("Called callback 1.");
+
+    setTimeout(() => {
+      console.log("Called child callback 1.");
+    }, 5000);
+  }, 3000);
+
+  setTimeout(() => {
+    console.log("Called callback 2.");
+
+    setTimeout(() => {
+      console.log("Called child callback 2.");
+
+      setTimeout(() => {
+        console.log("Called childest callback 1.");
+      }, 1000);
+    }, 1000);
+  }, 3000);
+}
+
+test("playground", () => {
+  jest.useFakeTimers();
+
+  callbackRunner();
+
+  jest.runOnlyPendingTimers();
+});
+```
+<CodeResult>
+Called callback 1.
+Called callback 2.
+</CodeResult>
+
+## jest.advanceTimersByTime()
+
+Tüm zamanlayıcıların timeout'unu sıfırlamak istemiyorsak ikinci bir seçenek 
+zamanlayıcıyı belirli süre ilerletmektir. Sahte zamanlayıcıyı 4000ms 
+ilerletecek olursak ilk üç callback'in çalıştırılacağını görebiliriz.
+
+```javascript
+function callbackRunner() {
+  setTimeout(() => {
+    // Cumulative timeout: 3000ms ✓
+    console.log("Called callback 1.");
+
+    setTimeout(() => {
+      // Cumulative timeout: 3000ms + 5000ms = 8000ms ⨉
+      console.log("Called child callback 1.");
+    }, 5000);
+  }, 3000);
+
+  setTimeout(() => {
+    // Cumulative timeout: 3000ms ✓
+    console.log("Called callback 2.");
+
+    setTimeout(() => {
+      // Cumulative timeout: 3000ms + 1000ms = 4000ms ✓
+      console.log("Called child callback 2.");
+
+      setTimeout(() => {
+        // Cumulative timeout: 3000ms + 1000ms + 1000ms = 5000ms ⨉
+        console.log("Called childest callback 1.");
+      }, 1000);
+    }, 1000);
+
+     setTimeout(() => {
+      // Cumulative timeout: 3000ms + 1000ms = 4000ms ✓
+      console.log("Called child callback 3.");
+    }, 1000);
+  }, 3000);
+}
+
+test("playground", () => {
+  jest.useFakeTimers();
+
+  callbackRunner();
+
+  jest.advanceTimersByTime(4000);
+});
+```
+<CodeResult>
+Called callback 1.
+Called callback 2.
+Called child callback 2.
+Called child callback 3.
+</CodeResult>
+
+Kümülatif olarak toplandığında verilen süre içerisinde tamamlanacak tüm timerların callback'leri direk çağrılır.
+
+## jest.advanceTimersToNextTimer()
+
+Son yöntem ise callback'leri adım adım çalıştırmayı sağlayan
+`jest.advanceTimersToNextTimer(step?)` metodudur.
+
+```javascript
+function callbackRunner() {
+  setTimeout(() => {
+    console.log("Called callback 1.");
+
+    setTimeout(() => {
+      console.log("Called child callback 1.");
+    }, 5000);
+  }, 3000);
+
+  setTimeout(() => {
+    console.log("Called callback 2.");
+
+    setTimeout(() => {
+      console.log("Called child callback 2.");
+
+      setTimeout(() => {
+        console.log("Called childest callback 1.");
+      }, 1000);
+    }, 1000);
+
+    setTimeout(() => {
+      console.log("Called child callback 3.");
+    }, 1000);
+  }, 3000);
+}
+
+test("playground", () => {
+  jest.useFakeTimers();
+
+  callbackRunner();
+
+  console.log("Step 1: callbacks");
+  jest.advanceTimersToNextTimer();
+  console.log("Step 2: child callbacks");
+  jest.advanceTimersToNextTimer();
+  console.log("Step 3: childest callbacks");
+  jest.advanceTimersToNextTimer();
+});
+```
+<CodeResult>
+Step 1: callbacks
+`  Called callback 1.`
+`  Called callback 2.`
+Step 2: child callbacks
+`  Called child callback 2.`
+`  Called child callback 3.`
+Step 3: childest callbacks
+`  Called childest callback 1.`
+</CodeResult>
+
+Görebileceğimiz gibi önce bir `setTimeout`'un callback'ini ardından içindekini 
+ve ardından onun içindeki çalıştırarak ilerleyebiliriz. Teker teker ilerlemek 
+yerine birden fazla adımı tek seferde atmak istersek `step` parametresini 
+kullanabiliriz.
+
+```javascript
+function callbackRunner() {
+  setTimeout(() => {
+    console.log("Called callback 1.");
+
+    setTimeout(() => {
+      console.log("Called child callback 1.");
+    }, 5000);
+  }, 3000);
+
+  setTimeout(() => {
+    console.log("Called callback 2.");
+
+    setTimeout(() => {
+      console.log("Called child callback 2.");
+
+      setTimeout(() => {
+        console.log("Called childest callback 1.");
+      }, 1000);
+    }, 1000);
+
+    setTimeout(() => {
+      console.log("Called child callback 3.");
+    }, 1000);
+  }, 3000);
+}
+
+test("playground", () => {
+  jest.useFakeTimers();
+
+  callbackRunner();
+
+  jest.advanceTimersToNextTimer(2);
+});
+```
+<CodeResult>
+Called callback 1.
+Called callback 2.
+Called child callback 2.
+Called child callback 3.
+</CodeResult>
+
+Callback 1 ve Callback 2, birinci kademede; Child Callback 1 ve Child Callback 
+2 ise ikinci kademededirler ve çalıştırılırlar.
+
+## Ekstra Metodlar
+
+Son olarak üç minik metoddan bahsedelim:
+- `jest.now()` - mevcuttaki tarihi ms olarak döndürür. Kullanılıyor 
+  ise fake zamanlayıcı değerini, aksi halde gerçek zamanlayıcı değerini 
+  baz alır.
+- `jest.setSystemTime(now?: number | Date)` - program içerisinde sistem 
+  tarihini değiştirir.
+- `jest.getRealSystemTime()` - gerçek tarihi verir.
+
+```javascript
+test("playground", () => {
+  jest.useFakeTimers();
+
+  jest.setSystemTime(new Date(1999, 2, 21));
+
+  console.log(
+    "gerçek tarih (orjinal timer'a göre):",
+    new Date(jest.getRealSystemTime())
+  );
+  console.log(
+    "sahte tarih (fake timer'a göre):",
+    new Date(jest.now())
+  );
+});
+```
+<CodeResult>
+gerçek tarih (orjinal timer'a göre): 2022-11-15T03:32:20.747Z
+sahte tarih (fake timer'a göre): 1999-03-20T22:00:00.000Z
+</CodeResult>
+
+## Pekiştirme
+
+Sona gelirken sizi çok zorlamayacak bir final boss bırakıyorum. Çözümünü ikinci 
+sekmede bulabilirsiniz fakat kodu bi çalıştırıp inceleyip kendi kendinize 
+denemenizi tavsiye ederim. Çok şey öğrendiğim zamanlar daima en zorlandığım 
+zamanlar olmuştur.
+
+<CH.Code>
+```javascript breakReminder.ts
+function breakReminder(breakActivity: any) {
+  console.log("Starting working...");
+  let breakCount = 0;
+
+  const breakTimer = setInterval(() => {
+    if (breakCount > 2) {
+      clearInterval(breakTimer);
+      console.log("Ending working.");
+    } else {
+      breakActivity();
+    }
+
+    breakCount += 1;
+  }, 3000);
+}
+
+export default breakReminder;
+```
+```javascript breakReminder.test.ts
+import breakReminder from "./callTenSecondLater";
+
+describe("breakReminder tests", () => {
+  let mockBreakActivity: jest.Mock;
+
+  beforeAll(() => {
+    jest.useFakeTimers();
+
+    jest.spyOn(global, "setInterval");
+    jest.spyOn(global, "clearInterval");
+    jest.spyOn(console, "log");
+
+    mockBreakActivity = jest.fn();
+    // we call our method to be tested in beforeAll
+    // because this will wait for callback timeout.
+    // we will progress gradually.
+    breakReminder(mockBreakActivity);
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
+  test('should log "Starting working..." on first iteration', () => {
+    expect(console.log).toHaveBeenCalledWith("Starting working...");
+    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 3000);
+  });
+
+  test("should call breakActivity on second, third and fourth iteration", () => {
+    jest.advanceTimersToNextTimer(3);
+
+    expect(mockBreakActivity).toHaveBeenCalledTimes(3);
+  });
+
+  test("should end work on last iteration", () => {
+    jest.advanceTimersByTime(3000);
+
+    expect(console.log).toHaveBeenCalledWith("Ending working.");
+    expect(clearInterval).toHaveBeenCalled();
+  });
+});
+```
+</CH.Code>
+
+## Kapanış
+
+Güzel ve öğretici bir makale olmasını umuyorum. Şahsen ben araştırırken ve 
+yazarken zevk aldım.
+
+Yazı burada biter. Sağlıcakla kalın.
+
+## Kaynaklar
+
+- [https://jestjs.io/docs](https://jestjs.io/docs)
