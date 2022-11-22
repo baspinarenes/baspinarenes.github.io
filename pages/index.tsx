@@ -1,10 +1,10 @@
-import type { NextPage } from "next";
+import axios from "axios";
+import { Meta } from "components/common";
 import CardList from "components/Content/Home/CardList";
 import ProfileCard from "components/Content/Home/ProfileCard";
-import { Meta } from "components/common";
-import { getRepositories } from "utils/github";
-import axios from "axios";
 import siteData from "constants/site-data";
+import type { NextPage } from "next";
+import { getRepositories } from "utils/github";
 import { getPostForHome } from "utils/post";
 
 const Home: NextPage = (props: any) => {
@@ -14,11 +14,11 @@ const Home: NextPage = (props: any) => {
     <div className="flex flex-col gap-10">
       <Meta />
       <ProfileCard />
-      {repositories?.length > 0 && (
-        <CardList type="repository" data={repositories} />
-      )}
       {postsWithViews?.length > 0 && (
         <CardList type="post" data={postsWithViews} />
+      )}
+      {repositories?.length > 0 && (
+        <CardList type="repository" data={repositories} />
       )}
     </div>
   );
