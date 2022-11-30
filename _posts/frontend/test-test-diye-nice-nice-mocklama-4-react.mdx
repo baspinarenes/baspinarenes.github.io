@@ -1,0 +1,1045 @@
+---
+title: "Test Test Diye Nice Nice: Mocklama (4) - React"
+date: 2022-12-01
+summary: "React komponentleri kullanırken mocklamanın nasıl çalıştığını görelim."
+---
+
+## Bölümler
+
+- [Test Test Diye Nice Nice: Mocklama (1) - Fonksiyon](/blog/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon)
+- [Test Test Diye Nice Nice: Mocklama (2) - Modül](/blog/frontend/test-test-diye-nice-nice-mocklama-2-modul)
+- [Test Test Diye Nice Nice: Mocklama (3) - Timer](/blog/frontend/test-test-diye-nice-nice-mocklama-3-timer)
+- Test Test Diye Nice Nice: Mocklama (4) - React (Şu anda
+buradasınız!)
+
+<CustomImage
+  src="/images/post/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon/001.jpeg"
+  width={800}
+  height={375}
+  fluid
+  borderless 
+/>
+
+> Angular sevdiğimiz bir abimizdi. Karmaşık bir framework'tü, her şeyi yapmaya 
+> çalışırdı. Mesela ben yapmam. Bundle size'ı arttırırdı, ben arttırmam. 
+> Developerlar'ın işi düştüğünde sırtını dönerdi, ben dönmem. Angular 
+> sevdiğimiz bir abimizdi ama komponentleri de bir tuhaf render'lardı. Bizde 
+> hook'lar masaya konur. Herkes ihtiyacı kadarını alır. Eskiler sende kalsın 
+> kardeş, junior'ların kafasını karıştırma yeter.  
+> **React Dayı**
+
+Mocklama serüvenimizde React'a kadar geldik. Çoğumuz çalışma hayatında 
+React framework'ünü kullanıyoruz. Komponentler ve testleriyle sürekli haşır 
+neşir oluyoruz. Peki mocklama React komponentleriyle birlikte nasıl çalışır?
+
+## Girizgah
+
+Projelerimizde yardımcı metodları çoğu yerde kullanıyoruz. Ancak framework'ler 
+işin içine girdiğinde komponent dediğimiz özel fonksiyon türleri devreye 
+giriyor ve bu komponentler DOM ağacına render edilecek elementleri temsil 
+ederler.
+
+> Komponentlerin hepsini elbette bir dosyada tutmayız. Aşağıdaki kod bloğunda 
+> genel bakış atmak için birlikte göstereceğim ama siz her birinin kendi 
+> dosyalarında olduğunu varsayın. Modül yazısında test ettiğimiz fonksiyonla 
+> aynı dosyada bulunan fonksiyonları mocklayamadığımızı hatırlayın. Bu 
+> sebepledir ki komponentlerimizi atomik boyutlara bölmek, **testable** kod 
+> yazmak için en temel kuraldır.
+
+Kullanıcının kayıtlı olup olmamasına göre formun içeriğini yöneten 
+`Registration` komponentine sahip olalım.
+
+```javascript
+const RegisterForm: React.FC = () => {
+  return <div>...</div>;
+};
+
+export default RegisterForm;
+
+// ----------------------------------------------------------
+
+const LoginForm: React.FC = () => {
+  return <div>...</div>;
+};
+
+export default LoginForm;
+
+// ----------------------------------------------------------
+
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+
+const Registration: React.FC<RegistrationProps> = ({ isRegistered }) => {
+  return isRegistered ? <LoginForm /> : <RegisterForm />;
+};
+
+interface RegistrationProps {
+  isRegistered: boolean;
+}
+
+export default Registration;
+```
+
+Gördüğümüz üzere komponentler iç içe kullanılırlar ve uygulamanın giriş dosyasında özel bir metodla DOM ağacına render edilirler.
+
+```javascript
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+İlgili dosya browser'da çalıştırıldığında DOM ağacına erişebilir. Ancak 
+testlerimiz NodeJS ortamında çalışırlar ve ortada DOM ağacı bulunmaz. 
+Komponentlerin test edilebilmesi için framework'lere özel test kütüphaneleri 
+tarafından sahte bir DOM ağacı oluşturulur. Makalede Jest ile birlikte 
+React'tın en popüler test kütüphanesi olan **React Testing Library** 
+kullanacağız.
+
+Komponentleri mocklamak için önceki yazılardaki gibi test edilen dosya 
+içerisindeki import yolunu kullanabilir ve döndüreceği DOM içeriğini
+belirleyebiliriz. Genelde `div` döndürüp `data-testid` parametresi olarak 
+komponent ismi vermeyi tercih ediyorum.
+
+```javascript
+import { render } from "@testing-library/react";
+import Registration from "./Registration";
+
+jest.mock("./RegisterForm", () => jest.fn(() => <div data-testid="register-form" />));
+
+test("playground", () => {
+  const { debug } = render(<Registration isRegistered={false} />)
+  console.log("DOM:");
+  // sahte DOM ağacının mevcut halini yazdırır
+  debug();
+});
+```
+<CodeResult>
+DOM:
+
+`<body>`
+`  <div>`
+`    <div data-testid="register-form" />`
+`  </div>`
+`</body>`
+</CodeResult>
+
+`render` metodu DOM ağacıyla yapabileceğimiz işlemler için metodlar barındıran 
+bir nesne döndürür. Mock içeriklerin başarıyla render olduğunu görmek için  
+`debug` metodunu kullanabiliriz.  Çıktıya baktığımızda istediğimiz değerin 
+render edilmiş olduğunu görebiliriz. Komponentin başarıyla mocklandığını 
+görmenin huzuruyla yolumuza devam edelim.
+
+## Basit Testler
+
+Hatırlarsanız test yazarkenki temel prensibimiz, testin odaklandığı fonksiyon 
+dışındaki fonksiyonların mümkün mertebe çalıştırılmamasıydı. React'da ise child 
+komponentlerin render edilmemesini ve unit test gerekliliklerinin 
+karşılanmasını istiyoruz.
+
+Test yazarken ilk sormamız gereken soru "Bu komponentin görevi nedir?" 
+olmalıdır. `Registration` komponentinin görevi, `isRegistered` props değerine 
+göre hangi formun ekranda gösterileceğine karar vermektir. İçerisinde hangi 
+inputlarin olduğunu ve işlem bitince yönlendirdiği sayfayı test etmemeliyiz. 
+Bunlar formu render eden komponentin testinde ele alınmalıdır. `data-testid` 
+değeriyle doğru formun render edilip edilmediğini kontrol edebiliriz.
+
+> Örnekleri basit tutmaya çalışacağım ve her seferinde farklı biçimde yazışlar 
+> göstereceğim ki kullanım örneklerini kafamızda çeşitlendirelim. Temel fikre 
+> odaklanırsanız kendi örneklerinize uygulayabileceğinizi düşünüyorum.
+
+Testlerimizi yazalım.
+
+<CH.Code>
+```javascript jest.mock
+import { render, screen } from "@testing-library/react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import Registration from "./Registration";
+
+jest.mock("./RegisterForm");
+jest.mock("./LoginForm");
+
+describe("<Registration> tests", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test("should render <RegisterForm /> when isRegistered equal false", () => {
+    jest.mocked(RegisterForm).mockReturnValue(<div data-testid="register-form" />);
+
+    render(<Registration isRegistered={false} />);
+
+    expect(screen.getByTestId("register-form")).toBeInTheDocument();
+  });
+
+  test("should render <LoginForm /> when isRegistered equal true", () => {
+    jest.mocked(LoginForm).mockReturnValue(<div data-testid="login-form" />);
+
+    render(<Registration isRegistered={true} />);
+
+    expect(screen.getByTestId("login-form")).toBeInTheDocument();
+  });
+});
+```
+```javascript jest.spyOn
+import { render, screen } from "@testing-library/react";
+import * as LoginFormModule from "./LoginForm";
+import * as RegisterFormModule from "./RegisterForm";
+import Registration from "./Registration";
+
+describe("<Registration> tests", () => {
+  test("should render <RegisterForm /> when isRegistered equal false", () => {
+    jest.spyOn(RegisterFormModule, "default").mockReturnValue(
+      <div data-testid="register-form" />
+    );
+
+    render(<Registration isRegistered={false} />);
+
+    expect(screen.getByTestId("register-form")).toBeInTheDocument();
+  });
+
+  test("should render <LoginForm /> when isRegistered equal true", () => {
+    jest.spyOn(LoginFormModule, "default").mockReturnValue(
+      <div data-testid="login-form" />
+    );
+
+    render(<Registration isRegistered={true} />);
+
+    expect(screen.getByTestId("login-form")).toBeInTheDocument();
+  });
+});
+```
+</CH.Code>
+<CodeResult>
+`PASS  src/Registration.test.tsx`
+`  <Registration> tests`
+`    ✓ should render <RegisterForm /> when isRegistered equal false (57 ms)`
+`    ✓ should render <LoginForm /> when isRegistered equal true (4 ms)`
+</CodeResult>
+
+Mocklarınızı test ihtiyaçlarına göre şekillendirmelisiniz. Render edildiğini 
+görmek mi istiyorum o halde basit bir parametre işimizi görecektir.
+
+## Komponente İletilen Propsları Mock Komponente Geçme
+
+Yapılacak maddelerimizi listelediğimiz bir komponentimiz ve maddeleri render 
+eden ayrı bir komponentimiz olsun. Tamamlanan maddeleri göz ardı ederek 
+listemizi ekrana yazdıralım.
+
+<CH.Code>
+```javascript App.tsx
+import TodoList from "./TodoList";
+
+function App() {
+  const todos = [
+    {
+      title: "Ölümcül task'ı bitir.",
+      isCompleted: false,
+    },
+    {
+      title: "Yalandan iki spor yap.",
+      isCompleted: false,
+    },
+    {
+      title: "Yarım saat diye başlayıp 3 saat sürecek şekilde oyun oyna.",
+      isCompleted: true,
+    },
+    {
+      title: "Olmayan zamanını sosyal medyada öldür.",
+      isCompleted: true,
+    },
+  ];
+
+  return (
+    <TodoList todos={todos} />
+  );
+}
+
+export default App;
+```
+```javascript TodoList.tsx
+import React from "react";
+import TodoItem from "./TodoItem";
+
+const TodoList: React.FC<TodoListProps> = ({ todos }) => {
+  return (
+    <div>
+      <p>Yapılacaklar:</p>
+      {todos.map((todo) => (
+        <TodoItem
+          title={todo.title}
+          isCompleted={todo.isCompleted}
+        />
+      ))}
+    </div>
+  );
+};
+
+interface TodoListProps {
+  todos: Array<{
+    title: string;
+    isCompleted: boolean;
+  }>;
+}
+
+export default TodoList;
+```
+```javascript TodoItem.tsx
+import React from "react";
+
+const TodoItem: React.FC<TodoItemProps> = ({ title, isCompleted }) => {
+  if (isCompleted) {
+    return null;
+  }
+
+  return <div>{title}</div>;
+};
+
+interface TodoItemProps {
+  title: string;
+  isCompleted: boolean;
+}
+
+export default TodoItem;
+```
+</CH.Code>
+
+Yapılacaklar listesinde tamamlanan maddelerin gösterilmediğinden emin olmak tek 
+test durumumuz gibi görünüyor.
+
+```javascript TodoList.test.tsx
+import { render, screen } from "@testing-library/react";
+import TodoList from "./TodoList";
+
+jest.mock("./TodoItem", () => jest.fn().mockReturnValue(
+  <div data-testid="todo-item"></div>
+));
+
+describe("<TodoList> tests", () => {
+  test("should render only incomplete todo items", () => {
+    const mockTodos = [
+      {
+        title: "Ölümcül task'ı bitir.",
+        isCompleted: false,
+      },
+      {
+        title: "Yalandan iki spor yap.",
+        isCompleted: false,
+      },
+      {
+        title: "Yarım saat diye başlayıp 3 saat sürecek şekilde oyun oyna.",
+        isCompleted: true,
+      },
+      {
+        title: "Olmayan zamanını sosyal medyada öldür.",
+        isCompleted: true,
+      },
+    ];
+
+    const { debug } = render(<TodoList todos={mockTodos} />);
+
+    console.log("DOM:");
+    debug();
+
+    expect(screen.getAllByTestId("todo-item")).toHaveLength(2);
+    expect(screen.getByText("Ölümcül task'ı bitir.")).toBeInTheDocument();
+    expect(screen.getByText("Yalandan iki spor yap.")).toBeInTheDocument();
+  });
+});
+```
+<CodeResult>
+`DOM:`
+`<body>`
+`  <div>`
+`    <div>`
+`      <p>Yapılacaklar:</p>`
+`      <div data-testid="todo-item" />`
+`      <div data-testid="todo-item" />`
+`      <div data-testid="todo-item" />`
+`      <div data-testid="todo-item" />`
+`    </div>`
+`  </div>`
+`</body>`
+
+` FAIL  src/TodoList.test.tsx`
+`  <TodoList> tests`
+`    ✕ should render only incomplete todo items (83 ms)`
+`      Expected length: 2`
+`      Received length: 4`
+</CodeResult>
+
+Mock başarılı... ama bir problem var gibi. Tamamlanan maddeler de gösteriliyor 
+ve hangi maddelerin render ettirildiğini belirten bir şey yok. Komponenti 
+mockladığımızda render olmasını engelleyen koşul da kaybolur. Tamamlanma 
+durumunu kontrol edip mock değerimizin içerisinde ele alabiliriz ve maddeyi de 
+mock div elementinin içerisinde gösterebiliriz.
+
+<CH.Section>
+```javascript TodoList.test.tsx focus=2,5:9
+import { render, screen } from "@testing-library/react";
+import { TodoItemProps } from "./TodoItem";
+import TodoList from "./TodoList";
+
+jest.mock("./TodoItem", () =>
+  jest.fn(({ isCompleted, title }: TodoItemProps) => {
+    return isCompleted ? null : <div data-testid="todo-item">{title}</div>;
+  })
+);
+
+describe("<TodoList> tests", () => {
+  test("should render only incomplete todo items", () => {
+    const mockTodos = [
+      {
+        title: "Ölümcül task'ı bitir.",
+        isCompleted: false,
+      },
+      {
+        title: "Yalandan iki spor yap.",
+        isCompleted: false,
+      },
+      {
+        title: "Yarım saat diye başlayıp 3 saat sürecek şekilde oyun oyna.",
+        isCompleted: true,
+      },
+      {
+        title: "Olmayan zamanını sosyal medyada öldür.",
+        isCompleted: true,
+      },
+    ];
+
+    const { debug } = render(<TodoList todos={mockTodos} />);
+
+    console.log("DOM:");
+    debug();
+
+    expect(screen.getAllByTestId("todo-item")).toHaveLength(2);
+    expect(screen.getByText("Ölümcül task'ı bitir.")).toBeInTheDocument();
+    expect(screen.getByText("Yalandan iki spor yap.")).toBeInTheDocument();
+  });
+});
+```
+</CH.Section>
+<CodeResult>
+`DOM:`
+`<body>`
+`  <div>`
+`    <div>`
+`      <p>Yapılacaklar:</p>`
+`      <div data-testid="todo-item">Ölümcül task'ı bitir.</div>`
+`      <div data-testid="todo-item">Yalandan iki spor yap.</div>`
+`    </div>`
+`  </div>`
+`</body>`
+
+`PASS  src/TodoList.test.tsx`
+`  <TodoList> tests`
+`    ✓ should render only incomplete todo items (93 ms)`
+</CodeResult>
+
+## Eventleri Tetiklediğimiz Child Komponentleri Mocklama
+
+Bazen komponent state değerlerini alt komponentlerden değiştirip yeniden render 
+olmasını isteriz. Butona tıklandığında kişi listesinin çekildiği ve üst 
+komponentte render edildiği bir senaryo olabilir.
+
+<CH.Code>
+```javascript PersonList.tsx
+import React, { useState } from "react";
+import FetchButton from "./FetchButton";
+import Person from "./Person";
+
+const PersonList: React.FC = () => {
+  const [persons, setPersons] = useState<any>([]);
+
+  return (
+    <div>
+      <FetchButton setPersons={setPersons} />
+      {persons.map((person: any) => (
+        <Person
+          key={person.email}
+          firstName={person.firstName}
+          lastName={person.lastName}
+          email={person.email}
+        />
+      ))}
+    </div>
+  );
+};
+
+export default PersonList;
+```
+```javascript Person.tsx
+import React from "react";
+
+const Person: React.FC<PersonProps> = ({ firstName, lastName, email }) => {
+  return (
+    <div>
+      <p>{firstName}</p>
+      <p>{lastName}</p>
+      <p>{email}</p>
+    </div>
+  );
+};
+
+export interface PersonProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export default Person;
+```
+```javascript FetchButton.tsx
+import React from "react";
+
+const FetchButton: React.FC<FetchButtonProps> = ({ setPersons }) => {
+  const fetchPersons = async () => {
+    const response = await fetch("https://dummyjson.com/users?limit=5");
+    const result = await response.json();
+    setPersons(result.users);
+  };
+
+  return <button onClick={fetchPersons}>Kullanıcı Listesini Getir</button>;
+};
+
+export interface FetchButtonProps {
+  setPersons: (persons: Array<any>) => void;
+}
+
+export default FetchButton;
+```
+</CH.Code>
+
+Bu senaryoyu yukarıdaki örnekte `FetchButton` komponentine ilettiğimiz 
+`setPersons` setter metoduyla örneklendirebiliriz. Peki testte bu durumu nasıl 
+ele alacağız? 
+
+Mock div elementinde bir `onClick` olayı tanımlayıp callback değerini 
+verdiğimiz mock listeyi dönecek şekilde tanımlayabiliriz.
+
+```javascript PersonList.test.tsx
+import { fireEvent, render, screen } from "@testing-library/react";
+import { PersonProps } from "./Person";
+import * as FetchButtonModule from "./FetchButton";
+import PersonList from "./PersonList";
+
+// div içeriğinin gerçekte nasıl olduğu hiç önemli değil.
+// doğru kişiyi render ettiğimizi teyit edebiliyorsak kafi. 
+jest.mock("./Person", () =>
+  jest.fn(({ firstName, lastName, email }: PersonProps) => (
+    <div data-testid="person">
+      {firstName} - {lastName} - {email}
+    </div>
+  ))
+);
+
+describe("<PersonList /> tests", () => {
+  test("should get persons when click fetch button", () => {
+    const mockPersons = [
+      {
+        firstName: "Terry",
+        lastName: "Medhurst",
+        email: "atuny0@sohu.com",
+      },
+      {
+        firstName: "Sheldon",
+        lastName: "Quigley",
+        email: "hbingley1@plala.or.jp",
+      },
+    ];
+
+    jest.spyOn(FetchButtonModule, "default")
+        .mockImplementation(({ setPersons }: FetchButtonModule.FetchButtonProps) => (
+          <button
+            data-testid="fetch-button"
+            onClick={() => setPersons(mockPersons)}
+          />
+        ));
+
+    render(<PersonList />);
+
+    expect(screen.queryAllByTestId("person")).toHaveLength(0);
+
+    const fetchButton = screen.getByTestId("fetch-button");
+    fireEvent.click(fetchButton);
+
+    expect(screen.getAllByTestId("person")).toHaveLength(2);
+
+    screen.getAllByTestId("person").forEach((personEl, index) => {
+      const { firstName, lastName, email } = mockPersons[index];
+
+      expect(personEl).toHaveTextContent(`${firstName} - ${lastName} - ${email}`);
+    });
+  });
+});
+```
+<CodeResult>
+`PASS  src/PersonList.test.tsx`
+`  <PersonList /> tests`
+`    ✓ should get persons when click fetch button (36 ms)`
+</CodeResult>
+
+`PersonList` komponentinin görevi state değerine göre kişileri render 
+ettirmektir. Dolayısıyla alt komponentin listeyi nereden ve nasıl çektiğiyle 
+ilgilenmez.
+
+## LazyLoad Komponentleri Mocklama
+
+Sayfalarımızın içeriği karmaşıklaştıkça biliyoruz ki yüklenme süreleri şaha 
+kalkar. Bu gibi durumlarda bildiğimiz üzere **lazy load** namı diğer tembel 
+yükleme kullanırız. Adeta ödevini son güne bırakan tembel bir öğrenci misali 
+komponentin ekranda gözükmesi yaklaşana kadar render edilmez. Testleri 
+yaptığımız NodeJS ortamında ekran dediğimiz kavram da olmadığı için 
+komponentler hiçbir zaman render olmaz ve testlerimizi yapamayız.
+
+> Örneğimizi rastgele seçtiğim `react-lazyload` kütüphanesi üzerinden 
+> gösteriyor olacağım. Örneklerde ele alınmayan durumlar var 
+> (örneğin aşağıdaki örnekte api'den reject yediğimiz durumda kod patlar). 
+> Odaklanmak istediğim noktayı kaybetmemek için test dışındaki lojiğin 
+> ayrıntısından feragat etmeyi tercih ettim.
+
+```javascript Photos.tsx
+import { useEffect, useState } from "react";
+import LazyLoad from "react-lazyload";
+import fetch from "node-fetch";
+
+const Photos: React.FC = () => {
+  const [photos, setPhotos] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/photos")
+      .then(response => response.json())
+      .then(result => setPhotos(result));
+  }, []);
+
+  return (
+    <div>
+      {photos.map((photo: any) => (
+        <LazyLoad
+          key={photo.id}
+          height={600}
+        >
+          <img
+            data-testid="photo"
+            alt={photo.title}
+            src={photo.url}
+          />
+        </LazyLoad>
+      ))}
+    </div>
+  );
+};
+
+export default Photos;
+```
+
+Testini yazalım.
+
+```javascript Photos.test.tsx
+import { render, screen } from "@testing-library/react";
+import Photos from "./Photos";
+import * as NodeFetchModule from "node-fetch";
+
+describe("<Photos /> tests", () => {
+  let mockPhotos: Array<any>;
+
+  beforeAll(() => {
+    mockPhotos = [
+      {
+        id: 1,
+        title: "accusamus beatae ad facilis cum similique qui sunt",
+        url: "https://via.placeholder.com/600/92c952",
+      },
+      {
+        id: 2,
+        title: "reprehenderit est deserunt velit ipsam",
+        url: "https://via.placeholder.com/600/771796",
+      },
+      {
+        id: 3,
+        title: "officia porro iure quia iusto qui ipsa ut modi",
+        url: "https://via.placeholder.com/600/24f355",
+      },
+    ];
+
+    jest.spyOn(NodeFetchModule, "default").mockImplementation((url: any): any =>
+      Promise.resolve({
+        json: () => {
+          if (url === "https://jsonplaceholder.typicode.com/photos") {
+            return Promise.resolve(mockPhotos);
+          }
+
+          return Promise.reject();
+        },
+      })
+    );
+  });
+
+  test("should render greeting text without name", async () => {
+    const { debug } = render(<Photos />);
+
+    // useEffect'teki fetch metodu ile veriyi çektikten sonra
+    // state değerini güncelliyoruz. ancak bu durum meydana
+    // gelmesini beklediğimiz render test içerisinde beklenmez.
+    // ve eski dom içeriği görürüz. testi bekletmek adına `photo`
+    // test id'li elementin render edilmesini bekleriz.
+    const photoElements = await screen.findAllByTestId("photo");
+    debug();
+
+    photoElements.forEach((photoEl, index) => {
+      expect(photoEl).toHaveAttribute("alt", mockPhotos[index].title);
+      expect(photoEl).toHaveAttribute("src", mockPhotos[index].url);
+    });
+  });
+});
+```
+<CodeResult>
+`<body>`
+`  <div>`
+`    <div>`
+`      <div class="lazyload-wrapper">`
+`        <div`
+`          class="lazyload-placeholder"`
+`          style="height: 600px;"`
+`        />`
+`      </div>`
+`      <div class="lazyload-wrapper">`
+`        <div`
+`          class="lazyload-placeholder"`
+`          style="height: 600px;"`
+`        />`
+`      </div>`
+`      <div class="lazyload-wrapper">`
+`        <div`
+`          class="lazyload-placeholder"`
+`          style="height: 600px;"`
+`        />`
+`      </div>`
+`    </div>`
+`  </div>`
+`</body>`
+
+`FAIL src/Photos.test.tsx`
+`  <Photos /> tests`
+`    ✕ should render greeting text without name (1083 ms)`
+`      wUnable to find an element by: [data-testid="photo"]`
+</CodeResult>
+
+`img` elementi görmek yerine yer tutucuyla karşılaşıyoruz. NodeJS'de 
+intersection observer olmadığından ötürü hiçbir zaman resim elementi DOM'a 
+render olmaz. Bu şekilde testimizi yazamayacağımız için `LazyLoad` komponentini 
+mocklayacağız.
+
+<CH.Section>
+```javascript Photos.test.tsx focus=5:8
+import { render, screen } from "@testing-library/react";
+import Photos from "./Photos";
+import * as NodeFetchModule from "node-fetch";
+
+// içerisine verilen komponentin kendisini render ettirir.
+jest.mock("react-lazyload", () =>
+  jest.fn().mockImplementation(({ children }) => children);
+);
+
+describe("<Photos /> tests", () => {
+  let mockPhotos: Array<any>;
+
+  beforeAll(() => {
+    mockPhotos = [
+      {
+        id: 1,
+        title: "accusamus beatae ad facilis cum similique qui sunt",
+        url: "https://via.placeholder.com/600/92c952",
+      },
+      {
+        id: 2,
+        title: "reprehenderit est deserunt velit ipsam",
+        url: "https://via.placeholder.com/600/771796",
+      },
+      {
+        id: 3,
+        title: "officia porro iure quia iusto qui ipsa ut modi",
+        url: "https://via.placeholder.com/600/24f355",
+      },
+    ];
+
+    jest.spyOn(NodeFetchModule, "default").mockImplementation((url: any): any =>
+      Promise.resolve({
+        json: () => {
+          if (url === "https://jsonplaceholder.typicode.com/photos") {
+            return Promise.resolve(mockPhotos);
+          }
+
+          return Promise.reject();
+        },
+      })
+    );
+  });
+
+  test("should render greeting text without name", async () => {
+    const { debug } = render(<Photos />);
+
+    const photoElements = await screen.findAllByTestId("photo");
+    debug();
+
+    photoElements.forEach((photoEl, index) => {
+      expect(photoEl).toHaveAttribute("alt", mockPhotos[index].title);
+      expect(photoEl).toHaveAttribute("src", mockPhotos[index].url);
+    });
+  });
+});
+```
+</CH.Section>
+<CodeResult>
+`<body>`
+`  <div>`
+`    <div>`
+`      <img`
+`        alt="accusamus beatae ad facilis cum similique qui sunt"`
+`        data-testid="photo"`
+`        src="https://via.placeholder.com/600/92c952"`
+`      />`
+`      <img`
+`        alt="reprehenderit est deserunt velit ipsam"`
+`        data-testid="photo"`
+`        src="https://via.placeholder.com/600/771796"`
+`      />`
+`      <img`
+`        alt="officia porro iure quia iusto qui ipsa ut modi"`
+`        data-testid="photo"`
+`        src="https://via.placeholder.com/600/24f355"`
+`      />`
+`    </div>`
+`  </div>`
+`</body>`
+
+`PASS  src/components/lazyload/Photos.test.tsx`
+`  <Photos /> tests`
+`    ✓ should render greeting text without name (55 ms)`
+</CodeResult>
+
+## Seri Sonu Canavarı
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2ZHK-hVhELc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Yazının sonuna gelirken serideki bütün konuları birleştiren ve sizi challange 
+edecek bir örnek paylaşmak istedim. Aşağıda kodları olan örneğimizde geriye 
+sayaç vazifesi icra eden mini React projesinin kodlarını aşağıya bıraktım. 
+Buyrun çözüme.
+
+> Testleri yazarken çıktıdaki açıklamalardan faydalanabilirsiniz. Testin 
+> tamamlanmış haliniyse dördüncü sekmede bulabilirsiniz. Öncesinde bi 
+> yazmayı deneyin ve karşılaştığınız problemleri araştırırken ne gibi şeyler 
+> keşfedeceğinizi görmüş olun.
+
+<CH.Code>
+```javascript JusticeTimer.tsx
+import { useEffect, useState } from "react";
+import TimeBox from "./TimeBox";
+import { calculateDeltaBetweenDates, convertDeltaToDaysHoursMinutes } from "./utils/date";
+
+const justiceDate = new Date(2023, 5, 18, 17);
+let justiceTimerInterval: any;
+
+const JusticeTimer: React.FC = () => {
+  const [remainingTime, setRemainingTime] = useState(calculateDeltaBetweenDates(justiceDate));
+
+  useEffect(() => {
+    justiceTimerInterval = setInterval(() => {
+      setRemainingTime(calculateDeltaBetweenDates(justiceDate));
+    }, 1000);
+
+    return () => {
+      clearInterval(justiceTimerInterval);
+    };
+  }, []);
+
+  if (remainingTime === 0) {
+    clearInterval(justiceTimerInterval);
+
+    return (
+      <div data-testid="timer-ended-text">
+        Başardık! Artık yeni bir problemimiz var...
+      </div>
+    );
+  }
+
+  const { 
+    remainingDays,
+    remainingHours,
+    remainingMinutes,
+    remainingSeconds
+  } = convertDeltaToDaysHoursMinutes(remainingTime);
+
+  return (
+    <div>
+      <p>Adalet Sayacı</p>
+      <div data-testid="time-box-container">
+        <TimeBox type="day" value={remainingDays} />
+        <TimeBox type="hour" value={remainingHours} />
+        <TimeBox type="min" value={remainingMinutes} />
+        <TimeBox type="sec" value={remainingSeconds} />
+      </div>
+    </div>
+  );
+};
+
+export default JusticeTimer;
+```
+```javascript TimeBox.tsx
+const TimeBox: React.FC<TimeBoxProps> = ({ type, value }) => {
+  const helperTextsByType = {
+    day: "gün",
+    hour: "saat",
+    min: "dakika",
+    sec: "saniye",
+  };
+
+  return (
+    <div className="time-box">
+      <p>{value}</p>
+      <p>{helperTextsByType[type]}</p>
+    </div>
+  );
+};
+
+export interface TimeBoxProps {
+  value: number;
+  type: "day" | "hour" | "min" | "sec";
+}
+
+export default TimeBox;
+```
+```javascript utils/date.ts
+function calculateDeltaBetweenDates(futureDate: Date, currDate: Date = new Date()) {
+  let delta = futureDate.valueOf() - currDate.valueOf();
+
+  if (delta < 0) {
+    delta = 0;
+  }
+
+  return delta;
+}
+
+function convertDeltaToDaysHoursMinutes(delta: number) {
+  const deltaAsSeconds = Math.floor(delta / 1000);
+
+  return {
+    remainingDays: Math.floor(deltaAsSeconds / (60 * 60 * 24)),
+    remainingHours: Math.floor((deltaAsSeconds / (60 * 60)) % 24),
+    remainingMinutes: Math.floor((deltaAsSeconds / 60) % 60),
+    remainingSeconds: Math.floor(deltaAsSeconds % 60),
+  };
+}
+
+export { calculateDeltaBetweenDates, convertDeltaToDaysHoursMinutes };
+```
+```javascript JusticeTimer.test.tsx
+import { act, render, screen } from "@testing-library/react";
+import JusticeTimer from "./JusticeTimer";
+import TimeBox, { TimeBoxProps } from "./TimeBox";
+import * as DateUtils from "./utils/date";
+
+jest.useFakeTimers();
+jest.mock("./TimeBox");
+
+describe("<JusticeTimer> tests", () => {
+  beforeEach(() => {
+    jest.mocked(TimeBox).mockImplementation((props: TimeBoxProps) => (
+      <div
+        data-testid={`${props.type}-time-box`}
+        {...props}
+      />
+    ));
+  });
+
+  test("should render time that returned convertDeltaToDaysHoursMinutes when delta greater than zero", async () => {
+    let mockRemainingTime = 5530000;
+    const mockParsedRemainingTime = {
+      remainingDays: 0,
+      remainingHours: 1,
+      remainingMinutes: 32,
+      remainingSeconds: 10,
+    };
+
+    jest
+      .spyOn(DateUtils, "calculateDeltaBetweenDates")
+      .mockReturnValueOnce(mockRemainingTime)
+      .mockReturnValue(mockRemainingTime - 5000);
+
+    jest.spyOn(DateUtils, "convertDeltaToDaysHoursMinutes").mockImplementation((remainingTime: number) => {
+      if (remainingTime !== mockRemainingTime) {
+        new Error("You didn't mock.");
+      }
+
+      if (remainingTime === mockRemainingTime - 5000) {
+        return { ...mockParsedRemainingTime, remainingSeconds: mockParsedRemainingTime.remainingSeconds - 5 };
+      }
+
+      return mockParsedRemainingTime;
+    });
+
+    const { container } = render(<JusticeTimer />);
+
+    expect(screen.getByTestId("day-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingDays));
+    expect(screen.getByTestId("hour-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingHours));
+    expect(screen.getByTestId("min-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingMinutes));
+    expect(screen.getByTestId("sec-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingSeconds));
+
+    act(() => {
+      jest.advanceTimersByTime(5000);
+    });
+
+    expect(screen.getByTestId("sec-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingSeconds - 5));
+  });
+
+  test("should render timer ended text when delta equal zero", async () => {
+    const mockRemainingTime = 1000;
+
+    jest.spyOn(global, "clearInterval");
+    jest
+      .spyOn(DateUtils, "calculateDeltaBetweenDates")
+      .mockReturnValueOnce(mockRemainingTime)
+      .mockReturnValue(mockRemainingTime - 1000);
+
+    render(<JusticeTimer />);
+
+    act(() => {
+      jest.advanceTimersByTime(1000);
+    });
+
+    expect(screen.queryAllByTestId("time-box")).toHaveLength(0);
+    expect(screen.getByTestId("timer-ended-text")).toHaveTextContent("Başardık! Artık yeni bir problemimiz var...");
+    expect(clearInterval).toBeCalled();
+  });
+});
+```
+</CH.Code>
+<CodeResult>
+`PASS  src/JusticeTimer.test.tsx`
+`  <JusticeTimer> tests`
+`    ✓ should render time that returned convertDeltaToDaysHoursMinutes when delta greater than zero (79 ms)`
+`    ✓ should render timer ended text when delta equal zero (41 ms)`
+</CodeResult>
+
+## Kapanış
+
+React komponentlerine değindiğimiz bu yazıyla birlikte test serimin mocklama 
+kısmını bitirmiş oldum. Bol kodlu bir yazı oldu, umarım açıklayıcı olmuştur. 
+Testle ilgili İngilizce olarak bile çok büyük bir eksiklik var ve can suyu 
+olmayı umuyorum. Sonuna kadar okuduysan birkaç projenin testine giriştikten 
+sonra yoluna alfa tester olarak devam edebileceğini düşünüyorum. 
+Geribildirimlerinizi duymaktan mutlu olurum.
+
+Yazı burada biter. Sağlıcakla kalın.
+
+## Kaynaklar
+
+- [https://jestjs.io/docs](https://jestjs.io/docs)
