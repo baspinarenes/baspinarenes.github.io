@@ -1,0 +1,250 @@
+---
+title: "Kıssadan React [Yaşayan Yazı]"
+date: 2022-12-12
+summary: "React hakkında tuttuğum kısa notlar."
+---
+
+<WarningBox>
+  **Yaşayan Yazı**, bir yerimden uydurduğum bir terimdir ve ileriki dönemde içeriği zenginleşecek ama şu anki haliyle de faydalı olabilecek yazıları belirtir.
+</WarningBox>
+
+Yeni React dökümantasyonunun çıkmasıyla birlikte baştan takip etmek istedim. Dolayısıyla sıfırdan öğrenen birisine yardımcı olacak kilit noktaları az ve öz paylaşıyor olacağım.
+
+### Genel
+
+- React'ın "Strict Mode"u development esnasında her komponent fonksiyonunu iki kez çağırır ve Pure olmayan komponentleri yakalamanızı sağlar.
+- Animasyon ve ekranın yenilenmesi gibi işlemler **side effect** olarak adlandırılırlar. Renderlama anında değil yanında meydana gelen şeylerdir.
+
+### Renderlama
+
+- React komponentler esasen render edilmek üzere HTML döndüren fonksiyonlardır. Aslında HTML gibi dursa da JSX dediğimiz ve HTML çok benzeyen bir uzantı kullanır. Kendisi de JS olduğundan kodların elementlerle kullanılmasını kolaylaştırır. Nihayetinde kendisi de HTML'e çevrilir.
+
+```javascript
+function MyButton() {
+  return (
+    <button>I'm a button</button>
+  );
+}
+
+export default function MyApp() {
+  return (
+    <div>
+      <h1 className="heading-1">Welcome to my app</h1>
+      <MyButton />
+    </div>
+  );
+}
+```
+
+- Tek bir element/komponent döndürmesi gerekir. Eğer iç içe olmaması gereken bir şeyler varsa etrafına `<div>` ya da `<>` sarabiliriz.
+```javascript
+<div>
+  <CustomElement />
+  <div />
+</div>
+```
+
+- Child komponenti yoksa her zaman kapanan etiket (closing tag) ile yazmalıyız.
+```javascript
+<CustomElement />
+<div />
+```
+
+- Birden fazla element return edilemez. Bunları `<div>...</div>` ya da `<>...</>` etrafına sarmalıyız. İkincisinin adı **Fragment** olarak geçer ve HTML'e ekstra bir element eklemeden bu işi görür. Sebebi ise bir fonksiyonun array olmadığı takdirde birden fazla sonuç döndürememesidir.
+
+```js
+<div>
+  <CustomElement />
+  <div />
+</div>
+```
+
+- JavaScript değişkenleri ve ifadelerini (expression) JSX'de süslü parantez ile kullanabiliriz.
+
+```js
+const user = {
+  name: 'Hedy Lamarr',
+  imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg',
+  imageSize: 90,
+};
+
+export default function Profile() {
+  return (
+    <>
+      <h1>{user.name}</h1>
+      <img
+        className="avatar"
+        src={user.imageUrl}
+        alt={`Photo of ${user.name}`}
+        style={{
+          width: user.imageSize,
+          height: user.imageSize
+        }}
+      />
+    </>
+  );
+}
+```
+
+- Koşullu render için 3 farklı yaklaşım uygulayabiliriz. `false`, `null` ve `undefined` değerleri JSX'de gözardı edilir.
+
+```js
+let content;
+
+if (isLoggedIn) {
+  content = <AdminPanel />;
+} else {
+  content = <LoginForm />;
+}
+return (
+  <div>
+    {content}
+  </div>
+);
+```
+
+```js
+<div>
+  {isLoggedIn ? (
+    <AdminPanel />
+  ) : (
+    <LoginForm />
+  )}
+</div>
+```
+
+```js
+<div>
+  {isLoggedIn && <AdminPanel />}
+</div>
+```
+
+- Koşullu render yapmak istersek `condition ? result1 : result2` , `condition && result` şeklinde kısaltma ya da `if` koşulunu kullanabiliriz.
+
+```javascript
+if (isPacked) {
+  return <li className="item">{name} ✔</li>;
+}
+
+return <li className="item">{name}</li>;
+```
+```javascript
+return (
+  <li className="item">
+    {isPacked ? name + ' ✔' : name}
+  </li>
+);
+```
+```javascript
+return (
+  <li className="item">
+    {name} {isPacked && '✔'}
+  </li>
+);
+```
+
+- Listeleri render etmek istersek array metodlarıyla ürettiğimiz JSX element element listesi kullanabiliriz. Ek olarak elementlere `key` özelliği iletilmelidir ki elemanların sıraları değişirse ya da birisi silinirse benzersiz anahtar değerlere göre doğru şekilde yeniden render edilebilsin. 
+
+> `key` olarak uuid üreten bir kütüphane yada apiden dönen id değerini kullanabilirsiniz. Aksi halde şu hatayı alırsınız: 'Warning: Each child in a list should have a unique “key” prop.'
+
+
+```js
+const products = [
+  { title: 'Cabbage', id: 1 },
+  { title: 'Garlic', id: 2 },
+  { title: 'Apple', id: 3 },
+];
+
+const listItems = products.map(product =>
+  <li key={product.id}>
+    {product.title}
+  </li>
+);
+
+return (
+  <ul>{listItems}</ul>
+);
+```
+
+### Event Handler
+
+- Olaylara tepki gösterecel fonksiyonlarımızın ismini elementlere iletebiliriz. Çağrı parantezlerini eklerseniz render edilirken fonksiyon tek sefer çağrılır. Varsayılan olarak fonksiyona `Event` nesnesi geçilir ancak ekstra veri göndermek istersek **arrow function** kullanabiliriz.
+
+```js
+function MyButton() {
+  function handleClick() {
+    alert('You clicked me!');
+  }
+
+  return (
+    // <button onClick={(e) => handleClick(e)}>
+    <button onClick={handleClick}>
+      Click me
+    </button>
+  );
+}
+```
+
+### Props
+
+- Bileşenden bileşene veri aktarmak için `props` kullanırız. Klasik fonksiyona parametre geçme mantığı.
+
+```js
+function Avatar({ person, size = 100 }) {
+  // ...
+}
+
+function Profile() {
+  return (
+    <div className="card">
+      <Avatar
+        person="Enes"
+        size={80}
+      />
+    </div>
+  );
+}
+```
+
+- Children elementleri `children` alanından okuyabiliriz.
+
+```js
+function Heading({ children }) {
+  return (
+    <div className="heading">
+      {children}
+    </div>
+  );
+}
+
+export default function Text() {
+  return <Heading>Hello</Heading>;
+}
+```
+
+### State
+
+- Render'lar arasında korumak istediğimiz değerler varsa ve değiştiklerinde komponenti yeniden renderlamak istersek state değişkenleri kullanabiliriz. `useState` hook'u ile tanımlanabilir.
+
+> React'da `use` ile başlayan fonksiyonlara `hook` diyoruz. Bu hook'lar genellikle komponent root'unda olmalıdır. Koşul ya da döngü içine kullanmamalıyız. Gerekiyorsa yeni bir bileşen oluşturabiliriz.
+
+```js
+import { useState } from 'react';
+
+function MyButton() {
+  // count: mevcut değer
+  // setCount: değeri güncelleyecek olan fonksiyon
+  // 0: ilk değer
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+```

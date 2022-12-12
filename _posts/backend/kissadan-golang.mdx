@@ -1,8 +1,12 @@
 ---
-title: "Kıssadan Golang [Draft]"
+title: "Kıssadan Golang [Yaşayan Yazı]"
 date: 2022-10-11
 summary: "Golang çalışırken tuttuğum kısa notlar."
 ---
+
+<WarningBox>
+  **Yaşayan Yazı**, bir yerimden uydurduğum bir terimdir ve ileriki dönemde içeriği zenginleşecek ama şu anki haliyle de faydalı olabilecek yazıları belirtir.
+</WarningBox>
 
 <CustomImage src="/images/post/backend/kissadan-golang/001.jpeg" reference="https://github.com/golang/go" width={715} height={429} fluid/>
 
@@ -367,6 +371,73 @@ fmt.Println(userInfo)
 <CodeResult>
 map[name:Cem]
 </CodeResult>
+
+## Paket
+
+* Kendi paketimizi de oluşturabiliriz.
+
+```go
+package utils
+
+func Add(nums ...int) int  {
+  total := 0
+
+  for _, num := range nums {
+    total += num
+  }
+
+  return total
+}
+```
+
+```go
+package main
+
+import (
+  "fmt"
+  "project-folder/utils"
+  // math "{workspaceFolderName}/utils" : importa isim verebiliriz
+)
+
+func main()  {
+  utils.Add()
+}
+```
+
+## Unit Testing
+
+* Test dosyasının ismi test edilen dosyanın sonuna `_test` eklenmiş
+halidir. Bu iki dosya aynı dizinde olmalıdır.
+
+```go
+package utils
+
+import (
+	"testing"
+)
+
+func TestAverage(t *testing.T) {
+	expected := 4
+	actual := Average(3, 2)
+
+	if actual != expected {
+		t.Errorf("Add function does not add up: Expected: %d, Actual: %d", expected, actual)
+	}
+```
+
+```go
+package utils
+
+func Average(nums ...int) int {
+	total := 0
+
+	for _, num := range nums {
+		total += num
+	}
+
+	return total
+}
+```
 
 ## Diğer
 
