@@ -143,10 +143,15 @@ return (
 );
 ```
 
-- Listeleri render etmek istersek array metodlarıyla ürettiğimiz JSX element element listesi kullanabiliriz. Ek olarak elementlere `key` özelliği iletilmelidir ki elemanların sıraları değişirse ya da birisi silinirse benzersiz anahtar değerlere göre doğru şekilde yeniden render edilebilsin. 
+- Listeleri render etmek istersek array metodlarıyla ürettiğimiz JSX element 
+element listesi kullanabiliriz. Burda dikkat edilmesi gereken listedeki 
+değişikliklere adapte olabilmesi için elementlere `key` özelliği iletilmelidir. 
+Aksi halde indeks değerleri kullanır ve elemanların sıraları değişirse ya da 
+içlerinden birisi silinirse doğru şeyleri render edemez. 
 
 > `key` olarak uuid üreten bir kütüphane yada apiden dönen id değerini kullanabilirsiniz. Aksi halde şu hatayı alırsınız: 'Warning: Each child in a list should have a unique “key” prop.'
 
+> `key` özelliğine her seferinde rastgele değer üreten bir metod verilirse (örneğin Math.random) DOM'a her seferinde yeniden render edilir.
 
 ```js
 const products = [
@@ -185,6 +190,58 @@ function MyButton() {
 }
 ```
 
+- Fonksiyon çağrılırsa rendering esnasında çalıştırılır.
+
+```js
+<button onClick={handleClick()}>
+```
+
+- Elementlerin beklediği event props isimlerinde `on`, handler isimlerinde `handle` ile başlamak yaygındır. Örn: `onMouseEnter={handleMouseEnter}` 
+- Event propagation komponentlerde de geçerlidir. Örnekte önce button sonra div `onClick` metodu çağrılır. `onScroll` harici tüm olaylar yukarıya yayılır. Engellemek için `e.stopPropagation()` kullanılır.
+
+```js
+export default function Toolbar() {
+  return (
+    <div className="Toolbar" onClick={() => {
+      alert('You clicked on the toolbar!');
+    }}>
+      <button onClick={() => {
+        e.stopPropagation();
+        alert('Playing!')  
+      }}>
+        Play Movie
+      </button>
+    </div>
+  );
+}
+```
+
+- Formun `onSubmit` olayı gibi bazı olaylar varsayılan tarayıcı davranışına sahiptir ve sizin kodunuzdan sonra çalıştırır. Bunu engellemek için `e.preventDefault` kullanabiliriz.
+- Event handler'ları yukarıdan aşağıya doğru (capturing) çalıştırmak istersek `onClick` yerine `onClickCapture` kullanımını yapabiliriz.
+
+```js
+<div onClick={() => {
+  alert('Call 1');
+}}>
+  <div onClickCapture={() => {
+    alert('Call 2');
+  }}>
+    <div onClickCapture={() => {
+      alert('Call 3');
+    }}>
+      Click!
+    </div>
+  </div>
+</div>
+```
+<CodeResult>
+Call 2
+Call 3
+Call 1
+</CodeResult>
+
+
+
 ### Props
 
 - Bileşenden bileşene veri aktarmak için `props` kullanırız. Klasik fonksiyona parametre geçme mantığı.
@@ -206,7 +263,7 @@ function Profile() {
 }
 ```
 
-- Children elementleri `children` alanından okuyabiliriz.
+- Children elementleri props'un `children` özelliğinden okuyabiliriz.
 
 ```js
 function Heading({ children }) {
@@ -224,16 +281,17 @@ export default function Text() {
 
 ### State
 
-- Render'lar arasında korumak istediğimiz değerler varsa ve değiştiklerinde komponenti yeniden renderlamak istersek state değişkenleri kullanabiliriz. `useState` hook'u ile tanımlanabilir.
+- Zamanla değişebilen ve ekranın güncellenmesine yol açacak değerler için  **state** değişkenlerini kullanırız. Bi nevi komponent bazlı bellektir. Render'lar arasında değeri korunur. 
+- React'da state tanımlamak için `useState` hook'u kullanılır.
 
-> React'da `use` ile başlayan fonksiyonlara `hook` diyoruz. Bu hook'lar genellikle komponent root'unda olmalıdır. Koşul ya da döngü içine kullanmamalıyız. Gerekiyorsa yeni bir bileşen oluşturabiliriz.
+> React'da `use` ile başlayan fonksiyonlara `hook` diyoruz ve esasen React'ın özelliklerini kullanabilmemize yarıyorlar. Komponentlerin root'unda kullanılabilirler. Koşul ya da döngü içine kullanmamalıyız. Gerekiyorsa yeni bir bileşen oluşturabiliriz.
 
 ```js
 import { useState } from 'react';
 
 function MyButton() {
   // count: mevcut değer
-  // setCount: değeri güncelleyecek olan fonksiyon
+  // setCount: değeri güncelleyecek fonksiyon
   // 0: ilk değer
   const [count, setCount] = useState(0);
 
@@ -246,5 +304,58 @@ function MyButton() {
       Clicked {count} times
     </button>
   );
+}
+```
+
+- State setter çağırıldıktan sonra rerender tetiklenir ve yeni değer kullanılır.
+- React Hook'ların değerlerini çağrılma sırasına göre anlar. Arka arkaya tanımladığımız state değerleri dizide tutulur ve okunacağı zamanda indeksi birer arttırarak okur. Bu sebeptendir ki sadece komponentin root'unda tanımlanmalıdır.
+- Obje tutuyorsak spread kullanmayı unutmamalıyız.
+
+```js
+const [person, setPerson] = useState({
+  name: 'Niki de Saint Phalle',
+  artwork: {
+    title: 'Blue Nana',
+    city: 'Hamburg',
+    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  }
+});
+
+function handleTitleChange(e) {
+  setPerson({
+    ...person,
+    artwork: {
+      ...person.artwork,
+      title: e.target.value
+    }
+  });
+}
+```
+
+- State güncelleme metodu çalıştığı anda değeri yenilemez. Örnekte üç kez çağırılan setNumber metoduyla birlikte son değerin 3 olmasını bekleyebiliriz ancak öyle olmaz. Her bir setter çalıştığında state değeri mevcuttaki değer yani 0'dır. Metod çalışmayı bitirdikten sonra rerender olur ve state değeri güncellenir. Komponent context'deki değeri elde etmek istersek parametre olarak güncel değeri alan **updater** fonksiyon verebiliriz.
+
+```js
+import { useState } from 'react';
+
+export default function Counter() {
+  const [number, setNumber] = useState(0);
+
+  return (
+    <>
+      <h1>{number}</h1>
+      <button onClick={() => {
+        setNumber(number + 1); // setNumber(0 + 1)
+        setNumber(number + 1); // setNumber(0 + 1)
+        setNumber(number + 1); // setNumber(0 + 1)
+        // yeni değer sonraki rerender'da 1 olur.
+      }}>+3</button>
+      <button onClick={() => {
+        setNumber(number => number + 1); // setNumber(0 + 1)
+        setNumber(number => number + 1); // setNumber(1 + 1)
+        setNumber(number => number + 1); // setNumber(2 + 1)
+        // yeni değer sonraki rerender'da 3 olur.
+      }}>+3</button>
+    </>
+  )
 }
 ```
