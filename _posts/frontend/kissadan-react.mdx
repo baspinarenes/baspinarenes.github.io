@@ -281,7 +281,8 @@ export default function Text() {
 
 ### State
 
-- Zamanla değişebilen ve ekranın güncellenmesine yol açacak değerler için  **state** değişkenlerini kullanırız. Bi nevi komponent bazlı bellektir. Render'lar arasında değeri korunur. 
+- Zamanla değişebilen ve ekranın güncellenmesine yol açacak değerler için  **state** değişkenlerini kullanırız. Bi nevi komponent bazlı bellektir. Render'lar arasında değeri korunur.
+- State komponentin DOM'daki yeriyle ilişkilendirilir. State'in rerender'lar esnasında korunmasını istiyorsanız, DOM ağacının yenisiyle 'eşleşmesi' gerekir. Eğer aynı konumda render olan komponentlerde state'i sıfırlamak istersek farklı `key` parametresi verebiliriz.
 - React'da state tanımlamak için `useState` hook'u kullanılır.
 
 > React'da `use` ile başlayan fonksiyonlara `hook` diyoruz ve esasen React'ın özelliklerini kullanabilmemize yarıyorlar. Komponentlerin root'unda kullanılabilirler. Koşul ya da döngü içine kullanmamalıyız. Gerekiyorsa yeni bir bileşen oluşturabiliriz.
@@ -359,3 +360,177 @@ export default function Counter() {
   )
 }
 ```
+
+- Karmaşık state'leri yönetmek çok karmaşık olabilir. React'ın `useReducer` hook'u ile reducer oluşturup kullanılabiliriz. Esasen alınan aksiyonlar sonunda yapılacak state değişikliklerini tanımlamamızı sağlar.
+
+<CH.Code>
+```javascript TaskApp.tsx
+import AddTask from './AddTask.js';
+import TaskList from './TaskList.js';
+import { useTasksReducer } from './tasksReducer.js';
+
+export default function TaskApp() {
+  const [tasks, dispatch] = useTasksReducer();
+
+  function handleAddTask(text) {
+    dispatch({
+      type: 'added',
+      id: nextId++,
+      text: text,
+    });
+  }
+
+  function handleChangeTask(task) {
+    dispatch({
+      type: 'changed',
+      task: task,
+    });
+  }
+
+  function handleDeleteTask(taskId) {
+    dispatch({
+      type: 'deleted',
+      id: taskId,
+    });
+  }
+
+  return {
+    // ...
+  }
+}
+```
+```javascript tasksReducer.js
+import { useReducer } from 'react';
+
+function tasksReducer(tasks, action) {
+  switch (action.type) {
+    case 'added': {
+      return [
+        ...tasks,
+        {
+          id: action.id,
+          text: action.text,
+          done: false,
+        },
+      ];
+    }
+    case 'changed': {
+      return tasks.map((t) => {
+        if (t.id === action.task.id) {
+          return action.task;
+        } else {
+          return t;
+        }
+      });
+    }
+    case 'deleted': {
+      return tasks.filter((t) => t.id !== action.id);
+    }
+    default: {
+      throw Error('Unknown action: ' + action.type);
+    }
+  }
+}
+
+const initialTasks = [
+  {id: 0, text: 'Visit Kafka Museum', done: true},
+  {id: 1, text: 'Watch a puppet show', done: false},
+  {id: 2, text: 'Lennon Wall pic', done: false},
+];
+
+const useTasksReducer = () => useReducer(tasksReducer, initialTasks);
+
+export {
+  tasksReducer,
+  useTasksReducer
+}
+```
+</CH.Code>
+
+### Ref
+
+- Referans tanımlamak için `useRef` hook'u kullanabiliriz. Değeri render'lar sırasında korur ancak rerender'a sebep olmaz.
+
+```javascript
+import { useRef } from 'react';
+
+export default function Counter() {
+  let count = useRef(0);
+
+  function handleClick() {
+    count.current = count.current + 1;
+    alert('You clicked ' + count.current + ' times!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click me!
+    </button>
+  );
+}
+```
+
+- DOM elementlerini manipüle etmek istersek `ref` parametresini kullanabiliriz.
+
+```javascript
+import { useRef } from 'react';
+
+export default function Form() {
+  const inputRef = useRef(null);
+
+  function handleClick() {
+    inputRef.current.focus();
+  }
+
+  return (
+    <>
+      <input ref={inputRef} />
+      <button onClick={handleClick}>
+        Focus the input
+      </button>
+    </>
+  );
+}
+```
+
+### Context
+
+- Props'ları komponentler arasında 100 kat aşağıya indirmek yerine bir context tanımlayıp `useContext` hook'u yardımıyla okuyabiliriz.
+
+<CH.Code>
+```javascript Section.jsx
+import { LevelContextProvider } from './LevelContext.js';
+
+export default function Section({ level, children }) {
+  return (
+    <section className="section">
+      <LevelContextProvider value={level}>
+        {children}
+      </LevelContextProvider>
+    </section>
+  );
+}
+```
+```javascript Heading.jsx
+import { useLevelContext } from "./LevelContext";
+
+export default function Heading({ children }) {
+  const level = useLevelContext();
+ 
+ // ...
+}
+
+```
+```javascript LevelContext.jsx
+import { createContext, useContext } from 'react';
+
+const LevelContext = createContext(1);
+const LevelContextProvider = LevelContext.Provider;
+const useLevelContext = () => useContext(LevelContext);
+
+export {
+  LevelContextProvider,
+  useLevelContext
+}
+```
+</CH.Code>

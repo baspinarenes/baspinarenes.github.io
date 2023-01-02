@@ -159,7 +159,7 @@ export default {
 
 Farklı içe aktarma yöntemlerinin farklarına sıradaki başlıkta değineceğiz.
 
-## Modül Mocklama
+## Girizgah
 
 Uygulamamızda ürün ve kullanıcı bilgilerini çekmek için yardımcı fonksiyonlara sahip olduğumuzu varsayalım.
 
@@ -774,14 +774,10 @@ describe("utils tests", () => {
 });
 ```
 
-> Bu arada neden direk olayı anlatmıyorsun diyorsanız hataları görelim ki 
-> tekrardan karşılaştığımızda hangi aksiyonu alacağımızı kestirelim.
-
-Aha, yine hata. `get` metodunu mocklayamadık. Buraya pür dikkat lütfen. 
-**MOCK, YALNIZCA IMPORT ÇAĞIRILAN DOSYALARDA ÇALIŞIR.** Peki biz `utils.
-ts`'de `./utils` dosyasının import ediyor muyuz? Hayır! Bundan dolayı da 
-mocklayamıyoruz. Teyit etmek için testimizin içinde `mockedUtils` değişkenini 
-yazdıralım.
+Aha, yine hata. `get` metodunu mocklayamadık. İlgili dosyanın fonksiyonları 
+yalnızca import edildiği dosyalarda mocklanır, kendi dosyasının içerisinde 
+kullanıyorsak mocklanmaz. Peki biz `utils.ts`'de `./utils` dosyasının import 
+ediyor muyuz? Hayır! Teyit etmek için `mockedUtils` değişkenini yazdıralım.
 
 ```typescript
 test("should call get func with api product endpoint when given product id", () => {
@@ -813,7 +809,7 @@ test("should call get func with api product endpoint when given product id", () 
 `}`
 </CodeResult>
 
-Şimdi bir de `getProduct` içinde `get` fonksiyonunu yazdıralım.
+Şimdi `getProduct` içinde `get` fonksiyonunu yazdıralım.
 
 ```typescript
 export function getProduct(productId: number): Promise<any> {
@@ -825,8 +821,8 @@ export function getProduct(productId: number): Promise<any> {
 get Function: [Function: get]
 </CodeResult>
 
-Görebileceğiniz üzere fonksiyon mocklanmamış. Peki ne yapacağız? Ayrı bir 
-dosyaya çıkarıp yeni dosya üzerinden mocklayabiliriz.
+Düşündüğümüz gibi fonksiyon mocklanmamış. Ayrı bir dosyaya çıkarıp yeni dosya 
+üzerinden mocklayabiliriz.
 
 <CH.Code>
 ```typescript utils.test.ts
@@ -917,8 +913,8 @@ utils tests
 ### jest.spyOn()
 
 Eski bir dostla karşılaşmış gibiyiz. Evet, modüllerde de `jest.spyOn()` 
-kullanabiliriz. Ayrı dosyaya çıkartmak bu yöntemde de gereklidir. Ancak hala 
-çok daha temiz bir kullanımdır.
+kullanabiliriz. Ayrı dosyaya çıkartmak bu yöntemle de gerekli olsa bile 
+çok daha temiz bir kullanım sağlar.
 
 <CH.Code>
 ```typescript utils.test.ts
@@ -1059,7 +1055,9 @@ Is axiosInstance2.get mocked: false
 
 ## Kapanış
 
-Herhangi bir konuda olduğu gibi, haşır neşir olmadığınız takdirde test öğrenmek zor gelebilir. Ancak işin aslı kesinlikle öyle değil.
+İşin içine girip gerçek senaryolarla ilgili kod yazmadıkça test öğrenmek zor 
+görünebilir. Ancak olumsuz bir yargıya varmayın istediğimiz takdirde 
+öğrenebileceğimizi biliyoruz.
 
 Yazı burada biter. Sağlıcakla kalın.
 
