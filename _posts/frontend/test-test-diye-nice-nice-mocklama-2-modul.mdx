@@ -7,8 +7,7 @@ summary: "Modül metodlarını nasıl mocklayabileceğimizi görelim."
 ## Bölümler
 
 - [Test Test Diye Nice Nice: Mocklama (1) - Fonksiyon](/blog/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon)
-- Test Test Diye Nice Nice: Mocklama (2) - Modül (Şu anda
-buradasınız!)
+- Test Test Diye Nice Nice: Mocklama (2) - Modül (Şu anda buradasınız)
 - [Test Test Diye Nice Nice: Mocklama (3) - Timer](/blog/frontend/test-test-diye-nice-nice-mocklama-3-timer)
 - [Test Test Diye Nice Nice: Mocklama (4) - React](/blog/frontend/test-test-diye-nice-nice-mocklama-4-react)
 
@@ -26,7 +25,10 @@ Artık modüllere böldüğümüz fonksiyonları nasıl mocklayabileceğimize g�
 
 ## Modül Nedir?
 
-Uygulamalar büyüdükçe dosyalara bölme ihtiyacı hissedilmeye başlanır. Fonksiyon gruplarını içeren bu dosyalara **modül** denir. Mocklarken hangi yöntemleri kullanabileceğimiz anlayabilmek için içe aktarılan dosyaların içeriklerine (nesne mi? değerleri neler?) göz atacağız.
+Uygulamalar büyüdükçe dosyalara bölme ihtiyacı hissedilmeye başlanır. Fonksiyon
+gruplarını içeren bu dosyalara **modül** denir. Mocklarken hangi yöntemleri
+kullanabileceğimiz anlayabilmek için içe aktarılan dosyaların içeriklerine
+(nesne mi? değerleri neler?) göz atacağız.
 
 CommonJs kullanarak yapabileceğimiz farklı import çeşitleri:
 
@@ -161,7 +163,8 @@ Farklı içe aktarma yöntemlerinin farklarına sıradaki başlıkta değineceğ
 
 ## Girizgah
 
-Uygulamamızda ürün ve kullanıcı bilgilerini çekmek için yardımcı fonksiyonlara sahip olduğumuzu varsayalım.
+Uygulamamızda ürün ve kullanıcı bilgilerini çekmek için yardımcı fonksiyonlara
+sahip olduğumuzu varsayalım.
 
 > Kod kümelerimizi yardımcı metodlara çıkarma işlemine **abstraction** denir. 
 > Örneğin ürün bilgisini çekmek görevini ifa eden kodları `getProduct()` isimli 
@@ -193,7 +196,8 @@ export function getUser(userId: number): Promise<any> {
 }
 ```
 
-Elimizdeki bilgilerle mocklamayı deneyelim. İlk akla gelen import edip ezerek override etmek olabilir.
+Elimizdeki bilgilerle mocklamayı deneyelim. İlk akla gelen import edip ezerek
+override etmek olabilir.
 
 ```javascript utils.test.ts
 import { get } from "./index";
@@ -208,7 +212,8 @@ test("should be mock", () => {
 error TS2632: Cannot assign to 'get' because it is an import.
 </CodeResult>
 
-Mocklamaya çalıştığımız fonksiyonun import olduğuna dair uyarı ile karşılaştık. Dosyanın nesne olarak import edilmesinin çözüm olacağını düşünebiliriz.
+Mocklamaya çalıştığımız fonksiyonun import olduğuna dair uyarı ile karşılaştık.
+Dosyanın nesne olarak import edilmesinin çözüm olacağını düşünebiliriz.
 
 ```javascript utils.test.ts
 import * as UtilsModule from "./index";
@@ -225,11 +230,14 @@ test("should be mock", () => {
 error TS2540: Cannot assign to 'get' because it is a read-only property.
 </CodeResult>
 
-Ancak alnımızın çatına TypeScript hatasını yeriz. Olsun, güzel denemeydi. Zaten import'un direkt ezmek güzel bir uygulama olmazdı. Bu işi Jest'in maharetli ellerine bırakalım.
+Ancak alnımızın çatına TypeScript hatasını yeriz. Olsun, güzel denemeydi. Zaten
+import'un direkt ezmek güzel bir uygulama olmazdı. Bu işi Jest'in maharetli
+ellerine bırakalım.
 
 ## jest.mock()
 
-Modülleri mocklamak için `jest.mock(relativeFilePath, factory, options)` kullanılır. Yalnızca dosya yolu verilmişse export edilen tüm metodları otomatik mocklar.
+Modülleri mocklamak için `jest.mock(relativeFilePath, factory, options)` kullanılır.
+Yalnızca dosya yolu verilmişse export edilen tüm metodları otomatik mocklar.
 
 <CH.Code>
 ```typescript utils.test.ts
@@ -299,7 +307,9 @@ export function getUser(userId: number): Promise<any> {
 `}`
 </CodeResult>
 
-Dosya yolunu mockladığımızda kendisini çağıran import'lar takip edilerek sahte modül döndürülür. Ancak unutmayalım ki test dosyasının içindeki modül çağrısı da mocklanmış olur.
+Dosya yolunu mockladığımızda kendisini çağıran import'lar takip edilerek sahte
+modül döndürülür. Ancak unutmayalım ki test dosyasının içindeki modül çağrısı
+da mocklanmış olur.
 
 ```javascript
 import * as UtilsModule from "./utils";
@@ -332,7 +342,8 @@ Mocklanan modüllerdeki fonksiyonlara varsayılan olarak `jest.fn()` atanır.
 Dolayısıyla implementasyonu ya da dönüş değerini önceki yazıdaki yöntemlerle
 mocklayabiliriz.
 
-Utils modülümüzün testlerine `get` ile başlayalım. İçerisinde axios paketinin bir metodu kullanılmıştır ve bu paketi yani modülü mocklamamız gerekir.
+Utils modülümüzün testlerine `get` ile başlayalım. İçerisinde axios paketinin
+bir metodu kullanılmıştır ve bu paketi yani modülü mocklamamız gerekir.
 
 <CH.Code>
 ```typescript utils.test.ts
@@ -429,11 +440,15 @@ export function getUser(userId: number): Promise<any> {
 </CodeResult>
 
 Jest, modülleri mockladıktan sonra kendi metodları için TypeScript tiplerini
-eklemez. Barındırdığı tüm fonksiyonlara Jest metodlarının tiplerini sarmalamak istersek `jest.mocked(source)` metodunu kullanabiliriz.
+eklemez. Barındırdığı tüm fonksiyonlara Jest metodlarının tiplerini sarmalamak
+istersek `jest.mocked(source)` metodunu kullanabiliriz.
 
 ### Factory Parametresi
 
-Modül mocklanırken fonksiyonların otomatik mocklanmasını istemiyorsak ve kendimiz konfigüre edeceksek `factory` parametresini kullanabiliriz. Örneğimizde eğer dönüş değeri mocklanmamışsa reject edecek bir yapı kuralım ve ikinci testi refactor edelim.
+Modül mocklanırken fonksiyonların otomatik mocklanmasını istemiyorsak ve
+kendimiz konfigüre edeceksek `factory` parametresini kullanabiliriz.
+Örneğimizde eğer dönüş değeri mocklanmamışsa reject edecek bir yapı kuralım
+ve ikinci testi refactor edelim.
 
 <CH.Section>
 ```typescript focus=4:10,34:36,44:51
@@ -595,8 +610,9 @@ test("playground", async () => {
 ```
 </CH.Section>
 
-Görebileceğimiz üzere Once olanlar tamamlandıktan sonra normalleri çalıştırılır. Kendi aralarında ise tanımlandıkları sıraya riayet ederler. 
-`factory` parametresinin kritik özellikleriyle bölümü noktalayalım:
+Görebileceğimiz üzere Once olanlar tamamlandıktan sonra normalleri çalıştırılır.
+Kendi aralarında ise tanımlandıkları sıraya riayet ederler. `factory`
+parametresinin kritik özellikleriyle bölümü noktalayalım:
 
 - `export default` gibi ES modüllerini mocklamak istersek 
 `__esModule: true` eklemeliyiz.
@@ -610,7 +626,7 @@ jest.mock('../moduleName', () => {
 });
 ```
 
-- Modüldeki fonksiyonların yalnızca bazılarının mocklanmasını istersek `jest.requireActual()` ile modülün mocklanmamış haline erişebiliriz.
+- Modüldeki fonksiyonların yalnızca bazılarının mocklanmasını istersek, `jest.requireActual()` ile modülün mocklanmamış haline erişebiliriz.
 
 ```typescript
 jest.mock('../moduleName', () => {
@@ -706,12 +722,14 @@ fakat bu fonksiyon hiç çağırılmadı." diyor.
 
 `getProduct` fonksiyonunun implementasyonunu mocklamak için `Utils` modülünü 
 mockladık. Ancak testi için orijinal implementasyonuna ihtiyaç duyduğumuz `get` 
-fonksiyonu da mocklanmış oldu. Test bazlı fonksiyon mocklamak işimize yarardı. Bu problemi birkaç farklı yöntemle çözebiliriz.
+fonksiyonu da mocklanmış oldu. Test bazlı fonksiyon mocklamak işimize yarardı.
+Bu problemi birkaç farklı yöntemle çözebiliriz.
 
 ### jest.doMock()
 
 Jest'te modül mocklamanın diğer bir yolu `jest.doMock()` kullanmaktır. Bunun 
-`jest.mock`'tan farkı, hoist edilmiyor olmasıdır. Yani sadece kendisinden sonra yazılan importları mocklar.
+`jest.mock`'tan farkı, hoist edilmiyor olmasıdır. Yani sadece kendisinden sonra
+yazılan importları mocklar.
 
 > Mocklanmasını beklediğiniz bir modül mocklanmamışsa import 
 > edildikten sonra mocklanmış olma ihtimali çok yüksektir. Kontrol 
@@ -737,6 +755,8 @@ describe("utils tests", () => {
     // dosyanın ana kapsamında yapılan mock geçersiz olur.
     jest.resetModules();
   });
+
+  // ...
 
   describe("getProduct() tests", () => {
     test("should call get func with api product endpoint when given product id", () => {
@@ -774,10 +794,9 @@ describe("utils tests", () => {
 });
 ```
 
-Aha, yine hata. `get` metodunu mocklayamadık. İlgili dosyanın fonksiyonları 
-yalnızca import edildiği dosyalarda mocklanır, kendi dosyasının içerisinde 
-kullanıyorsak mocklanmaz. Peki biz `utils.ts`'de `./utils` dosyasının import 
-ediyor muyuz? Hayır! Teyit etmek için `mockedUtils` değişkenini yazdıralım.
+`get` metodunu mocklayamadığımıza dair bir hata aldık. getProduct ve get aynı
+dosyada yer aldığı ve biz mocklamak için import beklediğimizden dolayı başarısız
+olur. Teyit etmek için `mockedUtils` değişkenini yazdıralım.
 
 ```typescript
 test("should call get func with api product endpoint when given product id", () => {

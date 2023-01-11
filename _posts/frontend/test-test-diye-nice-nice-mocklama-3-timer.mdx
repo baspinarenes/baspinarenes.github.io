@@ -8,8 +8,7 @@ summary: "setTimeout ve türevi zamanlayıcı içeren fonksiyonları nasıl mock
 
 - [Test Test Diye Nice Nice: Mocklama (1) - Fonksiyon](/blog/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon)
 - [Test Test Diye Nice Nice: Mocklama (2) - Modül](/blog/frontend/test-test-diye-nice-nice-mocklama-2-modul)
-- Test Test Diye Nice Nice: Mocklama (3) - Timer (Şu anda
-buradasınız!)
+- Test Test Diye Nice Nice: Mocklama (3) - Timer (Şu anda buradasınız)
 - [Test Test Diye Nice Nice: Mocklama (4) - React](/blog/frontend/test-test-diye-nice-nice-mocklama-4-react)
 
 <CustomImage
@@ -45,7 +44,7 @@ olarak aldığı fonksiyonu 3 saniye sonra çalıştıran bol konsollu bir
 fonksiyonumuz olduğunu varsayalım.
 
 ```javascript callAfterThreeSeconds.ts
-function callAfterThreeSeconds(callback: () => void) {
+export default function callAfterThreeSeconds(callback: () => void) {
   console.log("setTimeout çalışmadan önce");
 
   setTimeout(() => {
@@ -60,8 +59,6 @@ function callAfterThreeSeconds(callback: () => void) {
 callAfterThreeSeconds(() => {
   console.log("callback çalıştı");
 });
-
-export default callAfterThreeSeconds;
 ```
 <CodeResult>
 setTimeout çalışmadan önce
@@ -268,7 +265,7 @@ tamamlandığında kuyruktan çıkarılır ve çalıştırılır. Testlerde time
 geçip callback'i anında çalıştırabiliriz. `setTimeout()` ile yazdığımız 
 testi tekrardan görelim.
 
-```javascript
+```javascript callAfterThreeSeconds.test.ts
 import callAfterThreeSeconds from "./callAfterThreeSeconds";
 
 jest.spyOn(global, "setTimeout");
@@ -290,7 +287,7 @@ Süre az gözükse bile 3 saniye 3 saniye birike birike pipeline olur size 1.5 s
 > Test esnasında tamamlanmayı bekleyen timer sayısını görmek için
 > `jest.getTimerCount()` metodunu kullanabiliriz.
 
-```javascript
+```javascript callAfterThreeSeconds.test.ts
 import callAfterThreeSeconds from "./callAfterThreeSeconds";
 
 jest.useFakeTimers();

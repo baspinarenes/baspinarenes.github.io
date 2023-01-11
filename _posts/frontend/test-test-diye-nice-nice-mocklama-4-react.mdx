@@ -9,8 +9,7 @@ summary: "React komponentleri kullanırken mocklamanın nasıl çalıştığın�
 - [Test Test Diye Nice Nice: Mocklama (1) - Fonksiyon](/blog/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon)
 - [Test Test Diye Nice Nice: Mocklama (2) - Modül](/blog/frontend/test-test-diye-nice-nice-mocklama-2-modul)
 - [Test Test Diye Nice Nice: Mocklama (3) - Timer](/blog/frontend/test-test-diye-nice-nice-mocklama-3-timer)
-- Test Test Diye Nice Nice: Mocklama (4) - React (Şu anda
-buradasınız!)
+- Test Test Diye Nice Nice: Mocklama (4) - React (Şu anda buradasınız)
 
 <CustomImage
   src="/images/post/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon/001.jpeg"
@@ -37,35 +36,12 @@ haşır neşir oluyoruz. Peki mocklama React komponentleriyle birlikte nasıl
 
 Projelerimizde yardımcı metodları çoğu yerde kullanıyoruz. Framework'ler 
 işin içine girdiğinde komponent dediğimiz özel fonksiyon türleri hayatımıza 
-giriyor.
-
-> Komponentlerin hepsini elbette bir dosyada tutmayız. Aşağıdaki kod bloğunda 
-> genel bakış atmak için birlikte göstereceğim ama siz her birinin kendi 
-> dosyalarında olduğunu varsayın. Modül yazısında test ettiğimiz fonksiyonla 
-> aynı dosyada bulunan fonksiyonları mocklayamadığımızı hatırlayın. Bu 
-> sebepledir ki komponentlerimizi atomik boyutlara bölmek, test edilebilir kod 
-> yazmak için en temel kuraldır.
-
-Kullanıcının kayıtlı olup olmamasına göre formun içeriğini yöneten 
+giriyor. Kullanıcının kayıtlı olup olmamasına göre formun içeriğini yöneten 
 `Registration` komponentimiz olduğunu düşünelim.
 
-```javascript
-const RegisterForm: React.FC = () => {
-  return <div>...</div>;
-};
-
-export default RegisterForm;
-
-// ----------------------------------------------------------
-
-const LoginForm: React.FC = () => {
-  return <div>...</div>;
-};
-
-export default LoginForm;
-
-// ----------------------------------------------------------
-
+<CH.Code>
+```typescript Registration.tsx
+import React from "react";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 
@@ -79,6 +55,25 @@ interface RegistrationProps {
 
 export default Registration;
 ```
+```typescript RegisterForm.tsx
+import React from "react";
+
+const RegisterForm: React.FC = () => {
+  return <div>...</div>;
+};
+
+export default RegisterForm;
+```
+```typescript LoginForm.tsx
+import React from "react";
+
+const LoginForm: React.FC = () => {
+  return <div>...</div>;
+};
+
+export default LoginForm;
+```
+</CH.Code>
 
 Gördüğümüz üzere komponentler iç içe kullanılırlar ve uygulamanın giriş dosyasında özel bir metodla DOM ağacına render edilirler.
 
