@@ -4,6 +4,7 @@ date: 2022-12-01
 summary: "React komponentleri kullanırken mocklamanın nasıl çalıştığını görelim."
 ---
 
+
 ## Bölümler
 
 - [Test Test Diye Nice Nice: Mocklama (1) - Fonksiyon](/blog/frontend/test-test-diye-nice-nice-mocklama-1-fonksiyon)
@@ -19,6 +20,18 @@ summary: "React komponentleri kullanırken mocklamanın nasıl çalıştığın�
   borderless 
 />
 
+## İçerik
+
+- [Girizgah](#girizgah)
+- [Komponent Mocklama](#komponent-mocklama)
+  - [Propsları Mock Komponente Geçme](#propsları-mock-komponente-geçme)
+  - [State'leri Manipüle Ettiğimiz Child Komponentleri Mocklama](#stateleri-manipüle-ettiğimiz-child-komponentleri-mocklama)
+  - [Kütüphane Komponentlerini Mocklama](#kütüphane-komponentlerini-mocklama)
+- [Seri Sonu Canavarı](#seri-sonu-canavarı)
+
+
+<Seperator />
+
 > Angular sevdiğimiz bir abimizdi. Karmaşık bir framework'tü, her şeyi yapmaya 
 > çalışırdı. Mesela ben yapmam. Bundle size'ı arttırırdı, ben arttırmam. 
 > Developerlar'ın işi düştüğünde sırtını dönerdi, ben dönmem. Angular 
@@ -27,17 +40,15 @@ summary: "React komponentleri kullanırken mocklamanın nasıl çalıştığın�
 > kardeş, junior'ların kafasını karıştırma yeter.  
 > **- React**
 
-Mocklama serüvenimizde son olarak React'a kadar geldik. Çoğumuz çalışma 
-hayatında React framework'ünü kullanıyoruz ve komponent testleriyle 
-haşır neşir oluyoruz. Peki mocklama React komponentleriyle birlikte nasıl 
-çalışır?
+Mocklama serüvenimizde React'a kadar geldik. Çoğumuz React framework'ünü kullanıyoruz ve komponent testleriyle
+haşır neşir oluyoruz. Peki mocklama React komponentleriyle birlikte nasıl çalışır?
 
+> Yazının kodlarına [Github](https://github.com/baspinarenes/blog-code-examples/tree/main/jest-mocking-4-react) üzerinden erişebilirsiniz.
+ 
 ## Girizgah
 
-Projelerimizde yardımcı metodları çoğu yerde kullanıyoruz. Framework'ler 
-işin içine girdiğinde komponent dediğimiz özel fonksiyon türleri hayatımıza 
-giriyor. Kullanıcının kayıtlı olup olmamasına göre formun içeriğini yöneten 
-`Registration` komponentimiz olduğunu düşünelim.
+Framework'lerle birlikte komponent dediğimiz özel fonksiyon türleri hayatımıza girer ve temel amaçları DOM elementri üretmek ve DOM ağacına render etmektir. Kullanıcının kayıtlı olup olmamasına göre formun içeriğini yöneten 
+`Registration` komponentini ele alalım.
 
 <CH.Code>
 ```typescript Registration.tsx
@@ -56,19 +67,42 @@ interface RegistrationProps {
 export default Registration;
 ```
 ```typescript RegisterForm.tsx
-import React from "react";
+import React, { useState } from "react";
 
-const RegisterForm: React.FC = () => {
-  return <div>...</div>;
+const RegisterForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  // ...
+
+  return (
+    <form onSubmit={handleRegisterSubmit}>
+      ...
+    </form>
+  );
 };
 
 export default RegisterForm;
 ```
 ```typescript LoginForm.tsx
-import React from "react";
+import React, { useState } from "react";
 
-const LoginForm: React.FC = () => {
-  return <div>...</div>;
+const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  // ...
+
+  return (
+    <form onSubmit={handleLoginSubmit}>
+      ...
+    </form>
+  );
 };
 
 export default LoginForm;
@@ -99,23 +133,20 @@ kullanacağız.
 
 Komponentleri mocklamak için önceki yazılardan faydalanabilir ve döndüreceği DOM içeriğini belirleyebiliriz. Genelde `div` döndürüp `data-testid` parametresi olarak komponent ismi vermeyi tercih ediyorum.
 
-```javascript
+```javascript Registration.test.tsx
 import { render } from "@testing-library/react";
 import Registration from "./Registration";
 
 jest.mock("./RegisterForm", () => {
   return {
     default: jest.fn().mockReturnValue(<div data-testid="register-form" />),
-  }
+  };
 });
 
-// ya da
-// jest.mock("./RegisterForm", () => jest.fn(() => <div data-testid="register-form" />));
-
 test("playground", () => {
-  const { debug } = render(<Registration isRegistered={false} />)
+  const { debug } = render(<Registration isRegistered={false} />);
   console.log("DOM:");
-  // sahte DOM ağacının mevcut halini yazdırır
+  // prints the HTML of the fake DOM tree at that stage of the test
   debug();
 });
 ```
@@ -135,7 +166,7 @@ bir nesne döndürür. Mock içeriklerin başarıyla render olduğunu görmek i�
 render edilmiş olduğunu görebiliriz. Komponentin başarıyla mocklandığını 
 görmenin huzuruyla yolumuza devam edelim.
 
-## Basit Testler
+## Komponent Mocklama
 
 Hatırlarsanız test yazarkenki temel prensibimiz, testin odaklandığı fonksiyon 
 dışındaki fonksiyonların mümkün mertebe çalıştırılmamasıydı. React'da ise child 
@@ -162,27 +193,36 @@ import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import Registration from "./Registration";
 
-jest.mock("./RegisterForm");
-jest.mock("./LoginForm");
+jest.mock("./LoginForm", () => {
+  return {
+    default: jest.fn().mockReturnValue(<div data-testid="login-form" />),
+  };
+});
 
-describe("<Registration> tests", () => {
-  beforeEach(() => {
-    jest.resetAllMocks();
+jest.mock("./RegisterForm", () => {
+  return {
+    default: jest.fn().mockReturnValue(<div data-testid="register-form" />),
+  };
+});
+
+describe("<Registration /> tests", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  test("should render <RegisterForm /> when isRegistered equal false", () => {
-    jest.mocked(RegisterForm).mockReturnValue(<div data-testid="register-form" />);
-
+  it("should render the register form when isRegistered is false", () => {
     render(<Registration isRegistered={false} />);
 
+    expect(RegisterForm).toHaveBeenCalled();
+    expect(LoginForm).not.toHaveBeenCalled();
     expect(screen.getByTestId("register-form")).toBeInTheDocument();
   });
 
-  test("should render <LoginForm /> when isRegistered equal true", () => {
-    jest.mocked(LoginForm).mockReturnValue(<div data-testid="login-form" />);
-
+  it("should render the login form when isRegistered is true", () => {
     render(<Registration isRegistered={true} />);
 
+    expect(LoginForm).toHaveBeenCalled();
+    expect(RegisterForm).not.toHaveBeenCalled();
     expect(screen.getByTestId("login-form")).toBeInTheDocument();
   });
 });
@@ -226,7 +266,7 @@ describe("<Registration> tests", () => {
 Mocklamalar test ihtiyaçlarına göre şekillendirilmelidir. Render edildiğini 
 görmek istiyorsak basit bir `data-testid` işimizi görecektir.
 
-## Propsları Mock Komponente Geçme
+### Propsları Mock Komponente Geçme
 
 Yapılacaklar listesi ve maddeleri için iki farklı komponentimiz olduğunu 
 düşünelim.
@@ -317,7 +357,7 @@ import { render, screen } from "@testing-library/react";
 import TodoList from "./TodoList";
 
 jest.mock("./TodoItem", () => jest.fn().mockReturnValue(
-  <div data-testid="todo-item"></div>
+  <div data-testid="todo-item" />
 ));
 
 describe("<TodoList> tests", () => {
@@ -440,7 +480,7 @@ describe("<TodoList> tests", () => {
 `    ✓ should render only incomplete todo items (93 ms)`
 </CodeResult>
 
-## State'leri Manipüle Ettiğimiz Child Komponentleri Mocklama
+### State'leri Manipüle Ettiğimiz Child Komponentleri Mocklama
 
 Bazen komponent state değerlerini alt komponentlerden değiştirip yeniden render 
 olmasını isteriz. Butona tıklandığında kişi listesinin çekildiği ve üst 
@@ -582,7 +622,7 @@ describe("<PersonList /> tests", () => {
 ettirmektir. Dolayısıyla alt komponentin listeyi nereden ve nasıl çektiğiyle 
 ilgilenmez.
 
-## Kütüphane Komponentlerini Mocklama
+### Kütüphane Komponentlerini Mocklama
 
 Sayfalarımızın içeriği karmaşıklaştıkça yüklenme süresi şaha kalkar. Bu gibi durumlarda bildiğimiz üzere **lazy load** namı diğer tembel yükleme kullanırız. Adeta ödevini son güne bırakan tembel bir öğrenci misali komponentin ekranda gözükmesi yaklaşana kadar render etmez. Testleri yaptığımız NodeJS ortamında ekran dediğimiz kavram da olmadığı için komponentler hiçbir zaman render olmaz ve testleri gerçekleştiremeyiz.
 
@@ -590,17 +630,17 @@ Sayfalarımızın içeriği karmaşıklaştıkça yüklenme süresi şaha kalkar
 > gösteriyor olacağım. Bunun yerine diğer herhangi bir kütüphane gelebilir.
 
 ```javascript Photos.tsx
+import axios from "axios";
 import { useEffect, useState } from "react";
 import LazyLoad from "react-lazyload";
-import fetch from "node-fetch";
 
 const Photos: React.FC = () => {
   const [photos, setPhotos] = useState([]);
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/photos")
-      .then(response => response.json())
-      .then(result => setPhotos(result));
+    axios.get("https://jsonplaceholder.typicode.com/photos").then((result: any) => {
+      setPhotos(result);
+    });
   }, []);
 
   return (
@@ -628,8 +668,8 @@ Testini yazalım.
 
 ```javascript Photos.test.tsx
 import { render, screen } from "@testing-library/react";
+import axios from "axios";
 import Photos from "./Photos";
-import * as NodeFetchModule from "node-fetch";
 
 describe("<Photos /> tests", () => {
   let mockPhotos: Array<{
@@ -657,17 +697,13 @@ describe("<Photos /> tests", () => {
       },
     ];
 
-    jest.spyOn(NodeFetchModule, "default").mockImplementation((url: any): any =>
-      Promise.resolve({
-        json: () => {
-          if (url === "https://jsonplaceholder.typicode.com/photos") {
-            return Promise.resolve(mockPhotos);
-          }
+    jest.spyOn(axios, "get").mockImplementation((url: string): any => {
+      if (url === "https://jsonplaceholder.typicode.com/photos") {
+        return Promise.resolve(mockPhotos);
+      }
 
-          return Promise.reject();
-        },
-      })
-    );
+      return Promise.reject();
+    });
   });
 
   test("should render greeting text without name", async () => {
@@ -726,15 +762,11 @@ render olmaz. Bu şekilde testimizi gerçekleştiremeyeceğimizden dolayı
 `LazyLoad` komponentini mocklayacağız.
 
 <CH.Section>
-```javascript Photos.test.tsx focus=5:8
+```javascript Photos.test.tsx focus=42:44
 import { render, screen } from "@testing-library/react";
+import axios from "axios";
+import * as ReactLazyLoadModule from "react-lazyload";
 import Photos from "./Photos";
-import * as NodeFetchModule from "node-fetch";
-
-// içerisine verilen komponentin direk render ettirir.
-jest.mock("react-lazyload", () =>
-  jest.fn().mockImplementation(({ children }) => children);
-);
 
 describe("<Photos /> tests", () => {
   let mockPhotos: Array<{
@@ -762,22 +794,27 @@ describe("<Photos /> tests", () => {
       },
     ];
 
-    jest.spyOn(NodeFetchModule, "default").mockImplementation((url: any): any =>
-      Promise.resolve({
-        json: () => {
-          if (url === "https://jsonplaceholder.typicode.com/photos") {
-            return Promise.resolve(mockPhotos);
-          }
+    jest.spyOn(axios, "get").mockImplementation((url: string): any => {
+      if (url === "https://jsonplaceholder.typicode.com/photos") {
+        return Promise.resolve(mockPhotos);
+      }
 
-          return Promise.reject();
-        },
-      })
-    );
+      return Promise.reject();
+    });
   });
 
   test("should render greeting text without name", async () => {
+    jest
+      .spyOn(ReactLazyLoadModule, "default")
+      .mockImplementation(({ children }: any) => children);
+
     const { debug } = render(<Photos />);
 
+    // useEffect'teki fetch metodu ile veriyi çektikten sonra
+    // state değerini güncelliyoruz. ancak bu durum meydana
+    // gelmesini beklediğimiz render test içerisinde beklenmez.
+    // ve eski dom içeriği görürüz. testi bekletmek adına `photo`
+    // test id'li elementin render edilmesini bekleriz.
     const photoElements = await screen.findAllByTestId("photo");
     debug();
 
@@ -827,58 +864,60 @@ React projesinin kodlarını aşağıya bıraktım. Buyrun testlerini yazmaya. T
 çıktısından faydalanabilirsiniz.
 
 <CH.Code>
-```javascript JusticeTimer.tsx
+```javascript RemainingTimer.tsx
 import React, { useEffect, useState } from "react";
 import TimeBox from "./TimeBox";
 import { calculateDeltaBetweenDates, convertDeltaToDaysHoursMinutes } from "./utils/date";
 
-const justiceDate = new Date(2023, 5, 18, 17);
-let justiceTimerInterval: any;
+const timerEndDate = new Date(2023, 5, 18, 17);
 
-const JusticeTimer: React.FC = () => {
-  const [remainingTime, setRemainingTime] = useState(calculateDeltaBetweenDates(justiceDate));
+const RemainingTimer: React.FC = () => {
+  const [remainingTime, setRemainingTime] = useState(calculateDeltaBetweenDates(timerEndDate));
+  let remainingTimerInterval: any;
 
   useEffect(() => {
-    justiceTimerInterval = setInterval(() => {
-      setRemainingTime(calculateDeltaBetweenDates(justiceDate));
+    remainingTimerInterval = setInterval(() => {
+      setRemainingTime(calculateDeltaBetweenDates(timerEndDate));
     }, 1000);
 
     return () => {
-      clearInterval(justiceTimerInterval);
+      clearInterval(remainingTimerInterval);
     };
   }, []);
 
   if (remainingTime === 0) {
-    clearInterval(justiceTimerInterval);
+    clearInterval(remainingTimerInterval);
 
-    return (
-      <div data-testid="timer-ended-text">
-        Başardık! Artık yeni bir problemimiz var...
-      </div>
-    );
+    return <div data-testid="timer-ended-text">Timer finished!</div>;
   }
 
-  const { 
-    remainingDays,
-    remainingHours,
-    remainingMinutes,
-    remainingSeconds
-  } = convertDeltaToDaysHoursMinutes(remainingTime);
+  const { remainingDays, remainingHours, remainingMinutes, remainingSeconds } =
+    convertDeltaToDaysHoursMinutes(remainingTime);
 
   return (
-    <div>
-      <p>Adalet Sayacı</p>
-      <div data-testid="time-box-container">
-        <TimeBox type="day" value={remainingDays} />
-        <TimeBox type="hour" value={remainingHours} />
-        <TimeBox type="min" value={remainingMinutes} />
-        <TimeBox type="sec" value={remainingSeconds} />
-      </div>
+    <div data-testid="time-box-container">
+      <TimeBox
+        type="day"
+        value={remainingDays}
+      />
+      <TimeBox
+        type="hour"
+        value={remainingHours}
+      />
+      <TimeBox
+        type="min"
+        value={remainingMinutes}
+      />
+      <TimeBox
+        type="sec"
+        value={remainingSeconds}
+      />
     </div>
   );
 };
 
-export default JusticeTimer;
+export default RemainingTimer;
+
 ```
 ```javascript TimeBox.tsx
 import React from "react";
@@ -930,91 +969,10 @@ function convertDeltaToDaysHoursMinutes(delta: number) {
 
 export { calculateDeltaBetweenDates, convertDeltaToDaysHoursMinutes };
 ```
-```javascript JusticeTimer.test.tsx
-import React from "react";
-import { act, render, screen } from "@testing-library/react";
-import JusticeTimer from "./JusticeTimer";
-import TimeBox, { TimeBoxProps } from "./TimeBox";
-import * as DateUtils from "./utils/date";
-
-jest.useFakeTimers();
-jest.mock("./TimeBox");
-
-describe("<JusticeTimer> tests", () => {
-  beforeEach(() => {
-    jest.mocked(TimeBox).mockImplementation((props: TimeBoxProps) => (
-      <div
-        data-testid={`${props.type}-time-box`}
-        {...props}
-      />
-    ));
-  });
-
-  test("should render time that returned convertDeltaToDaysHoursMinutes when delta greater than zero", async () => {
-    let mockRemainingTime = 5530000;
-    const mockParsedRemainingTime = {
-      remainingDays: 0,
-      remainingHours: 1,
-      remainingMinutes: 32,
-      remainingSeconds: 10,
-    };
-
-    jest
-      .spyOn(DateUtils, "calculateDeltaBetweenDates")
-      .mockReturnValueOnce(mockRemainingTime)
-      .mockReturnValue(mockRemainingTime - 5000);
-
-    jest.spyOn(DateUtils, "convertDeltaToDaysHoursMinutes").mockImplementation((remainingTime: number) => {
-      if (remainingTime !== mockRemainingTime) {
-        new Error("You didn't mock.");
-      }
-
-      if (remainingTime === mockRemainingTime - 5000) {
-        return { ...mockParsedRemainingTime, remainingSeconds: mockParsedRemainingTime.remainingSeconds - 5 };
-      }
-
-      return mockParsedRemainingTime;
-    });
-
-    const { container } = render(<JusticeTimer />);
-
-    expect(screen.getByTestId("day-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingDays));
-    expect(screen.getByTestId("hour-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingHours));
-    expect(screen.getByTestId("min-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingMinutes));
-    expect(screen.getByTestId("sec-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingSeconds));
-
-    act(() => {
-      jest.advanceTimersByTime(5000);
-    });
-
-    expect(screen.getByTestId("sec-time-box")).toHaveAttribute("value", String(mockParsedRemainingTime.remainingSeconds - 5));
-  });
-
-  test("should render timer ended text when delta equal zero", async () => {
-    const mockRemainingTime = 1000;
-
-    jest.spyOn(global, "clearInterval");
-    jest
-      .spyOn(DateUtils, "calculateDeltaBetweenDates")
-      .mockReturnValueOnce(mockRemainingTime)
-      .mockReturnValue(mockRemainingTime - 1000);
-
-    render(<JusticeTimer />);
-
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    expect(screen.queryAllByTestId("time-box")).toHaveLength(0);
-    expect(screen.getByTestId("timer-ended-text")).toHaveTextContent("Başardık! Artık yeni bir problemimiz var...");
-    expect(clearInterval).toBeCalled();
-  });
-});
-```
 </CH.Code>
 <CodeResult>
-`PASS  src/JusticeTimer.test.tsx`
-`  <JusticeTimer> tests`
+`PASS  src/RemainingTimer.test.tsx`
+`  <RemainingTimer /> tests`
 `    ✓ should render time that returned convertDeltaToDaysHoursMinutes when delta greater than zero (79 ms)`
 `    ✓ should render timer ended text when delta equal zero (41 ms)`
 </CodeResult>

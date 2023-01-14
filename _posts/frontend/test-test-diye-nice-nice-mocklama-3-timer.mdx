@@ -19,12 +19,25 @@ summary: "setTimeout ve türevi zamanlayıcı içeren fonksiyonları nasıl mock
   borderless 
 />
 
+## İçerik
+
+- [Girizgah](#girizgah)
+- [Fake Timer](#fake-timer)
+  - [Callback'i Beklemeksizin Çalıştırmak](#callbacki-beklemeksizin-çalıştırmak)
+  - [Yalnızca Halihazırda Kuyrukta Bulunan Callback'leri Çalıştırma](#yalnızca-halihazırda-kuyrukta-bulunan-callbackleri-çalıştırma)
+  - [Zamanlayıcıyı Belirli Süre İlerleterek Callback'leri Çalıştırma](#zamanlayıcıyı-belirli-süre-i̇lerleterek-callbackleri-çalıştırma)
+  - [Callback'leri Adım Adım Çalıştırma](#callbackleri-adım-adım-çalıştırma)
+- [Ekstra Metodlar](#ekstra-metodlar)
+- [Partik](#pratik)
+
+<Seperator />
+
 > Evren yaratıldığı anda gizli bir zamanlayıcı saymaya başladı. Bu uçsuz 
-> bucaksız düzlemde her birimize bir şerit ayrıldı ve yaşadığımız tüm olaylar,
+> bucaksız düzlemde her birimize bir şerit ayrıldı ve yaşadığımız tüm olaylar
 > bu şeride yazılmaya başlandı. Bazen anılarımız kesişti ve şeritler birleşti,
 > bazense ummadığımız kadar uzaklaştılar birbirlerinden... Bu ne alaka 
 > diyebilirsiniz aniden zihnimde belirince dümenden paylaştım. Garip blog 
-> dünyama hoşgeldiniz efenim. 
+> dünyama hoşgeldiniz.
 
 Günlük hayatımızda bir takım işlerimizi zamanlayıcılara göre yaparız. 40 dk 
 sonra yemek yiyecek ya da 24 saatte bir ilaç içecek olabiliriz. Kodlarımızdaki 
@@ -36,6 +49,8 @@ Makaleye güzel bir arkaplan müziğinin eşlik etmesini isteyenlere fazlaca
 dinlediğim keman virtüözü Farid Farjad'ı takdim ediyorum:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/N0tmJOjwYUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+> Yazının kodlarına [Github](https://github.com/baspinarenes/blog-code-examples/tree/main/jest-mocking-3-timer) üzerinden erişebilirsiniz.
 
 ## Girizgah
 
@@ -120,10 +135,10 @@ console.log
 
 İlk `expect` başarıyla geçer ancak ikincisinde fonksiyonun tamamlanması 
 beklenmediği için test başarısız olur. Fonksiyonun 3 saniye sonra 
-tamamlanacağını testimize belirtmemiz gerekir.
+tamamlanacağını belirtmemiz gerekir.
 
 <CH.Section>
-```javascript callAfterThreeSeconds.test.ts focus=9:13
+```javascript focus=9:13
 import callAfterThreeSeconds from "./callAfterThreeSeconds";
 
 jest.spyOn(global, "setTimeout");
@@ -171,7 +186,7 @@ metodu kullanılır. Nereden çağrıldığı farketmeksizin tüm dosyayı etkil
 çağrıldığında önceki zamanlayıcılara ait bilgileri temizler. Kodun bir kısmında 
 gerçek zamanlayıcıya geri dönmek istersek `jest.useRealTimers()` kullanabiliriz.
 
-```javascript
+```javascript useTimers.test.ts
 test("playground", () => {
   jest.useFakeTimers();
   console.log("FAKES\n-------");
@@ -231,7 +246,7 @@ Sahte zamanlayıcıyı özelleştirmek istersek aşağıdaki değerleri alabilen
 - **timerLimit** - az sonra değineceğimiz `jest.runAllTimers()` ile 
   çalıştırabileceğimiz maksimum timer sayısı.
 
-```javascript
+```javascript customUseTimers.test.ts
 jest.useFakeTimers({
   now: new Date(1999, 2, 21),
   doNotFake: ["setInterval"],
@@ -258,7 +273,7 @@ test("playground", () => {
 `Date.now(): 1999-03-20T22:00:00.000Z`
 </CodeResult>
 
-## Callback'i Beklemeksizin Çalıştırmak
+### Callback'i Beklemeksizin Çalıştırmak
 
 Zamanlayıcı metodlarının callback'leri event loop'da kuyruğa alınır ve süresi 
 tamamlandığında kuyruktan çıkarılır ve çalıştırılır. Testlerde timeout'u es 
@@ -333,7 +348,7 @@ ana metodumuz bulunur:
 > Micro-macro görevler konusunda kafanızda soru işareti varsa sizi yine
 > [şu videoya](https://www.youtube.com/watch?v=8aGhZQkoFbQ) alalım.
 
-## Yalnızca Halihazırda Kuyrukta Bulunan Callback'leri Çalıştırma
+### Yalnızca Halihazırda Kuyrukta Bulunan Callback'leri Çalıştırma
 
 Önceki başlıkta bahsettiğimiz üzere `jest.runAllTimers()` metodu, fonksiyon 
 kuyruktaki macro-task'ların callback'lerini çalıştırır. Türetilenler varsa 
@@ -420,7 +435,7 @@ Called callback 1.
 Called callback 2.
 </CodeResult>
 
-## Zamanlayıcıyı Belirli Süre İlerleterek Callback'leri Çalıştırma
+### Zamanlayıcıyı Belirli Süre İlerleterek Callback'leri Çalıştırma
 
 Tüm zamanlayıcıların süresini sıfırlamak istemiyorsak ikinci seçenek olarak 
 zamanlayıcıyı belirli süre ilerletebiliriz. Örnekteki sahte zamanlayıcıyı 
@@ -471,7 +486,7 @@ Called child callback 3.
 Kümülatif olarak toplandığında verilen süre içerisinde çalıştırılan timerların 
 callback'leri timeout beklemeksizin çalıştırılır.
 
-## Callback'leri Adım Adım Çalıştırma
+### Callback'leri Adım Adım Çalıştırma
 
 Son yöntem ise callback'lerin adım adım çalıştırılmasını sağlayan
 `jest.advanceTimersToNextTimer(step?)` metodudur.
@@ -592,14 +607,8 @@ test("playground", () => {
 
   jest.setSystemTime(new Date(1999, 2, 21));
 
-  console.log(
-    "gerçek tarih (orjinal timer'a göre):",
-    new Date(jest.getRealSystemTime())
-  );
-  console.log(
-    "sahte tarih (fake timer'a göre):",
-    new Date(jest.now())
-  );
+  console.log("gerçek tarih:", new Date(jest.getRealSystemTime()));
+  console.log("sahte tarih:", new Date(jest.now()));
 });
 ```
 <CodeResult>
@@ -607,14 +616,13 @@ gerçek tarih (orjinal timer'a göre): 2022-11-15T03:32:20.747Z
 sahte tarih (fake timer'a göre): 1999-03-20T22:00:00.000Z
 </CodeResult>
 
-## Final Boss
+## Pratik
 
-Sona gelirken sizi çok zorlamayacak bir final boss bırakıyorum. Çıktıdan 
-case'lere bakarak testleri kendiniz yazmaya çabalamanızı tavsiye ederim çünkü 
-çok şey öğrenilen anlar çoğunlukla en çok zorlanılan zamanlar oluyor. 
-Takılırsanız ikinci sekmeden testlerin tamamlanmış haline bakabilirsiniz.
+Sona gelirken testini yazmanızı beklediğim bir fonksiyon bırakıyorum. Çıktıdan 
+case'leri çıkararak kendi kendinize yazmanızı tavsiye ederim çünkü 
+çok fazle şey öğrenilen anlar genellikle en çok zorlanılan zamanlar oluyor. 
+Takılırsanız [Github](https://github.com/baspinarenes/blog-code-examples/blob/main/jest-mocking-3-timer/src/009-practice/breakReminder.test.ts)'dan çözümüne göz atabilirsiniz.
 
-<CH.Code>
 ```javascript breakReminder.ts
 function breakReminder(breakActivity: any) {
   console.log("Starting working...");
@@ -634,51 +642,6 @@ function breakReminder(breakActivity: any) {
 
 export default breakReminder;
 ```
-```javascript breakReminder.test.ts
-import breakReminder from "./breakReminder";
-
-describe("breakReminder() tests", () => {
-  let mockBreakActivity: jest.Mock;
-
-  beforeAll(() => {
-    jest.useFakeTimers();
-
-    jest.spyOn(global, "setInterval");
-    jest.spyOn(global, "clearInterval");
-    jest.spyOn(console, "log");
-
-    mockBreakActivity = jest.fn();
-    // test edeceğimiz metodu beforeAll'da çağırdık
-    // çünkü setTimeout kodu bekletecektir. bu sayede
-    // her testte ayrı ayrı çağırma zahmetine girmeden
-    // kademe kademe ilerletebiliriz.
-    breakReminder(mockBreakActivity);
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
-
-  test('should start work on first iteration', () => {
-    expect(console.log).toHaveBeenCalledWith("Starting working...");
-    expect(setInterval).toHaveBeenCalledWith(expect.any(Function), 3000);
-  });
-
-  test("should call breakActivity on second, third and fourth iteration", () => {
-    jest.advanceTimersToNextTimer(3);
-
-    expect(mockBreakActivity).toHaveBeenCalledTimes(3);
-  });
-
-  test("should end work on last iteration", () => {
-    jest.advanceTimersByTime(3000);
-
-    expect(console.log).toHaveBeenCalledWith("Ending working.");
-    expect(clearInterval).toHaveBeenCalled();
-  });
-});
-```
-</CH.Code>
 <CodeResult>
 `PASS  src/playground/utils.test.ts`
 `  breakReminder() tests`

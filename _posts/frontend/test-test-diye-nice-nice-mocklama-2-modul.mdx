@@ -19,9 +19,26 @@ summary: "Modül metodlarını nasıl mocklayabileceğimizi görelim."
   borderless 
 />
 
+## İçerik
+
+- [Modül Nedir?](#modül-nedir)
+- [Girizgah](#girizgah)
+- [Modül Mocklama](#jestmock)
+  - [Modül Fonksiyonların İmplementasyonunun Mocklanması](#modül-fonksiyonların-i̇mplementasyonunun-mocklanması)
+  - [Factory Parametresi](#factory-parametresi)
+  - [Kısmi Mocklama](#kısmi-mocklama)
+- [Spesifik Testlerde Modül Mocklamak](#spesifik-testlerde-modül-mocklamak)
+  - [jest.doMock()](#jestdomock)
+  - [jest.spyOn()](#jestspyon)
+- [Modül Mockunu Temizleme](#modül-mockunu-temizleme)
+
+<Seperator />
+
 Önceki yazıda mock kavramının ne olduğuna ve hangi ihtiyaçtan doğduğuna 
 değindik. Kütüphane ve built-in metodların mocklanış yöntemlerinden bahsettik. 
 Artık modüllere böldüğümüz fonksiyonları nasıl mocklayabileceğimize göz atalım.
+
+> Yazının kodlarına [Github](https://github.com/baspinarenes/blog-code-examples/tree/main/jest-mocking-2-module) üzerinden erişebilirsiniz.
 
 ## Modül Nedir?
 
@@ -234,7 +251,7 @@ Ancak alnımızın çatına TypeScript hatasını yeriz. Olsun, güzel denemeydi
 import'un direkt ezmek güzel bir uygulama olmazdı. Bu işi Jest'in maharetli
 ellerine bırakalım.
 
-## jest.mock()
+## Modül Mocklama
 
 Modülleri mocklamak için `jest.mock(relativeFilePath, factory, options)` kullanılır.
 Yalnızca dosya yolu verilmişse export edilen tüm metodları otomatik mocklar.
@@ -610,23 +627,9 @@ test("playground", async () => {
 ```
 </CH.Section>
 
-Görebileceğimiz üzere Once olanlar tamamlandıktan sonra normalleri çalıştırılır.
-Kendi aralarında ise tanımlandıkları sıraya riayet ederler. `factory`
-parametresinin kritik özellikleriyle bölümü noktalayalım:
+### Kısmi Mocklama
 
-- `export default` gibi ES modüllerini mocklamak istersek 
-`__esModule: true` eklemeliyiz.
-
-```typescript
-jest.mock('../moduleName', () => {
-  return {
-    __esModule: true,
-    default: ...,
-  };
-});
-```
-
-- Modüldeki fonksiyonların yalnızca bazılarının mocklanmasını istersek, `jest.requireActual()` ile modülün mocklanmamış haline erişebiliriz.
+Şimdiye kadar daima tüm modülü mockladık. Ancak yalnızca bazı işlevleri mocklamak isteyebiliriz. Modüllerin gerçek içeriğine erişmek için `jest.requireActual` kullanılır.
 
 ```typescript
 jest.mock('../moduleName', () => {
@@ -737,12 +740,11 @@ yazılan importları mocklar.
 
 ```typescript
 import axios from "axios";
+import UtilsModule from "./utils";
 
 jest.mock("axios", () => {
   return {
-    get: jest
-      .fn()
-      .mockRejectedValue(new Error("Error occured when fetching data!")),
+    get: jest.fn().mockRejectedValue(new Error("Error occured when fetching data!")),
   };
 });
 
@@ -751,12 +753,11 @@ const mockedAxios = jest.mocked(axios);
 describe("utils tests", () => {
   afterEach(() => {
     jest.clearAllMocks();
-    // tüm modüllerdeki mockları temizler. dolayısıyla
-    // dosyanın ana kapsamında yapılan mock geçersiz olur.
+    // bu dosyadaki tüm modül mockları temizler.
     jest.resetModules();
   });
 
-  // ...
+  //...
 
   describe("getProduct() tests", () => {
     test("should call get func with api product endpoint when given product id", () => {
@@ -779,15 +780,14 @@ describe("utils tests", () => {
         get: jest.fn().mockResolvedValue(mockProduct),
       }));
 
-      // burası kritik bir nokta. doMock hoist edilmeyeceği
+       // burası kritik bir nokta. doMock hoist edilmeyeceği
       // için sonrasında yaptığımız require'ı kullanmalıyız.
+      const GetModule = require("./utils");
       const UtilsModule = require("./utils");
 
       const result = UtilsModule.getProduct(productId);
 
-      expect(UtilsModule.get).toHaveBeenCalledWith(
-        `https://dummyjson.com/products/${productId}`
-      );
+      expect(GetModule.default).toHaveBeenCalledWith(`https://dummyjson.com/products/${productId}`);
       expect(result).toStrictEqual(mockProduct);
     });
   });
@@ -801,12 +801,14 @@ olur. Teyit etmek için `mockedUtils` değişkenini yazdıralım.
 ```typescript
 test("should call get func with api product endpoint when given product id", () => {
   // ...
-  console.log("get Function: ", UtilsModule.get);
+  const UtilsModule = require("./utils");
+
+  console.log("get:", UtilsModule.get);
   // ...
 })
 ```
 <CodeResult>
-`get Function: [Function: mockConstructor] {`
+`get: [Function: mockConstructor] {`
 `  _isMockFunction: true,`
 `  getMockImplementation: [Function (anonymous)],`
 `  mock: [Getter/Setter],`
@@ -850,16 +852,52 @@ import * as GetModule from "./get";
 
 jest.mock("axios", () => {
   return {
-    get: jest
-      .fn()
-      .mockRejectedValue(new Error("Error occured when fetching data!")),
+    get: jest.fn().mockRejectedValue(new Error("Error occured when fetching data!")),
   };
 });
 
 const mockedAxios = jest.mocked(axios);
 
 describe("utils tests", () => {
-  // ...
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.resetModules(); // clears all module mocks in this file.
+  });
+
+  describe("get() tests", () => {
+    test("should return product when request is success", async () => {
+      const apiUrl = "https://dummyjson.com/product/1";
+      const mockProduct = {
+        id: 1,
+        title: "iPhone 9",
+        description: "An apple mobile which is nothing like apple",
+        price: 549,
+        discountPercentage: 12.96,
+        rating: 4.69,
+        stock: 94,
+        brand: "Apple",
+        category: "smartphones",
+      };
+
+      mockedAxios.get.mockResolvedValueOnce({
+        data: mockProduct,
+      });
+
+      const result = await GetModule.default(apiUrl);
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      expect(result).toStrictEqual(mockProduct);
+    });
+
+    test("should return null when request is failed", async () => {
+      const apiUrl = "https://dummyjson.com/product/1000";
+
+      const result = await GetModule.default(apiUrl);
+
+      expect(mockedAxios.get).toHaveBeenCalledWith(apiUrl);
+      expect(result).toBeNull();
+    });
+  });
 
   describe("getProduct() tests", () => {
     test("should call get func with api product endpoint when given product id", async () => {
@@ -887,9 +925,7 @@ describe("utils tests", () => {
 
       const result = await UtilsModule.getProduct(productId);
 
-      expect(GetModule.default).toHaveBeenCalledWith(
-        `https://dummyjson.com/products/${productId}`
-      );
+      expect(GetModule.default).toHaveBeenCalledWith(`https://dummyjson.com/products/${productId}`);
       expect(result).toStrictEqual(mockProduct);
     });
   });
@@ -898,12 +934,14 @@ describe("utils tests", () => {
 ```typescript utils.ts
 import get from "./get";
 
+const API_URL = "https://dummyjson.com";
+
 export function getProduct(productId: number): Promise<any> {
-  return get(`https://dummyjson.com/products/${productId}`);
+  return get(`${API_URL}/products/${productId}`);
 }
 
 export function getUser(userId: number): Promise<any> {
-  return get(`https://dummyjson.com/users/${userId}`);
+  return get(`${API_URL}/users/${userId}`);
 }
 ```
 ```typescript get.ts

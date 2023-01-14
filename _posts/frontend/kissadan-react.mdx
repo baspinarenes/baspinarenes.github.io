@@ -14,8 +14,20 @@ Yeni React dökümantasyonunun çıkmasıyla birlikte baştan takip etmek istedi
 
 - React'ın "Strict Mode"u development esnasında her komponent fonksiyonunu iki kez çağırır ve Pure olmayan komponentleri yakalamanızı sağlar.
 - Animasyon ve ekranın yenilenmesi gibi işlemler **side effect** olarak adlandırılırlar. Renderlama anında değil yanında meydana gelen şeylerdir.
+- Uygulama başladığında yalnızca bir kez çalıştırılacak kod komponent dışına koyulabilir.
 
-### Renderlama
+```javascript
+if (typeof window !== 'undefined') {
+  checkAuthToken();
+  loadDataFromLocalStorage();
+}
+
+function App() {
+  // ...
+}
+```
+
+### Rendering
 
 - React komponentler esasen render edilmek üzere HTML döndüren fonksiyonlardır. Aslında HTML gibi dursa da JSX dediğimiz ve HTML çok benzeyen bir uzantı kullanır. Kendisi de JS olduğundan kodların elementlerle kullanılmasını kolaylaştırır. Nihayetinde kendisi de HTML'e çevrilir.
 
@@ -169,6 +181,45 @@ const listItems = products.map(product =>
 return (
   <ul>{listItems}</ul>
 );
+```
+
+- Normal davranışta React değişen state ile birlikte ilgili tüm işlemler bittikten sonra DOM'u günceller. O kodun arkasından state değişikliğiyle gelecek yeni DOM'a erişmemiz gerekirse `flushSync` metodunu kullanabiliriz.
+
+```javascript
+import { useState, useRef } from 'react';
+import { flushSync } from 'react-dom';
+
+export default function TodoList() {
+  const listRef = useRef(null);
+  const [todos, setTodos] = useState(
+    initialTodos
+  );
+
+  function handleAdd() {
+    flushSync(() => {
+      setTodos([ ...todos, { id: nextId++, text: text }]);      
+    });
+    
+    listRef.current.lastChild // can access new todo dom element
+  }
+
+  return (
+    <>
+      <button onClick={handleAdd}>
+        Add
+      </button>
+      <input
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <ul ref={listRef}>
+        {todos.map(todo => (
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
 ```
 
 ### Event Handler
@@ -449,7 +500,7 @@ export {
 
 ### Ref
 
-- Referans tanımlamak için `useRef` hook'u kullanabiliriz. Değeri render'lar sırasında korur ancak rerender'a sebep olmaz.
+- Referans tanımlamak için `useRef` hook'u kullanabiliriz. Değeri render'lar sırasında korur ancak rerender'a sebep olmaz. Event handler içerisinde kullanılabilir. Belirli bir event yoksa **Effect** ihtiyacı olabilir.
 
 ```javascript
 import { useRef } from 'react';
@@ -466,6 +517,51 @@ export default function Counter() {
     <button onClick={handleClick}>
       Click me!
     </button>
+  );
+}
+```
+
+- Elementlere verilen ref rendering esnasında çalıştırılan komponent gövdesinde olmamalıdır.
+
+```javascript
+function VideoPlayer({ src, isPlaying }) {
+  const ref = useRef(null);
+
+  if (isPlaying) {
+    ref.current.play();
+  } else {
+    ref.current.pause();
+  }
+
+  return <video ref={ref} src={src} loop playsInline />;
+}
+```
+
+- Ref'leri map içerisinde kullanamayacağımızdan ötürü ref callback kullanmalıyız.
+
+```javascript
+import { useRef } from "react";
+
+export default function CatFriends() {
+  const itemsRef = useRef(new Map());
+
+  return (
+    <ul>
+      {catList.map((cat) => (
+        <li
+          key={cat.id}
+          ref={(node) => {
+            if (node) {
+              itemsRef.current.set(cat.id, node);
+            } else {
+              itemsRef.current.delete(cat.id);
+            }
+          }}
+        >
+        ...
+        </li>
+      ))}
+    </ul>
   );
 }
 ```
@@ -490,6 +586,22 @@ export default function Form() {
       </button>
     </>
   );
+}
+```
+
+- Komponente ilettiğimiz ref otomatik olarak DOM'a eklenmez. Bunun için `forwardRef` API'sinin kullanılması gerekir.
+
+```javascript
+import { forwardRef, useRef } from 'react';
+
+const MyInput = forwardRef((props, ref) => {
+  return <input {...props} ref={ref} />;
+});
+
+export default function Form() {
+  const inputRef = useRef(null);
+
+  return <MyInput ref={inputRef} />;
 }
 ```
 
@@ -534,3 +646,25 @@ export {
 }
 ```
 </CH.Code>
+
+### Effect
+
+- Komponentlerin harici sistemlerle senkronize edilmesi için rendering sonrasında kod çalıştırmak için kullanılır. React harici bir komponentin yönetilmesi, sunucu bağlantısının kurulması analitik log'u gönderilmesi vs. Render'ın sebep olduğu yan etkileri gerçekleştirmek için kullanılır. Render'dan sonra çalışır. `useEffect` metodu kullanılır.
+
+```javascript
+useEffect(() => {
+  // run after every render
+});
+useEffect(() => {
+  // run after every render when dependency changed (will compare with Object.is)
+}, [someCompVariable, someProps, someState]);
+useEffect(() => {
+  // run on mount (appears on the screen for the first time)
+
+  return () => {
+    // run on before each effect runs and unmount
+  }
+}, []);
+```
+
+- Sunucuda yani server-side rendering esnasında çalışmaz.

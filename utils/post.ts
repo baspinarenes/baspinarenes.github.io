@@ -7,6 +7,7 @@ import { bundleMDX } from "mdx-bundler";
 import { PostParams } from "models/post";
 import path from "path";
 import readingTime from "reading-time";
+import rehypeSlug from "rehype-slug";
 import theme from "shiki/themes/nord.json";
 import { getLocaleDateString, getPreviousDay } from "./date";
 
@@ -76,7 +77,7 @@ const getPostData = async (categoryName: string, postName: string) => {
         ...(options.remarkPlugins ?? []),
         [remarkCodeHike, { theme, lineNumbers: true }],
       ];
-      options.rehypePlugins = [...(options.rehypePlugins ?? [])];
+      options.rehypePlugins = [...(options.rehypePlugins ?? [rehypeSlug])];
 
       return options;
     },
